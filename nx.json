@@ -71,5 +71,6 @@
       "unitTestRunner": "jest"
     }
   },
-  "defaultProject": "sportsKitAngular"
+  "defaultProject": "sportsKitAngular",
+  "nxCloudAccessToken": "MTAyYTI1M2UtZGMzYS00ZTc2LWI2YjEtNjgwM2M4N2VhN2ZkfHJlYWQtd3JpdGU="
 }
