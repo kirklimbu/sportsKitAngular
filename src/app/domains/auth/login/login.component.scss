@@ -1,0 +1,113 @@
+@import 'src/assets/scss/_variables.scss';
+
+a {
+
+  color: $primary-color;
+
+  &:hover {
+    color: $orange;
+  }
+}
+
+input,
+select {
+  height: 2rem;
+  border-radius: 0;
+}
+
+button {
+  border-radius: 0;
+  background-color: $primary-color;
+  border: none;
+
+  &:hover {
+    background-color: $orange;
+  }
+}
+
+.fa {
+  margin: 8px 4px;
+}
+
+img {
+  height: 150px;
+  width: 150px;
+}
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  // width: 400px;
+  padding: 2rem 2rem;
+  height: 100vh;
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    padding: 2rem 3rem;
+    border: 1px solid rgb(224, 216, 216);
+  }
+
+  .register {
+    float: right;
+  }
+
+  .register:hover {
+    text-decoration: underline;
+  }
+}
+
+.login-form {
+  max-width: 400px;
+  margin-top: 2rem;
+}
+
+.login-form-margin {
+  margin-bottom: 16px;
+}
+
+.login-form-forgot {
+  float: right;
+}
+
+.login-form-button {
+  width: 100%;
+  font-weight: bold;
+}
+
+@media (min-width: 320px) {
+  .login-container {
+    display: flex;
+    flex-direction: row;
+
+    .card {
+      width: 350px;
+      padding: 2rem 1rem;
+
+      .form-section {
+        width: 250px;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+
+    img {
+      height: 150px;
+      width: 150px;
+    }
+
+    .form-section {
+      width: 300px;
+    }
+  }
+}

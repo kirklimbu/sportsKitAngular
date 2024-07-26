@@ -1,1 +1,85 @@
 /* You can add global styles to this file, and also import other style files */
+@import "ng-zorro-antd/ng-zorro-antd.min.css";
+@import "./assets/scss/app.scss";
+@import 'leaflet/dist/leaflet.css';
+
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: clip;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: $font-weight-bold;
+    font-family: $font-primary;
+}
+
+.sub-title {
+    font-family: cursive;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-normal;
+    color: $gray-light;
+
+    span::before {
+        content: "";
+        position: absolute;
+        margin-top: 24px;
+        border-bottom: 4px solid $gold;
+    }
+
+}
+
+.ant-card {
+    margin-bottom: 0;
+
+}
+
+.ant-card-cover {
+    display: flex;
+    justify-content: center;
+}
+
+.ant-card-meta-title {
+    font-family: $font-primary;
+}
+
+.ant-card-meta-description {
+    text-align: justify;
+}
+
+.description {
+    text-align: justify;
+}
+
+.content-container {
+    padding: 1rem;
+}
+
+.image-section {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (min-width: 320px) {
+    .title {
+        text-justify: none;
+    }
+
+    .sub-title {
+        span::before {
+            width: 6%;
+        }
+
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .sub-title {
+        span::before {
+            width: 2%;
+        }
+
+    }
+}

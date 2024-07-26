@@ -1,0 +1,69 @@
+<div class="message-section">
+    <div class="sub-title text-warning">
+        <span class="">Contact Us </span>
+    </div>
+    <div class="title text-bolder">
+        <h4>
+            Please drop your Inquiry here.
+        </h4>
+    </div>
+    <!-- <small>
+        To start consultation and admission, kindly fill up the form , one of our advisers will contact
+        you via call or mail in less
+        than 24 hours.
+    </small> -->
+
+</div>
+<form class="form" [formGroup]="form">
+    <div class="row">
+        <div class="col">
+
+            <div class="input-wrapper">
+                <input formControlName="name" type="text" name="full_name" required placeholder="Name"
+                    aria-label="Full Name" class="input-field" />
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-wrapper">
+
+                <input formControlName="mobile" type="tel" name="mobile" required placeholder="Mobile"
+                    aria-label="Email" class="input-field" />
+            </div>
+        </div>
+        <div class="col">
+            <div class="input-wrapper">
+
+                <input formControlName="email" type="email" name="email_address" required placeholder="Email"
+                    aria-label="Email" class="input-field" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+
+            <div class="input-wrapper">
+                <select formControlName="typeId" name="total_person" aria-label="Course" class="input-field">
+                    <option value="0" selected disabled>--Please Select--</option>
+                    <option [value]="item.typeId" *ngFor="let item of typeList">{{item.type}}</option>
+
+                </select>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="input-wrapper">
+                <textarea formControlName="remarks" placeholder="Type your message here" class="input-field">
+                                                            </textarea>
+            </div>
+        </div>
+    </div>
+
+    <button class="button" [nzLoading]="isLoading" nz-button nzType="primary" nzDanger
+        (click)="onSubmit()">SUBMIT</button>
+
+</form>

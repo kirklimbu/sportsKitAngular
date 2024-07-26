@@ -1,0 +1,118 @@
+<!-- 
+  - #FOOTER
+-->
+<footer class="footer" id="footer">
+  <!-- style="background-image: url('assets/images/footer_bg.jpga')" -->
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-brand">
+        @if (footerData) {
+
+        <img [ngSrc]="footerData.logo" height=" 150" width="150" class="logo" alt="logo" loading="lazy" />
+
+        <p class="footer-text">
+          {{(footerData).bio}}
+        </p>
+        }
+        <!-- <ul class="social-list">
+          <li>
+            <a href="#" class="social-link">
+              <i class="fab fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="social-link">
+              <i name="logo-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="social-link">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+        </ul> -->
+      </div>
+
+      <ul class="footer-list">
+        @if (footerData) {
+
+        <li>
+          <p class="footer-list-title ">CONTACT INFO</p>
+        </li>
+        <li>
+          <span>Address:</span>
+          <p class="footer-list-item">
+            {{footerData.address}}
+
+          </p>
+        </li>
+        <li>
+          <span>Mobile:</span>
+          <p class="footer-list-item">
+            {{footerData.mobile}}
+
+          </p>
+        </li>
+        <!-- <li>
+          <span>Address:</span>
+          <p class="footer-list-item">
+            {{footerData.addressTwo}}
+
+          </p>
+        </li> -->
+        <!-- <li>
+          <span class="">Mobile:</span>
+          <p class="footer-list-item">
+            {{footerData.footer.mobile2}}
+
+          </p>
+        </li> -->
+        <li>
+          <span>Mail:</span>
+          <p class="footer-list-item">
+            {{footerData.emailOne}}
+          </p>
+        </li>
+        <li>
+          <address class="footer-list-item">
+
+            <!-- <p>{{(footerData$|async)?.addressOne |titlecase}} </p> -->
+            <!-- <p>{{(footerData$|async)?.addressTwo|titlecase}} </p> -->
+
+          </address>
+        </li>
+        }
+      </ul>
+      <ul class="footer-list">
+        <li>
+          <p class="footer-list-title">TRAINING</p>
+        </li>
+        @for (index of (footerData)?.footer?.studyDestinations ; track index) {
+        <li>
+          <p class="footer-list-item ">{{index?.name}}</p>
+        </li>
+        }
+
+      </ul>
+      <ul class="footer-list">
+        <li>
+          <p class="footer-list-title">INFORMATION</p>
+        </li>
+        <li>
+          <a class="footer-list-item " target="_blank" routerLink="/privacy" routerLinkActive>Privacy Policy</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p class="copyright-text">
+        &copy; {{currentDate}}
+        <a href="http://www.kalpaantatech.com.np" target="_blank" class="copyright-link">Kalpaanta Tech Solutions</a>
+        All Rights Reserved.
+      </p>
+    </div>
+  </div>
+</footer>

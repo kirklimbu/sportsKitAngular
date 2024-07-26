@@ -1,0 +1,24 @@
+<section id="about-us" class="content-container animate__animated animate__fadeInLeft animate__delay-1s ">
+    <!-- @for(content of data; track $index){ -->
+
+    <div class="message-section ">
+        <div class="sub-title">
+            <span>About us
+            </span>
+        </div>
+        <div class="title text-bolder">
+            <span>
+                {{ data?.title}}
+            </span>
+        </div>
+        <div class="description text-muted">
+            <p [innerText]="data?.description"></p>
+
+        </div>
+    </div>
+    <div class="image-section ">
+        <img [ngSrc]="data?.image" alt="About us" loading="lazy" height="600" width="500">
+    </div>
+    <!-- } -->
+
+</section>

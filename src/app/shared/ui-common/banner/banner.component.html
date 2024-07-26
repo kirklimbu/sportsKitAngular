@@ -1,0 +1,41 @@
+<section>
+  <div class="banner-slider">
+    <div class="row justify-content-center">
+      <div class="col-md-12 heading-section ftco-animate ml-4">
+        <!-- <h3 class="mb-0">{{ title | titlecase }}</h3> -->
+        <!-- <span class="subheading">{{ subtitle | titlecase }}</span> -->
+        <!-- <p>{{ description | titlecase }}</p> -->
+      </div>
+    </div>
+    <hr />
+
+    <!-- <owl-carousel-o class="carousel" [options]="carouselOptions">
+
+      <ng-container class="col-md-2 slide  " *ngFor="let slide of data; trackBy: trackBy">
+        <ng-template carouselSlide>
+          <figure>
+            <div class="card card--1">
+              <img class=" owl-carousel owl-theme" [ngSrc]="slide.docPath" [alt]="slide.name" [title]="slide.name"
+                width="250" height="250" fetchPriority="high" />
+              <figcaption *ngIf="showCaption">
+                <div class="carousel-caption ">
+                  <p class="subtitle">{{ slide.name }}</p>
+                  <button nz-button nzType="primary" [nzDanger]="true" nzBlock (click)="onClick()">Book my seat</button>
+                </div>
+              </figcaption>
+            </div>
+          </figure>
+        </ng-template>
+      </ng-container>
+
+    </owl-carousel-o> -->
+    <nz-carousel nzAutoPlay>
+      @for (index of array; track index) {
+      <div nz-carousel-content>
+        <h3>{{ index }}</h3>
+      </div>
+      }
+    </nz-carousel>
+
+  </div>
+</section>

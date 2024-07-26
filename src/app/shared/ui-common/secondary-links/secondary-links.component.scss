@@ -1,0 +1,19 @@
+@import 'src/assets/scss/_variables.scss';
+
+.secondary-link-container {
+  display: flex;
+  justify-content: space-between;
+
+
+  .btn-primary {
+    color: $gray;
+  }
+
+  .btn-secondary {
+    color: $primary-color;
+  }
+
+  .btn:hover {
+    color: #fbbe06;
+  }
+}

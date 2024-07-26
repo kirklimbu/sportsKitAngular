@@ -1,0 +1,36 @@
+@import 'src/assets/scss/_variables.scss';
+
+button {
+  border-radius: 0;
+  font-weight: bold;
+}
+input,
+select {
+  height: 3.5rem;
+}
+input,
+select:focus {
+  border: none;
+}
+.form {
+  margin-top: 2rem;
+  color: $black;
+}
+@media (min-width: 320px) {
+  .content-container {
+    padding: 0rem;
+    margin-top: 0;
+  }
+  button {
+    width: 100%;
+    height: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+@media (min-width: 992px) {
+  button {
+    width: 164px;
+    height: 48px;
+    float: inline-end;
+  }
+}

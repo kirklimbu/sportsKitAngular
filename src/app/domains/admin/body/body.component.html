@@ -1,0 +1,68 @@
+<nz-layout>
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+        <div class="logo"></div>
+        <ul nz-menu nzTheme="dark" nzMode="inline">
+
+            <li nz-menu-item>
+                <span nz-icon nzTitle="Home" nzType="home"></span>
+                <span nz-tooltip nzTooltipTitle="Home">
+                    Home
+                    <a [routerLink]="['/home']">
+                    </a>
+                </span>
+            </li>
+            <!-- <li nz-menu-item>
+                <span nz-icon nzTitle="Dashboard" nzType="appstore"></span>
+                <span nz-tooltip nzTooltipTitle="Dashboard">Dashboard
+                    <a [routerLink]="['/auth/dashboard']"></a>
+                </span>
+            </li> -->
+            <li nz-menu-item>
+                <span nz-icon nzTitle="Inquiry" nzType="question-circle"></span>
+                <span nz-tooltip nzTooltipTitle="Inquiry">
+                    Inquiry
+                    <a [routerLink]="['/auth/inquiry']"></a>
+
+                </span>
+            </li>
+            <li nz-menu-item>
+                <span nz-icon nzTitle="Set" nzType="question-circle"></span>
+                <span nz-tooltip nzTooltipTitle="Set">
+                    Set
+                    <a [routerLink]="['/auth/set-add']"></a>
+
+                </span>
+            </li>
+
+
+            <li nz-submenu nzTitle="Question" nzIcon="book">
+                <ul>
+                    <li nz-menu-item [routerLink]="['/auth/question-list']">Question list</li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Setting" nzIcon="setting">
+                <ul>
+                    <li nz-menu-item (click)="onLogout()">Logout</li>
+
+                </ul>
+            </li>
+
+        </ul>
+    </nz-sider>
+    <nz-layout>
+        <nz-header>
+            <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+                (click)="isCollapsed = !isCollapsed"></span>
+        </nz-header>
+        <nz-content>
+            <!-- <nz-breadcrumb>
+                <nz-breadcrumb-item>User</nz-breadcrumb-item>
+                <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
+            </nz-breadcrumb> -->
+            <div class="inner-content">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+        <nz-footer>Valley Multi Education Network Consultancy Pvt.Ltd. </nz-footer>
+    </nz-layout>
+</nz-layout>

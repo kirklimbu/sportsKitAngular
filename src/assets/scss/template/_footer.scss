@@ -1,0 +1,182 @@
+.footer {
+  padding: 0px;
+  font-size: 90%;
+  background-color: $tone-green-light;
+
+  .footer-content {
+    display: flex;
+    height: $footer-height;
+    align-items: center;
+    border-top: 1px solid $border-color;
+  }
+}
+
+/*-----------------------------------*\
+  #FOOTER
+\*-----------------------------------*/
+ul {
+  list-style-type: none;
+}
+
+.footer {
+  overflow: hidden;
+}
+
+.footer-top {
+  position: relative;
+  padding-block: 60px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: bottom;
+  border-block-end: 2px solid var(--independence_30);
+}
+
+// .footer-top::after {
+//   // content: url(assets/images/delivery-boy.svg);
+//   position: absolute;
+//   bottom: -11px;
+//   left: -160px;
+//   width: 160px;
+// }
+
+@keyframes running-cycle {
+  0% {
+    left: -160px;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+.footer-top .container {
+  display: grid;
+  gap: 30px;
+}
+
+.footer .logo {
+  color: black;
+  font-size: 3.2rem;
+}
+
+.social-list {
+  display: flex;
+  gap: 5px;
+}
+
+.social-link {
+  background-color: orange;
+  color: white;
+  font-size: 1.5rem;
+  padding: 10px;
+  //   transition: var(--transition-1);
+}
+
+.social-link:is(:hover, :focus) {
+  //   background-color: var(--rich-black-fogra-29);
+}
+
+.footer-list-title {
+  position: relative;
+  max-width: max-content;
+  color: var(--rich-black-fogra-29);
+  font-family: var(--ff-rubik);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-600);
+  letter-spacing: -1px;
+  margin-block-end: 20px;
+
+}
+
+.footer-list-title::before {
+  content: "";
+  position: absolute;
+  width: 20%;
+  bottom: 0;
+  border-bottom: 4px solid $gold;
+}
+
+.footer-list>li:not(:last-child) {
+  margin-block-end: 15px;
+}
+
+.footer-list {
+  font-size: small;
+  font-weight: 600;
+  color: #707376;
+
+  .footer-list-title {
+    max-width: 20ch;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    // color: ;
+  }
+}
+
+.footer-form {
+  background-color: var(--white);
+  padding: 30px 30px 30px 0px;
+  border: 1px solid var(--cultured);
+  box-shadow: var(--shadow-2);
+}
+
+.input-wrapper {
+  display: grid;
+  gap: 10px;
+  margin-block-end: 16px;
+}
+
+.input-field {
+  color: var(--spanish-gray);
+  font-size: var(--fs-4);
+  border: 1px solid var(--cultured);
+  padding: 8px 12px;
+}
+
+.input-field::placeholder {
+  color: var(--spanish-gray);
+}
+
+::placeholder {
+  color: red;
+  opacity: 0.5;
+}
+
+.input-field::-webkit-calendar-picker-indicator {
+  opacity: 0.5;
+}
+
+textarea.input-field {
+  min-height: 50px;
+  max-height: 150px;
+  height: 100px;
+  resize: vertical;
+  margin-block-end: 10px;
+}
+
+.footer-form .btn {
+  font-size: var(--fs-15);
+  --height: 40px;
+  --padding-inline: 25px;
+}
+
+.footer-form .btn:is(:hover, :focus) {
+  background-color: var(--rich-black-fogra-29);
+}
+
+.footer-bottom {
+  padding-block: 20px;
+  text-align: center;
+  background-color: $tone-green-light;
+}
+
+.copyright-link {
+  display: inline-block;
+}
+
+.copyright-link:is(:hover, :focus) {
+  text-decoration: underline;
+}
+
+
+@media (min-width: 320px) {}

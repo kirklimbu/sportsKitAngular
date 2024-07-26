@@ -1,0 +1,19 @@
+.map {
+  border: 1px solid black;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+@media (min-width: 320px) {
+  .map {
+    // width: 350px;
+    height: 350px;
+    // margin-left: 2rem;
+  }
+}
+@media (min-width: 992px) {
+  .map {
+    max-width: 500px;
+    height: 424px;
+    margin-left: 0;
+  }
+}

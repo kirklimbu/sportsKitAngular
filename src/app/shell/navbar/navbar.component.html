@@ -1,0 +1,180 @@
+<header data-header>
+  <nav data-navbar class="container">
+    <div class="wrapper">
+
+      <img src="../../../assets/images/logo/logo.png" height="20" width="150" class="logo" />
+
+      <!-- <input type="radio" name="slider" id="menu-btn" /> -->
+      <!-- <input type="radio" name="slider" id="close-btn" /> -->
+      <ul class="nav-links">
+        <label for="close-btn" class="btn close-btn">
+          <i class="fas fa-times text-warning"></i>
+        </label>
+        <li class="nav-item">
+          <a class="navbar-link" href="/home" routerLinkActive>Home</a>
+        </li>
+
+        <!-- <li>
+          <a href="#" class="desktop-item">Dropdown Menu</a>
+          <input type="checkbox" id="showDrop" />
+          <label for="showDrop" class="mobile-item">Dropdown Menu</label>
+          <ul class="drop-menu">
+            <li><a href="#">Drop menu 1</a></li>
+            <li><a href="#">Drop menu 2</a></li>
+            <li><a href="#">Drop menu 3</a></li>
+            <li><a href="#">Drop menu 4</a></li>
+          </ul>
+        </li> -->
+        <li class="d-flex">
+          <a href=" #" class="desktop-item">Study Destinations</a>
+          <!-- <input type="checkbox" id="showMega" /> -->
+          <i class="fa-solid fa-angle-down text-warning"></i>
+          <label for="showMega" class="mobile-item">Mega Menu</label>
+          <div class="mega-box">
+            <div class="content">
+              <!-- <div class="row">
+                <img
+                  src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg"
+                  alt="" />
+              </div> -->
+              <div class="row">
+                <!-- <header>Design Services</header> -->
+                <ul class="mega-links">
+                  <li><a href="#">South Korea</a></li>
+                  <li><a href="#">Japan</a></li>
+                  <li><a href="#">New Zealand </a></li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-link" href="/popularCourses" routerLinkActive="active">Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-link" href="/aboutus" routerLinkActive="active">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="navbar-link" href="/contactus" routerLinkActive>Contact us</a>
+        </li>
+
+
+
+        <ng-container *ngIf="userDetails as user">
+          <ul class="navbar-nav  profile-menu  d-none d-md-block">
+            <li ngbDropdown class="nav-item dropdown  text-center">
+              <a ngbDropdownToggle class="nav-link dropdown-toggle  text-center" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="profile-pic circular-text  text-center">
+                  <!-- <img src="https://source.unsplash.com/250x250?girl" alt="Profile Picture"> -->
+                  <!-- <span class="fw-bold text-white">{{user.name|shortName|titlecase}}</span> -->
+                </div>
+
+
+                <!-- You can also use icon as follows: -->
+                <!--  <i class="fas fa-user"></i> -->
+              </a>
+              <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a ngbDropdownItem href="/auth/user-profile"><i class="fas fa-sliders-h fa-fw"></i> Account</a>
+                </li>
+                <ng-container *ngIf="isLoggedIn">
+                  <!-- <ng-container>
+                    <li *ngIf="role===userType.ADMIN"><a ngbDropdownItem href="/auth/list-order"><i
+                          class="fas fa-tasks fa-fw"></i>
+                        Order</a>
+                    </li>
+                  </ng-container> -->
+                  <ng-container>
+                    <!-- <li *ngIf="role===userType.USER"><a ngbDropdownItem href="/auth/list-order"><i
+                          class="fas fa-tasks fa-fw"></i>
+                        My Order</a>
+                    </li> -->
+                  </ng-container>
+
+                </ng-container>
+
+                <li><a ngbDropdownItem href="/auth/registration"><i class="fas fa-cog fa-fw"></i> Signup</a></li>
+
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <ng-container *ngIf="isLoggedIn;else notLoggedIn">
+
+                  <li><a ngbDropdownItem (click)="onLogout()"><i class="fas fa-sign-out-alt fa-fw"></i> Log
+                      Out</a>
+                  </li>
+                </ng-container>
+                <ng-template #notLoggedIn>
+                  <li>
+                    <a ngbDropdownItem href="/auth/login"><i class="fas fa-sign-in fa-fw"></i> LogIn
+                    </a>
+                  </li>
+                </ng-template>
+              </ul>
+            </li>
+          </ul>
+        </ng-container>
+
+        <!-- begin::hide in desktop-->
+      </ul>
+      <ng-container>
+        <div class="d-flex p-3">
+
+          <!-- <li class="nav-item d-sm-block d-md-block d-lg-none  d-xl-none " title="View Cart">
+            <a class="position-relative navbar-link" href="/cart">
+              <i class="fas fa-shopping-cart fa-lg"> </i>
+              <span *ngIf="cartService.cartCount() as totalCount"
+                class="  translate-middle badge rounded-pill bg-danger ">
+                {{totalCount>0? totalCount:''}}
+              </span>
+
+            </a>
+          </li> -->
+          <ng-container *ngIf="userDetails as user">
+            <ul class="navbar-nav  profile-menu d-sm-block d-md-block d-lg-none d-xl-none ">
+              <li ngbDropdown class="nav-item dropdown">
+                <a ngbDropdownToggle class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="profile-pic circular-text">
+                    <!-- <img src="https://source.unsplash.com/250x250?girl" alt="Profile Picture"> -->
+                    <!-- <span class="text-center fw-bolder fs-3 text-white">{{user.name|shortName |titlecase}} </span> -->
+                  </div>
+                  <!-- You can also use icon as follows: -->
+                  <!--  <i class="fas fa-user"></i> -->
+                </a>
+                <ul ngbDropdownMenu class="dropdown-menu bg-white" aria-labelledby="navbarDropdown">
+                  <li><a ngbDropdownItem href="/auth/user-profile"><i class="fas fa-sliders-h fa-fw"></i> Account</a>
+                  </li>
+                  <li><a ngbDropdownItem href="/auth/registration"><i class="fas fa-cog fa-fw"></i> Signup</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <ng-container *ngIf="isLoggedIn;else notLoggedIn">
+                    <li><a ngbDropdownItem (click)="onLogout()"><i class="fas fa-sign-out-alt fa-fw"></i> Log
+                        Out</a>
+                    </li>
+                  </ng-container>
+                  <ng-template #notLoggedIn>
+                    <li>
+                      <a ngbDropdownItem href="/auth/login"><i class="fas fa-sign-in fa-fw"></i> LogIn
+                      </a>
+                    </li>
+                  </ng-template>
+                </ul>
+              </li>
+            </ul>
+          </ng-container>
+        </div>
+
+
+      </ng-container>
+
+
+
+      <label for="menu-btn" class="btn menu-btn">
+        <i class="fas fa-bars text-warning"></i>
+      </label>
+    </div>
+  </nav>
+</header>

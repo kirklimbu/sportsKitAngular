@@ -1,0 +1,38 @@
+{
+  "home": {
+    "logo": "http://162.0.230.55:9091/dba/file/=organization=dba_logo.jpg",
+    "name": "Damak Namuna Badminton Academy",
+    "address": "Damak",
+    "latitude": null,
+    "longitude": null,
+    "mobile": "9816",
+    "emailOne": "emailOne@gmail.com",
+    "emailTwo": "emailTwo@gmail.com",
+    "openingHour": "5 am",
+    "bio": "Only badminton in damak"
+  },
+  "bannerList": [
+    {
+      "bannerId": 1,
+      "title": "title1",
+      "subTitle": "subtitle1",
+      "image": "http://162.0.230.55:9091/dba/file/=banner=jump_smash.jpg"
+    }
+  ],
+  "eventList": [
+    {
+      "eventId": 1,
+      "title": "Dayahang Rai",
+      "description": "Dayahang rai visited our academy.",
+      "image": "http://162.0.230.55:9091/dba/file/=event=ehatiya2.jpg",
+      "eventDate": "2081/04/20",
+      "startTime": "14:20",
+      "ticketPrice": 0.0
+    }
+  ],
+  "member": {
+    "lifeTimeMemberCount": 20,
+    "yearlyMemberCount": 30,
+    "monthlyMemberCount": 50
+  }
+}

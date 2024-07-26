@@ -1,0 +1,44 @@
+<section id="coach" class="content-container animate__animated animate__fadeInLeft animate__delay-1s ">
+
+    <div class="image-section ">
+        <img [ngSrc]="data?.image" [alt]="data?.title" loading="lazy" height="600" width="500">
+
+    </div>
+
+    <div class="message-section ">
+        <div class="sub-title">
+            <span>Our Secretary
+            </span>
+        </div>
+        <div class="title text-bolder">
+            <span>
+
+                {{data?.title}}
+            </span>
+        </div>
+        <!-- <small nz-typography nzType="secondary">Head Coach</small> -->
+
+        <div nz-typography nzType="secondary" class="description ">
+
+            <p [innerText]="data?.description">
+            </p>
+
+            <!-- <p>{{(message$|async )?.message1}}</p>
+            <p>{{(message$|async )?.message2}}</p>
+
+
+            <div class="text-muted" [ngClass]="show ? 'expand' : 'collapse'">
+                <p>{{(message$|async )?.message3}}</p>
+
+
+                <p>{{(message$|async )?.message4}}</p>
+            </div>
+
+            <button nz-button nzType="primary" nzDanger (click)="show = !show"> {{show ? 'Show less' :
+                'Show more'}}</button> -->
+
+        </div>
+    </div>
+
+
+</section>

@@ -1,0 +1,65 @@
+@import 'src/assets/scss/_variables.scss';
+
+.content-container {
+    text-justify: justify;
+    // font-family: $font-primary;
+}
+
+.image-section {
+    box-shadow: none;
+}
+
+.message-section {
+    padding-bottom: 2rem;
+}
+
+.image-section {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    place-items: center;
+    font-family: $font-primary;
+}
+
+.ant-card-meta-title {
+    font-family: $font-primary;
+}
+
+small {
+    font-family: $font-primary;
+}
+
+@media (min-width: 320px) {
+    .content-container {
+        padding: 1rem;
+
+        .image-section {
+            img {
+                width: 240px;
+                height: 240px;
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .content-container {
+
+        padding: 2rem 7rem;
+
+        .image-section {
+            // width: 400px;
+
+
+            img {
+                width: 300px;
+                height: 300px;
+            }
+        }
+    }
+}
+
+@media (min-width: 990px) {}

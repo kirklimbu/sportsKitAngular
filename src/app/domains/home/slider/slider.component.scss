@@ -1,0 +1,67 @@
+@import 'src/assets/scss/_variables.scss';
+
+nz-carousel {
+  background-color: $primary-color;
+  width: 100%;
+}
+
+img {
+  // object-fit: cover;
+  width: 100%;
+  height: 25vw;
+}
+
+h3 {
+  color: $primary-color;
+  margin-bottom: 0;
+  user-select: none;
+}
+
+[nz-carousel-content] {
+  text-align: center;
+  line-height: 160px;
+}
+
+/* Small devices such as large phones (640px and up) */
+@media only screen and (min-width: 320px) {
+  nz-carousel {
+    height: 32vw;
+
+    img {
+      height: 32vw;
+    }
+  }
+}
+
+/* Medium devices such as tablets (768px and up) */
+@media only screen and (min-width: 768px) {
+  nz-carousel {
+    height: 25vw;
+
+    img {
+      height: auto;
+      height: 25vw;
+    }
+  }
+}
+
+/* Large devices such as laptops (1024px and up) */
+@media only screen and (min-width: 64em) {
+  nz-carousel {
+    // min-height: 400px;
+    height: 25vw;
+
+    img {
+      // height: auto;
+      width: 100%;
+    }
+  }
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next,
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover {
+  font-size: inherit;
+  color: yellow;
+}

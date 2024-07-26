@@ -1,0 +1,15 @@
+<div class="form-submit gap-2 ">
+
+  <ng-container *ngIf="showSecondaryButton">
+    <button class="btn btn-secondary cancel " id="reset" name="reset" (click)="onCancel($event)">
+      {{secondaryButtonLabel}}
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="showPrimaryButton">
+    <button [disabled]="isDisabled" class="save btn btn-warning Save " id="submit" name="submit"
+      (click)="onSave($event)">
+      {{primaryButtonLabel}}
+    </button>
+  </ng-container>
+</div>

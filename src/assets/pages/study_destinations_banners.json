@@ -1,0 +1,20 @@
+[
+  {
+    "alt": "Alternative text",
+    "docPath": "assets/images/studyDestinations/banners/studyinJapan.png",
+    "srcset": "800w, 1600w",
+    "sizes": "(max-width: 1600px) 800px, 1600px",
+    "title": "",
+    "subtitle": "",
+    "priority": true
+  },
+  {
+    "alt": "Alternative text",
+    "docPath": "assets/images/studyDestinations/banners/studyinsouthkorea.png",
+    "srcset": "800w, 1600w",
+    "sizes": "(max-width: 1600px) 800px, 1600px",
+    "title": "",
+    "subtitle": "",
+    "priority": true
+  }
+]

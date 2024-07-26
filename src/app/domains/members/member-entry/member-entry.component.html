@@ -1,0 +1,59 @@
+<section class="memberentry-section">
+
+    <form class="form" [formGroup]="form">
+        <p class="title">Member Entry </p>
+        <p class="message">Add new member</p>
+        <div class="clearfix">
+            <label>
+                <span class="Photo">Photo</span>
+            </label>
+            <nz-upload nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" nzListType="picture-card"
+                [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview" (nzChange)="handleChange($event)">
+                <div>
+                    <span nz-icon nzType="plus"></span>
+                    <div style="margin-top: 8px">Upload</div>
+                </div>
+            </nz-upload>
+            <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+                (nzOnCancel)="previewVisible = false">
+                <ng-template #modalContent>
+                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                </ng-template>
+            </nz-modal>
+        </div>
+        <div class="flex">
+        </div>
+        <div class="flex">
+
+            <label>
+                <input class="input" type="text" placeholder="" required="" autocomplete="off" formControlName="name">
+                <span class="required">Name</span>
+            </label>
+
+            <label>
+                <input class="input" type="tel" placeholder="" required="" autocomplete="off" formControlName="mobile">
+                <span class="required">Mobile</span>
+            </label>
+        </div>
+
+        <div class="flex">
+            <label>
+                <input class="input" type="date" placeholder="" required="" autocomplete="off" formControlName="dob">
+                <span class="required">D.O.B</span>
+            </label>
+
+            <label for="MemberType">
+                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Membertype"
+                    formControlName="memberShipTypeId">
+                    <nz-option nzLabel="Lifetime" [nzValue]="1"></nz-option>
+                    <nz-option nzLabel="Annual" [nzValue]="2"></nz-option>
+                    <nz-option nzLabel="Monthly" [nzValue]="3"></nz-option>
+                    <nz-option nzLabel="Quarterly" [nzValue]="4"></nz-option>
+                </nz-select>
+            </label>
+
+        </div>
+        <button class="submit" (click)="onSave()">Save</button>
+
+    </form>
+</section>

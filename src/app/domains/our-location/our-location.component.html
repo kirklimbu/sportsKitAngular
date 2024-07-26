@@ -1,0 +1,31 @@
+<section id="contactUs" class="content-container location-container ">
+    <div class="img-section animate__animated animate__pulse">
+
+        <!-- <img class="img" [ngSrc]="item.docPath" height="250px" width="500px" [alt]="item.name" /> -->
+        <img nz-image width="100%" nzSrc="/assets/images/contactUsPage.png" alt="" />
+    </div>
+
+    <div class="location-content animate__animated animate__fadeInDown animate__delay-1s">
+
+        <div class="form-content ">
+            <div class="form-section">
+                <app-contact-us-form />
+            </div>
+
+            <div class="map-section">
+                <div class=" sub-title">
+                    <span>Our Location
+                    </span>
+                </div>
+                <div class="title text-bolder">
+                    <h3>
+                        Welcome to {{info.appTitle}}
+                    </h3>
+                </div>
+                <app-map />
+
+            </div>
+        </div>
+    </div>
+
+</section>
