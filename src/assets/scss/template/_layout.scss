@@ -17,9 +17,7 @@
       min-height: calc(100vh - #{$footer-height});
 
       @include screen-mobile {
-        // padding: calc(#{$header-height} + #{$layout-content-gutter-sm})
-        // $layout-content-gutter-sm $layout-content-gutter-sm
-        // $layout-content-gutter-sm;
+        padding: calc(#{$header-height} + #{$layout-content-gutter-sm}) $layout-content-gutter-sm $layout-content-gutter-sm $layout-content-gutter-sm;
       }
 
       .main-content-header {

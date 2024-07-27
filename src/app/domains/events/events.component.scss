@@ -30,6 +30,12 @@
 
 small {
     font-family: $font-primary;
+    color: $gold;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.3);
+    }
 }
 
 @media (min-width: 320px) {

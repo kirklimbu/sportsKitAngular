@@ -14,10 +14,23 @@ export const COMMON_LAYOUT_ROUTES: Routes = [
     //Dashboard
     {
         path: 'home',
+        data: {
+            breadcrumb: 'Home'
+        },
         loadChildren: () => import('./../../domains/home').then(m => m.FEATURE_HOME_ROUTES),
     },
     {
+        path: 'events',
+        data: {
+            breadcrumb: 'Events'
+        },
+        loadChildren: () => import('./../../domains/events').then(m => m.FEATURE_EVENTS_ROUTES),
+    },
+    {
         path: 'privacy',
+        data: {
+            breadcrumb: 'Privacy Policies'
+        },
         component: PrivacyPolicyComponent,
     },
     // {

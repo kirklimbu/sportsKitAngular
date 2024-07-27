@@ -1,9 +1,7 @@
 <div class="header">
     <div class="logo logo-dark">
-
-        <a href="">
+        <a routerLink="/home">
             <img [src]="data?.logo" height="150" width="150" class="logo" alt="Logo" priority="high">
-
         </a>
     </div>
     <div class=" nav-wrap">
@@ -33,6 +31,9 @@
         <ul class="nav-right">
             <li class="nav-item">
                 <a routerLinkActive class="navbar-link " routerLink="/home" routerLinkActive>Home</a>
+            </li>
+            <li class="nav-item">
+                <a routerLinkActive class="navbar-link " routerLink="/events/all-events" routerLinkActive>Events</a>
             </li>
             <li class="nav-item">
                 <a routerLinkActive class="navbar-link" routerLink="/training" routerLinkActive>Training</a>

@@ -30,16 +30,13 @@ export class HomeService {
   getHomeContents(deviceId: string, userId: string) {
     console.log('calling home');
 
-    // if (userId == 'null' || userId == 'undefined' || userId == undefined) userId = '0';
+    if (userId == 'null' || userId == 'undefined' || userId == undefined) userId = '0';
 
-    // let params = {
-    //   deviceId: deviceId,
-    //   userId: userId,
-
-    // };
-    return this.http.get<any>(`${this.apiUrl}home`, { headers: { skip: "true" } });
-    // return this.http.get<any>(`${this.apiUrl}home`, { headers: { skip: "false" } });
-
+    let params = {
+      deviceId: deviceId,
+      userId: userId,
+    };
+    return this.http.get<any>(`${this.apiUrl}home`, { params: params });
   }
 
   getBanners(): Observable<any[]> {

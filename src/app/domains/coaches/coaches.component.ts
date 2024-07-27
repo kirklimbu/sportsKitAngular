@@ -6,6 +6,8 @@ import { NgOptimizedImage } from '@angular/common';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-coaches',
@@ -14,30 +16,19 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
     NgOptimizedImage,
     NzDividerModule,
     NzTypographyModule,
-    NzTagModule
+    NzTagModule,
+    NzButtonModule,
+    // project
+    TruncatePipe
   ],
   templateUrl: './coaches.component.html',
   styleUrl: './coaches.component.scss'
 })
-export class CoachesComponent implements OnInit {
+export class CoachesComponent {
   message$!: Observable<any>;
   show = false;
   @Input() data!: any;
 
 
-  private homeService = inject(HomeService)
-  private destroyRef$ = inject(DestroyRef)
 
-  ngOnInit() {
-    this.getWelcomeMessage()
-  }
-
-  getWelcomeMessage() {
-    this.message$ = this.homeService.getWelComeMessage()
-      .pipe(
-        takeUntilDestroyed(this.destroyRef$),
-        shareReplay(1)
-      )
-
-  }
 }

@@ -21,8 +21,12 @@
                 national-level athletes,
                 as well as veteran players. The academy provides a platform for skill development, competition, and
                 community
-                engagement.Some of the glimpses of these events are
+                engagement.Some of the glimpses of these events are ...
             </p>
+            <a routerLink="/events/list-events" title="View all events" class="all-events" (click)="showAllEvents()">
+                <small>View all events...</small>
+
+            </a>
         </div>
 
 
@@ -33,7 +37,7 @@
 
         <nz-card nzHoverable style="text-justify: justify;" [nzCover]="coverTemplate"
             [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-            <nz-card-meta [nzTitle]="event.title" [nzDescription]=" event.description">
+            <nz-card-meta [nzTitle]="event.title" [nzDescription]=" event.description |truncate :35">
 
             </nz-card-meta>
         </nz-card>
@@ -52,7 +56,7 @@
             </span>
         </ng-template>
         <ng-template #actionEllipsis>
-            <button title="Show more" nz-button nzType="default" nzShape="circle">
+            <button title="Show more" nz-button nzType="default" nzShape="circle" routerLink="/events/all-events">
                 <span nz-icon nzType="right" nzTheme="outline"></span>
             </button>
 

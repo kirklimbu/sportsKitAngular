@@ -3,11 +3,13 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Observable } from 'rxjs';
 import { HomeService } from 'src/app/domains/home/home.service';
 import { DatePipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
   imports: [CommonModule,
+    RouterModule,
     NgOptimizedImage],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],

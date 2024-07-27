@@ -13,8 +13,28 @@
 }
 
 button {
-    border-radius: 0;
+
+    color: $gold;
+    border: 1px solid $gold;
+    background: transparent;
+
+    &:hover {
+        color: $primary-color;
+        border: 1px solid $primary-color;
+        background-position: 0;
+    }
+
+    background: {
+        image: linear-gradient(45deg, $gold 50%, transparent 50%);
+        position: 100%;
+        size: 300%;
+    }
+
+    transition: background 400ms ease-in-out;
+
 }
+
+
 
 /* Small devices such as large phones (640px and up) */
 @media (min-width: 320px) {
@@ -103,7 +123,7 @@ button {
             flex-wrap: wrap;
             padding: 3%;
             width: 500px;
-            height: 500px;
+            // height: 500px;
             margin-top: 2rem;
 
             img {
@@ -126,6 +146,7 @@ button {
 
             button {
                 height: auto;
+                width: 100px;
             }
         }
     }

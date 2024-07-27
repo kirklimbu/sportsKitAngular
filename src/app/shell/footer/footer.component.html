@@ -87,9 +87,10 @@
         <li>
           <p class="footer-list-title">TRAINING</p>
         </li>
-        @for (index of (footerData)?.footer?.studyDestinations ; track index) {
+        @if(footerData) {
+        <span>Opening Hour:</span>
         <li>
-          <p class="footer-list-item ">{{index?.name}}</p>
+          <p class="footer-list-item ">{{footerData?.openingHour}}</p>
         </li>
         }
 
@@ -110,7 +111,8 @@
     <div class="container">
       <p class="copyright-text">
         &copy; {{currentDate}}
-        <a href="http://www.kalpaantatech.com.np" target="_blank" class="copyright-link">Kalpaanta Tech Solutions</a>
+        <a href="http://www.kalpaantatech.com.np" target="_blank" class="copyright-link">Kalpaanta Tech Solutions Pvt.
+          Ltd</a>
         All Rights Reserved.
       </p>
     </div>

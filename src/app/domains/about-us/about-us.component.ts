@@ -5,6 +5,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { SanitizeHtmlPipe } from "../../shared/util-common/pipes/sanitize-html.pipe";
+import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
 
 
 @Component({
@@ -14,12 +15,14 @@ import { SanitizeHtmlPipe } from "../../shared/util-common/pipes/sanitize-html.p
     CommonModule,
     NzButtonModule,
     NgOptimizedImage,
-    SanitizeHtmlPipe
+    SanitizeHtmlPipe,
+    TruncatePipe
   ],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.scss'
 })
 export class AboutUsComponent implements OnInit {
+  show = false;
 
   @Input() data!: any;
 

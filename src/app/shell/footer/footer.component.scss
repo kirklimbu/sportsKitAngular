@@ -1,8 +1,20 @@
-// @import 'src/assets/scss/_variables.scss';
+@import 'src/assets/scss/_variables.scss';
 
-// src/assets/scss/_variables.scss
 .opening-hour {
   white-space: break-spaces;
+}
+
+a,
+p {
+  color: grey;
+
+  &:hover {
+    color: $gold;
+  }
+}
+
+span {
+  font-weight: $font-weight-normal;
 }
 
 /*-----------------------------------*\

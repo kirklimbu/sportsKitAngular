@@ -20,6 +20,9 @@ import { fadeInUpOnEnterAnimation, slideInDownAnimation, slideInDownOnEnterAnima
 import { trigger, transition, style, animate, state } from '@angular/animations';
 import { EventsComponent } from '../events/events.component';
 import { OurLocationComponent } from '../our-location/our-location.component';
+import { getDeviceId } from 'src/app/shared/util-common/generateDeviceId';
+import { Store } from '@ngxs/store';
+import { AuthState } from '../auth/login/state/login.state';
 
 
 @Component({
@@ -70,7 +73,8 @@ export class HomeComponent implements OnInit {
 
 
   private readonly destroyRef = inject(DestroyRef);
-  private homeService = inject(HomeService)
+  private readonly homeService = inject(HomeService)
+  private readonly store = inject(Store);
 
 
   ngOnInit(): void {
@@ -127,8 +131,9 @@ export class HomeComponent implements OnInit {
 
   private fetchHomeContents() {
     console.log('fetching home ');
+    const userId = this.fetchUserId();
 
-    this.homeService.getHomeContents('0', '0')
+    this.homeService.getHomeContents(getDeviceId(), userId)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((res: any) => {
         console.log(' res', res);
@@ -140,6 +145,11 @@ export class HomeComponent implements OnInit {
       });
   }
 
+
+  private fetchUserId(): string {
+    const userDetail = this.store.selectSnapshot(AuthState.userDetails);
+    return userDetail.userId;
+  }
 
 
 
