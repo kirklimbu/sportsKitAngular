@@ -15,3 +15,18 @@
 .search-button {
   margin-right: 8px;
 }
+
+button {
+  margin-right: 4px;
+}
+
+/* .table-container {
+  overflow-x: auto;
+}*/
+@media (width<=520px) {
+  .table-container {
+    padding-top: 2rem;
+  }
+
+
+}

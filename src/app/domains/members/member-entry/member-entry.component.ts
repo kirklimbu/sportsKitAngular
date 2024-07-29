@@ -17,7 +17,9 @@ import { ImageUploadDirective } from 'src/app/shared/util-common/directives/imag
 import { MemberService } from '../data/services/member.service';
 import { AllMembersComponent } from '../all-members.component';
 import { IMember } from '../data/models/member.model';
+// import { NepaliDatepickerModule } from 'nepali-datepicker-angular';
 import { NepaliDatepickerModule } from 'nepali-datepicker-angular';
+
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -32,13 +34,13 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   standalone: true,
   imports: [
     CommonModule,
+    ImageUploadDirective,
+    ReactiveFormsModule,
+    // third-party
     NzUploadModule,
     NzModalModule,
     NzSelectModule,
     NzIconModule,
-    ImageUploadDirective,
-    ReactiveFormsModule,
-    // third-party
     NepaliDatepickerModule,
     // project
     AllMembersComponent,

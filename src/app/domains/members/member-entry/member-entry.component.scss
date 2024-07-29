@@ -32,6 +32,14 @@ nz-select {
   background-color: $primary-color !important;
 }
 
+::ng-deep.nepali-date-picker .form-icon svg {
+  // background-color: $primary-color !important;
+  right: 24px !important;
+  top: 20px !important;
+
+}
+
+
 .admin-members-section {
   display: flex;
   gap: 1rem;
@@ -65,39 +73,39 @@ nz-select {
   border: 1px solid lightgray;
 }
 
-.title {
-  font-size: 28px;
-  color: $primary-color;
-  font-weight: 600;
-  letter-spacing: -1px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding-left: 30px;
-}
+// .title {
+//   font-size: 28px;
+//   color: $primary-color;
+//   font-weight: 600;
+//   letter-spacing: -1px;
+//   position: relative;
+//   display: flex;
+//   align-items: center;
+//   padding-left: 30px;
+// }
 
-.title::before,
-.title::after {
-  position: absolute;
-  content: '';
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  left: 0px;
-  background-color: $primary-color;
-}
+// .title::before,
+// .title::after {
+//   position: absolute;
+//   content: '';
+//   height: 16px;
+//   width: 16px;
+//   border-radius: 50%;
+//   left: 0px;
+//   background-color: $primary-color;
+// }
 
-.title::before {
-  width: 18px;
-  height: 18px;
-  background-color: $primary-color;
-}
+// .title::before {
+//   width: 18px;
+//   height: 18px;
+//   background-color: $primary-color;
+// }
 
-.title::after {
-  width: 18px;
-  height: 18px;
-  animation: pulse 1s linear infinite;
-}
+// .title::after {
+//   width: 18px;
+//   height: 18px;
+//   animation: pulse 1s linear infinite;
+// }
 
 .message,
 .signin {
@@ -154,7 +162,7 @@ nz-select {
 .form label .input:focus+span,
 .form label .input:valid+span {
   top: 0px;
-  font-size: 0.7em;
+  // font-size: 0.7em;
   font-weight: 600;
 }
 
@@ -190,6 +198,10 @@ nz-select {
   }
 }
 
+.required {
+  font-size: 12px;
+  font-weight: bold;
+}
 
 @media (width<=576px) {
   .memberentry-section {
@@ -214,6 +226,12 @@ nz-select {
 }
 
 @media (min-width: 768px) {
+  ::ng-deep .nepali-date-picker .form-icon svg {
+    // background-color: $primary-color !important;
+    right: 24px;
+    top: 20px;
+
+  }
 
   .memberentry-section {
     max-width: 450px;
@@ -238,6 +256,12 @@ nz-select {
 }
 
 @media only screen and (min-width: 991px) {
+  ::ng-deep.nepali-date-picker .form-icon svg {
+
+    right: 24px;
+    top: 20px;
+
+  }
 
   .form {
     padding: 20px;
@@ -251,4 +275,8 @@ nz-select {
       width: 50%;
     }
   }
+}
+
+.form label .input {
+  padding: 16px
 }

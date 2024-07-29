@@ -8,6 +8,10 @@ import { IMember } from './data/models/member.model';
 import { MemberService } from './data/services/member.service';
 import { Observable } from 'rxjs';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
+import { NzTagModule } from 'ng-zorro-antd/tag';
 
 interface DataItem {
   name: string;
@@ -22,40 +26,19 @@ interface DataItem {
     FormsModule,
     NzTableModule,
     NzDropDownModule,
-    NzAvatarModule
+    NzAvatarModule,
+    NzButtonModule,
+    NzIconModule,
+    NzTagModule
   ],
   templateUrl: './all-members.component.html',
-  styleUrl: './all-members.component.css',
+  styleUrl: './all-members.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AllMembersComponent implements OnInit, OnChanges {
 
   @Input() data$!: Observable<IMember[]>
-  searchValue = '';
-  visible = false;
-  listOfData: DataItem[] = [
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park'
-    }
-  ];
-  listOfDisplayData = [...this.listOfData];
+
 
   private readonly memberService = inject(MemberService)
   private readonly cd = inject(ChangeDetectorRef)
@@ -77,13 +60,23 @@ export class AllMembersComponent implements OnInit, OnChanges {
     this.data$ = this.memberService.getAllMembers()
 
   }
-  reset(): void {
-    this.searchValue = '';
-    this.search();
+
+  onAdd() {
+    // if (!this.form.controls['setMasterId'].value) return this.messageService.createMessage('error', 'Set is missing. Please select set.')
+    // this.router.navigate(['/auth/question-add'], { queryParams: { setMasterId: this.form.controls['setMasterId'].value } })
   }
 
-  search(): void {
-    this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
+
+  onEdit(id: number) {
+    // this.router.navigate(['/auth/question-add'], { queryParams: { id: id, setMasterId: this.form.controls['setMasterId'].value } })
   }
+  // reset(): void {
+  //   this.searchValue = '';
+  //   this.search();
+  // }
+
+  // search(): void {
+  //   this.visible = false;
+  //   this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
+  // }
 }

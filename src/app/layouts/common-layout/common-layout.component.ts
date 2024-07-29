@@ -109,24 +109,20 @@ export class CommonLayoutComponent implements OnInit {
 
 
     private fetchHomeContents() {
-        console.log('fetching home ');
-
         this.homeService.getHomeContents('0', '0')
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((res: any) => {
                 this.headerTopData = res.organization
                 this.headerData = res.organization
                 this.footerData = res.organization
-
-                console.log('home res', res);
                 // this.setContents(res)
             });
     }
 
     switchLanguage() {
-        console.log('switch lang');
+        // console.log('switch lang');
 
-        this.i18n.setLocale(ne_NP);
+        // this.i18n.setLocale(ne_NP);
     }
 
     // private buildBreadCrumb(route: ActivatedRoute, url = '', breadcrumbs: IBreadcrumb[] = []): IBreadcrumb[] {

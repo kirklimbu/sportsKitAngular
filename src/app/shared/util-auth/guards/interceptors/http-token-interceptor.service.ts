@@ -42,8 +42,6 @@ export class HttpTokenInterceptorService implements HttpInterceptor {
 
 
     if (!token) {
-      console.log('token', token);
-
       request = request.clone({
         setHeaders: {
           UserAgent: environment.UserAgent,

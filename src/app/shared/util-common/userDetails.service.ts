@@ -10,13 +10,13 @@ import { Observable } from 'rxjs';
 })
 export class UserDetailsService {
 
-  isAuthenticated$: Observable<boolean> | undefined;
+  isAuthenticated$!: Observable<boolean>;
 
   store = inject(Store)
 
   getUserStatus() {
-    this.isAuthenticated$ = this.store.select(AuthState.isAuthenticated);
-
+    const isAuthenticated$ = this.store.select(AuthState.isAuthenticated);
+    return isAuthenticated$;
   }
 
   getUserId() {

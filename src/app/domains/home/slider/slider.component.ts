@@ -23,25 +23,11 @@ export class SliderComponent implements OnInit {
 
   @Input() bannerData!: any
 
-  private destroyRef$ = inject(DestroyRef)
-  private homeService = inject(HomeService)
   ngOnInit(): void {
 
-    // this.loadSlider()
-    console.log('slider', this.bannerData);
 
   }
 
 
-  private loadSlider() {
-    this.bannerData = this.homeService.getBanners()
-    this.bannerData
-      .pipe(
-        takeUntilDestroyed(this.destroyRef$)
-      )
-      .subscribe((res: any) => {
-        this.bannerData = res.bannerList
-      })
-  }
 
 }

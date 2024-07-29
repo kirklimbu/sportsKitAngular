@@ -17,24 +17,32 @@
                     <a [routerLink]="['/auth/dashboard']"></a>
                 </span>
             </li> -->
-            <li nz-menu-item>
+            <!-- <li nz-menu-item>
                 <span nz-icon nzTitle="Inquiry" nzType="question-circle"></span>
                 <span nz-tooltip nzTooltipTitle="Inquiry">
                     Inquiry
                     <a [routerLink]="['/auth/inquiry']"></a>
 
                 </span>
-            </li>
+            </li> -->
             <li nz-menu-item>
-                <span nz-icon nzTitle="Set" nzType="question-circle"></span>
+                <span nz-icon nzTitle="Set" nzType="user-add"></span>
                 <span nz-tooltip nzTooltipTitle="Set">
-                    Set
-                    <a [routerLink]="['/auth/set-add']"></a>
+                    Members
+                    <a [routerLink]="['/auth/add-member']"></a>
 
                 </span>
             </li>
+            <!-- <li nz-menu-item>
+                <span nz-icon nzTitle="Set" nzType="schedule"></span>
+                <span nz-tooltip nzTooltipTitle="Set">
+                    Events
+                    <a [routerLink]="['/auth/events']"></a>
 
+                </span>
+            </li> -->
 
+            <!-- 
             <li nz-submenu nzTitle="Members" nzIcon="user-add">
                 <ul>
                     <li nz-menu-item [routerLink]="['/auth/question-list']">All Members</li>
@@ -46,7 +54,7 @@
                     <li nz-menu-item [routerLink]="['/auth/question-list']">All Events</li>
                     <li nz-menu-item [routerLink]="['/auth/question-list']">Add Event</li>
                 </ul>
-            </li>
+            </li> -->
             <li nz-submenu nzTitle="Setting" nzIcon="setting">
                 <ul>
                     <li nz-menu-item (click)="onLogout()">Logout</li>

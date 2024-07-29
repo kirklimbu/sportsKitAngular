@@ -15,9 +15,8 @@
 
         <form class="form" [formGroup]="form">
             <div class="flex">
+                <span class="required">Profile pic</span>
                 <label for="">
-
-                    <span>Profile pic</span>
                     <div class="clearfix">
                         <nz-upload [nzAction]="''" nzListType="picture-card" [(nzFileList)]="fileList"
                             [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview"
@@ -39,12 +38,12 @@
 
             <div class="flex">
 
+                <span class="required">Name</span>
                 <label>
                     <input class="input" type="text" placeholder="" autocomplete="off" formControlName="name">
-                    <span class="required">Name</span>
                 </label>
                 <label>
-                    <span for="dob" class="required">D.O.B</span>
+                    <span class="required" for="dob">D.O.B</span>
                     <ne-datepicker [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event)"
                         (dateInAD)="updateEnglishDate($event)">
                     </ne-datepicker>
@@ -52,20 +51,22 @@
             </div>
 
             <div class="flex">
+                <span class="required">Mobile1</span>
                 <label>
                     <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile1">
-                    <span class="required">Mobile1</span>
-                </label>
-                <label>
-                    <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile2">
-                    <span class="required">Mobile2</span>
                 </label>
             </div>
+
             <div class="flex">
+                <span class="required">Mobile2</span>
+                <label>
+                    <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile2">
+                </label>
 
-
+            </div>
+            <div class="flex">
                 <label for="MemberType">
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Membertype"
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select type of member"
                         formControlName="memberShipTypeId">
                         <nz-option nzLabel="Lifetime" [nzValue]="1"></nz-option>
                         <nz-option nzLabel="Annual" [nzValue]="2"></nz-option>

@@ -28,8 +28,6 @@ export class HomeService {
   // protected state: BehaviorSubject<Home> | undefined;
 
   getHomeContents(deviceId: string, userId: string) {
-    console.log('calling home');
-
     if (userId == 'null' || userId == 'undefined' || userId == undefined) userId = '0';
 
     let params = {

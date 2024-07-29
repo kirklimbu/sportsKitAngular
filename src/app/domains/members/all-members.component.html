@@ -1,51 +1,83 @@
-<div class="sub-title">
-    <span>All members
-    </span>
-</div>
-<div class="title text-bolder">
-    <h3>
-        All members
-    </h3>
-</div>
-@if(data$|async;as data ){
+<div class="table-container">
 
-<nz-table #nzTable [nzBordered]="true" [nzData]="data" nzTableLayout="fixed" [nzScroll]="{ y: '540px' }">
-    <thead>
-        <tr>
-            <th></th>
-
-            <th nzCustomFilter>
-                Name
-                <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-                    <span nz-icon nzType="search"></span>
-                </nz-filter-trigger>
-            </th>
-            <th>Mobile</th>
-            <th>Member Type</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (member of nzTable.data; track $index) {
-
-        <tr>
-            <td class="text-center">
-                <nz-avatar nzIcon="user" [nzSrc]="member.profilePic"></nz-avatar>
-            </td>
-            <td>{{ member.name }}</td>
-            <td>{{ member.mobile1 }},{{ member.mobile2 }}</td>
-            <td>{{ member.memberShip }}</td>
-
-        </tr>
-        }
-    </tbody>
-</nz-table>
-<nz-dropdown-menu #menu="nzDropdownMenu">
-    <div class="ant-table-filter-dropdown">
-        <div class="search-box">
-            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
-            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
-            <button nz-button nzSize="small" (click)="reset()">Reset</button>
-        </div>
+    <div class="sub-title">
+        <span>All members
+        </span>
     </div>
-</nz-dropdown-menu>
-}
+    <div class="title text-bolder">
+        <h3>
+            All members
+        </h3>
+    </div>
+
+
+    @if(data$|async;as data ){
+
+    <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
+        [nzScroll]="{ x: '600px', y: '635px' }">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>Mobile</th>
+                <th>Member Type</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @for (member of nzTable.data; track $index) {
+
+            <tr>
+                <td class="text-center">
+                    <nz-avatar nzIcon="user" [nzSrc]="member.profilePic"></nz-avatar>
+                </td>
+                <td>{{ member.name |titlecase }}</td>
+                <td>
+                    <p>
+                        {{ member.mobile1 }}
+                    </p>
+                    <p>
+                        {{ member.mobile2 }}
+                    </p>
+                </td>
+                <!--  
+                    <nz-tag [nzColor]="'#108ee9'">#108ee9</nz-tag>
+                 -->
+                <td>
+                    @switch (member.memberShip) {
+                    @case ('LIFE') {
+                    <nz-tag [nzColor]="'#2db7f5'">{{member.memberShip|titlecase}}</nz-tag>
+
+                    }@case ('QUARTERLY') {
+                    <nz-tag [nzColor]="'#87d068'">{{member.memberShip|titlecase}}</nz-tag>
+
+                    }@case ('MONTHLY') {
+                    <nz-tag [nzColor]="'#87d068'">{{member.memberShip|titlecase}}</nz-tag>
+
+                    }
+                    <!-- ANNUAL -->
+                    @default {
+                    <nz-tag [nzColor]="'#f50'">{{member.memberShip|titlecase}}</nz-tag>
+                    }
+                    }
+                </td>
+
+                <td>
+                    <div class="action-buttons">
+
+                        <button nzTooltipTitle="Edit" nzTooltipPlacement="topLeft" nz-tooltip nz-button nzType="primary"
+                            nzGhost (click)="onEdit(member.memberId)"><span nz-icon nzType="form"></span></button>
+                        <button nzTooltipTitle="Delete" nzTooltipPlacement="topLeft" nz-tooltip nz-button nzDanger><span
+                                nz-icon nzType="delete"></span></button>
+
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </nz-table>
+    }
+
+</div>

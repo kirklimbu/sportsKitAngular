@@ -31,27 +31,23 @@
         </span>
       </li>
       <li style="font-size: 16px;" nzPlacement="bottomCenter" nz-submenu nzTitle="" nzIcon="user">
-
         <ul>
+          @if(!isLoggedIn){
 
-          <li nz-menu-group nzTitle="">
-            <ul>
-              <li nzIcon="login" nz-menu-item routerLink="auth/login">
-                <!-- <span nz-icon nzType="login" nzTheme="outline"></span> -->
-                Login
-              </li>
-              <!-- <li nzIcon="login" nz-menu-item>
-
-                Register
-              </li> -->
-
-            </ul>
+          <li nz-menu-item routerLink="auth/login">
+            <span nz-icon nzType="login" nzTheme="outline"></span>
+            Login
           </li>
-          <!-- <li nz-menu-group nzTitle="Item 2">
-            <ul>
-              <li nz-menu-item>Option 3</li>
-            </ul>
-          </li> -->
+          }@if(isLoggedIn){
+          <li nz-menu-item (click)="onLogout()">
+            <span nz-icon nzType="logout" nzTheme="outline"></span> Logout
+          </li>
+          <li nz-menu-item routerLink="auth/add-member">
+            <span nz-icon nzType="user-add" nzTheme="outline"></span> Member
+
+          </li>
+          }
+
         </ul>
       </li>
     </ul>

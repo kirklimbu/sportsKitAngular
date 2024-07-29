@@ -130,13 +130,12 @@ export class HomeComponent implements OnInit {
 
 
   private fetchHomeContents() {
-    console.log('fetching home ');
     const userId = this.fetchUserId();
 
     this.homeService.getHomeContents(getDeviceId(), userId)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((res: any) => {
-        console.log(' res', res);
+        // console.log(' res', res);
         this.aboutUsData = res.homeContentList[0];
         this.coachData = res.homeContentList[1];
         this.bannerData = res.bannerList
