@@ -26,8 +26,6 @@ export class HttpTokenInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const token = this.store.selectSnapshot(AuthState.token);
-    console.log('token', token);
-
 
     // if (!this.shouldAttemptJwtTokenInjection(request)) {
     //     return next.handle(request);
@@ -54,8 +52,6 @@ export class HttpTokenInterceptorService implements HttpInterceptor {
       });
       return next.handle(request);
     }
-    console.log('token', token);
-
     request = request.clone({
       setHeaders: {
         Token: token,

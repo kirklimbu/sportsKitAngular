@@ -31,6 +31,12 @@ export class AboutUsComponent implements OnInit {
   }
 
 
+  scrollTo(elem: string) {
+    console.log(elem);
+    this.show = !this.show;
+    document?.querySelector(elem)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
 
 }
 

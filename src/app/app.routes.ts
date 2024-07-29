@@ -12,19 +12,19 @@ export const appRoutes: Route[] = [
         pathMatch: 'full',
     },
 
+    {
+        path: 'auth',
+        loadChildren: () =>
+            import('./domains/auth').then((m) => m.FEATURE_AUTH_ROUTES),
+    },
     // {
-    //     path: 'auth',
-    //     loadChildren: () =>
-    //         import('./domains/auth').then((m) => m.FEATURE_AUTH_ROUTES),
+    //     path: 'auth/login',
+    //     component: LoginComponent
     // },
-    {
-        path: 'auth/login',
-        component: LoginComponent
-    },
-    {
-        path: 'auth/add-member',
-        component: MemberEntryComponent,
-    },
+    // {
+    //     path: 'auth/add-member',
+    //     component: MemberEntryComponent,
+    // },
 
     {
         path: '',

@@ -4,8 +4,10 @@
 // }
 
 $font-primary: 'primary';
+
 .form-submit {
   font-family: $font-primary;
+
   button {
     font-weight: bold;
     border-radius: 0;
@@ -38,6 +40,7 @@ $font-primary: 'primary';
     .save {
       min-width: 160px;
     }
+
     .cancel {
       width: 90px;
     }

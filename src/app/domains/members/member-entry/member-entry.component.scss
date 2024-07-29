@@ -3,26 +3,66 @@
 nz-select {
   width: 100%;
   height: 100%;
-  padding: 10px 10px 20px 10px;
+  padding: 10px 0px;
+}
+
+::ng-deep .ant-upload-list-picture-card .ant-upload-list-item-error {
+  border-color: white;
+}
+
+::ng-deep .nepali-date-picker .np_datepicker_input --active {
+  border-radius: 0;
+  outline: none !important;
+}
+
+::ng-deep .nepali-date-picker .np_datepicker_input {
+  border-radius: 0 !important;
+  outline: none !important;
+}
+
+::ng-deep .nepali-date-picker {
+  box-shadow: none;
+}
+
+::ng-deep .nepali-date-picker .datepicker__options-container {
+  background-color: $primary-color !important;
+}
+
+::ng-deep .nepali-date-picker .datepicker__date--active {
+  background-color: $primary-color !important;
+}
+
+.admin-members-section {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  .memberentry-section {
+    flex: 1;
+  }
+
+  .members-list-section {
+    flex: 1;
+  }
 }
 
 .memberentry-section {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: 550px;
+  gap: 16px;
+  // width: 450px;
+  // width: auto;
+  padding: 1rem;
   background-color: #fff;
-  padding: 20px;
   border-radius: 2px;
   position: relative;
-  border: 1px solid grey;
+  border: 1px solid lightgray;
 }
 
 .title {
@@ -85,7 +125,7 @@ nz-select {
 
 .form label {
   position: relative;
-  width: 50%;
+
 }
 
 .form label .input {
@@ -147,5 +187,68 @@ nz-select {
   to {
     transform: scale(1.8);
     opacity: 0;
+  }
+}
+
+
+@media (width<=576px) {
+  .memberentry-section {
+    max-width: 250px;
+  }
+
+  .form {
+    padding: 14px;
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: column;
+
+
+    label {
+      width: 100%;
+    }
+
+
+  }
+}
+
+@media (min-width: 768px) {
+
+  .memberentry-section {
+    max-width: 450px;
+  }
+
+  .form {
+    padding: 22px;
+
+  }
+
+  flex {
+    display: flex;
+    flex-direction: column;
+
+
+    label {
+      width: 100%;
+    }
+
+
+  }
+}
+
+@media only screen and (min-width: 991px) {
+
+  .form {
+    padding: 20px;
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: column;
+
+    .form label {
+      width: 50%;
+    }
   }
 }

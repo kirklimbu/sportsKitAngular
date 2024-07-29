@@ -164,7 +164,7 @@ export class LoginComponent implements OnInit {
           const userDetails = this.store.selectSnapshot(AuthState.userDetails)
 
           if (userDetails?.role?.includes('Admin')) {
-            this.router.navigate(['auth/profile'])
+            this.router.navigate(['/auth/'])
             return;
           }
           this.router.navigate(['/home']);

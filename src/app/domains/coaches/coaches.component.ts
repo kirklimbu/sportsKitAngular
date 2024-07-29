@@ -1,7 +1,5 @@
-import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Observable, shareReplay } from 'rxjs';
-import { HomeService } from '../home/home.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { NgOptimizedImage } from '@angular/common';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
@@ -30,5 +28,9 @@ export class CoachesComponent {
   @Input() data!: any;
 
 
+  scrollTo(elem: string) {
+    this.show = !this.show;
+    document?.querySelector(elem)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
 }

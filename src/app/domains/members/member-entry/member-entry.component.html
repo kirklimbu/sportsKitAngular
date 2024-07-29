@@ -1,59 +1,86 @@
-<section class="memberentry-section">
+<div class="admin-members-section">
 
-    <form class="form" [formGroup]="form">
-        <p class="title">Member Entry </p>
-        <p class="message">Add new member</p>
-        <div class="clearfix">
-            <label>
-                <span class="Photo">Photo</span>
-            </label>
-            <nz-upload nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" nzListType="picture-card"
-                [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview" (nzChange)="handleChange($event)">
-                <div>
-                    <span nz-icon nzType="plus"></span>
-                    <div style="margin-top: 8px">Upload</div>
-                </div>
-            </nz-upload>
-            <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
-                (nzOnCancel)="previewVisible = false">
-                <ng-template #modalContent>
-                    <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
-                </ng-template>
-            </nz-modal>
-        </div>
-        <div class="flex">
-        </div>
-        <div class="flex">
-
-            <label>
-                <input class="input" type="text" placeholder="" required="" autocomplete="off" formControlName="name">
-                <span class="required">Name</span>
-            </label>
-
-            <label>
-                <input class="input" type="tel" placeholder="" required="" autocomplete="off" formControlName="mobile">
-                <span class="required">Mobile</span>
-            </label>
+    <section class="memberentry-section">
+        <div>
+            <div class="sub-title">
+                <span>New member
+                </span>
+            </div>
+            <div class="title text-bolder">
+                <h3>
+                    Add member
+                </h3>
+            </div>
         </div>
 
-        <div class="flex">
-            <label>
-                <input class="input" type="date" placeholder="" required="" autocomplete="off" formControlName="dob">
-                <span class="required">D.O.B</span>
-            </label>
+        <form class="form" [formGroup]="form">
+            <div class="flex">
+                <label for="">
 
-            <label for="MemberType">
-                <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Membertype"
-                    formControlName="memberShipTypeId">
-                    <nz-option nzLabel="Lifetime" [nzValue]="1"></nz-option>
-                    <nz-option nzLabel="Annual" [nzValue]="2"></nz-option>
-                    <nz-option nzLabel="Monthly" [nzValue]="3"></nz-option>
-                    <nz-option nzLabel="Quarterly" [nzValue]="4"></nz-option>
-                </nz-select>
-            </label>
+                    <span>Profile pic</span>
+                    <div class="clearfix">
+                        <nz-upload [nzAction]="''" nzListType="picture-card" [(nzFileList)]="fileList"
+                            [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview"
+                            (nzChange)="handleChange($event)">
+                            <div>
+                                <span nz-icon nzType="plus"></span>
+                                <div style="margin-top: 8px">Upload</div>
+                            </div>
+                        </nz-upload>
+                        <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+                            (nzOnCancel)="previewVisible = false">
+                            <ng-template #modalContent>
+                                <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                            </ng-template>
+                        </nz-modal>
+                    </div>
+                </label>
+            </div>
 
-        </div>
-        <button class="submit" (click)="onSave()">Save</button>
+            <div class="flex">
 
-    </form>
-</section>
+                <label>
+                    <input class="input" type="text" placeholder="" autocomplete="off" formControlName="name">
+                    <span class="required">Name</span>
+                </label>
+                <label>
+                    <span for="dob" class="required">D.O.B</span>
+                    <ne-datepicker [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event)"
+                        (dateInAD)="updateEnglishDate($event)">
+                    </ne-datepicker>
+                </label>
+            </div>
+
+            <div class="flex">
+                <label>
+                    <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile1">
+                    <span class="required">Mobile1</span>
+                </label>
+                <label>
+                    <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile2">
+                    <span class="required">Mobile2</span>
+                </label>
+            </div>
+            <div class="flex">
+
+
+                <label for="MemberType">
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Membertype"
+                        formControlName="memberShipTypeId">
+                        <nz-option nzLabel="Lifetime" [nzValue]="1"></nz-option>
+                        <nz-option nzLabel="Annual" [nzValue]="2"></nz-option>
+                        <nz-option nzLabel="Monthly" [nzValue]="3"></nz-option>
+                        <nz-option nzLabel="Quarterly" [nzValue]="4"></nz-option>
+                    </nz-select>
+                </label>
+
+            </div>
+            <button class="submit" (click)="onSave()">Save</button>
+
+        </form>
+    </section>
+
+    <section class="members-list-section">
+        <app-all-members [data$]="memberList$" />
+    </section>
+</div>

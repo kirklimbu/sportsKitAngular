@@ -17,17 +17,21 @@
         "tsConfig": "tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
+          "./src/favicon.ico",
+          "./src/assets",
+
           {
             "glob": "**/*",
-            "input": "public"
-          },
-          "src/assets"
+            "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+            "output": "/assets/"
+          }
         ],
         "styles": [
+          "./node_modules/leaflet/dist/leaflet.css",
           "./src/styles.scss",
           "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
         ],
-        "scripts": [],
+        "scripts": ["node_modules/jquery/dist/jquery.min.js"],
         "server": "src/main.server.ts",
         "prerender": false,
         "ssr": false

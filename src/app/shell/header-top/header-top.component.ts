@@ -8,12 +8,14 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 // project
 import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-header-top',
   standalone: true,
   imports: [CommonModule,
+    RouterModule,
     // third-party
     NzIconModule,
     NzMenuModule,
@@ -25,6 +27,11 @@ import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
 export class HeaderTopComponent implements OnInit {
   url = '/assets/data/pages/company_info.json';
 
+  openMap: { [name: string]: boolean } = {
+    sub1: false,
+    sub2: false,
+    sub3: false
+  };
   headerData = GlobalConstants
   info$!: Observable<any>;
   @Input() notificationCount!: number
@@ -46,5 +53,12 @@ export class HeaderTopComponent implements OnInit {
 
   fetchInfo() {
     this.info$ = this.httpClient.get<any>(this.url)
+  }
+  openHandler(value: string): void {
+    for (const key in this.openMap) {
+      if (key !== value) {
+        this.openMap[key] = false;
+      }
+    }
   }
 }

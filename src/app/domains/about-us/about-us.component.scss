@@ -33,6 +33,12 @@ button {
   transition: background 400ms ease-in-out;
 }
 
+p {
+
+  overflow: hidden;
+  transition: opacity linear 1s, width linear 1s;
+}
+
 /* Small devices such as large phones (640px and up) */
 @media (min-width: 320px) {
   .content-container {

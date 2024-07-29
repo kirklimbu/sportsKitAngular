@@ -22,4 +22,8 @@ export class MembersComponent {
 
   @Input() data: any
 
+  scrollTo(elem: string) {
+    console.log(elem);
+    document?.querySelector(elem)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }

@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-// import { NxWelcomeComponent } from './nx-welcome.component';
-import { NzConfig, provideNzConfig } from 'ng-zorro-antd/core/config';
+import { NzConfig, } from 'ng-zorro-antd/core/config';
 import { IconDefinition } from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NZ_ICONS } from 'ng-zorro-antd/icon';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { trigger, transition, style, animate, stagger } from '@angular/animations';
-import { query } from 'express';
+
 const ngZorroConfig: NzConfig = {
   message: { nzTop: 120 },
   notification: { nzTop: 240 }
@@ -33,5 +30,5 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
 
 })
 export class AppComponent {
-  title = 'sportsKitAngular';
+  title = 'DNB Academy';
 }

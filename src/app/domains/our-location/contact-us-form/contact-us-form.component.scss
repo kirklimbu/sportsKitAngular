@@ -1,32 +1,58 @@
 @import 'src/assets/scss/_variables.scss';
 
+[nz-button] {
+  margin-right: 8px;
+  margin-bottom: 12px;
+  font-size: 16px;
+
+  &:hover {
+    background-color: $gold;
+    border: 1px solid $white;
+    background-position: 0;
+  }
+
+  background: {
+    image: linear-gradient(45deg, $gold 50%, transparent 50%);
+    position: 100%;
+    size: 300%;
+  }
+
+  transition: background 400ms ease-in-out;
+}
+
 button {
   border-radius: 0;
   font-weight: bold;
 }
+
 input,
 select {
   height: 3.5rem;
 }
+
 input,
 select:focus {
   border: none;
 }
+
 .form {
   margin-top: 2rem;
   color: $black;
 }
+
 @media (min-width: 320px) {
   .content-container {
     padding: 0rem;
     margin-top: 0;
   }
+
   button {
     width: 100%;
     height: 3rem;
     margin-bottom: 1rem;
   }
 }
+
 @media (min-width: 992px) {
   button {
     width: 164px;

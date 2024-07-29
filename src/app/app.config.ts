@@ -1,3 +1,4 @@
+
 import { ApplicationConfig, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
@@ -19,6 +20,8 @@ import { ErrorInterceptor } from './shared/util-auth/guards/interceptors/error.i
 // import { LoaderInterceptor } from './shared/util-auth/guards/interceptors/loader.interceptor';
 import { NgxsReduxDevtoolsPlugin, withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
 import { Auth } from './domains/auth/login/state/login.actions';
+
+
 registerLocaleData(en);
 // registerLocaleData(ne_NP);
 
@@ -29,15 +32,11 @@ const ngZorroConfig: NzConfig = {
 
 export function tokenGetter() {
   let token = localStorage.getItem("token");
-  console.log('token', token);
 
   if (!token) {
-    console.log('no token', token);
     localStorage.setItem("token", ".")
     return localStorage.getItem("token")
   } else {
-    console.log('xa token', token);
-
     return localStorage.getItem("token")
   }
 }

@@ -11,6 +11,10 @@ body {
     overflow-x: clip;
 }
 
+button {
+    transition: background 400ms ease-in-out;
+}
+
 .title {
     font-size: 3rem;
     font-weight: $font-weight-bold;
@@ -64,6 +68,11 @@ body {
 
 
 @media only screen and (min-width: 320px) {
+
+    .content-container {
+        padding: 3rem 2rem;
+    }
+
     .title {
         text-justify: none;
     }

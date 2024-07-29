@@ -5,6 +5,7 @@ import { Role } from 'src/app/shared/util-auth/models/user.model';
 // import { UserProfileComponent } from '../user-profile/user-profile.component';
 import { AuthGuard } from 'src/app/shared/util-auth/guards/auth.guard';
 import { MemberEntryComponent } from '../members/member-entry/member-entry.component';
+import { FEATURE_MEMBERS_ROUTES } from '../members';
 
 // import { DashboardComponent } from '../dashboard/dashboard.component';
 // import { InquiryComponent } from '../inquiry/inquiry.component';
@@ -12,14 +13,14 @@ import { MemberEntryComponent } from '../members/member-entry/member-entry.compo
 export const FEATURE_ADMIN_ROUTES: Routes = [
   {
     path: '',
-    // canActivate: [AuthGuard],
-    // loadChildren: () =>
-    // import('.././user-profile').then((m) => m.FEATURE_USER_ROUTES),
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('../members').then((m) => FEATURE_MEMBERS_ROUTES),
   },
-  {
-    path: 'add-member',
-    component: MemberEntryComponent
-  }
+  // {
+  //   path: 'add-member',
+  //   component: MemberEntryComponent
+  // }
   // {
   //   path: '',
   //   canActivate: [hasRoleGuard],

@@ -1,0 +1,51 @@
+<div class="sub-title">
+    <span>All members
+    </span>
+</div>
+<div class="title text-bolder">
+    <h3>
+        All members
+    </h3>
+</div>
+@if(data$|async;as data ){
+
+<nz-table #nzTable [nzBordered]="true" [nzData]="data" nzTableLayout="fixed" [nzScroll]="{ y: '540px' }">
+    <thead>
+        <tr>
+            <th></th>
+
+            <th nzCustomFilter>
+                Name
+                <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                    <span nz-icon nzType="search"></span>
+                </nz-filter-trigger>
+            </th>
+            <th>Mobile</th>
+            <th>Member Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (member of nzTable.data; track $index) {
+
+        <tr>
+            <td class="text-center">
+                <nz-avatar nzIcon="user" [nzSrc]="member.profilePic"></nz-avatar>
+            </td>
+            <td>{{ member.name }}</td>
+            <td>{{ member.mobile1 }},{{ member.mobile2 }}</td>
+            <td>{{ member.memberShip }}</td>
+
+        </tr>
+        }
+    </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">Search</button>
+            <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>
+}

@@ -35,9 +35,16 @@
             </li>
 
 
-            <li nz-submenu nzTitle="Question" nzIcon="book">
+            <li nz-submenu nzTitle="Members" nzIcon="user-add">
                 <ul>
-                    <li nz-menu-item [routerLink]="['/auth/question-list']">Question list</li>
+                    <li nz-menu-item [routerLink]="['/auth/question-list']">All Members</li>
+                    <li nz-menu-item [routerLink]="['/auth/question-list']">Add Member</li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Events" nzIcon="schedule">
+                <ul>
+                    <li nz-menu-item [routerLink]="['/auth/question-list']">All Events</li>
+                    <li nz-menu-item [routerLink]="['/auth/question-list']">Add Event</li>
                 </ul>
             </li>
             <li nz-submenu nzTitle="Setting" nzIcon="setting">

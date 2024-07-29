@@ -23,19 +23,29 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         let errorMessage = '';
         if (error.error instanceof ErrorEvent) {
+          console.log('client error', error);
+
           // client-side error
           errorMessage = `${error.error.message}`;
-          this.messageService.createMessage('error',
-            `<strong class=''>Client side error.</strong>${errorMessage}`
-          );
+          if (error.status !== 200) {
+
+            this.messageService.createMessage('error',
+              `<strong class=''>Client side error.</strong>${errorMessage}`
+            );
+          }
           return throwError(() => new Error(errorMessage));
         }
         // server-side error
-        errorMessage = `${error.error.message}`;
-        this.messageService
-          .createMessage('error', `<strong >Please contact your admin.</strong> </br>
-        <small class='text-danger my-5' >${errorMessage}</small>`);
+        console.log('server error', error);
+        if (error.status !== 200) {
+
+          errorMessage = `${error.error.message}`;
+          this.messageService
+            .createMessage('error', `<strong >Please contact your admin.</strong> </br>
+          <small class='text-danger my-5'>${errorMessage}</small>`);
+        }
         return throwError(() => new Error(errorMessage));
+
       })
     );
   }

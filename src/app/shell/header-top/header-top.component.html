@@ -5,30 +5,66 @@
     <marquee direction="left" scrollamount="5">"{{headerData.bio}}"</marquee>
   </div>
   <div class="social-media ">
-    <div class="language-selector">
+    <!-- <div class="language-selector">
       <div id="google_translate_element" class="language-selector"></div>
-    </div>
+    </div> -->
 
     <!-- Translate flag END -->
-    <a title="Visit our facebook page" [href]="headerData.facebook" target="_blank" rel="noopener noreferrer"
+    <!-- <a title="Visit our facebook page" [href]="headerData.facebook" target="_blank" rel="noopener noreferrer"
       title="Facebook">
       <i class="facebook fab fa-facebook-square  fa-lg"></i>
     </a>
-    <span nz-icon [nzIconfont]="'icon-facebook'"></span>
+    <span nz-icon [nzIconfont]="'icon-facebook'"></span> -->
     <!-- <a href='https://www.instagram.com/valleymenc' target="_blank" rel="noopener noreferrer" title="Instagram">
             <i class="insta fab fa-instagram  fa-lg"></i>
           </a> -->
     <!-- <a href="/auth/login" title="Login ">
             <i class="fas fa-user-lock"></i>
           </a> -->
+    <ul nz-menu nzMode="horizontal" style="width: auto; background-color:#cceabe1a;">
+      <li nz-menu-item>
+        <span nz-icon>
+          <a title="Visit our facebook page" [href]="headerData.facebook" target="_blank" rel="noopener noreferrer"
+            title="Facebook">
+            <i class="facebook fab fa-facebook-square  fa-lg"></i>
+          </a>
+        </span>
+      </li>
+      <li style="font-size: 16px;" nzPlacement="bottomCenter" nz-submenu nzTitle="" nzIcon="user">
+
+        <ul>
+
+          <li nz-menu-group nzTitle="">
+            <ul>
+              <li nzIcon="login" nz-menu-item routerLink="auth/login">
+                <!-- <span nz-icon nzType="login" nzTheme="outline"></span> -->
+                Login
+              </li>
+              <!-- <li nzIcon="login" nz-menu-item>
+
+                Register
+              </li> -->
+
+            </ul>
+          </li>
+          <!-- <li nz-menu-group nzTitle="Item 2">
+            <ul>
+              <li nz-menu-item>Option 3</li>
+            </ul>
+          </li> -->
+        </ul>
+      </li>
+    </ul>
+
+
     <!-- begin::profile menu -->
-    <label class="popup">
+    <!-- <label class="popup">
       <input type="checkbox" />
       <div tabindex="0" class="burger">
         <i class="fas fa-user"></i>
 
       </div>
-      <!-- <nav class="popup-window">
+      <nav class="popup-window">
         <ul>
           <li>
             <button>
@@ -53,8 +89,8 @@
             </button>
           </li>
         </ul>
-      </nav> -->
-    </label>
+      </nav>
+    </label> -->
 
     <!-- end::profile menu -->
   </div>
