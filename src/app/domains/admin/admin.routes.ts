@@ -6,6 +6,8 @@ import { Role } from 'src/app/shared/util-auth/models/user.model';
 import { AuthGuard } from 'src/app/shared/util-auth/guards/auth.guard';
 import { MemberEntryComponent } from '../members/member-entry/member-entry.component';
 import { FEATURE_MEMBERS_ROUTES } from '../members';
+import { FEATURE_EVENTS_ROUTES } from '../events/events.routes';
+import { EventsAddComponent } from '../events/admin/events-add/events-add.component';
 
 // import { DashboardComponent } from '../dashboard/dashboard.component';
 // import { InquiryComponent } from '../inquiry/inquiry.component';
@@ -17,10 +19,16 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
     loadChildren: () =>
       import('../members').then((m) => FEATURE_MEMBERS_ROUTES),
   },
-  // {
-  //   path: 'add-member',
-  //   component: MemberEntryComponent
-  // }
+  {
+    path: 'events',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('../events').then((m) => FEATURE_EVENTS_ROUTES),
+  },
+  {
+    path: 'add-event',
+    component: EventsAddComponent
+  }
   // {
   //   path: '',
   //   canActivate: [hasRoleGuard],

@@ -17,6 +17,7 @@
         [nzScroll]="{ x: '600px', y: '635px' }">
         <thead>
             <tr>
+                <th></th>
                 <th>
                     Name
                 </th>
@@ -42,9 +43,7 @@
                         {{ member.mobile2 }}
                     </p>
                 </td>
-                <!--  
-                    <nz-tag [nzColor]="'#108ee9'">#108ee9</nz-tag>
-                 -->
+
                 <td>
                     @switch (member.memberShip) {
                     @case ('LIFE') {

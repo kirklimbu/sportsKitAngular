@@ -15,6 +15,12 @@ button {
     transition: background 400ms ease-in-out;
 }
 
+
+.content-container {
+    padding: 1rem;
+}
+
+// content heading/sub-heading
 .title {
     font-size: 3rem;
     font-weight: $font-weight-bold;
@@ -36,6 +42,9 @@ button {
 
 }
 
+
+// cards
+
 .ant-card {
     margin-bottom: 0;
 
@@ -54,12 +63,83 @@ button {
     text-align: justify;
 }
 
-.description {
-    text-align: justify;
+
+
+
+// form styling
+.flex {
+    display: flex;
+    width: 100%;
+    gap: 6px;
 }
 
-.content-container {
-    padding: 1rem;
+
+.required:after {
+    content: " *";
+    color: $red;
+}
+
+::placeholder {
+    color: $gray;
+}
+
+.form label {
+    position: relative;
+
+}
+
+.form label .input {
+    width: 100%;
+    padding: 10px 10px 20px 10px;
+    outline: 0;
+    border: 1px solid rgba(105, 105, 105, 0.397);
+    border-radius: 1px;
+}
+
+.form label .input+span {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    color: grey;
+    font-size: 0.9em;
+    cursor: text;
+    transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown+span {
+    top: 15px;
+    font-size: 0.9em;
+}
+
+.form label .input:focus+span,
+.form label .input:valid+span {
+    top: 0px;
+    // font-size: 0.7em;
+    font-weight: 600;
+}
+
+.form label .input:valid+span {
+    color: $primary-color;
+}
+
+.submit {
+    border: none;
+    outline: none;
+    background-color: $primary-color;
+    padding: 10px;
+    border-radius: 1px;
+    color: #fff;
+    font-size: 16px;
+    transform: 0.3s ease;
+}
+
+.submit:hover {
+    background-color: $gold;
+    cursor: pointer;
+}
+
+.description {
+    text-align: justify;
 }
 
 .image-section {

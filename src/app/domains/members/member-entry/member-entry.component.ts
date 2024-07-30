@@ -34,7 +34,6 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   standalone: true,
   imports: [
     CommonModule,
-    ImageUploadDirective,
     ReactiveFormsModule,
     // third-party
     NzUploadModule,

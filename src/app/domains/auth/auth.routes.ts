@@ -12,16 +12,6 @@ export const FEATURE_AUTH_ROUTES: Routes = [
     path: 'registration',
     component: RegistrationComponent,
   },
-  {
-    path: '',
-    data: {
-      breadcrumb: {
-        label: 'admin'
-      }
-    },
-    component: AdminComponent,
-    loadChildren: () =>
-      import('.././admin').then((m) => m.FEATURE_ADMIN_ROUTES),
-  },
+
 
 ];

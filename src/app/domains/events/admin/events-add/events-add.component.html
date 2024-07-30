@@ -1,0 +1,85 @@
+<div class="container">
+
+  <section class="memberentry-section">
+    <div>
+      <div class="sub-title">
+        <span>New Event
+        </span>
+      </div>
+      <div class="title text-bolder">
+        <h3>
+          Add Event
+        </h3>
+      </div>
+    </div>
+
+    <form class="form" [formGroup]="form">
+      <div class="flex">
+        <span class="required">Image</span>
+        <label for="">
+          <div class="clearfix">
+            <nz-upload [nzAction]="''" nzListType="picture-card" [(nzFileList)]="fileList"
+              [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview" (nzChange)="handleChange($event)">
+              <div>
+                <span nz-icon nzType="plus"></span>
+                <div style="margin-top: 8px">Upload</div>
+              </div>
+            </nz-upload>
+            <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+              (nzOnCancel)="previewVisible = false">
+              <ng-template #modalContent>
+                <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+              </ng-template>
+            </nz-modal>
+          </div>
+        </label>
+      </div>
+
+      <div class="flex">
+
+        <span class="required">Title</span>
+        <label>
+          <input class="input" type="text" placeholder="Mirak Lawati" autocomplete="off" formControlName="title">
+        </label>
+
+      </div>
+
+      <div class="flex">
+        <span class="required">Description</span>
+        <label>
+          <textarea nz-input placeholder="District level tournament"
+            [nzAutosize]="{ minRows: 4, maxRows: 6 }"></textarea>
+        </label>
+      </div>
+
+      <div class="flex">
+        <label>
+          <span class="required" for="dob">Date</span>
+          <ne-datepicker [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event)"
+            (dateInAD)="updateEnglishDate($event)">
+          </ne-datepicker>
+        </label>
+
+      </div>
+      <div class="flex">
+        <span class="required">Time</span>
+        <label>
+          <input class="input" type="time" placeholder="12:15" autocomplete="off" formControlName="startTime">
+        </label>
+      </div>
+      <div class="flex">
+        <span class="ticket">Ticket</span>
+        <label>
+          <input class="input" type="number" placeholder="" autocomplete="off" formControlName="ticketPrice">
+        </label>
+      </div>
+
+      <button class="submit" (click)="onSave()">Save</button>
+
+    </form>
+  </section>
+
+  <section class="members-list-section">
+    <app-events-list [data$]="event$" />
+  </section>
+</div>

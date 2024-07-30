@@ -4,6 +4,7 @@ import { CommonLayoutComponent } from './layouts/common-layout/common-layout.com
 import { LoginComponent } from './domains/auth/login/login.component';
 import { RegistrationComponent } from './domains/auth/registration/registration.component';
 import { MemberEntryComponent } from './domains/members/member-entry/member-entry.component';
+import { AdminComponent } from './domains/admin/admin.component';
 
 export const appRoutes: Route[] = [
     {
@@ -17,6 +18,18 @@ export const appRoutes: Route[] = [
         loadChildren: () =>
             import('./domains/auth').then((m) => m.FEATURE_AUTH_ROUTES),
     },
+    {
+        path: 'admin',
+        data: {
+            breadcrumb: {
+                label: 'admin'
+            }
+        },
+        component: AdminComponent,
+        loadChildren: () =>
+            import('../app/domains/admin').then((m) => m.FEATURE_ADMIN_ROUTES),
+    },
+
     // {
     //     path: 'auth/login',
     //     component: LoginComponent

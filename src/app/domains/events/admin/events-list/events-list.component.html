@@ -1,0 +1,83 @@
+<div class="table-container">
+
+  <div class="sub-title">
+    <span> Events
+    </span>
+  </div>
+  <div class="title text-bolder">
+    <h3>
+      All Events
+    </h3>
+  </div>
+
+
+  @if(data$|async;as data ){
+
+  <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
+    [nzScroll]="{ x: '600px', y: '635px' }">
+    <thead>
+      <tr>
+        <th></th>
+        <th>
+          Title
+        </th>
+        <th>Date/Time</th>
+
+        <th>Action</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      @for (member of nzTable.data; track $index) {
+
+      <tr>
+        <td class="text-center">
+          <img height="250" width="250" [src]="member.image" alt="">
+          <!-- <nz-avatar nzIcon="user" [nzSrc]="member.image"></nz-avatar> -->
+        </td>
+        <td>{{ member.title |titlecase }}</td>
+        <td>
+          <p>
+            {{ member.eventDate }}
+          </p>
+          <p>
+            {{ member.startTime }}
+          </p>
+        </td>
+
+        <!-- <td>
+          @switch (member.memberShip) {
+          @case ('LIFE') {
+          <nz-tag [nzColor]="'#2db7f5'">{{member.memberShip|titlecase}}</nz-tag>
+
+          }@case ('QUARTERLY') {
+          <nz-tag [nzColor]="'#87d068'">{{member.memberShip|titlecase}}</nz-tag>
+
+          }@case ('MONTHLY') {
+          <nz-tag [nzColor]="'#87d068'">{{member.memberShip|titlecase}}</nz-tag>
+
+          }
+
+          @default {
+          <nz-tag [nzColor]="'#f50'">{{member.memberShip|titlecase}}</nz-tag>
+          }
+          }
+        </td> -->
+
+        <td>
+          <div class="action-buttons">
+
+            <button nzTooltipTitle="Edit" nzTooltipPlacement="topLeft" nz-tooltip nz-button nzType="primary" nzGhost
+              (click)="onEdit(member.eventId)"><span nz-icon nzType="form"></span></button>
+            <button nzTooltipTitle="Delete" nzTooltipPlacement="topLeft" nz-tooltip nz-button nzDanger><span nz-icon
+                nzType="delete"></span></button>
+
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </nz-table>
+  }
+
+</div>
