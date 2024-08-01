@@ -1,4 +1,3 @@
-
 import { Routes } from '@angular/router';
 import { hasRoleGuard } from 'src/app/shared/util-auth/guards/hasRole.guard';
 import { Role } from 'src/app/shared/util-auth/models/user.model';
@@ -8,6 +7,8 @@ import { MemberEntryComponent } from '../members/member-entry/member-entry.compo
 import { FEATURE_MEMBERS_ROUTES } from '../members';
 import { FEATURE_EVENTS_ROUTES } from '../events/events.routes';
 import { EventsAddComponent } from '../events/admin/events-add/events-add.component';
+import { OrganizationComponent } from './organization/organization.component';
+import { AddOrganizationComponent } from './organization/add-organization/add-organization.component';
 
 // import { DashboardComponent } from '../dashboard/dashboard.component';
 // import { InquiryComponent } from '../inquiry/inquiry.component';
@@ -22,13 +23,12 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
   {
     path: 'events',
     canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('../events').then((m) => FEATURE_EVENTS_ROUTES),
+    loadChildren: () => import('../events').then((m) => FEATURE_EVENTS_ROUTES),
   },
   {
-    path: 'add-event',
-    component: EventsAddComponent
-  }
+    path: 'organization',
+    component: AddOrganizationComponent,
+  },
   // {
   //   path: '',
   //   canActivate: [hasRoleGuard],
@@ -68,9 +68,7 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
   //   path: 'inquiry',
   //   component: InquiryComponent,
 
-
   // },
-
 
   // {
   //   canActivate: [hasRoleGuard],
@@ -86,12 +84,4 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
   //   //   }
   //   // },
   // },
-
-
-
-
-
-]
-
-
-
+];

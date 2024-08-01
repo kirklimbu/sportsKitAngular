@@ -1,0 +1,96 @@
+<div class="container">
+
+    <section class="memberentry-section">
+        <div>
+            <div class="sub-title">
+                <span>Our Organization
+                </span>
+            </div>
+            <div class="title text-bolder">
+                <h3>
+                    Add Organization
+                </h3>
+            </div>
+        </div>
+
+        <form class="form" [formGroup]="form">
+            <div class="flex">
+                <label for="">
+                    <span class="required">Logo</span>
+                    <div class="clearfix">
+                        <nz-upload [nzAction]="''" nzListType="picture-card" [(nzFileList)]="fileList"
+                            [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview"
+                            (nzChange)="handleChange($event)">
+                            <div>
+                                <span nz-icon nzType="plus"></span>
+                                <div style="margin-top: 8px">Upload</div>
+                            </div>
+                        </nz-upload>
+                        <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+                            (nzOnCancel)="previewVisible = false">
+                            <ng-template #modalContent>
+                                <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                            </ng-template>
+                        </nz-modal>
+
+                    </div>
+                </label>
+            </div>
+
+            <div class="flex">
+
+                <label>
+                    <span class="required">Name</span>
+                    <input class="input" type="text" placeholder="" autocomplete="off"
+                        formControlName="name">
+                </label>
+                <label>
+                    <span class="required">Address</span>
+                    <input class="input" type="text" placeholder="" autocomplete="off"
+                        formControlName="address">
+                </label>
+
+            </div>
+
+            <div class="flex">
+                <label>
+                    <span class="required">Email1</span>
+                    <input class="input" type="email" placeholder="12:15" autocomplete="off" formControlName="emailOne">
+                </label>
+                <label>
+                    <span class="required">Email2</span>
+                    <input class="input" type="email" placeholder="" autocomplete="off" formControlName="emailTwo">
+                </label>
+            
+            </div>
+            <div class="flex">
+                <label>
+                    <span class="required">Latitude</span>
+                    <input class="input" type="text" placeholder="12:15" autocomplete="off" formControlName="latitude">
+                </label>
+                <label>
+                    <span class="required">Longtitude</span>
+                    <input class="input" type="text" placeholder="" autocomplete="off" formControlName="longitude">
+                </label>
+            
+            </div>
+
+            <div class="flex">
+                <label>
+                    <span class="required">Mobile</span>
+                    <input class="input" type="text" placeholder="12:15" autocomplete="off" formControlName="mobile">
+                </label>
+                <label>
+                    <span class="required">Bio</span>
+                    <textarea formControlName="bio" nz-input placeholder=""
+                        [nzAutosize]="{ minRows: 4, maxRows: 6 }"></textarea>
+                </label>
+            </div>
+
+            <button class="submit" (click)="onSave()">Save</button>
+
+        </form>
+    </section>
+
+   
+</div>

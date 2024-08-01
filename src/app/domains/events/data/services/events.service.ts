@@ -5,17 +5,14 @@ import { toFormData } from 'src/app/shared/util-common/toFormData';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EventsService {
-
-  apiUrl = environment.apiUrl
-  private readonly http = inject(HttpClient)
-  constructor() { }
+  apiUrl = environment.apiUrl;
+  private readonly http = inject(HttpClient);
 
   getAllEvents(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}event/list`);
-
   }
 
   // getFormValues;
@@ -32,7 +29,9 @@ export class EventsService {
   }
 
   addEventImage(file: any) {
-    return this.http.post<any>(`${this.apiUrl}auth/event/image/save`, toFormData(file),
+    return this.http.post<any>(
+      `${this.apiUrl}auth/event/image/save`,
+      toFormData(file)
     );
   }
 

@@ -5,6 +5,7 @@ import {
   ElementRef,
   ViewChild,
   inject,
+  OnInit,
 } from '@angular/core';
 import { CommonModule, formatDate } from '@angular/common';
 import {
@@ -13,7 +14,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
 
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
@@ -37,21 +37,25 @@ import { EventsService } from '../../data/services/events.service';
 import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
 import { converterDate } from 'src/app/shared/util-logger/convert-date';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { NzUploadFile, NzUploadChangeParam, NzUploadModule } from 'ng-zorro-antd/upload';
-import { NepaliDatepickerModule, NepaliDatepickerService } from 'nepali-datepicker-angular';
+import {
+  NzUploadFile,
+  NzUploadChangeParam,
+  NzUploadModule,
+} from 'ng-zorro-antd/upload';
+import {
+  NepaliDatepickerModule,
+  NepaliDatepickerService,
+} from 'nepali-datepicker-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { EventsListComponent } from "../events-list/events-list.component";
-
-
-
+import { EventsListComponent } from '../events-list/events-list.component';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
 
 @Component({
@@ -71,30 +75,28 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
     NzModalModule,
     NzIconModule,
     NepaliDatepickerModule,
-    EventsListComponent
+    EventsListComponent,
   ],
   templateUrl: './events-add.component.html',
   styleUrls: ['./events-add.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EventsAddComponent {
-
+export class EventsAddComponent implements OnInit {
   previewImage: string | undefined = '';
   previewVisible = false;
-  showButton = true
-  fileList: any[] = []
-  date: any = new Date()
-
+  showButton = true;
+  fileList: any[] = [];
+  date: any = new Date();
 
   form!: FormGroup;
   addedFiles: any[] = [];
   croppedImage: any = '';
   defaultImg = 'https://bulma.io/images/placeholders/480x480.png';
-  fileName: string = 'FILE NOT SELECTED';
-  showCropper: boolean = false;
-  enableUpload: boolean = false;
-  finalImage: any;
-  values: any[] = [{ value: '' }];
+  fileName = 'FILE NOT SELECTED';
+  showCropper = false;
+  enableUpload = false;
+  finalImage: unknown;
+  values: unknown[] = [{ value: '' }];
   imageChangedEvent: any = '';
   mode = 'add';
   isLoading = false;
@@ -107,7 +109,7 @@ export class EventsAddComponent {
   @ViewChild('fileInput', { static: false }) selectedFile!: ElementRef;
   @ViewChild('cropper', { static: false }) private scrollCropper!: ElementRef;
 
-  private _nepaliDatepickerService = inject(NepaliDatepickerService)
+  private _nepaliDatepickerService = inject(NepaliDatepickerService);
   constructor(
     private readonly changeDetector: ChangeDetectorRef,
     private fb: FormBuilder,
@@ -116,7 +118,7 @@ export class EventsAddComponent {
     private store: Store,
     private route: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
 
   async ngOnInit(): Promise<void> {
     this.buildForm();
@@ -131,45 +133,46 @@ export class EventsAddComponent {
    * check authentication
    */
 
-
   private checkFormStatus() {
     this.eventId$ = this.route.queryParamMap.pipe(
       map((params: ParamMap) => Number(params.get('id')))
     );
-    this.eventId$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((_res: any) => {
-        console.log('fomn res', _res);
-        if (_res) {
-          this.mode = 'edit';
-          this.edit();
-        }
-      });
+    this.eventId$.pipe(takeUntil(this.unsubscribe$)).subscribe((_res: any) => {
+      console.log('fomn res', _res);
+      if (_res) {
+        this.mode = 'edit';
+        this.edit();
+      }
+    });
   }
 
   /**
-  *
-  * edit
-  */
+   *
+   * edit
+   */
   edit() {
     this.event$ = this.eventId$.pipe(
       switchMap((query: number) => this.eventService.getFormValues(query))
     );
-    this.event$.pipe(takeUntil(this.unsubscribe$))
-      .subscribe((_res: any) => {
-        // console.log('fomn res', _res);
-        this.form.patchValue(_res);
-        this.fileList = [{
+    this.event$.pipe(takeUntil(this.unsubscribe$)).subscribe((_res: any) => {
+      // console.log('fomn res', _res);
+      this.form.patchValue(_res);
+      this.fileList = [
+        {
           eventId: _res.eventId,
           name: _res.title,
           status: 'done',
-          url: _res.image
-        }]
-        this.previewImage = _res.image
-        const BSDate = this._nepaliDatepickerService.BSToAD(_res.eventDate, 'yyyy/mm/dd');
-        this.date = new Date(BSDate)
-        this.changeDetector.detectChanges();
-      });
+          url: _res.image,
+        },
+      ];
+      this.previewImage = _res.image;
+      const BSDate = this._nepaliDatepickerService.BSToAD(
+        _res.eventDate,
+        'yyyy/mm/dd'
+      );
+      this.date = new Date(BSDate);
+      this.changeDetector.detectChanges();
+    });
   }
 
   private buildForm() {
@@ -184,23 +187,20 @@ export class EventsAddComponent {
     });
   }
 
-
   handleChange(info: NzUploadChangeParam): void {
     // console.log('set file', info);
     if (!info.fileList[0]) {
-      return this.messageService.createMessage('error', 'Please select file.')
+      return this.messageService.createMessage('error', 'Please select file.');
     }
     // this.fileList.push(info.fileList[0])
     this.form.patchValue({
-      file: info?.['file']?.originFileObj
-    })
+      file: info?.['file']?.originFileObj,
+    });
 
     // on Delete
     if (info.file.status === 'removed') {
-      this.onDeleteFile(info.file['eventId'])
-
+      this.onDeleteFile(info.file['eventId']);
     }
-
   }
 
   onDeleteFile(docId: number): void {
@@ -217,7 +217,6 @@ export class EventsAddComponent {
     this.enableUpload = false;
   }
 
-
   handlePreview = async (file: NzUploadFile): Promise<void> => {
     // console.log('sel file', file);
     if (!file.url && !file['preview']) {
@@ -230,7 +229,7 @@ export class EventsAddComponent {
   // nepali date picker
   updateNepaliDate($event: string) {
     // console.log('updaet nepali', $event);
-    this.form.patchValue({ "eventDate": $event })
+    this.form.patchValue({ eventDate: $event });
   }
   updateEnglishDate($event: string) {
     // console.log('updaet eng', $event);
@@ -239,11 +238,7 @@ export class EventsAddComponent {
     // console.log('date', $event);
   }
 
-
-
-
   onSave() {
-
     this.checkNull('eventDate');
     this.isLoading = true;
     console.log('form val', this.form.value);
@@ -258,12 +253,15 @@ export class EventsAddComponent {
         // this.isLoading = false;
         if (_res) {
           // route to vendor home page
-          this.messageService.createMessage('success', 'Event added successfully.')
+          this.messageService.createMessage(
+            'success',
+            'Event added successfully.'
+          );
           // this.onCancel();
           this.form.reset();
           this.previewImage = '';
           this.date = new Date();
-          this.event$ = of(_res)
+          this.event$ = of(_res);
           // location.reload();
           // this.router.navigate(['/auth/list-event']);
           // scroll2Top();
@@ -271,8 +269,6 @@ export class EventsAddComponent {
         }
       });
   }
-
-
 
   /**
    * cancel
@@ -314,11 +310,13 @@ export class EventsAddComponent {
   private convertDate(value: string): void {
     if (value != 'eventDate') return;
 
-    let convertedDate = converterDate(this.form.controls['eventDate'].value, 'yyyy/MM/dd', 'en');
+    const convertedDate = converterDate(
+      this.form.controls['eventDate'].value,
+      'yyyy/MM/dd',
+      'en'
+    );
     this.form.patchValue({
       eventDate: convertedDate,
     });
   }
-
-
 }
