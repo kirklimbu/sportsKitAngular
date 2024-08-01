@@ -51,6 +51,7 @@ nz-select {
 
   .members-list-section {
     flex: 1;
+    margin-top: 2rem;
   }
 }
 
@@ -188,7 +189,7 @@ nz-select {
 
   flex {
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
 
 
     label {
@@ -209,15 +210,20 @@ nz-select {
 
   .form {
     padding: 20px;
+    width: 600px;
   }
 
   .flex {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    // flex-direction: column;
 
-    .form label {
-      width: 50%;
+    label {
+      // width: 50%;
+      flex: 0 0 47%;
     }
+
   }
 }
 

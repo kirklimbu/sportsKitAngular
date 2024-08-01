@@ -37,10 +37,14 @@ nz-tag {
 /* .table-container {
   overflow-x: auto;
 }*/
-@media (width<=520px) {
-  .table-container {
-    padding-top: 2rem;
-  }
+@media (width<=520px) {}
 
-
+.table-container {
+  padding-top: 4rem;
 }
+
+// @media (width<=991px) {
+//   .table-container {
+//     padding-top: 6rem;
+//   }
+// }

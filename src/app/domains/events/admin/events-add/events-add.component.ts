@@ -17,7 +17,7 @@ import {
 
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, of } from 'rxjs';
 
 // third-party
 // import { CalendarModule } from 'primeng/calendar';
@@ -122,8 +122,6 @@ export class EventsAddComponent {
     this.buildForm();
     // if (this.mode === 'edit') return this.edit();
     this.checkFormStatus();
-
-    console.log('mode', this.mode);
   }
   get f() {
     return this.form.controls;
@@ -157,14 +155,21 @@ export class EventsAddComponent {
     this.event$ = this.eventId$.pipe(
       switchMap((query: number) => this.eventService.getFormValues(query))
     );
-    this.event$.pipe(takeUntil(this.unsubscribe$)).subscribe((_res: any) => {
-      console.log('fomn res', _res);
-      this.form.patchValue(_res);
-      // event date milaune
-      this.form.patchValue({ eventDate: converterDate(_res.eventDate, 'yyyy-MM-dd', 'en') });
-      // this.croppedImage = _res.image;
-      this.changeDetector.detectChanges();
-    });
+    this.event$.pipe(takeUntil(this.unsubscribe$))
+      .subscribe((_res: any) => {
+        // console.log('fomn res', _res);
+        this.form.patchValue(_res);
+        this.fileList = [{
+          eventId: _res.eventId,
+          name: _res.title,
+          status: 'done',
+          url: _res.image
+        }]
+        this.previewImage = _res.image
+        const BSDate = this._nepaliDatepickerService.BSToAD(_res.eventDate, 'yyyy/mm/dd');
+        this.date = new Date(BSDate)
+        this.changeDetector.detectChanges();
+      });
   }
 
   private buildForm() {
@@ -181,7 +186,7 @@ export class EventsAddComponent {
 
 
   handleChange(info: NzUploadChangeParam): void {
-    console.log('set file', info);
+    // console.log('set file', info);
     if (!info.fileList[0]) {
       return this.messageService.createMessage('error', 'Please select file.')
     }
@@ -189,6 +194,12 @@ export class EventsAddComponent {
     this.form.patchValue({
       file: info?.['file']?.originFileObj
     })
+
+    // on Delete
+    if (info.file.status === 'removed') {
+      this.onDeleteFile(info.file['eventId'])
+
+    }
 
   }
 
@@ -208,7 +219,7 @@ export class EventsAddComponent {
 
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {
-    console.log('sel file', file);
+    // console.log('sel file', file);
     if (!file.url && !file['preview']) {
       file['preview'] = await getBase64(file.originFileObj!);
     }
@@ -218,39 +229,18 @@ export class EventsAddComponent {
 
   // nepali date picker
   updateNepaliDate($event: string) {
-    console.log('updaet nepali', $event);
+    // console.log('updaet nepali', $event);
     this.form.patchValue({ "eventDate": $event })
   }
   updateEnglishDate($event: string) {
-    console.log('updaet eng', $event);
+    // console.log('updaet eng', $event);
   }
   onDateChange($event: string) {
-    console.log('date', $event);
+    // console.log('date', $event);
   }
 
 
 
-  // image cropper
-  onFileSelected(event: any): void {
-    console.log('event', event);
-
-    this.scrollCropper.nativeElement.scrollIntoView({ behavior: 'smooth' });
-    // issue while removing photo
-    this.showCropper = true;
-    const file = event.target.files[0];
-    if (file) {
-      this.fileName = file.name;
-      // File Preview
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.croppedImage = reader.result as string;
-        this.changeDetector.detectChanges();
-      };
-    }
-
-    this.imageChangedEvent = event;
-  }
 
   onSave() {
 
@@ -262,8 +252,6 @@ export class EventsAddComponent {
       .addEvent(this.form.value)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((_res: any) => {
-        console.log('saved image res', _res);
-        // this.addedFiles = [];
         console.log('res', _res);
 
         this.croppedImage = '';
@@ -273,6 +261,9 @@ export class EventsAddComponent {
           this.messageService.createMessage('success', 'Event added successfully.')
           // this.onCancel();
           this.form.reset();
+          this.previewImage = '';
+          this.date = new Date();
+          this.event$ = of(_res)
           // location.reload();
           // this.router.navigate(['/auth/list-event']);
           // scroll2Top();
@@ -330,52 +321,4 @@ export class EventsAddComponent {
   }
 
 
-
-  // imageCropped(event: ImageCroppedEvent) {
-  //   this.croppedImage = event.base64;
-  //   this.finalImage = this.base64ToFile(event.base64, this.fileName);
-  //   this.enableUpload = true;
-  // }
-  // keep it in shared module
-  // private base64ToFile(data: any, filename: string) {
-  //   const arr = data.split(',');
-  //   const mime = arr[0].match(/:(.*?);/)[1];
-  //   const bstr = atob(arr[1]);
-  //   let n = bstr.length;
-  //   let u8arr = new Uint8Array(n);
-
-  //   while (n--) {
-  //     u8arr[n] = bstr.charCodeAt(n);
-  //   }
-
-  //   return new File([u8arr], filename, { type: mime });
-  // }
-
-  // imageLoaded(image: LoadedImage) {
-  //   // show cropper
-  // }
-  // cropperReady() {
-  //   // cropper ready
-  // }
-  // loadImageFailed() {
-  //   // show message
-  // }
-
-
-  // not used
-  // onUploadFile(): void {
-  //   this.eventService
-  //     .addEventImage(this.finalImage)
-  //     .pipe(takeUntil(this.unsubscribe$))
-  //     .subscribe((_res: any) => {
-  //       console.log('saved image res', _res);
-  //       this.addedFiles.push({
-  //         docPath: this.croppedImage,
-  //         docId: _res.docId,
-  //         name: this.fileName,
-  //       });
-  //       this.resetFile();
-  //       this.isLoading = false;
-  //     });
-  // }
 }

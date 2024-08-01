@@ -38,15 +38,20 @@ export class EventsListComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (!this.data$) this.fetchEvents();
+    (this.data$.subscribe(res => {
+      console.log('init', res)
+    }));
+    this.fetchEvents();
   }
 
   ngOnChanges(): void {
-    console.log('data', this.data$);
+    // (this.data$.subscribe(res => {
+    // }));
+    console.log('onchanges')
     if (!this.data$) this.fetchEvents()
 
     this.data$ = this.data$
-    this.cd.detectChanges();
+    // this.cd.detectChanges();
   }
 
   private fetchEvents() {
@@ -56,8 +61,8 @@ export class EventsListComponent implements OnInit {
 
   onClick(id?: number) {
     id
-      ? this.router.navigate(['/auth/add-event'], { queryParams: { id: id } })
-      : this.router.navigate(['/auth/add-event']);
+      ? this.router.navigate(['/admin/events/add-event'], { queryParams: { id: id } })
+      : this.router.navigate(['/admin/events/add-event']);
   }
 
 
@@ -69,8 +74,8 @@ export class EventsListComponent implements OnInit {
 
   onEdit(id: number) {
     id
-      ? this.router.navigate(['/auth/add-event'], { queryParams: { id: id } })
-      : this.router.navigate(['/auth/add-event']);
+      ? this.router.navigate(['/admin/events/add-event'], { queryParams: { id: id } })
+      : this.router.navigate(['/admin/events/add-event']);
     // this.router.navigate(['/auth/question-add'], { queryParams: { id: id, setMasterId: this.form.controls['setMasterId'].value } })
   }
 }
