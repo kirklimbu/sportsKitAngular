@@ -1,0 +1,171 @@
+<div class="container">
+  <section class="memberentry-section">
+    <div>
+      <div class="sub-title">
+        <span>New User </span>
+      </div>
+      <div class="title text-bolder">
+        <h3>Add User</h3>
+      </div>
+    </div>
+
+    <form class="form" [formGroup]="form">
+      <div class="flex">
+        <label for="">
+          <span class="required">Profile pic</span>
+          <div class="clearfix">
+            <nz-upload
+              [nzAction]="''"
+              nzListType="picture-card"
+              [(nzFileList)]="fileList"
+              [nzShowButton]="fileList.length < 1"
+              [nzPreview]="handlePreview"
+              (nzChange)="handleChange($event)"
+            >
+              <div>
+                <span nz-icon nzType="plus"></span>
+                <div style="margin-top: 8px">Upload</div>
+              </div>
+            </nz-upload>
+            <nz-modal
+              [nzVisible]="previewVisible"
+              [nzContent]="modalContent"
+              [nzFooter]="null"
+              (nzOnCancel)="previewVisible = false"
+            >
+              <ng-template #modalContent>
+                <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+              </ng-template>
+            </nz-modal>
+          </div>
+        </label>
+      </div>
+
+      <div class="flex">
+        <label>
+          <span class="required">Name</span>
+          <input
+            class="input"
+            type="text"
+            placeholder="Mirak Lawati"
+            autocomplete="off"
+            formControlName="name"
+          />
+        </label>
+        <label>
+          <span class="required">Address</span>
+          <input
+            class="input"
+            type="text"
+            placeholder=""
+            autocomplete="off"
+            formControlName="address"
+          />
+        </label>
+      </div>
+
+      <div class="flex">
+        <label>
+          <span class="required">Mobile</span>
+          <input
+            class="input"
+            type="tel"
+            placeholder=""
+            autocomplete="off"
+            formControlName="mobile"
+          />
+        </label>
+        <label>
+          <span class="ticket">Email</span>
+          <input
+            class="input"
+            type="email"
+            placeholder=""
+            autocomplete="off"
+            formControlName="email"
+          />
+        </label>
+      </div>
+
+      <div class="flex">
+        <label for="">
+          <span class="ticket">Password</span>
+          <input
+            class="input"
+            placeholder=""
+            autocomplete="off"
+            formControlName="passWord"
+            [type]="showPassword ? 'text' : 'password'"
+          />
+          <!-- @if (showPassword) {
+  
+          <span nz-icon nzType="lock" nzTheme="outline"></span>
+          }@else{
+          <span nz-icon nzType="unlock" nzTheme="outline"></span>
+          } -->
+        </label>
+
+        <label for="">
+          <span class="ticket">Confirm password</span>
+          <nz-input-group nzPostfixIcon="lock">
+            <input
+              class="input"
+              placeholder=""
+              autocomplete="off"
+              formControlName="cPassword"
+              [type]="showcPassword ? 'text' : 'password'"
+            />
+          </nz-input-group>
+          <!-- @if (showPassword) {
+  
+          <span nz-icon nzType="lock" nzTheme="outline"></span>
+          }@else{
+          <span nz-icon nzType="unlock" nzTheme="outline"></span>
+          } -->
+        </label>
+      </div>
+      <!-- <div class="flex">
+        <span>Password</span>
+        <nz-input-group nzSize="large" [nzSuffix]="suffixIcon">
+          <input
+            class="input"
+            [type]="showcPassword ? 'text' : 'password'"
+            placeholder=""
+            nz-input
+          />
+        </nz-input-group>
+        <ng-template #suffixIcon>
+          @if (showPassword) {
+
+          <span nz-icon nzType="lock" nzTheme="outline"></span>
+          }@else{
+          <span nz-icon nzType="unlock" nzTheme="outline"></span>
+          }
+        </ng-template>
+        <span>Confirm Password</span>
+        <nz-input-group nzSize="large" [nzSuffix]="suffixIcon">
+          <input
+            class="input"
+            [type]="showcPassword ? 'text' : 'password'"
+            placeholder=""
+            nz-input
+          />
+        </nz-input-group>
+        <ng-template #suffixIcon>
+          @if (showPassword) {
+
+          <span nz-icon nzType="lock" nzTheme="outline"></span>
+          }@else{
+          <span nz-icon nzType="unlock" nzTheme="outline"></span>
+          }
+        </ng-template>
+      </div> -->
+      <!-- </span> -->
+      <button class="submit" (click)="onSave()">Save</button>
+    </form>
+  </section>
+
+  <section class="members-list-section">
+    <app-user [data$]="userList$" />
+  </section>
+</div>

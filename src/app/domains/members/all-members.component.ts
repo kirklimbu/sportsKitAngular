@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 // third-party
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -29,43 +37,39 @@ interface DataItem {
     NzAvatarModule,
     NzButtonModule,
     NzIconModule,
-    NzTagModule
+    NzTagModule,
   ],
   templateUrl: './all-members.component.html',
   styleUrl: './all-members.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AllMembersComponent implements OnInit, OnChanges {
+  @Input() data$!: Observable<IMember[]>;
 
-  @Input() data$!: Observable<IMember[]>
-
-
-  private readonly memberService = inject(MemberService)
-  private readonly cd = inject(ChangeDetectorRef)
+  private readonly memberService = inject(MemberService);
+  private readonly cd = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
-
-    if (!this.data$) this.fetchMembers()
+    if (!this.data$) this.fetchMembers();
   }
 
   ngOnChanges(): void {
     console.log('data', this.data$);
-    if (!this.data$) this.fetchMembers()
+    if (!this.data$) this.fetchMembers();
 
-    this.data$ = this.data$
+    // eslint-disable-next-line no-self-assign
+    this.data$ = this.data$;
     this.cd.detectChanges();
   }
 
   private fetchMembers(): void {
-    this.data$ = this.memberService.getAllMembers()
-
+    this.data$ = this.memberService.getAllMembers();
   }
 
   onAdd() {
     // if (!this.form.controls['setMasterId'].value) return this.messageService.createMessage('error', 'Set is missing. Please select set.')
     // this.router.navigate(['/auth/question-add'], { queryParams: { setMasterId: this.form.controls['setMasterId'].value } })
   }
-
 
   onEdit(id: number) {
     // this.router.navigate(['/auth/question-add'], { queryParams: { id: id, setMasterId: this.form.controls['setMasterId'].value } })

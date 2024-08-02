@@ -1,14 +1,31 @@
-import { Component, DestroyRef, ElementRef, Renderer2, inject, OnInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  Renderer2,
+  inject,
+  OnInit,
+  AfterViewInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/shared/util-auth/services/auth-http/auth.service';
 import { ConfirmedValidator } from 'src/app/shared/util-logger/confirm-password.validator';
 import { UrlService } from 'src/app/shared/util-logger/url.service';
-import { NzUploadChangeParam, NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
+import {
+  NzUploadChangeParam,
+  NzUploadFile,
+  NzUploadModule,
+} from 'ng-zorro-antd/upload';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
@@ -20,13 +37,12 @@ import { IMember } from '../data/models/member.model';
 // import { NepaliDatepickerModule } from 'nepali-datepicker-angular';
 import { NepaliDatepickerModule } from 'nepali-datepicker-angular';
 
-
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
 
 @Component({
@@ -48,41 +64,34 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   styleUrl: './member-entry.component.scss',
 })
 export class MemberEntryComponent implements OnInit {
-
   // props
   previewImage: string | undefined = '';
   previewVisible = false;
-  showButton = true
-  fileList: any[] = []
+  showButton = true;
+  fileList: any[] = [];
 
-
-
-  memberList$!: Observable<IMember[]>
+  memberList$!: Observable<IMember[]>;
   form!: FormGroup;
   hasError!: boolean;
   showPassword = false;
   showcPassword = false;
   isLoading$!: Observable<boolean>;
 
-  destroyRef = inject(DestroyRef)
-  memberService = inject(MemberService)
+  destroyRef = inject(DestroyRef);
+  memberService = inject(MemberService);
 
-  date: any = new Date()
+  date: any = new Date();
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     public urlService: UrlService,
-    public messageService: MessageService,
-
-  ) {
-
-  }
+    public messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
   }
-
 
   // convenience getter for easy access to form fields
   get f() {
@@ -90,47 +99,27 @@ export class MemberEntryComponent implements OnInit {
   }
 
   initForm(): FormGroup {
-    return this.form = this.fb.group({
+    return (this.form = this.fb.group({
       memberId: [0],
-      name: ['', [Validators.required,]],
+      name: ['', [Validators.required]],
       dob: ['', [Validators.required]],
       memberShipTypeId: ['', [Validators.required]],
       file: [],
       mobile1: [],
       mobile2: [],
-
-    },
-
-    );
+    }));
   }
-
 
   handleChange(info: NzUploadChangeParam): void {
     console.log('set file', info);
     if (!info.fileList[0]) {
-      return this.messageService.createMessage('error', 'Please select file.')
+      return this.messageService.createMessage('error', 'Please select file.');
     }
     // this.fileList.push(info.fileList[0])
     this.form.patchValue({
-      file: info?.['file']?.originFileObj
-    })
-    // this.previewVisible = true
-    // if (info.type = "removed") {
-    //   // this.fileList.length = 0
-    //   this.showButton = true
-    // } else {
-    //   this.showButton = false;
-    // }
-    // if (info.file.status !== 'uploading') {
-    //   console.log(info.file, info.fileList);
-    // }
-    // if (info.file.status === 'done') {
-    //   this.msg.success(`${info.file.name} file uploaded successfully`);
-    // } else if (info.file.status === 'error') {
-    //   this.msg.error(`${info.file.name} file upload failed.`);
-    // }
+      file: info?.['file']?.originFileObj,
+    });
   }
-
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {
     console.log('sel file', file);
@@ -144,7 +133,7 @@ export class MemberEntryComponent implements OnInit {
   // nepali date picker
   updateNepaliDate($event: string) {
     console.log('updaet nepali', $event);
-    this.form.patchValue({ "dob": $event })
+    this.form.patchValue({ dob: $event });
   }
   updateEnglishDate($event: string) {
     console.log('updaet eng', $event);
@@ -158,24 +147,24 @@ export class MemberEntryComponent implements OnInit {
     this.hasError = false;
     console.log('saving form values', this.form.value);
 
-    this.memberService.saveMember(this.form.value)
+    this.memberService
+      .saveMember(this.form.value)
       .subscribe((user: IMember[]) => {
-        console.log('member', user,);
+        console.log('member', user);
 
-        this.messageService.createMessage('success', 'Member added successfully.')
+        this.messageService.createMessage(
+          'success',
+          'Member added successfully.'
+        );
         this.form.reset();
         this.previewImage = '';
         this.date = new Date();
-        this.memberList$ = of(user)
+        this.memberList$ = of(user);
       });
   }
 
   onCancel(): void {
     console.log('cancel');
-    this.router.navigate(['/home'])
-
+    this.router.navigate(['/home']);
   }
-
 }
-
-

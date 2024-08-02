@@ -1,31 +1,52 @@
-<section id="about-us" class="content-container animate__animated animate__fadeInLeft animate__delay-1s ">
-    <!-- @for(content of data; track $index){ -->
+<section
+  id="about-us"
+  class="content-container animate__animated animate__fadeInLeft animate__delay-1s"
+>
+  <!-- @for(content of data; track $index){ -->
 
-    <div class="message-section ">
-        <div class="sub-title">
-            <span>{{data?.subTitle}} </span>
-        </div>
-        <div class="title text-bolder">
-            <span>
-                {{ data?.title}}
-            </span>
-        </div>
-        @if (!show) {
-        <div class="description text-muted">
-            <p [innerText]="data?.description |truncate:800 " [ngClass]="show ? 'expand' : 'collapse'"></p>
-        </div>
-
-        }@else {
-        <div class="description text-muted">
-            <p [innerText]="data?.description "></p>
-        </div>
-        }
-        <button nz-button nzShape="round" (click)="scrollTo('#about-us')"> {{show ? 'Show less' :
-            'Show more'}}</button>
+  <div class="message-section">
+    <div class="sub-title">
+      <span>{{ data?.subTitle }} </span>
     </div>
-    <div class="image-section ">
-        <img [ngSrc]="data?.image" alt="About us" loading="lazy" height="600" width="500">
+    <div class="title text-bolder">
+      <span>
+        {{ data?.title }}
+      </span>
     </div>
-    <!-- } -->
+    <!-- <div class="image-section">
+      <img
+        [ngSrc]="data?.image"
+        alt="About us"
+        loading="lazy"
+        height="600"
+        width="500"
+      />
+    </div> -->
+    @if (!show) {
+    <div class="description text-muted">
+      <p
+        [innerText]="data?.description | truncate : 800"
+        [ngClass]="show ? 'expand' : 'collapse'"
+      ></p>
+    </div>
 
+    }@else {
+    <div class="description text-muted">
+      <p [innerText]="data?.description"></p>
+    </div>
+    }
+    <button nz-button nzShape="round" (click)="scrollTo('#about-us')">
+      {{ show ? 'Show less' : 'Show more' }}
+    </button>
+  </div>
+  <div class="image-section">
+    <img
+      [ngSrc]="data?.image"
+      alt="About us"
+      loading="lazy"
+      height="600"
+      width="500"
+    />
+  </div>
+  <!-- } -->
 </section>

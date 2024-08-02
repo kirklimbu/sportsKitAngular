@@ -10,5 +10,5 @@ export interface IOrganization {
   openingHour: string;
   bio: string;
   file: string;
-  logo?: string;
+  logo: string;
 }

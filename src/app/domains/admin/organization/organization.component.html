@@ -16,27 +16,32 @@
     <!-- </nz-space> -->
 
     <div class="details-section">
-      <img [src]="details?.logo" height="150" width="150" alt="" />
+      <img
+        [ngSrc]="details.logo"
+        height="150"
+        width="150"
+        [alt]="details.name"
+      />
 
       <div class="title">
         <h3>
-          {{ details?.name }}
+          {{ details.name }}
         </h3>
       </div>
-      <small>{{ details?.bio }}</small>
+      <small>{{ details.bio }}</small>
       <p>
-        Address: <span>{{ details?.address }}</span>
+        Address: <span>{{ details.address }}</span>
       </p>
       <p>
-        Contact num: <span>{{ details?.mobile }}</span>
+        Mobile: <span>{{ details.mobile }}</span>
       </p>
       <p>
-        Primary email: <span>{{ details?.emailOne }}</span>
+        Email(Primary): <span>{{ details.emailOne }}</span>
       </p>
       @if(details.emailTwo){
 
       <p>
-        Secondary email: <span>{{ details?.emailTwo }}</span>
+        Secondary email: <span>{{ details.emailTwo }}</span>
       </p>
       }
     </div>

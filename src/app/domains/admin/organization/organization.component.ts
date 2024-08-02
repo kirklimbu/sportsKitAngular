@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { OrganizationService } from './data/services/organization.service';
 import { Observable } from 'rxjs';
 import { IOrganization } from './data/models/organization/organization.model';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule,
+    NgOptimizedImage,
     NzSpaceModule,
     NzButtonModule,
     NzIconModule,

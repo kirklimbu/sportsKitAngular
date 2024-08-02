@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IMember } from '../models/member.model';
+import { IUser } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MemberService {
+export class UsersService {
   apiUrl = environment.apiUrl;
 
   private http = inject(HttpClient);
@@ -18,19 +18,16 @@ export class MemberService {
     );
   }
 
-  saveMember(qustion: any): Observable<IMember[]> {
+  saveUser(qustion: IUser): Observable<IUser[]> {
     console.log('saving memeber', qustion);
     const formData = new FormData();
     formData.append('form', JSON.stringify(qustion));
     formData.append('file', qustion.file);
     console.log('fsdfa', formData);
-    return this.http.post<IMember[]>(
-      `${this.apiUrl}auth/member/save`,
-      formData
-    );
+    return this.http.post<IUser[]>(`${this.apiUrl}user/save`, formData);
   }
 
-  getAllMembers(): Observable<IMember[]> {
-    return this.http.get<IMember[]>(`${this.apiUrl}auth/member/list`);
+  getAllUsers(): Observable<IUser[]> {
+    return this.http.get<IUser[]>(`${this.apiUrl}auth/user/list`);
   }
 }

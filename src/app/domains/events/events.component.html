@@ -1,70 +1,80 @@
-<section id="events" class="content-container animate__animated animate__fadeInLeft animate__delay-1s ">
-
-
-
-    <div class="message-section ">
-        <div class="sub-title">
-            <span>Our Events
-            </span>
-        </div>
-        <div class="title text-bolder">
-            <span>
-                Events
-            </span>
-        </div>
-        <div class="description text-muted">
-
-            <p>
-                Damak Namuna Badminton Academy regularly organizes diverse events and training sessions aimed at
-                fostering the sport of
-                badminton. These activities cater to players of all levels, from local enthusiasts to state and
-                national-level athletes,
-                as well as veteran players. The academy provides a platform for skill development, competition, and
-                community
-                engagement.Some of the glimpses of these events are ...
-            </p>
-            <a routerLink="/events/list-events" title="View all events" class="all-events" (click)="showAllEvents()">
-                <small>View all events...</small>
-
-            </a>
-        </div>
-
-
+<section
+  id="events"
+  class="content-container animate__animated animate__fadeInLeft animate__delay-1s"
+>
+  <div class="message-section">
+    <div class="sub-title">
+      <span>Our Events </span>
     </div>
-
-    <div class="image-section ">
-        @for (event of data; track $index) {
-
-        <nz-card nzHoverable style="text-justify: justify;" [nzCover]="coverTemplate"
-            [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-            <nz-card-meta [nzTitle]="event.title" [nzDescription]=" event.description |truncate :35">
-
-            </nz-card-meta>
-        </nz-card>
-
-
-        <ng-template #coverTemplate>
-            <img [title]="event.title" [ngSrc]="event.image" [alt]="event.title" height="240" width="240" />
-        </ng-template>
-
-        <ng-template #actionSetting>
-            <span nz-icon nzType="">{{event.eventDate}}</span>
-        </ng-template>
-        <ng-template #actionEdit>
-            <span nz-icon nzType="">
-                {{event.startTime}}
-            </span>
-        </ng-template>
-        <ng-template #actionEllipsis>
-            <button title="Show more" nz-button nzType="default" nzShape="circle" routerLink="/events/all-events">
-                <span nz-icon nzType="right" nzTheme="outline"></span>
-            </button>
-
-        </ng-template>
-
-
-        }
+    <div class="title text-bolder">
+      <span> Events </span>
     </div>
+    <div class="description text-muted">
+      <p>
+        Damak Namuna Badminton Academy regularly organizes diverse events and
+        training sessions aimed at fostering the sport of badminton. These
+        activities cater to players of all levels, from local enthusiasts to
+        state and national-level athletes, as well as veteran players. The
+        academy provides a platform for skill development, competition, and
+        community engagement.Some of the glimpses of these events are ...
+      </p>
+      <a
+        routerLink="/events/list-events"
+        title="View all events"
+        class="all-events"
+        (click)="showAllEvents()"
+      >
+        <small>View all events...</small>
+      </a>
+    </div>
+  </div>
 
+  <div class="image-section">
+    @for (event of data; track $index) {
 
+    <nz-card
+      nzHoverable
+      style="text-justify: justify"
+      [nzCover]="coverTemplate"
+      [nzActions]="[actionSetting, actionEdit, actionEllipsis]"
+    >
+      <nz-card-meta
+        [nzTitle]="event.title"
+        [nzDescription]="event.description | truncate : 35"
+      >
+      </nz-card-meta>
+    </nz-card>
+
+    <ng-template #coverTemplate>
+      <img
+        [title]="event.title"
+        [ngSrc]="event.image"
+        [alt]="event.title"
+        height="240"
+        width="240"
+      />
+    </ng-template>
+
+    <ng-template #actionSetting>
+      <span nz-icon nzType="">{{ event.eventDate }}</span>
+    </ng-template>
+    <ng-template #actionEdit>
+      <span nz-icon nzType="">
+        {{ event.startTime }}
+      </span>
+    </ng-template>
+    <ng-template #actionEllipsis>
+      <button
+        title="Show more"
+        nz-button
+        nzType="default"
+        nzShape="circle"
+        routerLink="/events/all-events"
+      >
+        <span nz-icon nzType="right" nzTheme="outline"></span>
+      </button>
+    </ng-template>
+
+    }
+  </div>
 </section>

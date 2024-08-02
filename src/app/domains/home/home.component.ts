@@ -1,4 +1,11 @@
-import { Component, DestroyRef, Input, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  Input,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { SliderComponent } from './slider/slider.component';
 
 // import { WhyUsComponent } from '../why-us/why-us.component';
@@ -13,17 +20,26 @@ import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NgOptimizedImage } from '@angular/common';
 import { AboutUsComponent } from '../about-us/about-us.component';
 import { CoachesComponent } from '../coaches/coaches.component';
-import { MembersComponent } from "../members/members.component";
+import { MembersComponent } from '../members/members.component';
 
-
-import { fadeInUpOnEnterAnimation, slideInDownAnimation, slideInDownOnEnterAnimation } from 'angular-animations';
-import { trigger, transition, style, animate, state } from '@angular/animations';
+import {
+  fadeInUpOnEnterAnimation,
+  slideInDownAnimation,
+  slideInDownOnEnterAnimation,
+} from 'angular-animations';
+import {
+  trigger,
+  transition,
+  style,
+  animate,
+  state,
+} from '@angular/animations';
 import { EventsComponent } from '../events/events.component';
 import { OurLocationComponent } from '../our-location/our-location.component';
 import { getDeviceId } from 'src/app/shared/util-common/generateDeviceId';
 import { Store } from '@ngxs/store';
 import { AuthState } from '../auth/login/state/login.state';
-
+import { GallariesComponent } from '../gallaries/gallaries.component';
 
 @Component({
   selector: 'app-home',
@@ -38,12 +54,11 @@ import { AuthState } from '../auth/login/state/login.state';
     CoachesComponent,
     MembersComponent,
     OurLocationComponent,
-    // GallaryComponent,
+    GallariesComponent,
     // VideosComponent,
 
     MembersComponent,
-    EventsComponent
-
+    EventsComponent,
   ],
 
   animations: [
@@ -56,13 +71,10 @@ import { AuthState } from '../auth/login/state/login.state';
         style({ height: '*', opacity: 1 }),
         animate('500ms', style({ height: '0', opacity: 0 })),
       ]),
-    ])
-  ]
-
+    ]),
+  ],
 })
 export class HomeComponent implements OnInit {
-
-
   bannerData!: any;
   memberData!: any;
   eventData!: any;
@@ -71,24 +83,38 @@ export class HomeComponent implements OnInit {
   private readonly titleService = inject(Title);
   private readonly metaService = inject(Meta);
 
-
   private readonly destroyRef = inject(DestroyRef);
-  private readonly homeService = inject(HomeService)
+  private readonly homeService = inject(HomeService);
   private readonly store = inject(Store);
-
 
   ngOnInit(): void {
     this.titleService.setTitle('Namuna Badminton Academy');
     this.metaService.addTags([
-      { name: 'description', content: 'Valley Multi Education Network Consultancy in Kathmandu offers comprehensive services including EPS TOPIK preparation, study in Korea, study in Japan, and IELTS classes. Start your journey with us today!' },
-      { name: 'keywords', content: 'EPS TOPIK, study in Korea, study in Japan, IELTS classes, education consultancy, Kathmandu, Valley Multi Education Network, EPS TOPIK preparation, study abroad,Japanese/Korean language classes, Nepal' },
+      {
+        name: 'description',
+        content:
+          'Valley Multi Education Network Consultancy in Kathmandu offers comprehensive services including EPS TOPIK preparation, study in Korea, study in Japan, and IELTS classes. Start your journey with us today!',
+      },
+      {
+        name: 'keywords',
+        content:
+          'EPS TOPIK, study in Korea, study in Japan, IELTS classes, education consultancy, Kathmandu, Valley Multi Education Network, EPS TOPIK preparation, study abroad,Japanese/Korean language classes, Nepal',
+      },
       { name: 'author', content: 'Valley Multi Education Network Consultancy' },
       { name: 'robots', content: 'index, follow' },
-      { property: 'og:title', content: 'Valley Multi Education Network Consultancy | EPS TOPIK, Study in Korea, Study in Japan, IELTS Classes in Kathmandu' },
-      { property: 'og:description', content: 'Valley Multi Education Network Consultancy in Kathmandu offers comprehensive services including EPS TOPIK preparation, study in Korea, study in Japan, and IELTS classes. Start your journey with us today!' },
+      {
+        property: 'og:title',
+        content:
+          'Valley Multi Education Network Consultancy | EPS TOPIK, Study in Korea, Study in Japan, IELTS Classes in Kathmandu',
+      },
+      {
+        property: 'og:description',
+        content:
+          'Valley Multi Education Network Consultancy in Kathmandu offers comprehensive services including EPS TOPIK preparation, study in Korea, study in Japan, and IELTS classes. Start your journey with us today!',
+      },
       { property: 'og:image', content: 'URL_to_image' },
       { property: 'og:url', content: 'https://www.valleymulti.com/home' },
-      { property: 'og:type', content: 'website' }
+      { property: 'og:type', content: 'website' },
     ]);
 
     // Structured data
@@ -96,65 +122,56 @@ export class HomeComponent implements OnInit {
       const script = document.createElement('script');
       script.type = 'application/ld+json';
       script.text = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "Valley Multi Education Network Consultancy",
-        "url": "https://www.valleymulti.com/home",
-        "logo": "URL_to_logo",
-        "sameAs": [
-          "https://www.facebook.com/valleymenc",
-          "https://www.instagram.com/valleymenc/",
-          "https://www.linkedin.com/company/valley-multi-education-network/"
-
+        '@context': 'https://schema.org',
+        '@type': 'EducationalOrganization',
+        name: 'Damak Namuna Badminton Academy',
+        url: 'https://www.valleymulti.com/home',
+        logo: 'URL_to_logo',
+        sameAs: [
+          'https://www.facebook.com/valleymenc',
+          'https://www.instagram.com/valleymenc/',
+          'https://www.linkedin.com/company/valley-multi-education-network/',
         ],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "telephone": "+977-9767223789 ",
-          "contactType": "Customer Service"
+        contactPoint: {
+          '@type': 'ContactPoint',
+          telephone: '+977-9767223789 ',
+          contactType: 'Customer Service',
         },
-        "description": "Valley Multi Education Network Consultancy in Kathmandu offers comprehensive services including EPS TOPIK preparation, study in Korea, study in Japan, and IELTS classes.",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Chabahill, Opposite to Chabahil stupa",
-          "addressLocality": "Kathmandu",
-          "addressRegion": "Bagmati",
-          "postalCode": "44600",
-          "addressCountry": "NP"
+        description:
+          'Valley Multi Education Network Consultancy in Kathmandu offers comprehensive services including EPS TOPIK preparation, study in Korea, study in Japan, and IELTS classes.',
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Chabahill, Opposite to Chabahil stupa',
+          addressLocality: 'Kathmandu',
+          addressRegion: 'Bagmati',
+          postalCode: '44600',
+          addressCountry: 'NP',
         },
-        "areaServed": "Nepal"
+        areaServed: 'Nepal',
       });
       document.head.appendChild(script);
     }
-    this.fetchHomeContents()
+    this.fetchHomeContents();
   }
-
 
   private fetchHomeContents() {
     const userId = this.fetchUserId();
 
-    this.homeService.getHomeContents(getDeviceId(), userId)
+    this.homeService
+      .getHomeContents(getDeviceId(), userId)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((res: any) => {
         // console.log(' res', res);
         this.aboutUsData = res.homeContentList[0];
         this.coachData = res.homeContentList[1];
-        this.bannerData = res.bannerList
-        this.memberData = res.member
-        this.eventData = res.eventList.slice(0, 3)
+        this.bannerData = res.bannerList;
+        this.memberData = res.member;
+        this.eventData = res.eventList.slice(0, 3);
       });
   }
-
 
   private fetchUserId(): string {
     const userDetail = this.store.selectSnapshot(AuthState.userDetails);
     return userDetail.userId;
   }
-
-
-
-
 }
-
-
-
-
