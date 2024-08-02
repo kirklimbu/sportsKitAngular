@@ -7,7 +7,7 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { CommonModule, formatDate } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,

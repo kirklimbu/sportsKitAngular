@@ -1,6 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IOrganization {
-  logo: string;
   name: string;
   address: string;
   latitude: string;
@@ -10,4 +9,6 @@ export interface IOrganization {
   emailTwo: string;
   openingHour: string;
   bio: string;
+  file: string;
+  logo?: string;
 }

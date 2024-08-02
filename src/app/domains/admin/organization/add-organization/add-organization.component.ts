@@ -19,6 +19,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormSubmitButtonsComponent } from 'src/app/shared/ui-common/form-submit-buttons/form-submit-buttons.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { map, takeUntil } from 'rxjs';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -57,9 +59,12 @@ export class AddOrganizationComponent implements OnInit {
   private readonly messageService = inject(MessageService);
   private readonly organizationService = inject(OrganizationService);
   private readonly destoyref$ = inject(DestroyRef);
+  private readonly route = inject(ActivatedRoute);
+  private readonly unsubscribe$ = inject(DestroyRef);
 
   ngOnInit(): void {
     this.buildForm();
+    this.fetchFormValues();
   }
 
   private buildForm() {
@@ -73,12 +78,30 @@ export class AddOrganizationComponent implements OnInit {
       emailTwo: [],
       latitude: [],
       longitude: [],
-      logo: ['', [Validators.required]],
+      file: ['', [Validators.required]],
     });
   }
 
   get f() {
     return this.form.controls;
+  }
+
+  private fetchFormValues() {
+    this.organizationService
+      .getFormValues()
+      .pipe(takeUntilDestroyed(this.unsubscribe$))
+      .subscribe((_res) => {
+        if (_res.name) this.mode = 'edit';
+        this.form.patchValue(_res);
+        this.fileList = [
+          {
+            name: _res.name,
+            status: 'done',
+            url: _res.logo,
+          },
+        ];
+        this.previewImage = _res.logo;
+      });
   }
 
   onSave() {
@@ -95,15 +118,10 @@ export class AddOrganizationComponent implements OnInit {
           // route to vendor home page
           this.messageService.createMessage(
             'success',
-            'Event added successfully.'
+            'Organization details added successfully.'
           );
           // this.onCancel();
           this.form.reset();
-
-          // location.reload();
-          // this.router.navigate(['/auth/list-event']);
-          // scroll2Top();
-          // this.changeDetector.detectChanges();
         }
       });
   }
@@ -119,15 +137,6 @@ export class AddOrganizationComponent implements OnInit {
     });
 
     // on Delete
-    if (info.file.status === 'removed') {
-      this.onDeleteFile(info.file['eventId']);
-    }
-  }
-
-  onDeleteFile(docId: number): void {
-    this.addedFiles = this.addedFiles.filter(
-      (_deletedFile: any) => _deletedFile.docId !== docId
-    );
   }
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {

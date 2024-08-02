@@ -12,19 +12,17 @@ export class OrganizationService {
   private readonly http = inject(HttpClient);
 
   // getFormValues;
-  getFormValues(id: number): Observable<IOrganization> {
-    return this.http.get<IOrganization>(
-      `${this.apiUrl}auth/event/form?eventId=${id}`
-    );
+  getFormValues(): Observable<IOrganization> {
+    return this.http.get<IOrganization>(`${this.apiUrl}auth/org/form?`);
   }
 
   addOrganization(form: IOrganization) {
     const formData = new FormData();
     formData.append('form', JSON.stringify(form));
-    formData.append('file', form.logo);
+    formData.append('file', form.file);
 
     return this.http.post<IOrganization>(
-      `${this.apiUrl}auth/event/save`,
+      `${this.apiUrl}auth/org/save`,
       formData
     );
   }

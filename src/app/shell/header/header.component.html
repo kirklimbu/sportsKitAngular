@@ -1,12 +1,19 @@
 <div class="header">
-    <div class="logo logo-dark">
-        <a routerLink="/home">
-            <img [src]="data?.logo" height="150" width="150" class="logo" alt="Logo" priority="high">
-        </a>
-    </div>
-    <div class=" nav-wrap">
-        <ul class="nav-left nav-links">
-            <!-- <li class=" desktop-toggle">
+  <div class="logo logo-dark">
+    <a routerLink="/home">
+      <img
+        [src]="data?.logo"
+        height="150"
+        width="150"
+        class="logo"
+        alt="Logo"
+        priority="high"
+      />
+    </a>
+  </div>
+  <div class="nav-wrap">
+    <ul class="nav-left nav-links">
+      <!-- <li class=" desktop-toggle">
                 <a (click)="toggleFold()">
                     <i nz-icon [nzType]="isFolded? 'menu-unfold':'menu-fold'" theme="outline"></i>
                 </a>
@@ -17,7 +24,7 @@
                 </a>
             </li> -->
 
-            <!-- <li>
+      <!-- <li>
                 <a (click)="searchToggle()">
                     <i nz-icon nzType="search" theme="outline"></i>
                 </a>
@@ -26,25 +33,55 @@
                     <app-search></app-search>
                 </nz-drawer>
             </li> -->
-        </ul>
+    </ul>
 
-        <ul class="nav-right">
-            <li class="nav-item">
-                <a routerLinkActive class="navbar-link " routerLink="/home" routerLinkActive>Home</a>
-            </li>
-            <li class="nav-item">
-                <a routerLinkActive class="navbar-link " routerLink="/events/all-events" routerLinkActive>Events</a>
-            </li>
-            <li class="nav-item">
-                <a routerLinkActive class="navbar-link" routerLink="/training" routerLinkActive>Training</a>
-            </li>
-            <li class="nav-item">
-                <a routerLinkActive class="navbar-link" routerLink="/tournaments" routerLinkActive>Tournaments</a>
-            </li>
-            <li class="nav-item">
-                <a routerLinkActive class="navbar-link" routerLink="/tiesheet" routerLinkActive>Tiesheet</a>
-            </li>
-            <!-- <li class="nav-item">
+    <ul class="nav-right">
+      <li class="nav-item">
+        <a
+          routerLinkActive
+          class="navbar-link"
+          routerLink="/home"
+          routerLinkActive
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLinkActive
+          class="navbar-link"
+          routerLink="/events/all-events"
+          routerLinkActive
+          >Events</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLinkActive
+          class="navbar-link"
+          routerLink="/training"
+          routerLinkActive
+          >Training</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLinkActive
+          class="navbar-link"
+          routerLink="/tournaments"
+          routerLinkActive
+          >Tournaments</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLinkActive
+          class="navbar-link"
+          routerLink="/tiesheet"
+          routerLinkActive
+          >Tiesheet</a
+        >
+      </li>
+      <!-- <li class="nav-item">
                 <a nz-dropdown [nzDropdownMenu]="menu">
 
                     <span nz-icon nzType="down"></span>
@@ -57,7 +94,7 @@
                     </ul>
                 </nz-dropdown-menu>
             </li> -->
-            <!-- <li class="nav-item">
+      <!-- <li class="nav-item">
                 <a nz-dropdown [nzDropdownMenu]="courses">
                     Test Preparation
                     <span nz-icon nzType="down"></span>
@@ -73,26 +110,29 @@
                 </nz-dropdown-menu>
             </li> -->
 
-            <li class="nav-item">
+      <!-- <li class="nav-item">
                 <a routerLinkActive="active" data-after="coach" class="navbar-link"
                     (click)="scrollTo('#coach')">Coaches</a>
-            </li>
-            <li class="nav-item">
-                <a routerLinkActive="active" data-after="member" class="navbar-link"
-                    (click)="scrollTo('#member')">Members</a>
-            </li>
-            <!-- <li routerLinkActive class="nav-item">
+            </li> -->
+      <li class="nav-item">
+        <a
+          routerLinkActive="active"
+          data-after="member"
+          class="navbar-link"
+          (click)="scrollTo('#member')"
+          >Members</a
+        >
+      </li>
+      <!-- <li routerLinkActive class="nav-item">
                 <button style="border-radius: 0;padding: 0 1rem ; text-align: center; margin: 4px;" nz-button
                     nzType="primary" class="navbar-link " routerLink="contact-us" routerLinkActive>Contact
                     us</button>
             </li> -->
-            <li routerLinkActive class="nav-item contact-us-btn">
-                <button nz-button nzSize="default" nzShape="round">
-                    Contact us
-                </button>
-            </li>
-        </ul>
-        <!-- <ul class="nav-right">
+      <li routerLinkActive class="nav-item contact-us-btn">
+        <button nz-button nzSize="default" nzShape="round">Contact us</button>
+      </li>
+    </ul>
+    <!-- <ul class="nav-right">
             <li>
                 <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="popNotification" [nzPlacement]="'bottomRight'">
                     <nz-badge nzDot>
@@ -198,5 +238,5 @@
                 </nz-drawer>
             </li>
         </ul> -->
-    </div>
+  </div>
 </div>

@@ -1,1 +1,45 @@
-<p>organization works!</p>
+<section>
+  @if((details$ | async) ;as details){
+
+  <div class="organization-container">
+    <!-- <nz-space nzSize="large"> -->
+    <div class="content-with-button">
+      <div class="sub-title">
+        <label for="">
+          <span>Our Organization </span>
+        </label>
+      </div>
+      <button nz-button nzType="default" [routerLink]="['/admin/organization']">
+        Edit <span nz-icon nzType="edit"></span>
+      </button>
+    </div>
+    <!-- </nz-space> -->
+
+    <div class="details-section">
+      <img [src]="details?.logo" height="150" width="150" alt="" />
+
+      <div class="title">
+        <h3>
+          {{ details?.name }}
+        </h3>
+      </div>
+      <small>{{ details?.bio }}</small>
+      <p>
+        Address: <span>{{ details?.address }}</span>
+      </p>
+      <p>
+        Contact num: <span>{{ details?.mobile }}</span>
+      </p>
+      <p>
+        Primary email: <span>{{ details?.emailOne }}</span>
+      </p>
+      @if(details.emailTwo){
+
+      <p>
+        Secondary email: <span>{{ details?.emailTwo }}</span>
+      </p>
+      }
+    </div>
+  </div>
+  }
+</section>

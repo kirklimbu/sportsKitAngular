@@ -20,6 +20,11 @@ button {
     padding: 1rem;
 }
 
+.content-with-button{
+    display: flex;
+
+}
+
 // content heading/sub-heading
 .title {
     font-size: 3rem;
@@ -77,6 +82,12 @@ button {
 .required:after {
     content: " *";
     color: $red;
+}
+
+.optional{
+content: " ";
+    color: $black;
+    font-weight: $font-weight-bold;
 }
 
 ::placeholder {
@@ -149,6 +160,9 @@ button {
 
 @media only screen and (min-width: 320px) {
 
+    .content-with-button{
+        gap:36px
+    }
     .content-container {
         padding: 3rem 2rem;
     }
@@ -166,6 +180,9 @@ button {
 }
 
 @media only screen and (min-width: 768px) {
+    .content-with-button {
+            gap: 42px
+        }
     .sub-title {
         span::before {
             width: 2%;

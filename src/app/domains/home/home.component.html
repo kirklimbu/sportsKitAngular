@@ -1,15 +1,25 @@
 <section>
+  <app-slider [bannerData]="bannerData" />
 
-    <app-slider [bannerData]="bannerData" />
+  <app-about-us
+    class="animate__animated animate__slideInDown animate__delay-1s"
+    [data]="aboutUsData"
+  />
+  <app-coaches
+    class="animate__animated animate__slideInDown animate__delay-1s"
+    [data]="coachData"
+  />
+  <img
+    src="/assets/images/3.jpg"
+    height="400"
+    width="100%"
+    alt="slider image"
+  />
 
-    <app-about-us class="animate__animated animate__slideInDown animate__delay-1s" [data]="aboutUsData" />
-    <app-coaches class="animate__animated animate__slideInDown animate__delay-1s" [data]="coachData" />
-    <img src="/assets/images/3.jpg" height="400" width="100%" alt="slider image">
+  <app-members [data]="memberData" />
+  <app-events [data]="eventData" />
 
-    <app-members [data]="memberData" />
-    <app-events [data]="eventData" />
-
-    <!-- @defer (on viewport(trigger)) {
+  <!-- @defer (on viewport(trigger)) {
     }
     @defer (){
 
@@ -23,6 +33,7 @@
     <app-study-destinations />
     }
     <app-videos /> -->
-    <!-- <app-gallary /> -->
-    <app-our-location />
+  <!-- <app-gallary /> -->
+  <app-our-location />
+  Start from here --> ui milaune moble ma
 </section>

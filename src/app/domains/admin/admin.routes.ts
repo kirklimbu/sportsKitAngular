@@ -29,6 +29,10 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
     path: 'organization',
     component: AddOrganizationComponent,
   },
+  {
+    path: 'organization',
+    component: AddOrganizationComponent,
+  },
   // {
   //   path: '',
   //   canActivate: [hasRoleGuard],
@@ -47,17 +51,14 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
   //     import('.././set').then((m) => m.FEATURE_SET_ROUTES),
   // },
 
-  // {
-  //   canActivate: [hasRoleGuard],
-  //   data:
-  //   {
-  //     roles: [Role.ADMIN],
-
-  //   },
-  //   path: 'dashboard',
-  //   component: DashboardComponent,
-
-  // },
+  {
+    // canActivate: [hasRoleGuard],
+    // data: {
+    //   roles: [Role.ADMIN],
+    // },
+    path: 'profile',
+    component: OrganizationComponent,
+  },
   // {
   //   canActivate: [hasRoleGuard],
   //   data:

@@ -1,4 +1,11 @@
-import { Component, DestroyRef, Input, OnInit, TemplateRef, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  Input,
+  OnInit,
+  TemplateRef,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormGroup,
@@ -41,12 +48,11 @@ import { SecondaryLinksComponent } from 'src/app/shared/ui-common/secondary-link
     NzFormModule,
     NzInputModule,
     NzIconModule,
-    NzButtonModule
-
+    NzButtonModule,
   ],
   providers: [
     // NgbActiveModal,
-    MessageService
+    MessageService,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -60,11 +66,15 @@ export class LoginComponent implements OnInit {
   showSecondaryLink = true;
   logo = GlobalConstants.appLogo;
 
-  @Input() showLinks = 'false'
+  @Input() showLinks = 'false';
 
-  destroyRef = inject(DestroyRef)
+  destroyRef = inject(DestroyRef);
   // activeModal = inject(NgbActiveModal)
-  formError!: TemplateRef<{ validation: string; message: string; control: AbstractControl<any, any>; }> | null;
+  formError!: TemplateRef<{
+    validation: string;
+    message: string;
+    control: AbstractControl<any, any>;
+  }> | null;
 
   constructor(
     private fb: FormBuilder,
@@ -72,9 +82,9 @@ export class LoginComponent implements OnInit {
     private userDetailsService: UserDetailsService,
     private router: Router,
     private seoService: SeoService,
-    private store: Store,
-    // private modalService: NgbModal,
-  ) {
+    private store: Store
+  ) // private modalService: NgbModal,
+  {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
     // if user is admin navigate to dashboard else home
@@ -82,8 +92,7 @@ export class LoginComponent implements OnInit {
     //   this.router.navigate(['/home']);
     // }
 
-    const content =
-      'Damak Namuna Badminton Academy, Damak 7 , Jhapa';
+    const content = 'Damak Namuna Badminton Academy, Damak 7 , Jhapa';
     const title = 'Damak Namuna Badminton Academy';
     this.seoService.setMetaDescription(content);
     this.seoService.setMetaTitle(title);
@@ -92,7 +101,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.checkUser();
-
   }
 
   checkUser() {
@@ -101,13 +109,12 @@ export class LoginComponent implements OnInit {
     if (userDetails?.role?.includes('Admin')) {
       console.log('amin');
 
-      this.router.navigate(['auth/inquiry'])
+      this.router.navigate(['auth/inquiry']);
       return;
     }
     console.log('no amin');
 
     this.router.navigate(['/auth/login']);
-
   }
 
   /**
@@ -116,7 +123,6 @@ export class LoginComponent implements OnInit {
 
   checkPreviousPage() {
     // const currentPage = this.store.selectSnapshot(RouterState.url);
-
     // if (currentPage?.includes('/cart')) {
     //   this.showSecondaryLink = true;
     //   this.activeModal.close();
@@ -143,11 +149,10 @@ export class LoginComponent implements OnInit {
     const payload = {
       username: this.f['userName'].value,
       password: this.f['passWord'].value,
-      deviceId: ''
+      deviceId: '',
     };
 
     if (payload.username !== null && payload.password !== null) {
-
       this.store
         .dispatch(new Login(payload))
         .pipe(
@@ -161,10 +166,10 @@ export class LoginComponent implements OnInit {
            * if admin logged in route to admin dashboard
            * else home page
            */
-          const userDetails = this.store.selectSnapshot(AuthState.userDetails)
+          const userDetails = this.store.selectSnapshot(AuthState.userDetails);
 
           if (userDetails?.role?.includes('Admin')) {
-            this.router.navigate(['/auth/'])
+            this.router.navigate(['/admin/profile']);
             return;
           }
           this.router.navigate(['/home']);
@@ -177,33 +182,27 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-
   onCancel(event: any) {
-
-    this.router.navigate(['/home'])
-
+    this.router.navigate(['/home']);
   }
   private refresh() {
     // refresh current component only
     const currentRoute = this.router.url;
-    const url: any = currentRoute.split('?')[0]
-    let id: any = currentRoute.split('?')[1]
+    const url: any = currentRoute.split('?')[0];
+    let id: any = currentRoute.split('?')[1];
 
-    if (id) id = id.split('=')[1]
+    if (id) id = id.split('=')[1];
 
-    this.router.navigateByUrl('/', { skipLocationChange: true })
-      .then(() => {
-        if (id) {
-          this.router.navigate([url], { queryParams: { id } });
-          return
-        }
-        this.router.navigate([url]) // no need
-      });
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      if (id) {
+        this.router.navigate([url], { queryParams: { id } });
+        return;
+      }
+      this.router.navigate([url]); // no need
+    });
   }
 
   public openDeleiveryForm(event: any) {
-
-
     this.router.navigate(['/registration']);
 
     // let modalRefCustomerDetailAdd = this.modalService.open(CustomerDetailsAddComponent, { backdrop: false });
@@ -214,20 +213,15 @@ export class LoginComponent implements OnInit {
     // });
   }
 
-
-
   public openform(event: any) {
-
     // const modalRefRegistration = this.modalService.open(RegistrationComponent, { backdrop: false });
     // modalRefRegistration.result.then((res) => {
     //   // unsubscribe onAdd
     //   return res
     // });
-
   }
 
   onRegister(): void {
     this.router.navigate(['/auth/registration']);
   }
-
 }
