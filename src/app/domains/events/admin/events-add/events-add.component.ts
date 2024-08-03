@@ -118,7 +118,7 @@ export class EventsAddComponent implements OnInit {
     private store: Store,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   async ngOnInit(): Promise<void> {
     this.buildForm();
@@ -128,10 +128,6 @@ export class EventsAddComponent implements OnInit {
   get f() {
     return this.form.controls;
   }
-
-  /**
-   * check authentication
-   */
 
   private checkFormStatus() {
     this.eventId$ = this.route.queryParamMap.pipe(

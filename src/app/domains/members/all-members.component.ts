@@ -20,6 +20,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { NzTagModule } from 'ng-zorro-antd/tag';
+import { Router } from '@angular/router';
 
 interface DataItem {
   name: string;
@@ -48,6 +49,7 @@ export class AllMembersComponent implements OnInit, OnChanges {
 
   private readonly memberService = inject(MemberService);
   private readonly cd = inject(ChangeDetectorRef);
+  private readonly router = inject(Router);
 
   ngOnInit(): void {
     if (!this.data$) this.fetchMembers();
@@ -72,7 +74,7 @@ export class AllMembersComponent implements OnInit, OnChanges {
   }
 
   onEdit(id: number) {
-    // this.router.navigate(['/auth/question-add'], { queryParams: { id: id, setMasterId: this.form.controls['setMasterId'].value } })
+    this.router.navigate(['/admin/add-member'], { queryParams: { id: id } })
   }
   // reset(): void {
   //   this.searchValue = '';

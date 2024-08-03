@@ -1,3 +1,4 @@
+
 import {
   Component,
   DestroyRef,
@@ -6,6 +7,8 @@ import {
   inject,
   OnInit,
   AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
@@ -15,9 +18,9 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { Observable, of } from 'rxjs';
+import { Observable, map, of, switchMap, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/shared/util-auth/services/auth-http/auth.service';
 import { ConfirmedValidator } from 'src/app/shared/util-logger/confirm-password.validator';
 import { UrlService } from 'src/app/shared/util-logger/url.service';
@@ -35,7 +38,8 @@ import { MemberService } from '../data/services/member.service';
 import { AllMembersComponent } from '../all-members.component';
 import { IMember } from '../data/models/member.model';
 // import { NepaliDatepickerModule } from 'nepali-datepicker-angular';
-import { NepaliDatepickerModule } from 'nepali-datepicker-angular';
+import { NepaliDatepickerModule, NepaliDatepickerService } from 'nepali-datepicker-angular';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -62,35 +66,45 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   ],
   templateUrl: './member-entry.component.html',
   styleUrl: './member-entry.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MemberEntryComponent implements OnInit {
   // props
+  mode = 'add';
   previewImage: string | undefined = '';
   previewVisible = false;
   showButton = true;
   fileList: any[] = [];
 
-  memberList$!: Observable<IMember[]>;
   form!: FormGroup;
   hasError!: boolean;
   showPassword = false;
   showcPassword = false;
+
+  memberShipType: any[] = []
+  memberId$!: Observable<number>;
+  member$!: Observable<any>;
+  memberList$!: Observable<IMember[]>;
   isLoading$!: Observable<boolean>;
-
-  destroyRef = inject(DestroyRef);
-  memberService = inject(MemberService);
-
   date: any = new Date();
+
+  private readonly _nepaliDatepickerService = inject(NepaliDatepickerService);
+  private readonly memberService = inject(MemberService);
+  private readonly unsubscribe$ = inject(DestroyRef);
+  private readonly route = inject(ActivatedRoute);
+  private readonly cd = inject(ChangeDetectorRef);
+
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     public urlService: UrlService,
     public messageService: MessageService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
+    this.checkFormStatus()
   }
 
   // convenience getter for easy access to form fields
@@ -110,6 +124,21 @@ export class MemberEntryComponent implements OnInit {
     }));
   }
 
+
+
+  private checkFormStatus() {
+    this.memberId$ = this.route.queryParamMap.pipe(
+      map((params: ParamMap) => Number(params.get('id')))
+    );
+    this.memberId$.pipe(takeUntilDestroyed(this.unsubscribe$))
+      .subscribe((_res: any) => {
+        console.log('fomn res', _res);
+        if (_res > 0) {
+          this.mode = 'edit';
+          this.edit();
+        }
+      });
+  }
   handleChange(info: NzUploadChangeParam): void {
     console.log('set file', info);
     if (!info.fileList[0]) {
@@ -160,6 +189,33 @@ export class MemberEntryComponent implements OnInit {
         this.previewImage = '';
         this.date = new Date();
         this.memberList$ = of(user);
+        this.cd.detectChanges()
+      });
+  }
+
+  edit() {
+    this.member$ = this.memberId$.pipe(
+      switchMap((query: number) => this.memberService.getFormValues(query))
+    );
+    this.member$.pipe(takeUntilDestroyed(this.unsubscribe$))
+      .subscribe((_res: any) => {
+        this.memberShipType = _res.memberShipTypeList
+        this.form.patchValue(_res.form);
+        this.fileList = [
+          {
+            memberId: _res.form.memberId,
+            name: _res.form.name,
+            status: 'done',
+            url: _res.form.profilePic,
+          },
+        ];
+        this.previewImage = _res.form.profilePic;
+        const BSDate = this._nepaliDatepickerService.BSToAD(
+          _res.form.dob,
+          'yyyy/mm/dd'
+        );
+        this.date = new Date(BSDate);
+        // this.cd.detectChanges();
       });
   }
 
@@ -168,3 +224,4 @@ export class MemberEntryComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 }
+

@@ -68,10 +68,10 @@
                 <label for="MemberType">
                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select type of member"
                         formControlName="memberShipTypeId">
-                        <nz-option nzLabel="Lifetime" [nzValue]="1"></nz-option>
-                        <nz-option nzLabel="Annual" [nzValue]="2"></nz-option>
-                        <nz-option nzLabel="Monthly" [nzValue]="3"></nz-option>
-                        <nz-option nzLabel="Quarterly" [nzValue]="4"></nz-option>
+                        @for (item of memberShipType; track $index) {
+                        <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        }
+
                     </nz-select>
                 </label>
 

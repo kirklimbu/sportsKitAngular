@@ -12,9 +12,9 @@ export class MemberService {
 
   private http = inject(HttpClient);
 
-  getFormValues(id: number, setMasterId: number): Observable<any> {
-    return this.http.get<any>(
-      `${this.apiUrl}auth/exam/question/form?questionId=${id}&setMasterId=${setMasterId}`
+  getFormValues(id: number): Observable<IMember> {
+    return this.http.get<IMember>(
+      `${this.apiUrl}auth/member/form?memberId=${id}`
     );
   }
 
@@ -31,6 +31,6 @@ export class MemberService {
   }
 
   getAllMembers(): Observable<IMember[]> {
-    return this.http.get<IMember[]>(`${this.apiUrl}auth/member/list`);
+    return this.http.get<IMember[]>(`${this.apiUrl}member/list`);
   }
 }

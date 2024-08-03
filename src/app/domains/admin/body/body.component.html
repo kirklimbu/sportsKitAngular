@@ -11,8 +11,7 @@
       </li>
       <li nz-menu-item>
         <span nz-icon nzTitle="Dashboard" nzType="appstore"></span>
-        <span nz-tooltip nzTooltipTitle="Profile"
-          >Profile
+        <span nz-tooltip nzTooltipTitle="Profile">Profile
           <a [routerLink]="['/admin/profile']"></a>
         </span>
       </li>
@@ -31,13 +30,13 @@
           <a [routerLink]="['/admin/add-member']"></a>
         </span>
       </li>
-      <li nz-menu-item>
+      <!-- <li nz-menu-item>
         <span nz-icon nzTitle="Set" nzType="user-add"></span>
         <span nz-tooltip nzTooltipTitle="Users">
           User
           <a [routerLink]="['/admin/add-user']"></a>
         </span>
-      </li>
+      </li> -->
       <li nz-menu-item>
         <span nz-icon nzTitle="Set" nzType="schedule"></span>
         <span nz-tooltip nzTooltipTitle="Events">
@@ -76,12 +75,8 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <span
-        class="trigger"
-        nz-icon
-        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-        (click)="isCollapsed = !isCollapsed"
-      ></span>
+      <span class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"></span>
     </nz-header>
     <nz-content>
       <!-- <nz-breadcrumb>
