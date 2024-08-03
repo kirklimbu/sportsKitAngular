@@ -1,15 +1,47 @@
-<div class="form-submit gap-2 ">
-
-  <ng-container *ngIf="showSecondaryButton">
-    <button class="btn btn-secondary cancel " id="reset" name="reset" (click)="onCancel($event)">
-      {{secondaryButtonLabel}}
+<!--<div class="form-submit gap-2">
+ <ng-container *ngIf="showSecondaryButton">
+    <button
+      class="btn btn-secondary cancel"
+      id="reset"
+      name="reset"
+      (click)="onCancel($event)"
+    >
+      {{ secondaryButtonLabel }}
     </button>
   </ng-container>
 
   <ng-container *ngIf="showPrimaryButton">
-    <button [disabled]="isDisabled" class="save btn btn-warning Save " id="submit" name="submit"
-      (click)="onSave($event)">
-      {{primaryButtonLabel}}
+    <button
+      [disabled]="isDisabled"
+      class="save btn btn-warning Save"
+      id="submit"
+      name="submit"
+      (click)="onSave($event)"
+    >
+      {{ primaryButtonLabel }}
     </button>
-  </ng-container>
+  </ng-container> 
+</div>-->
+<div class="form-submit">
+  <nz-space [nzSize]="'large'">
+    @if(showSecondaryButton){
+    <div class="cancel">
+      <button nz-button name="reset" (click)="onCancel($event)">
+        {{ secondaryButtonLabel }}
+      </button>
+    </div>
+    } @if(showPrimaryButton){
+    <div>
+      <button
+        class="submit"
+        name="submit"
+        nz-button
+        [disabled]="isDisabled"
+        (click)="onSave($event)"
+      >
+        {{ primaryButtonLabel }}
+      </button>
+    </div>
+    }
+  </nz-space>
 </div>

@@ -1,15 +1,14 @@
-<div class="container">
+<div class="">
   <section class="memberentry-section">
-    <div>
-      <div class="sub-title">
-        <span>New User </span>
-      </div>
-      <div class="title text-bolder">
-        <h3>Add User</h3>
-      </div>
-    </div>
-
     <form class="form" [formGroup]="form">
+      <div>
+        <div class="sub-title">
+          <span>Registration </span>
+        </div>
+        <div class="title text-bolder">
+          <h3>New user</h3>
+        </div>
+      </div>
       <div class="flex">
         <label for="">
           <span class="required">Profile pic</span>
@@ -161,11 +160,17 @@
         </ng-template>
       </div> -->
       <!-- </span> -->
-      <button class="submit" (click)="onSave()">Save</button>
+
+      <app-form-submit-buttons
+        [primaryButtonLabel]="'Save'"
+        (cancel)="onCancel()"
+        [secondaryButtonLabel]="'Cancel'"
+        (save)="onSave()"
+      />
     </form>
   </section>
 
-  <section class="members-list-section">
+  <!-- <section class="members-list-section">
     <app-user [data$]="userList$" />
-  </section>
+  </section> -->
 </div>

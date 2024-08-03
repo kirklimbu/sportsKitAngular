@@ -1,29 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
 
 @Component({
   standalone: true,
   selector: 'app-form-submit-buttons',
   templateUrl: './form-submit-buttons.component.html',
   styleUrls: ['./form-submit-buttons.component.scss'],
-  imports: [CommonModule]
+  imports: [CommonModule, NzSpaceModule, NzButtonModule],
 })
-export class FormSubmitButtonsComponent implements OnInit {
+export class FormSubmitButtonsComponent {
   // props
   @Input() showPrimaryButton = true;
   @Input() showSecondaryButton = true;
-  @Input() primaryButtonLabel = ''
-  @Input() secondaryButtonLabel = ''
-  @Input() mode: string = 'add';
-  @Input() isDisabled: boolean = false;
+  @Input() primaryButtonLabel = '';
+  @Input() secondaryButtonLabel = '';
+  @Input() mode = 'add';
+  @Input() isDisabled = false;
 
-  @Output('save') save: EventEmitter<Event> = new EventEmitter<Event>();
-  @Output('cancel') cancel: EventEmitter<Event> = new EventEmitter<Event>();
+  @Output() save: EventEmitter<Event> = new EventEmitter<Event>();
+  @Output() cancel: EventEmitter<Event> = new EventEmitter<Event>();
 
+  // constructor() { }
 
-  constructor() { }
-
-  ngOnInit(): void { }
+  // ngOnInit(): void { }
 
   onSave($event: Event) {
     this.save.emit();

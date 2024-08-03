@@ -25,6 +25,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormSubmitButtonsComponent } from 'src/app/shared/ui-common/form-submit-buttons/form-submit-buttons.component';
 import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -52,7 +53,7 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
     NzIconModule,
     NzIconModule,
     NzFormModule,
-
+    NzButtonModule,
     // project
     UserComponent,
   ],
