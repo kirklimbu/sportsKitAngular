@@ -237,12 +237,3 @@
     </div>
     <!--end::Signin-->
 </div>
-<ng-template #formError let-control="control" let-message="message" let-validation="validation">
-    <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
-        <div class="fv-plugins-message-container">
-            <div class="fv-help-block">
-                {{ message }}
-            </div>
-        </div>
-    </ng-container>
-</ng-template>

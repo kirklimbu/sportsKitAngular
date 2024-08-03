@@ -45,6 +45,28 @@ button {
   }
 }
 
+span[nz-typography] {
+  display: block;
+  margin: .25rem;
+  font-weight: $font-weight-light;
+  font-size: $font-size-sm;
+}
+
+span[nz-typography]+span[nz-typography] {
+  margin-top: 8px;
+
+}
+
+// file 
+::ng-deep .ant-upload-list-picture-card .ant-upload-list-item-error {
+  border-color: white;
+}
+
+// input field
+::ng-deep .ant-input-group .ant-input {
+  height: 55px;
+}
+
 // cards
 
 .ant-card {
@@ -98,7 +120,7 @@ button {
   border-radius: 1px;
 }
 
-.form label .input + span {
+.form label .input+span {
   position: absolute;
   left: 10px;
   top: 15px;
@@ -108,19 +130,19 @@ button {
   transition: 0.3s ease;
 }
 
-.form label .input:placeholder-shown + span {
+.form label .input:placeholder-shown+span {
   top: 15px;
   font-size: 0.9em;
 }
 
-.form label .input:focus + span,
-.form label .input:valid + span {
+.form label .input:focus+span,
+.form label .input:valid+span {
   top: 0px;
   // font-size: 0.7em;
   font-weight: 600;
 }
 
-.form label .input:valid + span {
+.form label .input:valid+span {
   color: $primary-color;
 }
 
@@ -144,6 +166,7 @@ button {
   //   background-color: $primary-color;
   cursor: pointer;
 }
+
 // [nz-button] {
 //   min-width: 120px;
 //   .submit {
@@ -162,6 +185,7 @@ button {
   .content-with-button {
     gap: 36px;
   }
+
   .content-container {
     padding: 3rem 2rem;
   }
@@ -181,6 +205,7 @@ button {
   .content-with-button {
     gap: 42px;
   }
+
   .sub-title {
     span::before {
       width: 2%;

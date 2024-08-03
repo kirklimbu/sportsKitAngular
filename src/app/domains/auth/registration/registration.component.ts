@@ -1,6 +1,6 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import { Component, DestroyRef, TemplateRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/util-auth/services/auth-http/auth.service';
@@ -36,6 +36,7 @@ export class RegistrationComponent {
   showcPassword = false;
   isLoading$!: Observable<boolean>;
   destroyRef = inject(DestroyRef)
+  formError!: TemplateRef<{ validation: string; message: string; control: AbstractControl<any, any>; }> | null;
 
   constructor(
     private fb: FormBuilder,

@@ -26,6 +26,8 @@ import { FormSubmitButtonsComponent } from 'src/app/shared/ui-common/form-submit
 import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { ConfirmedValidator } from 'src/app/shared/util-logger/confirm-password.validator';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -54,6 +56,7 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
     NzIconModule,
     NzFormModule,
     NzButtonModule,
+    NzTypographyModule,
     // project
     UserComponent,
   ],
@@ -90,16 +93,20 @@ export class AddUserComponent implements OnInit {
   }
 
   initForm(): FormGroup {
-    return (this.form = this.fb.group({
+    return this.form = this.fb.group({
       userId: [0],
       name: ['', [Validators.required]],
-      passWord: ['', [Validators.required]],
-      cPassword: ['', [Validators.required]],
       address: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
       email: [],
       file: [],
-    }));
+      passWord: ['', [Validators.required]],
+      cPassword: ['', [Validators.required]],
+    },
+      {
+        validator: ConfirmedValidator('passWord', 'cPassword')
+      }
+    )
   }
 
   onTogglePassword() {

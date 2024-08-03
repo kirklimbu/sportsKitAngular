@@ -1,58 +1,37 @@
 @import 'src/assets/scss/_variables.scss';
+
 .user-registration-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   place-items: center;
-  gap: 2rem;
-  width: 50%;
+
   .logo-section {
-    flex: 1 img {
+    background: $tone-green-light;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    img {
       height: 200px;
       width: 200px;
+
     }
-  }
-  .form-section {
-    flex: 1;
+
+
   }
 }
 
-.flex-container {
-  display: flex;
-  // padding: 7rem;
-  align-items: center;
-  place-items: center;
-  gap: 2rem;
+// @media (width>=576px) {
+//   .user-registration-container {
+//     .logo-section {
+//       width: 284px;
+//     }
+//   }
+// }
 
-  .flex-child {
-    flex: 1;
-  }
+@media (width<=480px) {
 
-  .flex-child:first-child {
-    margin-right: 20px;
-    display: flex;
-    place-content: center;
-    // background: $tone-green-light;
-  }
-}
-
-@media (width<=576px) {
-  .user-registration-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    place-items: center;
-    gap: 2rem;
-    width: 50%;
-    .logo-section {
-      flex: 1 img {
-        height: 100px;
-        width: 100px;
-      }
-    }
-    .form-section {
-      flex: 1;
-    }
-  }
   .flex-container {
     display: flex;
     flex-direction: column;
@@ -60,7 +39,7 @@
     padding: 2rem;
     align-items: center;
     place-items: center;
-    gap: 2rem;
+    // gap: 2rem;
 
     .flex-child {
       flex: 1;
@@ -75,35 +54,109 @@
   }
 }
 
-@media (width<=768px) {
+@media (width<=768px) {}
+
+
+@media (width<=992px) {
   .user-registration-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     place-items: center;
-    gap: 2rem;
-    width: 50%;
+    // gap: 2rem;
+
     .logo-section {
-      flex: 1 img {
+      width: 516px;
+      flex: 1;
+
+      img {
         height: 200px;
         width: 200px;
       }
     }
+
     .form-section {
       flex: 1;
-      display: flex;
-      place-content: center;
-    }
-    .flex-container {
-      display: flex;
-      padding: 7rem;
       display: flex;
       place-content: center;
     }
   }
 }
 
-@media (width<=992px) {
+@media (width<=1200px) {}
+
+/* For Desktop View */
+@media screen and (min-width: 1024px) {
+  .user-registration-container {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    // gap: 2rem;
+
+    .logo-section {
+      width: 600px;
+      flex: 1;
+
+      img {
+        height: 200px;
+        width: 200px;
+      }
+    }
+  }
 }
 
-@media (width<=1200px) {
+/* For Tablet View */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .user-registration-container {
+    display: flex;
+    flex-direction: column;
+    place-items: center;
+    // gap: 2rem;
+
+    .logo-section {
+      width: 600px;
+      flex: 1;
+
+      img {
+        height: 200px;
+        width: 200px;
+      }
+    }
+
+    .form-section {
+      flex: 1;
+      display: flex;
+      place-content: center;
+    }
+  }
+}
+
+/* For Mobile Portrait View */
+@media screen and (max-device-width: 480px) and (orientation: portrait) {}
+
+/* For Mobile Landscape View */
+@media screen and (max-device-width: 640px) and (orientation: landscape) {}
+
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+
+  .user-registration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    place-items: center;
+
+    .logo-section {
+      width: 284px;
+
+
+      img {
+        height: 100px;
+        width: 100px;
+      }
+    }
+
+    .form-section {
+      flex: 1;
+    }
+  }
 }

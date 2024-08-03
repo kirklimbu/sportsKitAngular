@@ -10,6 +10,15 @@ nz-select {
   border-color: white;
 }
 
+::ng-deep .ant-input-group .ant-input {
+  height: 55px;
+}
+
+::ng-deep .anticon {
+  color: $gold;
+  font-size: 1rem;
+}
+
 // .admin-members-section {
 //     display: flex;
 //     gap: 1rem;
@@ -25,6 +34,7 @@ nz-select {
 //     // }
 // }
 
+
 .memberentry-section {
   display: flex;
   flex-direction: column;
@@ -38,10 +48,14 @@ nz-select {
   // width: 450px;
   // width: auto;
   padding: 1rem;
-  background-color: #fff;
+  background: $tone-green-light;
   border-radius: 2px;
   position: relative;
-  border: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+}
+
+span .profile-pic {
+  font-weight: $font-weight-bold;
 }
 
 // .title {
@@ -139,7 +153,7 @@ nz-select {
 @media (min-width: 768px) {
   .memberentry-section {
     // max-width: 450px;
-    margin-top: 2rem;
+    // margin-top: 2rem;
   }
 
   .form {

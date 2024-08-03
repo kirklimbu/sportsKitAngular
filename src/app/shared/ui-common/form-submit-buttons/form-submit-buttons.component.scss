@@ -21,18 +21,21 @@
   color: $gold;
   // padding-left: 1rem;
 }
+
 .cancel {
   padding-right: 0.5rem;
 }
+
 [nz-button] {
   font-weight: $font-weight-bold;
   // height: 3rem;
   // min-width: 8rem;
 }
+
 @media (min-width: 480px) {
   .form-submit {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     border-top: 1px solid rgb(192 182 182);
     text-transform: capitalize;
     padding-top: 2rem;
@@ -63,6 +66,7 @@
       color: $gold;
       // padding-left: 1rem;
     }
+
     .cancel {
       padding-right: 0.5rem;
     }
