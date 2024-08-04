@@ -26,22 +26,28 @@
 </section> -->
 
 <section class="content-container">
-  <div class="sub-title">
-    <span>Our Gallary </span>
-  </div>
-  <div class="title text-bolder">
-    <span> Gallaries </span>
-  </div>
-  <div class="description text-muted">
-    <p>
-      Damak Namuna Badminton Academy regularly organizes diverse events. These
-      are some of the memories of activities in our academy.
-    </p>
+  <div class="text-section">
+
+    <div class="sub-title">
+      <span>Our Gallary </span>
+    </div>
+    <div class="title text-bolder">
+      <span> Gallaries </span>
+    </div>
+    <div class="description text-muted">
+      <p>
+        Damak Namuna Badminton Academy regularly organizes diverse events. These
+        are some of the memories of activities in our academy.
+      </p>
+      <button nz-button nzType="default" nzShape="round" (click)="scrollTo('#contact-us')">
+        <a>View more</a>
+      </button>
+    </div>
   </div>
 
   <div class="gallery">
     @for ((item of gallary); track $index) {
-    <img [src]="item.image" alt="" />
+    <img [src]="item.image" [alt]="item.title" loading="lazy" />
 
     }
   </div>

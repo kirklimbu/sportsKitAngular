@@ -13,6 +13,7 @@ body {
 
 button {
   transition: background 400ms ease-in-out;
+  animation: pulse 1s linear infinite;
 }
 
 .content-container {
