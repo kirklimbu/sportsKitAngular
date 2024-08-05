@@ -172,7 +172,7 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/admin/profile']);
             return;
           }
-          this.router.navigate(['/home']);
+          this.router.navigate(['/admin/user-profile']);
           // return (this.hasError = true);
         });
     }

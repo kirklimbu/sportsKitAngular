@@ -12,7 +12,7 @@
       <li nz-menu-item>
         <span nz-icon nzTitle="Dashboard" nzType="appstore"></span>
         <span nz-tooltip nzTooltipTitle="Profile">Profile
-          <a [routerLink]="['/admin/profile']"></a>
+          <a [routerLink]="['/admin/profile']" (click)="onViewProfile()"></a>
         </span>
       </li>
       <!-- <li nz-menu-item>

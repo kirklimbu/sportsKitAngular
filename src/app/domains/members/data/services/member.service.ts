@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IMember } from '../models/member.model';
+import { IMemberPayment } from '../models/member-payment';
 
 @Injectable({
   providedIn: 'root',
@@ -32,5 +33,13 @@ export class MemberService {
 
   getAllMembers(): Observable<IMember[]> {
     return this.http.get<IMember[]>(`${this.apiUrl}member/list`);
+  }
+
+  // payment section
+
+  getPaymentFormValues(id: number): Observable<IMemberPayment[]> {
+    return this.http.get<IMemberPayment[]>(
+      `${this.apiUrl}auth/member/payment/form?memberId=${id}`
+    );
   }
 }

@@ -1,3 +1,4 @@
+import { IMember } from './../../../members/data/models/member.model';
 import { Injectable } from '@angular/core';
 import { State, Selector, Action, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
@@ -9,6 +10,8 @@ import { AuthService } from 'src/app/shared/util-auth/services/auth-http/auth.se
 
 // Initialize the state
 const defaults: UserModel = {
+  member: undefined,
+  trainee: undefined,
   token: '',
   roleId: 0,
   userId: 0,
@@ -23,6 +26,20 @@ const defaults: UserModel = {
 @State<UserModel>({
   name: 'auth',
   defaults: {
+    member: {
+      memberId: 0,
+      dob: '',
+      name: '',
+      memberShip: '',
+      mobile1: '',
+      mobile2: '',
+      status: '',
+      profilePic: '',
+    },
+    trainee: {
+
+    },
+
     token: '',
     roleId: 0,
     userId: 0,
@@ -65,6 +82,8 @@ export class AuthState {
       token: state?.token,
       addressOne: state?.addressOne,
       addressTwo: state?.addressTwo,
+      member: state?.member,
+      trainee: state?.trainee
 
     };
   }
@@ -87,6 +106,8 @@ export class AuthState {
             userId: result.userId,
             addressOne: result.addressOne,
             addressTwo: result.addressTwo,
+            member: result.member,
+            trainee: result.trainee,
           });
         })
       );

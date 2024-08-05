@@ -1,3 +1,4 @@
+import { IMember } from 'src/app/domains/members/data/models/member.model';
 import { AuthModel } from './auth.model';
 
 export class UserModel extends AuthModel {
@@ -16,6 +17,12 @@ export class UserModel extends AuthModel {
   latitude?: string;
   longitude?: string;
   override token?: string;
+  member: IMember | undefined
+  trainee: any | undefined
+  /**
+   * name,email,mobile,passWord,addressOne,addressTwo
+   */
+
 
   /**
    * name,email,mobile,passWord,addressOne,addressTwo
@@ -34,6 +41,8 @@ export interface LoginResponseDto {
   addressOne?: string;
   addressTwo?: string;
   deviceId?: string;
+  member: IMember | undefined
+  trainee: any | undefined
 }
 
 // export type Role = 'ADMIN' | 'CUSTOMER';

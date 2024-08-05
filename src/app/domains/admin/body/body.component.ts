@@ -8,6 +8,8 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { Store } from '@ngxs/store';
 import { Logout } from '../../auth/login/state/login.model';
+import { Role } from 'src/app/shared/util-auth/models/user.model';
+import { UserDetailsService } from 'src/app/shared/util-common/userDetails.service';
 
 @Component({
   selector: 'app-body',
@@ -33,6 +35,8 @@ export class BodyComponent {
 
   private router = inject(Router)
   private store = inject(Store)
+  private userDetailService = inject(UserDetailsService)
+
 
   getBodyClass(): string {
     let styleClass = '';
@@ -44,6 +48,24 @@ export class BodyComponent {
     return styleClass;
   }
 
+  checkUser(): Role {
+    const userRole: Role = this.userDetailService.getUserRole();
+    return userRole
+
+
+  }
+
+  onViewProfile() {
+    this.checkUser()
+
+    const userRole: Role = this.userDetailService.getUserRole();
+
+    if (userRole === Role.ADMIN) {
+      this.router.navigate(['admin/profile'])
+    } else {
+      this.router.navigate(['admin/user-profile'])
+    }
+  }
 
   onLogout() {
     localStorage.clear();

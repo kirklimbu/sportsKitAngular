@@ -1,0 +1,37 @@
+<ng-container>
+    <p class="title" style=" margin-bottom: 24px;">User Profile</p>
+    <nz-descriptions [nzColumn]="2" nzTitle="Personal">
+        <nz-descriptions-item nzTitle="Full Name" [nzSpan]="1">{{userProfile.name|titlecase}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Mobile" [nzSpan]="1">{{userProfile.mobile}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Address"
+            [nzSpan]="1">{{userProfile.addressOne}}/{{userProfile.addressTwo}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Email" [nzSpan]="1">{{userProfile.email}}</nz-descriptions-item>
+
+    </nz-descriptions>
+    @if(userProfile.member){
+    <nz-divider></nz-divider>
+    <nz-descriptions [nzColumn]="2" nzTitle="Member Details">
+        <nz-descriptions-item nzTitle="Membership Type"
+            [nzSpan]="1">{{userProfile.member.memberShip}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="D.O.B" [nzSpan]="1">{{userProfile.member.dob}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Mobile" [nzSpan]="1">
+            <p>{{userProfile.member.mobile1}}</p> /
+            <p>{{userProfile.member.mobile2}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Mobile" [nzSpan]="1">AFX</nz-descriptions-item>
+
+    </nz-descriptions>
+    }
+
+    @if(userProfile.trainee){
+
+    <nz-divider></nz-divider>
+    <nz-descriptions [nzColumn]="2" nzTitle="Contacts">
+        <nz-descriptions-item nzTitle="Email" [nzSpan]="1">AntDesign&#64;example.com</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Phone Number" [nzSpan]="1">+86 181 0000 0000</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Github" [nzSpan]="2">
+            <a href="https://github.com/NG-ZORRO/ng-zorro-antd" target="_blank">github.com/NG-ZORRO/ng-zorro-antd</a>
+        </nz-descriptions-item>
+    </nz-descriptions>
+    }
+</ng-container>

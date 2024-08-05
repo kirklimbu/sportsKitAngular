@@ -22,71 +22,37 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('../user-profile').then((m) => m.FEATURE_USER_ROUTES),
+  },
+  {
+    path: '',
+    canActivate: [AuthGuard],
     loadChildren: () => import('../user').then((m) => FEATURE_USERS_ROUTES),
   },
   {
+    canActivate: [hasRoleGuard],
+    data: {
+      roles: [Role.ADMIN],
+    },
     path: 'events',
-    canActivate: [AuthGuard],
     loadChildren: () => import('../events').then((m) => FEATURE_EVENTS_ROUTES),
   },
   {
+    canActivate: [hasRoleGuard],
+    data: {
+      roles: [Role.ADMIN],
+    },
     path: 'organization',
     component: AddOrganizationComponent,
   },
   {
-    path: 'organization',
-    component: AddOrganizationComponent,
-  },
-  // {
-  //   path: '',
-  //   canActivate: [hasRoleGuard],
-  //   data:
-  //   {
-  //     roles: [Role.ADMIN],
-
-  //   },
-  //   loadChildren: () =>
-  //     import('.././questions').then((m) => m.FEATURE_QUESTION_ROUTES),
-  // },
-  // {
-  //   path: '',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: () =>
-  //     import('.././set').then((m) => m.FEATURE_SET_ROUTES),
-  // },
-
-  {
-    // canActivate: [hasRoleGuard],
-    // data: {
-    //   roles: [Role.ADMIN],
-    // },
+    canActivate: [hasRoleGuard],
+    data: {
+      roles: [Role.ADMIN],
+    },
     path: 'profile',
     component: OrganizationComponent,
   },
-  // {
-  //   canActivate: [hasRoleGuard],
-  //   data:
-  //   {
-  //     roles: [Role.ADMIN],
 
-  //   },
-  //   path: 'inquiry',
-  //   component: InquiryComponent,
-
-  // },
-
-  // {
-  //   canActivate: [hasRoleGuard],
-  //   data:
-  //   {
-  //     roles: [Role.USER],
-  //   },
-  //   path: 'user-profile',
-  //   component: UserProfileComponent,
-  //   // data: {
-  //   //   breadcrumb: {
-  //   //     label: 'details'
-  //   //   }
-  //   // },
-  // },
 ];

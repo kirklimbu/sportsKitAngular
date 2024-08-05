@@ -5,6 +5,7 @@ import { LoginComponent } from './domains/auth/login/login.component';
 import { RegistrationComponent } from './domains/auth/registration/registration.component';
 import { MemberEntryComponent } from './domains/members/member-entry/member-entry.component';
 import { AdminComponent } from './domains/admin/admin.component';
+import { AuthGuard } from './shared/util-auth/guards/auth.guard';
 
 export const appRoutes: Route[] = [
     {
@@ -29,6 +30,7 @@ export const appRoutes: Route[] = [
         loadChildren: () =>
             import('../app/domains/admin').then((m) => m.FEATURE_ADMIN_ROUTES),
     },
+
 
     // {
     //     path: 'auth/login',
