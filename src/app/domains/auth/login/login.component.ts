@@ -168,10 +168,10 @@ export class LoginComponent implements OnInit {
            */
           const userDetails = this.store.selectSnapshot(AuthState.userDetails);
 
-          if (userDetails?.role?.includes('Admin')) {
-            this.router.navigate(['/admin/profile']);
-            return;
-          }
+          // if (userDetails?.role?.includes('Admin')) {
+          //   this.router.navigate(['/admin/user-profile']);
+          //   return;
+          // }
           this.router.navigate(['/admin/user-profile']);
           // return (this.hasError = true);
         });

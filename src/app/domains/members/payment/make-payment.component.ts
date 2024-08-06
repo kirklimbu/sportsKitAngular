@@ -41,7 +41,7 @@ export class MakePaymentComponent {
   paymentList$!: Observable<IMemberPayment[]>
   date: any = new Date();
 
-  paymentId$!: Observable<number>
+  paymentId$!: Observable<any>
   private readonly _nepaliDatepickerService = inject(NepaliDatepickerService);
 
   private readonly unsubscribe$ = inject(DestroyRef);
@@ -65,6 +65,7 @@ export class MakePaymentComponent {
       paymentId: ['', [Validators.required]],
       paymentDate: ['', [Validators.required]],
       amount: ['', [Validators.required]],
+      hasNewPayment: ['', [Validators.required]],
 
     }));
   }
@@ -75,22 +76,27 @@ export class MakePaymentComponent {
 
   private checkFormStatus() {
     this.paymentId$ = this.route.queryParamMap.pipe(
-      map((params: ParamMap) => Number(params.get('id')))
+      map((params: ParamMap) => {
+
+        const id = Number(params.get('id'));
+        this.form.patchValue({ memberId: id })
+        const paymentType = params.get('paymentType');
+        return { id, paymentType }
+
+      })
     );
     this.paymentId$.pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
         console.log('fomn res', _res);
-        if (_res > 0) {
-          this.mode = 'edit';
-          this.edit();
-        }
+
+        this.edit();
       });
   }
 
   // nepali date picker
   updateNepaliDate($event: string) {
     console.log('updaet nepali', $event);
-    this.form.patchValue({ dob: $event });
+    this.form.patchValue({ paymentDate: $event });
   }
   updateEnglishDate($event: string) {
     console.log('updaet eng', $event);
@@ -105,13 +111,13 @@ export class MakePaymentComponent {
     console.log('saving form values', this.form.value);
 
     this.memberService
-      .saveMember(this.form.value)
+      .savePayment(this.form.value)
       .subscribe((user: any) => {
         console.log('member', user);
 
         this.messageService.createMessage(
           'success',
-          'Member added successfully.'
+          user.message
         );
         this.form.reset();
 

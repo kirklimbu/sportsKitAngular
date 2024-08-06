@@ -10,11 +10,33 @@
         </span>
       </li>
       <li nz-menu-item>
-        <span nz-icon nzTitle="Dashboard" nzType="appstore"></span>
+        <span nz-icon nzTitle="Profile" nzType="user"></span>
         <span nz-tooltip nzTooltipTitle="Profile">Profile
-          <a [routerLink]="['/admin/profile']" (click)="onViewProfile()"></a>
+          <a [routerLink]="['/admin/user-profile']"></a>
         </span>
       </li>
+      @if (userRole==='Admin') {
+      <li nz-menu-item>
+        <span nz-icon nzTitle="Organization" nzType="bank"></span>
+        <span nz-tooltip nzTooltipTitle="Profile">Organization
+          <a [routerLink]="['/admin/profile']"></a>
+        </span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzTitle="Members" nzType="user-add"></span>
+        <span nz-tooltip nzTooltipTitle="Members">
+          Members
+          <a [routerLink]="['/admin/list-member']"></a>
+        </span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzTitle="Events" nzType="schedule"></span>
+        <span nz-tooltip nzTooltipTitle="Events">
+          Events
+          <a [routerLink]="['/admin/events/add-event']"></a>
+        </span>
+      </li>
+      }
       <!-- <li nz-menu-item>
                 <span nz-icon nzTitle="Inquiry" nzType="question-circle"></span>
                 <span nz-tooltip nzTooltipTitle="Inquiry">
@@ -23,13 +45,7 @@
 
                 </span>
             </li> -->
-      <li nz-menu-item>
-        <span nz-icon nzTitle="Set" nzType="user-add"></span>
-        <span nz-tooltip nzTooltipTitle="Members">
-          Members
-          <a [routerLink]="['/admin/add-member']"></a>
-        </span>
-      </li>
+
       <!-- <li nz-menu-item>
         <span nz-icon nzTitle="Set" nzType="user-add"></span>
         <span nz-tooltip nzTooltipTitle="Users">
@@ -37,13 +53,7 @@
           <a [routerLink]="['/admin/add-user']"></a>
         </span>
       </li> -->
-      <li nz-menu-item>
-        <span nz-icon nzTitle="Set" nzType="schedule"></span>
-        <span nz-tooltip nzTooltipTitle="Events">
-          Events
-          <a [routerLink]="['/admin/events/add-event']"></a>
-        </span>
-      </li>
+
       <!-- <li nz-menu-item>
                 <span nz-icon nzTitle="Set" nzType="schedule"></span>
                 <span nz-tooltip nzTooltipTitle="Set">

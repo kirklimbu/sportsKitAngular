@@ -20,31 +20,16 @@
     <!-- <a href="/auth/login" title="Login ">
             <i class="fas fa-user-lock"></i>
           </a> -->
-    <ul
-      nz-menu
-      nzMode="horizontal"
-      style="width: auto; background-color: #cceabe1a"
-    >
+    <ul nz-menu nzMode="horizontal" style="width: auto; background-color: #cceabe1a">
       <li nz-menu-item>
         <span nz-icon>
-          <a
-            title="Visit our facebook page"
-            [href]="headerData.facebook"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Facebook"
-          >
+          <a title="Visit our facebook page" [href]="headerData.facebook" target="_blank" rel="noopener noreferrer"
+            title="Facebook">
             <i class="facebook fab fa-facebook-square fa-lg"></i>
           </a>
         </span>
       </li>
-      <li
-        style="font-size: 16px"
-        nzPlacement="bottomCenter"
-        nz-submenu
-        nzTitle=""
-        nzIcon="user"
-      >
+      <li style="font-size: 16px" nzPlacement="bottomCenter" nz-submenu nzTitle="" nzIcon="user">
         <ul>
           @if(!isLoggedIn){
 
@@ -56,7 +41,7 @@
           <li nz-menu-item (click)="onLogout()">
             <span nz-icon nzType="logout" nzTheme="outline"></span> Logout
           </li>
-          <li nz-menu-item routerLink="/admin/profile">
+          <li nz-menu-item routerLink="/admin/user-profile">
             <span nz-icon nzType="user-add" nzTheme="outline"></span> Profile
           </li>
           }

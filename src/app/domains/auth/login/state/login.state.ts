@@ -9,23 +9,34 @@ import { LoginResponseDto, Role, UserModel } from 'src/app/shared/util-auth/mode
 import { AuthService } from 'src/app/shared/util-auth/services/auth-http/auth.service';
 
 // Initialize the state
-const defaults: UserModel = {
+const defaults: LoginResponseDto = {
   member: undefined,
-  trainee: undefined,
-  token: '',
-  roleId: 0,
-  userId: 0,
-  name: '',
-  role: Role?.NONE,
-  mobile: '',
-  addressOne: '',
-  addressTwo: '',
-  email: '',
+  traineeList: undefined,
+  user: undefined,
+  // token: '',
+  // roleId: 0,
+  // userId: 0,
+  // name: '',
+  // role: Role?.NONE,
+  // mobile: '',
+  // addressOne: '',
+  // addressTwo: '',
+  // email: '',
 }
 
-@State<UserModel>({
+@State<LoginResponseDto>({
   name: 'auth',
+
   defaults: {
+    user: {
+      token: '',
+      roleId: 0,
+      userId: 0,
+      name: '',
+      role: Role?.NONE,
+      mobile: '',
+
+    },
     member: {
       memberId: 0,
       dob: '',
@@ -36,19 +47,10 @@ const defaults: UserModel = {
       status: '',
       profilePic: '',
     },
-    trainee: {
+    traineeList: {
 
     },
 
-    token: '',
-    roleId: 0,
-    userId: 0,
-    name: '',
-    role: Role?.NONE,
-    mobile: '',
-    addressOne: '',
-    addressTwo: '',
-    email: '',
   },
 })
 
@@ -57,34 +59,39 @@ export class AuthState {
 
   @Selector()
   static token(state: LoginResponseDto): string | null | undefined {
-    return state.token;
+    return state.user?.token;
   }
 
   @Selector()
   static isAuthenticated(state: LoginResponseDto): boolean {
-    return !!state.token;
+    return !!state.user?.token;
   }
 
-  // @Selector()
-  // static userRole(state: LoginResponseDto): string {
-  //   return state.role;
-  // }
+  @Selector()
+  static userRole(state: LoginResponseDto): Role | undefined {
+    return state.user?.role;
+  }
 
   @Selector()
-  static userDetails(state: UserModel): any {
-    return {
-      name: state?.name,
-      role: state?.role,
-      mobile: state?.mobile,
-      email: state?.email,
-      userId: state?.userId,
-      roleId: state?.roleId,
-      token: state?.token,
-      addressOne: state?.addressOne,
-      addressTwo: state?.addressTwo,
-      member: state?.member,
-      trainee: state?.trainee
+  static userId(state: LoginResponseDto): number | undefined {
+    return state.user?.userId;
+  }
 
+  @Selector()
+  static userDetails(state: LoginResponseDto): any {
+    return {
+      // name: state?.name,
+      // role: state?.role,
+      // mobile: state?.mobile,
+      // // email: state?.email,
+      // userId: state?.userId,
+      // roleId: state?.roleId,
+      // token: state?.token,
+      // addressOne: state?.addressOne,
+      // addressTwo: state?.addressTwo,
+      user: state.user,
+      member: state.member,
+      trainee: state.traineeList
     };
   }
 
@@ -97,24 +104,25 @@ export class AuthState {
         tap((result: LoginResponseDto) => {
           console.log('calling auth state', result)
           ctx.patchState({
-            name: result.name,
-            role: result.role,
-            email: result.email,
-            mobile: result.mobile,
-            token: result.token,
-            roleId: result.roleId,
-            userId: result.userId,
-            addressOne: result.addressOne,
-            addressTwo: result.addressTwo,
+            // name: result.name,
+            // role: result.role,
+            // email: result.email,
+            // mobile: result.mobile,
+            // token: result.token,
+            // roleId: result.roleId,
+            // userId: result.userId,
+            // addressOne: result.addressOne,
+            // addressTwo: result.addressTwo,
+            user: result.user,
             member: result.member,
-            trainee: result.trainee,
+            traineeList: result.traineeList,
           });
         })
       );
   }
 
   @Action(Logout)
-  logout(ctx: StateContext<UserModel>) {
+  logout(ctx: StateContext<LoginResponseDto>) {
     ctx.setState({
       ...defaults
     });
@@ -134,10 +142,10 @@ export class AuthState {
   ) {
     console.log('onLoginSuccess, navigating to /dashboard');
     ctx.patchState({
-      token: payload.token,
-      userId: payload.userId || 0,
-      role: payload.role,
-      name: payload.name,
+      // user: payload.user?.token,
+      // userId: payload.userId || 0,
+      // role: payload.role,
+      // name: payload.name,
       // isSuperUser: payload.jwt.isSuper,
       // refreshToken: payload.jwt.refreshToken,
       // isLoading: false,

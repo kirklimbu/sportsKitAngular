@@ -4,5 +4,6 @@ export interface IMemberPayment {
     memberId: number
     paymentDate: string
     amount: number
+    hasNewPayment: boolean;
 
 }

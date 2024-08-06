@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IMember } from '../models/member.model';
 import { IMemberPayment } from '../models/member-payment';
+import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,9 +38,16 @@ export class MemberService {
 
   // payment section
 
-  getPaymentFormValues(id: number): Observable<IMemberPayment[]> {
+  getPaymentFormValues(payment: any): Observable<IMemberPayment[]> {
+    console.log('pay form', payment);
+
     return this.http.get<IMemberPayment[]>(
-      `${this.apiUrl}auth/member/payment/form?memberId=${id}`
+      `${this.apiUrl}auth/member/payment/form?memberId=${payment.id}&hasNewPayment=${payment.paymentType}`
     );
+  }
+
+  savePayment(payment: any): Observable<any> {
+    console.log('saving memeber', payment);
+    return this.http.post<CustomResponse>(`${this.apiUrl}auth/member/payment/save`, payment, {});
   }
 }

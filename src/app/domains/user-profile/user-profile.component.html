@@ -1,16 +1,25 @@
 <ng-container>
+    @if ((userProfile$|async);as userProfile){
+
     <p class="title" style=" margin-bottom: 24px;">User Profile</p>
-    <nz-descriptions [nzColumn]="2" nzTitle="Personal">
-        <nz-descriptions-item nzTitle="Full Name" [nzSpan]="1">{{userProfile.name|titlecase}}</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Mobile" [nzSpan]="1">{{userProfile.mobile}}</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Address"
-            [nzSpan]="1">{{userProfile.addressOne}}/{{userProfile.addressTwo}}</nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Email" [nzSpan]="1">{{userProfile.email}}</nz-descriptions-item>
+    <nz-descriptions [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 } " nzTitle="Personal">
+        <nz-descriptions-item nzTitle="Full Name"
+            [nzSpan]="1">{{userProfile?.user?.name|titlecase}}</nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Mobile" [nzSpan]="1">{{userProfile?.user?.mobile}}</nz-descriptions-item>
+        <!-- <nz-descriptions-item nzTitle="Address"
+                [nzSpan]="1">{{userProfile.addressOne}}/{{userProfile.addressTwo}}
+            </nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Email" [nzSpan]="1">{{userProfile.email}}</nz-descriptions-item> -->
 
     </nz-descriptions>
     @if(userProfile.member){
     <nz-divider></nz-divider>
-    <nz-descriptions [nzColumn]="2" nzTitle="Member Details">
+    <nz-descriptions [nzExtra]="memberButtons" [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
+        nzTitle="Member Details">
+        <nz-descriptions-item nzTitle="Profile Pic" [nzSpan]="1">
+            <nz-avatar nzIcon="user" [nzSrc]="userProfile.member.profilePic"></nz-avatar>
+            <nz-space [nzSize]="12">
+            </nz-space> </nz-descriptions-item>
         <nz-descriptions-item nzTitle="Membership Type"
             [nzSpan]="1">{{userProfile.member.memberShip}}</nz-descriptions-item>
         <nz-descriptions-item nzTitle="D.O.B" [nzSpan]="1">{{userProfile.member.dob}}</nz-descriptions-item>
@@ -23,15 +32,43 @@
     </nz-descriptions>
     }
 
-    @if(userProfile.trainee){
+    @if(userProfile.traineeList; as trainee){
+
+    @for(item of trainee; track $index) {
 
     <nz-divider></nz-divider>
-    <nz-descriptions [nzColumn]="2" nzTitle="Contacts">
+    <nz-descriptions [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }" nzTitle="Contacts">
         <nz-descriptions-item nzTitle="Email" [nzSpan]="1">AntDesign&#64;example.com</nz-descriptions-item>
         <nz-descriptions-item nzTitle="Phone Number" [nzSpan]="1">+86 181 0000 0000</nz-descriptions-item>
         <nz-descriptions-item nzTitle="Github" [nzSpan]="2">
             <a href="https://github.com/NG-ZORRO/ng-zorro-antd" target="_blank">github.com/NG-ZORRO/ng-zorro-antd</a>
         </nz-descriptions-item>
     </nz-descriptions>
+    }
+    }
+
+
+    <ng-template #memberButtons>
+        @if (userRole==='Admin') {
+        <nz-radio-group>
+            <label title="Edit Details" nz-radio-button nzValue="large">
+                <a (click)="onEdit(userProfile.member?.memberId)"><span nz-icon nzType="edit" nzTheme="outline"></span>
+                    Details</a>
+            </label>
+            <label title="Add Payment" nz-radio-button nzValue="default"><a
+                    (click)="onMakePayment(userProfile.member?.memberId)"><span nz-icon nzType="plus"
+                        nzTheme="outline"></span>
+                    Payment</a></label>
+            <label title="Edit Payment" nz-radio-button nzValue="small"><a
+                    (click)="onEditPayment(userProfile.member?.memberId)"><span nz-icon nzType="edit"
+                        nzTheme="outline"></span>
+                    Payment</a></label>
+            <label title="Payment History" nz-radio-button nzValue="small"><a
+                    (click)="onViewPaymentHistory(userProfile.member?.memberId)"> <span nz-icon nzType="history"
+                        nzTheme="outline"></span>
+                    History</a></label>
+        </nz-radio-group>
+        }
+    </ng-template>
     }
 </ng-container>

@@ -20,6 +20,7 @@ import { ErrorInterceptor } from './shared/util-auth/guards/interceptors/error.i
 // import { LoaderInterceptor } from './shared/util-auth/guards/interceptors/loader.interceptor';
 import { NgxsReduxDevtoolsPlugin, withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
 import { Auth } from './domains/auth/login/state/login.actions';
+import { LoaderInterceptor } from './shared/util-auth/guards/interceptors/loader.interceptor';
 
 
 registerLocaleData(en);
@@ -93,11 +94,11 @@ export const appConfig: ApplicationConfig = {
       useClass: ErrorInterceptor,
       multi: true,
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: LoaderInterceptor,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
+      multi: true,
+    },
   ],
 
 };

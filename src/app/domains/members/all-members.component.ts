@@ -20,7 +20,10 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { NzTagModule } from 'ng-zorro-antd/tag';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+
 
 interface DataItem {
   name: string;
@@ -31,6 +34,7 @@ interface DataItem {
   selector: 'app-all-members',
   standalone: true,
   imports: [
+    RouterModule,
     CommonModule,
     FormsModule,
     NzTableModule,
@@ -39,6 +43,8 @@ interface DataItem {
     NzButtonModule,
     NzIconModule,
     NzTagModule,
+    NzPageHeaderModule,
+    NzSpaceModule
   ],
   templateUrl: './all-members.component.html',
   styleUrl: './all-members.component.scss',
@@ -52,16 +58,16 @@ export class AllMembersComponent implements OnInit, OnChanges {
   private readonly router = inject(Router);
 
   ngOnInit(): void {
-    if (!this.data$) this.fetchMembers();
+    this.fetchMembers();
   }
 
   ngOnChanges(): void {
-    console.log('data', this.data$);
-    if (!this.data$) this.fetchMembers();
+    // console.log('data', this.data$);
+    // if (!this.data$) this.fetchMembers();
 
     // eslint-disable-next-line no-self-assign
-    this.data$ = this.data$;
-    this.cd.detectChanges();
+    // this.data$ = this.data$;
+    // this.cd.detectChanges();
   }
 
   private fetchMembers(): void {
@@ -73,8 +79,13 @@ export class AllMembersComponent implements OnInit, OnChanges {
     // this.router.navigate(['/auth/question-add'], { queryParams: { setMasterId: this.form.controls['setMasterId'].value } })
   }
 
-  onEdit(id: number) {
+  onEdit(id?: number) {
     this.router.navigate(['/admin/add-member'], { queryParams: { id: id } })
+  }
+
+
+  onViewMore(id: number) {
+    this.router.navigate(['/admin/user-profile'], { queryParams: { memberId: id } })
   }
   // reset(): void {
   //   this.searchValue = '';

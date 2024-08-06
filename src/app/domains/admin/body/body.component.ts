@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
@@ -27,16 +27,21 @@ import { UserDetailsService } from 'src/app/shared/util-common/userDetails.servi
     NzToolTipModule
   ]
 })
-export class BodyComponent {
-  isCollapsed = false;
+export class BodyComponent implements OnInit {
 
+  isCollapsed = false;
+  userRole!: Role
   @Input() collapsed = false;
   @Input() screenWidth = 0;
 
   private router = inject(Router)
   private store = inject(Store)
   private userDetailService = inject(UserDetailsService)
+  role!: Role;
 
+  ngOnInit(): void {
+    this.checkUser()
+  }
 
   getBodyClass(): string {
     let styleClass = '';
@@ -48,24 +53,24 @@ export class BodyComponent {
     return styleClass;
   }
 
-  checkUser(): Role {
-    const userRole: Role = this.userDetailService.getUserRole();
-    return userRole
+  checkUser(): void {
+    this.userRole = this.userDetailService.getUserRole();
 
+    console.log('role', this.userRole);
 
   }
 
-  onViewProfile() {
-    this.checkUser()
+  // onViewProfile() {
+  //   this.checkUser()
 
-    const userRole: Role = this.userDetailService.getUserRole();
+  //   const userRole: Role = this.userDetailService.getUserRole();
 
-    if (userRole === Role.ADMIN) {
-      this.router.navigate(['admin/profile'])
-    } else {
-      this.router.navigate(['admin/user-profile'])
-    }
-  }
+  //   // if (this.userRole === Role.ADMIN) {
+  //   //   this.router.navigate(['admin/profile'])
+  //   // } else {
+  //   //   this.router.navigate(['admin/user-profile'])
+  //   // }
+  // }
 
   onLogout() {
     localStorage.clear();

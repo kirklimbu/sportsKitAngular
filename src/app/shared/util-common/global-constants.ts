@@ -7,7 +7,7 @@ export class GlobalConstants {
     public static facebook = "https://www.facebook.com/profile.php?id=61557909320358";
     public static instagram = "example@gmail.com";
     public static HEAD_OFFICE = "Damak-7, Jhapa, Nepal";
-    public static HEAD_OFFICE_PHONE = "9812345678";
+    public static HEAD_OFFICE_PHONE = "9852626222";
     public static BRANCH_ADDRESS = "example@gmail.com";
     public static BRANCH_PHONE = "example@gmail.com";
     public static allowedImageTypes = ['image/png', 'image/jpeg', 'image/jpg'];

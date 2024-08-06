@@ -1,20 +1,9 @@
 <section>
   <app-slider [bannerData]="bannerData" />
 
-  <app-about-us
-    class="animate__animated animate__slideInDown animate__delay-1s"
-    [data]="aboutUsData"
-  />
-  <app-coaches
-    class="animate__animated animate__slideInDown animate__delay-1s"
-    [data]="coachData"
-  />
-  <img
-    src="/assets/images/3.jpg"
-    height="400"
-    width="100%"
-    alt="slider image"
-  />
+  <app-about-us class="animate__animated animate__slideInDown animate__delay-1s" [data]="aboutUsData" />
+  <app-coaches class="animate__animated animate__slideInDown animate__delay-1s" [data]="coachData" />
+  <img src="/assets/images/3.jpg" height="400" width="100%" alt="slider image" />
 
   <app-members [data]="memberData" />
   <app-events [data]="eventData" />

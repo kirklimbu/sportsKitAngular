@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Store } from '@ngxs/store';
 
 import { AuthState } from 'src/app/domains/auth/login/state/login.state';
-import { Role, UserModel } from '../util-auth/models/user.model';
+import { LoginResponseDto, Role, UserModel } from '../util-auth/models/user.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -29,10 +29,11 @@ export class UserDetailsService {
 
   getUserRole(): Role {
     const user = this.store.selectSnapshot(AuthState.userDetails);
-    return user.role;
+    return user.user.role;
   }
 
-  getUserDetails(): UserModel {
+
+  getUserDetails(): LoginResponseDto {
     const user = this.store.selectSnapshot(AuthState.userDetails);
     return user;
   }
