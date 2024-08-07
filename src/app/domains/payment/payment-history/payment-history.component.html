@@ -1,0 +1,64 @@
+<div class="table-container">
+
+    <div class="sub-title">
+        <span>Payment
+        </span>
+    </div>
+    <div class="title text-bolder">
+        <h3>
+            Payment History
+        </h3>
+    </div>
+    @if(paymentHistory$|async;as data ){
+
+    <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
+        [nzScroll]="{ x: '600px', y: '635px' }">
+        <thead>
+            <tr>
+
+                <th>
+                    Payment Date
+                </th>
+                <th>Amount</th>
+
+                <th>Type</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @for (member of nzTable.data; track $index) {
+
+            <tr>
+
+                <td>{{ member.paymentDate }}</td>
+                <td>
+
+                    {{ member.amount }}
+
+                </td>
+
+                <td>
+                    {{member.payerType}}
+                </td>
+
+                <!-- <td>
+                    <div class="action-buttons">
+
+                        <button nzTooltipTitle="View More" nzTooltipPlacement="topLeft" nz-tooltip nz-button
+                            nzType="primary" nzGhost (click)="onViewMore(member.memberId)">
+                            <span nz-icon nzType="eye"></span>
+                        </button>
+                        <button nzTooltipTitle="Delete" nzTooltipPlacement="topLeft" nz-tooltip nz-button nzDanger><span
+                                nz-icon nzType="delete">
+                            </span>
+                        </button>
+
+                    </div>
+                </td> -->
+            </tr>
+            }
+        </tbody>
+    </nz-table>
+    }
+
+</div>

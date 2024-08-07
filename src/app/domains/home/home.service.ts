@@ -22,9 +22,9 @@ export class HomeService {
   }
   // protected state: BehaviorSubject<Home> | undefined;
 
-  getHomeContents(deviceId: string, userId: string) {
-    if (userId == 'null' || userId == 'undefined' || userId == undefined)
-      userId = '0';
+  getHomeContents(deviceId: string, userId: number | undefined) {
+    if (userId == null || userId == undefined)
+      userId = 0;
 
     const params = {
       deviceId: deviceId,

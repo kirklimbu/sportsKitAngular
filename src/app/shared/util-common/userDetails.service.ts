@@ -20,16 +20,18 @@ export class UserDetailsService {
   }
 
   getUserId() {
-    const userDetail = this.store.selectSnapshot(AuthState.userDetails);
-    if (userDetail.userId == 'null' || userDetail.userId == 'undefined' || userDetail.userId == undefined) {
+    const userId = this.store.selectSnapshot(AuthState.userId);
+    console.log('user details service', userId);
+
+    if (userId === null || userId == undefined) {
       return '0';
     }
-    return userDetail.userId;
+    return userId;
   }
 
-  getUserRole(): Role {
-    const user = this.store.selectSnapshot(AuthState.userDetails);
-    return user.user.role;
+  getUserRole(): Role | undefined {
+    const role = this.store.selectSnapshot(AuthState.userRole);
+    return role;
   }
 
 

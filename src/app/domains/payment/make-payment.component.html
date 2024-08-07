@@ -1,0 +1,89 @@
+<div class="admin-members-section">
+
+    <section class="memberentry-section">
+        <div>
+            <div class="sub-title">
+                <span>{{mode==='add'?"New":""}} payment
+                </span>
+            </div>
+            <div class="title text-bolder">
+                <h3>
+                    {{mode==='add'?"Save":"Update"}} payment
+                </h3>
+            </div>
+        </div>
+
+        <form class="form" [formGroup]="form">
+            <!-- <div class="flex">
+                <span class="required">Profile pic</span>
+                <label for="">
+                    <div class="clearfix">
+                    <nz-upload [nzAction]="''" nzListType="picture-card" [(nzFileList)]="fileList"
+                            [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview"
+                            (nzChange)="handleChange($event)">
+                            <div>
+                                <span nz-icon nzType="plus"></span>
+                                <div style="margin-top: 8px">Upload</div>
+                            </div>
+                        </nz-upload>
+                        <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+                            (nzOnCancel)="previewVisible = false">
+                            <ng-template #modalContent>
+                                <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
+                            </ng-template>
+                        </nz-modal>
+                    </div>
+                </label>
+            </div> -->
+            <div class="flex">
+
+                <span class="required">Amount</span>
+                <label>
+                    <input class="input" type="text" placeholder="" autocomplete="off" formControlName="amount">
+                </label>
+                <label>
+                    <span class="required" for="dob">Date</span>
+                    <ne-datepicker [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event)"
+                        (dateInAD)="updateEnglishDate($event)">
+                    </ne-datepicker>
+                </label>
+            </div>
+
+            <!-- <div class="flex">
+
+                <span class="required">Name</span>
+                <label>
+                    <input class="input" type="text" placeholder="" autocomplete="off" formControlName="name">
+                </label>
+                <label>
+                    <span class="required" for="dob">D.O.B</span>
+                    <ne-datepicker [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event)"
+                        (dateInAD)="updateEnglishDate($event)">
+                    </ne-datepicker>
+                </label>
+            </div> -->
+
+            <!-- <div class="flex">
+                <span class="required">Mobile1</span>
+                <label>
+                    <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile1">
+                </label>
+            </div> -->
+
+            <!-- <div class="flex">
+                <span class="required">Mobile2</span>
+                <label>
+                    <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile2">
+                </label>
+
+            </div> -->
+
+            <button class="submit" (click)="onSave()">{{mode==='add'?"Save":"Update"}}</button>
+
+        </form>
+    </section>
+    <!-- 
+    <section class="members-list-section">
+        <app-all-members [data$]="memberList$" />
+    </section> -->
+</div>

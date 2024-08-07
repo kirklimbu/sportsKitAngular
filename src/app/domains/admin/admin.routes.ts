@@ -8,6 +8,8 @@ import { FEATURE_EVENTS_ROUTES } from '../events/events.routes';
 import { OrganizationComponent } from './organization/organization.component';
 import { AddOrganizationComponent } from './organization/add-organization/add-organization.component';
 import { FEATURE_USERS_ROUTES } from '../user/users.routes';
+import { FEATURE_PAYMENT_ROUTES } from '../payment/payment.routes';
+import { FEATURE_TRAINING_ROUTES } from '../training/training.routes';
 
 // import { DashboardComponent } from '../dashboard/dashboard.component';
 // import { InquiryComponent } from '../inquiry/inquiry.component';
@@ -37,6 +39,16 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
     },
     path: 'events',
     loadChildren: () => import('../events').then((m) => FEATURE_EVENTS_ROUTES),
+  },
+  {
+
+    path: 'payment',
+    loadChildren: () => import('../payment').then((m) => FEATURE_PAYMENT_ROUTES),
+  },
+  {
+
+    path: 'training',
+    loadChildren: () => import('../training').then((m) => FEATURE_TRAINING_ROUTES),
   },
   {
     canActivate: [hasRoleGuard],

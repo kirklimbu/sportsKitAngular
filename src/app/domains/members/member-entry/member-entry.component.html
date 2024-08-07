@@ -15,7 +15,7 @@
 
         <form class="form" [formGroup]="form">
             <div class="flex">
-                <span class="required">Profile pic</span>
+                <span class="not-compulsory">Profile pic</span>
                 <label for="">
                     <div class="clearfix">
                         <nz-upload [nzAction]="''" nzListType="picture-card" [(nzFileList)]="fileList"
@@ -58,7 +58,7 @@
             </div>
 
             <div class="flex">
-                <span class="required">Mobile2</span>
+                <span class="not-compulsory">Mobile2</span>
                 <label>
                     <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile2">
                 </label>
@@ -80,8 +80,5 @@
 
         </form>
     </section>
-    <!-- 
-    <section class="members-list-section">
-        <app-all-members [data$]="memberList$" />
-    </section> -->
+
 </div>

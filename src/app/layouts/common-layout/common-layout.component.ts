@@ -109,7 +109,7 @@ export class CommonLayoutComponent implements OnInit {
 
 
     private fetchHomeContents() {
-        this.homeService.getHomeContents('0', '0')
+        this.homeService.getHomeContents('0', 0)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((res: any) => {
                 this.headerTopData = res.organization

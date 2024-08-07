@@ -1,0 +1,81 @@
+<div class="container">
+    <section class="memberentry-section">
+        <div>
+            <div class="sub-title">
+                <span>{{mode==='add'?"New":""}} training
+                </span>
+            </div>
+            <div class="title text-bolder">
+                <h3>
+                    {{mode==='add'?"Save":"Update"}} training
+                </h3>
+            </div>
+        </div>
+
+        <form class="form" [formGroup]="form">
+
+            <div class="flex">
+                <label>
+                    <span class="required">Title</span>
+                    <input class="input" type="text" placeholder="Under 12" autocomplete="off"
+                        formControlName="title" />
+                </label>
+                <label>
+                    <span class="required">Trainer</span>
+                    <input class="input" type="text" placeholder="Mirak Lawati" autocomplete="off"
+                        formControlName="trainer" />
+                </label>
+
+            </div>
+
+            <div class="flex">
+                <label>
+                    <span class="required" for="dob">Start Date</span>
+                    <ne-datepicker language="en" [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event,'start')"
+                        (dateInAD)="updateEnglishDate($event,'start')">
+                    </ne-datepicker>
+                </label>
+                <label>
+                    <span class="required" for="dob">End Date</span>
+                    <ne-datepicker language="en" [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event,'end')"
+                        (dateInAD)="updateEnglishDate($event,'end')">
+                    </ne-datepicker>
+                </label>
+            </div>
+
+            <div class="flex">
+                <label>
+                    <span class="not-compulsory">From Time</span>
+                    <input class="input" type="time" placeholder="" autocomplete="off" formControlName="fromTime" />
+                </label>
+                <label>
+                    <span class="not-compulsory">To time</span>
+                    <input class="input" type="time" placeholder="" autocomplete="off" formControlName="toTime" />
+                </label>
+            </div>
+            <div class="flex">
+                <label for="MemberType">
+                    <span class="required">Training type</span>
+
+                    <nz-select nzShowSearch nzPlaceHolder="Select type " formControlName="typeId">
+                        @for (item of trainingType; track $index) {
+                        <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        }
+
+                    </nz-select>
+                </label>
+                <label>
+                    <span class="not-compulsory">Fee</span>
+                    <input class="input" type="number" min="0" max="1000000" placeholder="" autocomplete="off"
+                        formControlName="fee" />
+                </label>
+            </div>
+
+            <div class="flex">
+                <label nz-checkbox formControlName="hasStopReg"><span>Stop Registration</span></label>
+            </div>
+            <button class="submit" (click)="onSave()">{{mode==='add'?"Save":"Update"}}</button>
+        </form>
+    </section>
+
+</div>

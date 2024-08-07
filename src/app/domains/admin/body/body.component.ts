@@ -30,7 +30,7 @@ import { UserDetailsService } from 'src/app/shared/util-common/userDetails.servi
 export class BodyComponent implements OnInit {
 
   isCollapsed = false;
-  userRole!: Role
+  userRole!: Role | undefined;
   @Input() collapsed = false;
   @Input() screenWidth = 0;
 

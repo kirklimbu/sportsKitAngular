@@ -99,6 +99,12 @@ span[nz-typography]+span[nz-typography] {
   color: $red;
 }
 
+.required,
+.not-compulsory {
+  font-size: 12px;
+  font-weight: bold;
+}
+
 .optional {
   content: ' ';
   color: $black;

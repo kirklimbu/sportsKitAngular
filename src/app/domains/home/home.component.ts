@@ -170,8 +170,8 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  private fetchUserId(): string {
-    const userDetail = this.store.selectSnapshot(AuthState.userDetails);
-    return userDetail.userId;
+  private fetchUserId(): number | undefined {
+    const userId = this.store.selectSnapshot(AuthState.userId);
+    return userId;
   }
 }

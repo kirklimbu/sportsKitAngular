@@ -1,0 +1,90 @@
+<div class="table-container">
+
+    <div class="sub-title">
+        <span> Training
+        </span>
+    </div>
+    <div class="title text-bolder">
+        <h3>
+            All Trainings
+        </h3>
+    </div>
+
+
+    @if(data$|async;as data ){
+
+    <div class="site-page-header-ghost-wrapper">
+        <nz-page-header [nzGhost]="false">
+            <!-- <nz-page-header-title>Title</nz-page-header-title> -->
+            <!-- <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle> -->
+            <nz-page-header-extra>
+                <nz-space>
+                    <!-- <button *nzSpaceItem nz-button>Operation</button> -->
+                    <!-- <button *nzSpaceItem nz-button>Operation</button> -->
+                    <button *nzSpaceItem nz-button nzType="primary" routerLink="/admin/training/add-training"><span
+                            nz-icon nzType="plus" nzTheme="outline"></span>Add</button>
+                </nz-space>
+            </nz-page-header-extra>
+
+        </nz-page-header>
+    </div>
+
+    <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
+        [nzScroll]="{ x: '600px', y: '635px' }">
+        <thead>
+            <tr>
+
+                <th>
+                    Title
+                </th>
+                <th>Trainer</th>
+                <th>Type</th>
+                <th>Duration</th>
+                <th>Time</th>
+                <th>Fee</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @for (training of nzTable.data; track $index) {
+
+            <tr>
+
+                <td>{{ training.title |titlecase }}</td>
+                <td>
+
+                    {{ training.trainer|titlecase }}
+                </td>
+                <td>
+                    {{training.type}}
+                </td>
+
+                <td>{{training.startDate}}-{{training.endDate}}</td>
+                <td>{{training.fromTime}}-{{training.toTime}}</td>
+                <td>
+                    {{training.fee}}
+                </td>
+
+
+                <td>
+                    <div class="action-buttons">
+
+                        <button nzTooltipTitle="View More" nzTooltipPlacement="topLeft" nz-tooltip nz-button
+                            nzType="primary" nzGhost (click)="onViewMore(training.trainingMasterId)">
+                            <span nz-icon nzType="eye"></span>
+                        </button>
+                        <button nzTooltipTitle="Edit " nzTooltipPlacement="topLeft" nz-tooltip nz-button><span nz-icon
+                                nzType="edit" (click)="onEdit(training.trainingMasterId)">
+                            </span>
+                        </button>
+
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </nz-table>
+    }
+
+</div>

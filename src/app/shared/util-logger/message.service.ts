@@ -13,8 +13,8 @@ export class MessageService {
     private message = inject(NzMessageService)
 
 
-    createMessage(type: string, msg: string, duration?: number | 5_000): void {
-        this.message.create(type, `${msg}`, { nzDuration: duration });
+    createMessage(type: string, msg: string, duration?: number): void {
+        this.message.create(type, `${msg}`, { nzDuration: duration || 5_000 });
     }
 }
 

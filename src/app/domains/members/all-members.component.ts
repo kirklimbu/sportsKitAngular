@@ -50,8 +50,8 @@ interface DataItem {
   styleUrl: './all-members.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AllMembersComponent implements OnInit, OnChanges {
-  @Input() data$!: Observable<IMember[]>;
+export class AllMembersComponent implements OnInit {
+  data$!: Observable<IMember[]>;
 
   private readonly memberService = inject(MemberService);
   private readonly cd = inject(ChangeDetectorRef);
@@ -61,39 +61,15 @@ export class AllMembersComponent implements OnInit, OnChanges {
     this.fetchMembers();
   }
 
-  ngOnChanges(): void {
-    // console.log('data', this.data$);
-    // if (!this.data$) this.fetchMembers();
-
-    // eslint-disable-next-line no-self-assign
-    // this.data$ = this.data$;
-    // this.cd.detectChanges();
-  }
 
   private fetchMembers(): void {
     this.data$ = this.memberService.getAllMembers();
   }
 
-  onAdd() {
-    // if (!this.form.controls['setMasterId'].value) return this.messageService.createMessage('error', 'Set is missing. Please select set.')
-    // this.router.navigate(['/auth/question-add'], { queryParams: { setMasterId: this.form.controls['setMasterId'].value } })
-  }
-
-  onEdit(id?: number) {
-    this.router.navigate(['/admin/add-member'], { queryParams: { id: id } })
-  }
 
 
   onViewMore(id: number) {
     this.router.navigate(['/admin/user-profile'], { queryParams: { memberId: id } })
   }
-  // reset(): void {
-  //   this.searchValue = '';
-  //   this.search();
-  // }
 
-  // search(): void {
-  //   this.visible = false;
-  //   this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
-  // }
 }

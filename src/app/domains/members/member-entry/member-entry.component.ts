@@ -11,7 +11,6 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 import {
   FormGroup,
   FormBuilder,
@@ -20,10 +19,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { Observable, map, of, switchMap, takeUntil } from 'rxjs';
-import { AuthService } from 'src/app/shared/util-auth/services/auth-http/auth.service';
-import { ConfirmedValidator } from 'src/app/shared/util-logger/confirm-password.validator';
-import { UrlService } from 'src/app/shared/util-logger/url.service';
+import { Observable, map, switchMap } from 'rxjs';
 import {
   NzUploadChangeParam,
   NzUploadFile,
@@ -93,19 +89,16 @@ export class MemberEntryComponent implements OnInit {
   private readonly unsubscribe$ = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
   private readonly cd = inject(ChangeDetectorRef);
+  private readonly fb = inject(FormBuilder);
+  private readonly messageService = inject(MessageService);
 
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    public urlService: UrlService,
-    public messageService: MessageService
-  ) { }
 
   ngOnInit(): void {
     this.initForm();
     this.checkFormStatus()
   }
+  // 
 
   // convenience getter for easy access to form fields
   get f() {
@@ -118,8 +111,8 @@ export class MemberEntryComponent implements OnInit {
       name: ['', [Validators.required]],
       dob: ['', [Validators.required]],
       memberShipTypeId: ['', [Validators.required]],
+      mobile1: ['', [Validators.required]],
       file: [],
-      mobile1: [],
       mobile2: [],
     }));
   }
@@ -132,26 +125,24 @@ export class MemberEntryComponent implements OnInit {
     );
     this.memberId$.pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
-        console.log('fomn res', _res);
-        if (_res > 0) {
-          this.mode = 'edit';
-          this.edit();
-        }
+        if (_res > 0) this.mode = 'edit';
+        this.edit();
       });
   }
+
   handleChange(info: NzUploadChangeParam): void {
-    console.log('set file', info);
-    if (!info.fileList[0]) {
-      return this.messageService.createMessage('error', 'Please select file.');
-    }
-    // this.fileList.push(info.fileList[0])
+
+    // if (!info.fileList[0]) {
+    //   return this.messageService.createMessage('error', 'Please select file.');
+    // }
+
     this.form.patchValue({
       file: info?.['file']?.originFileObj,
     });
   }
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {
-    console.log('sel file', file);
+
     if (!file.url && !file['preview']) {
       file['preview'] = await getBase64(file.originFileObj!);
     }
@@ -161,7 +152,6 @@ export class MemberEntryComponent implements OnInit {
 
   // nepali date picker
   updateNepaliDate($event: string) {
-    console.log('updaet nepali', $event);
     this.form.patchValue({ dob: $event });
   }
   updateEnglishDate($event: string) {
@@ -173,14 +163,11 @@ export class MemberEntryComponent implements OnInit {
 
   // save member
   onSave(): void {
-    this.hasError = false;
-    console.log('saving form values', this.form.value);
 
     this.memberService
       .saveMember(this.form.value)
+      .pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((user: IMember[]) => {
-        console.log('member', user);
-
         this.messageService.createMessage(
           'success',
           'Member added successfully.'
@@ -188,8 +175,7 @@ export class MemberEntryComponent implements OnInit {
         this.form.reset();
         this.previewImage = '';
         this.date = new Date();
-        this.memberList$ = of(user);
-        this.cd.detectChanges()
+        location.reload();
       });
   }
 
@@ -219,9 +205,5 @@ export class MemberEntryComponent implements OnInit {
       });
   }
 
-  onCancel(): void {
-    console.log('cancel');
-    this.router.navigate(['/home']);
-  }
 }
 

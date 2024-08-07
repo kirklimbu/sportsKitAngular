@@ -1,51 +1,56 @@
-<div id="member" class="content-container animate__animated animate__fadeInLeft animate__delay-1s ">
-    <div class="message-section">
-        <div class="sub-title">
-            <span>Members
-            </span>
+<div class="concentric-rings">
+    <div id="member" class="content-container animate__animated animate__fadeInLeft animate__delay-1s ">
+        <div class="message-section">
+            <div class="sub-title">
+                <span>Members
+                </span>
+            </div>
+            <div class="title text-bolder">
+                <span>
+                    Members
+                </span>
+            </div>
+            <div class="description text-muted">
+                <p>
+                    Namuna Badminton Academy offers various membership types to suit different needs. Yearly members
+                    enjoy
+                    access to all
+                    facilities and training programs for one year, with the option to renew annually. Lifetime members
+                    receive a
+                    one-time,
+                    exclusive membership that grants them permanent access to all academy benefits and services.
+                </p>
+                <button nz-button nzType="default" nzShape="round" (click)="scrollTo('#contact-us')">
+                    <a>View more</a>
+                </button>
+
+            </div>
         </div>
-        <div class="title text-bolder">
-            <span>
-                Members
-            </span>
-        </div>
-        <div class="description text-muted">
-            <p>
-                Namuna Badminton Academy offers various membership types to suit different needs. Yearly members enjoy
-                access to all
-                facilities and training programs for one year, with the option to renew annually. Lifetime members
-                receive a
-                one-time,
-                exclusive membership that grants them permanent access to all academy benefits and services.
-            </p>
-            <button nz-button nzType="default" nzShape="round" (click)="scrollTo('#contact-us')">
-                <a>Join us</a>
-            </button>
+
+        <div class="image-section">
+
+            <div class="members">
+                <h2>{{data?.lifeTimeMemberCount}}</h2>
+                <p>Lifetime Members</p>
+            </div>
+            <div class="members">
+                <h2>{{data?.yearlyMemberCount}}</h2>
+                <p>Yearly Members</p>
+            </div>
+            <div class="members">
+                <h2>{{data?.quarterlyMemberCount}}</h2>
+                <p>Quarterly Members</p>
+            </div>
+            <div class="members">
+                <h2>{{data?.monthlyMemberCount}}</h2>
+
+                <p>Monthly Members</p>
+            </div>
 
         </div>
+
+
+
+
     </div>
-    <div class="image-section">
-        <div class="members">
-            <h3>{{data?.lifeTimeMemberCount}}</h3>
-            <p>Lifetime Members</p>
-        </div>
-        <div class="members">
-            <h3>{{data?.yearlyMemberCount}}</h3>
-            <p>Yearly Members</p>
-        </div>
-        <div class="members">
-            <h3>{{data?.quarterlyMemberCount}}</h3>
-            <p>Quarterly Members</p>
-        </div>
-        <div class="members">
-            <h3>{{data?.monthlyMemberCount}}</h3>
-
-            <p>Monthly Members</p>
-        </div>
-
-    </div>
-
-
-
-
 </div>

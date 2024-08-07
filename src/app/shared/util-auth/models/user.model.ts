@@ -37,6 +37,8 @@ export class UserModel {
   mobile?: string;
   role?: Role;
   token?: string;
+  address?: string;
+  email?: string;
   // member: any;
   // trainee: any;
 
@@ -53,7 +55,7 @@ export interface LoginResponseDto {
   // addressOne?: string;
   // addressTwo?: string;
   // deviceId?: string;]
-  user?: UserModel
+  user: UserModel
   member?: IMember
   traineeList: any
 }
@@ -63,8 +65,6 @@ export interface LoginResponseDto {
 export enum Role {
   SUPERADMIN = 'SuperAdmin',
   ADMIN = 'Admin',
-  WAITER = 'Waiter',
-  CUSTOMER = 'Customer',
-  USER = 'Normal User',
+  USER = 'User',
   NONE = "NONE"
 }

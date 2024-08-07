@@ -12,7 +12,15 @@ import { AuthService } from 'src/app/shared/util-auth/services/auth-http/auth.se
 const defaults: LoginResponseDto = {
   member: undefined,
   traineeList: undefined,
-  user: undefined,
+  user: {
+    token: '',
+    roleId: 0,
+    userId: 0,
+    name: '',
+    role: Role?.NONE,
+    mobile: '',
+
+  },
   // token: '',
   // roleId: 0,
   // userId: 0,
@@ -74,11 +82,11 @@ export class AuthState {
 
   @Selector()
   static userId(state: LoginResponseDto): number | undefined {
-    return state.user?.userId;
+    return state.user.userId;
   }
 
   @Selector()
-  static userDetails(state: LoginResponseDto): any {
+  static userDetails(state: LoginResponseDto): LoginResponseDto {
     return {
       // name: state?.name,
       // role: state?.role,
@@ -91,7 +99,7 @@ export class AuthState {
       // addressTwo: state?.addressTwo,
       user: state.user,
       member: state.member,
-      trainee: state.traineeList
+      traineeList: state.traineeList
     };
   }
 

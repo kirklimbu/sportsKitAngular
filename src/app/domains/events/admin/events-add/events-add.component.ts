@@ -258,9 +258,7 @@ export class EventsAddComponent implements OnInit {
           this.previewImage = '';
           this.date = new Date();
           this.event$ = of(_res);
-          // location.reload();
-          // this.router.navigate(['/auth/list-event']);
-          // scroll2Top();
+          location.reload();
           this.changeDetector.detectChanges();
         }
       });

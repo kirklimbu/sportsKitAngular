@@ -62,19 +62,19 @@
 
                 <td>
                     @switch (member.memberShip) {
-                    @case ('LIFE') {
-                    <nz-tag [nzColor]="'#2db7f5'">{{member.memberShip|titlecase}}</nz-tag>
+                    @case ('Life') {
+                    <nz-tag [nzColor]="'#ffc107'">{{member.memberShip|titlecase}}</nz-tag>
 
-                    }@case ('QUARTERLY') {
-                    <nz-tag [nzColor]="'#87d068'">{{member.memberShip|titlecase}}</nz-tag>
+                    }@case ('Quarterly') {
+                    <nz-tag [nzColor]="''">{{member.memberShip|titlecase}}</nz-tag>
 
-                    }@case ('MONTHLY') {
-                    <nz-tag [nzColor]="'#87d068'">{{member.memberShip|titlecase}}</nz-tag>
+                    }@case ('Monthly') {
+                    <nz-tag [nzColor]="'#3f87f5'">{{member.memberShip|titlecase}}</nz-tag>
 
                     }
                     <!-- ANNUAL -->
                     @default {
-                    <nz-tag [nzColor]="'#f50'">{{member.memberShip|titlecase}}</nz-tag>
+                    <nz-tag [nzColor]="'#87d068'">{{member.memberShip|titlecase}}</nz-tag>
                     }
                     }
                 </td>
@@ -86,10 +86,10 @@
                             nzType="primary" nzGhost (click)="onViewMore(member.memberId)">
                             <span nz-icon nzType="eye"></span>
                         </button>
-                        <button nzTooltipTitle="Delete" nzTooltipPlacement="topLeft" nz-tooltip nz-button nzDanger><span
+                        <!-- <button nzTooltipTitle="Delete" nzTooltipPlacement="topLeft" nz-tooltip nz-button nzDanger><span
                                 nz-icon nzType="delete">
                             </span>
-                        </button>
+                        </button> -->
 
                     </div>
                 </td>

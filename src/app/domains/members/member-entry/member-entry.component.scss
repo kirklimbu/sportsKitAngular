@@ -198,10 +198,12 @@ nz-select {
   }
 }
 
-.required {
+.required,
+.not-compulsory {
   font-size: 12px;
   font-weight: bold;
 }
+
 
 @media (width<=576px) {
   .memberentry-section {

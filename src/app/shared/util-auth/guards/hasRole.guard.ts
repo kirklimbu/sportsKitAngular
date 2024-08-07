@@ -7,9 +7,11 @@ import { UserDetailsService } from '../../util-common/userDetails.service';
 
 export const hasRoleGuard: CanActivateFn = (route, state) => {
     const router: Router = inject(Router);
-    const userRole: Role = inject(UserDetailsService).getUserRole();
+    const userRole: Role | undefined = inject(UserDetailsService).getUserRole();
 
     const expectedRoles: Role[] = route.data['roles'];
+    console.log('roles', userRole);
+    console.log('exp roles', expectedRoles);
 
     const hasRole: boolean = expectedRoles.some((role) => userRole === role);
 

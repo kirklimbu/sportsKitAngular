@@ -34,6 +34,8 @@ export class UsersService {
   }
 
   getUserById(query: any): Observable<LoginResponseDto> {
-    return this.http.get<LoginResponseDto>(`${this.apiUrl}auth/user/profile`);
+    console.log('quer', query);
+
+    return this.http.get<LoginResponseDto>(`${this.apiUrl}auth/user/profile`, { params: query });
   }
 }

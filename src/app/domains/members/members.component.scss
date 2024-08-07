@@ -47,15 +47,18 @@
     -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
 
     .members {
-        h3 {
+        h2 {
             font-weight: bolder;
             font-family: $font-primary;
+            font-size: 3rem;
+            margin-bottom: 0;
         }
 
         p {
-            font-weight: $font-weight-normal;
+            font-weight: $font-weight-light;
         }
     }
+
 
 }
 
@@ -92,6 +95,7 @@
         flex-wrap: wrap;
         padding: 3rem;
         justify-content: space-around;
+        border-radius: 1rem;
 
         .members {
             text-align: center;
@@ -127,18 +131,19 @@
 @media only screen and (min-width: 768px) {
     .content-container {
         display: flex;
-        gap: 2rem;
+        flex-direction: column;
+        // gap: 2rem;
         min-height: 600px;
         padding: 2rem 2rem;
 
         // background: rgb(233, 185, 98);
         .image-section {
             display: flex;
-            flex-direction: row;
             flex-wrap: wrap;
             padding: 0;
-            width: 500px;
-            margin-top: 2rem;
+            width: 100%;
+            // margin-top: 2rem;
+            border-radius: 1rem;
 
             .members {
                 text-align: center;
@@ -170,7 +175,8 @@
 @media (min-width: 992px) {
     .content-container {
         display: flex;
-        gap: 3rem;
+        flex-direction: column;
+        // gap: 3rem;
         min-height: 600px;
         padding: 2rem 7rem;
 
@@ -179,12 +185,12 @@
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-evenly;
-            padding: 4rem;
-            width: 500px;
-            height: 300px;
-            margin-top: 6rem;
-            gap: 2rem;
+            align-items: center;
+            // justify-content: space-evenly;
+            // padding: 4rem;
+            height: 250px;
+            // margin-top: 6rem;
+            // gap: 2rem;
 
             .members {
                 text-align: center;
@@ -227,3 +233,33 @@
 //     padding: 23%;
 //   }
 // }
+
+.concentric-rings {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-image:
+        radial-gradient(circle,
+            transparent 20%,
+            #fff 20%,
+            #fff 30%,
+            transparent 30%),
+        radial-gradient(circle,
+            transparent 40%,
+            #f7f7f7 40%,
+            #f7f7f7 50%,
+            transparent 50%),
+        radial-gradient(circle,
+            transparent 60%,
+            #e5e5e5 60%,
+            #e5e5e5 70%,
+            transparent 70%),
+        radial-gradient(circle,
+            transparent 80%,
+            #d3d3d3 80%,
+            #d3d3d3 90%,
+            transparent 90%);
+    background-size: 100% 100%;
+    background-position: center;
+}

@@ -2,7 +2,7 @@ import { Routes } from "@angular/router";
 
 import { MembersComponent } from "./members.component";
 import { MemberEntryComponent } from "./member-entry/member-entry.component";
-import { MakePaymentComponent } from "./payment/make-payment.component";
+import { MakePaymentComponent } from "../payment/make-payment.component";
 import { AllMembersComponent } from "./all-members.component";
 // import { StudyInJapanComponent } from "../study-destinations/study-in-japan/study-in-japan.component";
 
@@ -21,10 +21,10 @@ export const FEATURE_MEMBERS_ROUTES: Routes = [
     },
 
 
-    {
-        path: "payment",
-        component: MakePaymentComponent,
-    },
+    // {
+    //     path: "payment",
+    //     component: MakePaymentComponent,
+    // },
 
 
 

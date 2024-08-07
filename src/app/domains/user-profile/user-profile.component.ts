@@ -10,7 +10,7 @@ import { AuthState } from '../auth/login/state/login.state';
 // import { ButtonModule } from 'primeng/button';
 import { LoginResponseDto, Role, UserModel } from 'src/app/shared/util-auth/models/user.model';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Observable, Subject, map, switchMap } from 'rxjs';
+import { Observable, Subject, map, of, switchMap } from 'rxjs';
 // import { customer } from '../customer/customer-details-add/customer-details-add.component';
 
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
@@ -62,7 +62,7 @@ export class UserProfileComponent implements OnInit {
   userProfile$!: Observable<LoginResponseDto>
 
   form!: FormGroup;
-  userRole!: Role
+  userRole: Role | undefined
   address1$: Subject<string> = new Subject();
   showPersonalInfo = true; //default false rakhne
 
@@ -105,45 +105,31 @@ export class UserProfileComponent implements OnInit {
     this.id$.pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
         console.log('fomn res', _res);
-        this.getUserDetails()
+
+        if (_res > 0) {
+
+          this.getMemberDetails()
+        } else {
+          this.getUserDetails()
+        }
       });
   }
 
-  getUserDetails() {
-    // call api 
-    // send userId
-    // send memberId
-    // send traineeId
-    // this.userProfile = this.userDetailService.getUserDetails();
+  private getUserDetails() {
+    const id = this.userDetailService.getUserId()
+    this.userProfile$ = this.usersService.getUserById({ userId: id })
+  }
+
+  private getMemberDetails() {
     this.userProfile$ = this.id$.pipe(
-      switchMap((query: number) => this.usersService.getUserById(query))
+      switchMap((query: number) => this.usersService.getUserById({ memberId: query }))
     );
-    // this.userProfile$.pipe(takeUntilDestroyed(this.unsubscribe$))
-    //   .subscribe((_res: any) => {
-
-    //     this.form.patchValue(_res.form);
-    //     const BSDate = this._nepaliDatepickerService.BSToAD(
-    //       _res.form.dob,
-    //       'yyyy/mm/dd'
-    //     );
-    //     this.date = new Date(BSDate);
-    //     // this.cd.detectChanges();
-    //   });
-
   }
 
   getUserRole(): void {
-    this.userRole = this.userDetailService.getUserRole();
-    console.log('role', this.userRole);
-
-
+    this.userRole = this.store.selectSnapshot(AuthState.userRole);
   }
 
-  private fetchUserDetails() {
-    // this.userProfile = this.store.selectSnapshot(AuthState.userDetails);
-    // this.userProfile = this.usersService.getUserById();
-
-  }
 
   onEdit(id?: number) {
     this.router.navigate(['/admin/add-member'], { queryParams: { id: id } })
@@ -154,11 +140,11 @@ export class UserProfileComponent implements OnInit {
 
   }
   onEditPayment(id?: number) {
-    this.router.navigate(['/admin/payment'], { queryParams: { id: id, paymentType: true } })
+    this.router.navigate(['/admin/payment'], { queryParams: { id: id, paymentType: false } })
 
   }
   onViewPaymentHistory(id?: number) {
-    this.router.navigate(['/admin/payment'], { queryParams: { id: id, paymentType: true } })
+    this.router.navigate(['/admin/payment/history'], { queryParams: { id: id, type: 'member' } })
 
   }
 
