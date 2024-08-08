@@ -31,8 +31,8 @@
       @for (member of nzTable.data; track $index) {
 
       <tr>
-        <td class="text-center">
-          <img height="250" width="250" [src]="member.image" alt="">
+        <td nzEllipsis>
+          <img height="150" width="150" [src]="member.image" alt="">
           <!-- <nz-avatar nzIcon="user" [nzSrc]="member.image"></nz-avatar> -->
         </td>
         <td>{{ member.title |titlecase }}</td>

@@ -44,7 +44,7 @@ export const appRoutes: Route[] = [
     {
         path: '',
         data: {
-            breadcrumb: 'the store'
+            breadcrumb: ''
         },
         component: CommonLayoutComponent,
         children: COMMON_LAYOUT_ROUTES

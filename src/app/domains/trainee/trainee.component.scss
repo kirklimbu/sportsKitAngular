@@ -1,0 +1,23 @@
+.certain-search-item-count {
+    position: absolute;
+    color: #999;
+    right: 16px;
+}
+
+.more-link {
+    float: right;
+}
+
+@media (min-width: 576px) {
+
+
+    nz-select {
+        width: 100px;
+    }
+}
+
+@media (min-width: 768px) {
+    nz-select {
+        width: 200px;
+    }
+}

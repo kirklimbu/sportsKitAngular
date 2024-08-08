@@ -5,6 +5,7 @@ import {
   Input,
   OnChanges,
   OnInit,
+  ViewEncapsulation,
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -23,6 +24,8 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { Router, RouterModule } from '@angular/router';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 
 interface DataItem {
@@ -30,6 +33,7 @@ interface DataItem {
   age: number;
   address: string;
 }
+
 @Component({
   selector: 'app-all-members',
   standalone: true,
@@ -44,14 +48,19 @@ interface DataItem {
     NzIconModule,
     NzTagModule,
     NzPageHeaderModule,
-    NzSpaceModule
+    NzSpaceModule,
+    NzAutocompleteModule,
+    NzInputModule
   ],
   templateUrl: './all-members.component.html',
   styleUrl: './all-members.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
 export class AllMembersComponent implements OnInit {
   data$!: Observable<IMember[]>;
+
+
 
   private readonly memberService = inject(MemberService);
   private readonly cd = inject(ChangeDetectorRef);
@@ -71,5 +80,6 @@ export class AllMembersComponent implements OnInit {
   onViewMore(id: number) {
     this.router.navigate(['/admin/user-profile'], { queryParams: { memberId: id } })
   }
+
 
 }

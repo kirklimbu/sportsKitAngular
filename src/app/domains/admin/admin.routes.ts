@@ -10,6 +10,7 @@ import { AddOrganizationComponent } from './organization/add-organization/add-or
 import { FEATURE_USERS_ROUTES } from '../user/users.routes';
 import { FEATURE_PAYMENT_ROUTES } from '../payment/payment.routes';
 import { FEATURE_TRAINING_ROUTES } from '../training/training.routes';
+import { FEATURE_TRAINEE_ROUTES } from '../trainee/trainee.routes';
 
 // import { DashboardComponent } from '../dashboard/dashboard.component';
 // import { InquiryComponent } from '../inquiry/inquiry.component';
@@ -49,6 +50,11 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
 
     path: 'training',
     loadChildren: () => import('../training').then((m) => FEATURE_TRAINING_ROUTES),
+  },
+  {
+
+    path: 'trainee',
+    loadChildren: () => import('../trainee').then((m) => FEATURE_TRAINEE_ROUTES),
   },
   {
     canActivate: [hasRoleGuard],

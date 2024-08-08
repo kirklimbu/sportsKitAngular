@@ -188,6 +188,22 @@ span[nz-typography]+span[nz-typography] {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+// table
+.ng-table,
+th,
+td {
+  text-align: center;
+}
+
+.ant-table-fixed-header .ant-table-thead>tr>th {
+  font-weight: bold;
+  text-align: center;
+
+}
+
+
+
+
 @media only screen and (min-width: 320px) {
   .content-with-button {
     gap: 36px;

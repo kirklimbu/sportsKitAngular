@@ -1,47 +1,60 @@
 <div class="table-container">
 
     <div class="sub-title">
-        <span> Training
+        <span> Trainee
         </span>
     </div>
     <div class="title text-bolder">
         <h3>
-            All Trainings
+            All Trainee
         </h3>
     </div>
 
-
-    @if(data$|async;as data ){
-
     <div class="site-page-header-ghost-wrapper">
         <nz-page-header [nzGhost]="false">
+
+
             <!-- <nz-page-header-title>Title</nz-page-header-title> -->
             <!-- <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle> -->
             <nz-page-header-extra>
                 <nz-space>
+                    <div *nzSpaceItem class="training-selector">
+                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select training"
+                            [(ngModel)]="selectedValue">
+                            @for (training of trainingList$|async; track $index) {
+
+                            <nz-option [nzLabel]="training.trainer" [nzValue]="training.trainingMasterId"></nz-option>
+                            }
+
+                        </nz-select>
+                    </div>
+                    <button *nzSpaceItem nz-button>
+                        <span nz-icon nzType="search" (click)="onSearch()"></span>
+                    </button>
                     <!-- <button *nzSpaceItem nz-button>Operation</button> -->
-                    <!-- <button *nzSpaceItem nz-button>Operation</button> -->
-                    <button *nzSpaceItem nz-button nzType="primary" routerLink="/admin/training/add-training"><span
-                            nz-icon nzType="plus" nzTheme="outline"></span>Add</button>
+                    <button [disabled]="!(data$|async)" *nzSpaceItem nz-button nzType="primary"
+                        routerLink="/admin/trainee/add-trainee"><span nz-icon nzType="plus"
+                            nzTheme="outline"></span>Add</button>
                 </nz-space>
             </nz-page-header-extra>
 
         </nz-page-header>
     </div>
 
+    @if(data$|async;as data ){
+
     <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
         [nzScroll]="{ x: '600px', y: '635px' }">
         <thead>
             <tr>
 
-                <th>
-                    Title
-                </th>
-                <th>Trainer</th>
-                <th>Type</th>
-                <th>Duration</th>
-                <th>Time</th>
-                <th>Fee</th>
+                <th>Profile pic </th>
+                <th>Name </th>
+                <th>Address</th>
+                <th>Mobile</th>
+                <th>Email</th>
+                <th>D.O.B</th>
+                <th>Training</th>
                 <th>Action</th>
 
             </tr>
@@ -50,35 +63,23 @@
             @for (training of nzTable.data; track $index) {
 
             <tr>
-
-                <td>{{ training.title |titlecase }}</td>
-                <td>
-
-                    {{ training.trainer|titlecase }}
-                </td>
-                <td>
-                    {{training.type}}
+                <td class="text-center">
+                    <nz-avatar nzIcon="user" [nzSrc]="training.profilePic"></nz-avatar>
                 </td>
 
+                <td>{{ training.name |titlecase }}</td>
                 <td>
-                    From:
-                    <p>
-                        {{training.startDate}}
-                    </p>
-                    To:
-                    <p>{{training.endDate}}</p>
-                </td>
-                <td>From:
-                    <p>
-                        {{training.fromTime}}
-                    </p>
-                    To:
-                    <p>
-                        {{training.toTime}}
-                    </p>
+
+                    {{ training.address|titlecase }}
                 </td>
                 <td>
-                    {{training.fee}}
+                    {{training.mobile}}
+                </td>
+
+                <td>{{training.email}}</td>
+                <td>{{training.dob}}</td>
+                <td>
+                    {{training.training}}
                 </td>
 
 

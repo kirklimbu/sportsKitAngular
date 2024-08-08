@@ -20,6 +20,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HomeService } from 'src/app/domains/home/home.service';
 import { en_US, ne_NP, NzI18nService, provideNzI18n } from 'ng-zorro-antd/i18n';
 
+import { getDeviceId } from 'src/app/shared/util-common/generateDeviceId';
+import { Store } from '@ngxs/store';
+import { AuthState } from 'src/app/domains/auth/login/state/login.state';
 
 
 
@@ -67,6 +70,8 @@ export class CommonLayoutComponent implements OnInit {
     private readonly destroyRef = inject(DestroyRef);
     private readonly i18n = inject(NzI18nService)
     private homeService = inject(HomeService)
+    private readonly store = inject(Store);
+
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -109,7 +114,9 @@ export class CommonLayoutComponent implements OnInit {
 
 
     private fetchHomeContents() {
-        this.homeService.getHomeContents('0', 0)
+        const userId = this.fetchUserId();
+
+        this.homeService.getHomeContents(getDeviceId(), userId)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((res: any) => {
                 this.headerTopData = res.organization
@@ -117,6 +124,11 @@ export class CommonLayoutComponent implements OnInit {
                 this.footerData = res.organization
                 // this.setContents(res)
             });
+    }
+
+    private fetchUserId(): number | undefined {
+        const userId = this.store.selectSnapshot(AuthState.userId);
+        return userId;
     }
 
     switchLanguage() {
