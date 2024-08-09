@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -10,7 +10,7 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTagModule } from 'ng-zorro-antd/tag';
-import { Observable } from 'rxjs';
+import { Observable, distinctUntilChanged, shareReplay } from 'rxjs';
 import { ITrainee } from './data/model/trainee.model';
 import { TraineeService } from './data/services/trainee.service';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
@@ -18,6 +18,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ITraining } from '../training/data/model/training.model';
 import { TrainingService } from '../training/data/services/training.service';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 export interface AutocompleteOptionGroups {
   title: string;
@@ -29,6 +30,7 @@ export interface AutocompleteOptionGroups {
   selector: 'app-trainee',
   standalone: true,
   imports: [
+    ReactiveFormsModule,
     RouterModule,
     CommonModule,
     FormsModule,
@@ -53,12 +55,11 @@ export interface AutocompleteOptionGroups {
 
 export class TraineeComponent implements OnInit {
 
-
-  selectedValue = null || 0;
-
+  form!: FormGroup;
+  showAddButton: boolean = false
   inputValue?: string;
   optionGroups: AutocompleteOptionGroups[] = [];
-
+  selectedId!: number
   data$!: Observable<ITrainee[]>;
   trainingList$!: Observable<ITraining[]>;
 
@@ -67,35 +68,70 @@ export class TraineeComponent implements OnInit {
   private readonly messageService = inject(MessageService);
   private readonly cd = inject(ChangeDetectorRef);
   private readonly router = inject(Router);
+  private readonly destroy$ = inject(DestroyRef);
+  private readonly fb = inject(FormBuilder);
 
 
   ngOnInit(): void {
+    this.initForm();
     this.fetchAllTraining();
   }
 
 
+  private initForm() {
+    this.form = this.fb.group({
+      trainingMasterId: [0],
+    })
+    this.form.controls['trainingMasterId']
+      .valueChanges
+      .pipe(distinctUntilChanged(),
+        shareReplay(1),
+        takeUntilDestroyed(this.destroy$))
+      .subscribe(value => {
+        console.log(value);
+        this.showAddButton = false;
+
+      });
+
+  }
+  // 2 times api call vayo
+
   onSearch(): void {
-    if (!this.selectedValue) return this.messageService.createMessage('error', 'Please select training.', 4_000);
-    this.data$ = this.traineeService.getAllTrainee(this.selectedValue);
+    this.showAddButton = false;
+    const id = this.form.controls['trainingMasterId'].value
+    if (!id) return this.messageService.createMessage('error', 'Please select training.', 4_000);
+    this.data$ = this.traineeService.getAllTrainee(id);
+    this.data$
+      .pipe(distinctUntilChanged(),
+        shareReplay(1),
+        takeUntilDestroyed(this.destroy$))
+      .subscribe(res => {
+        console.log(res);
+        if (res) {
+          this.showAddButton = true;
+        }
+
+      })
 
   }
 
   private fetchAllTraining(): void {
     this.trainingList$ = this.trainingService.getAllTraining();
+
+
   }
 
 
+  onAdd() {
+    const id = this.form.controls['trainingMasterId'].value
 
-
-  onViewMore(id: number): void {
-    this.router.navigate(['/admin/user-profile'], { queryParams: { memberId: id } })
+    if (!id) return this.messageService.createMessage('error', 'Please select training.')
+    this.router.navigate(['/admin/trainee/add-trainee'], { queryParams: { id: id } })
   }
+
   onEdit(id: number): void {
-    this.router.navigate(['/admin/training/add-training'], { queryParams: { id: id } })
+    this.router.navigate(['/admin/trainee/add-trainee'], { queryParams: { traineeId: id } })
   }
 
 
-  onChange(value: string): void {
-    console.log(value);
-  }
 }

@@ -2,10 +2,10 @@
   <section class="memberentry-section">
     <div>
       <div class="sub-title">
-        <span>New Event </span>
+        <span>Event </span>
       </div>
       <div class="title text-bolder">
-        <h3>Add Event</h3>
+        <h3>{{mode==='add'?"New":'Update' }} Event</h3>
       </div>
     </div>
 
@@ -14,25 +14,15 @@
         <label for="">
           <span class="required">Image</span>
           <div class="clearfix">
-            <nz-upload
-              [nzAction]="''"
-              nzListType="picture-card"
-              [(nzFileList)]="fileList"
-              [nzShowButton]="fileList.length < 1"
-              [nzPreview]="handlePreview"
-              (nzChange)="handleChange($event)"
-            >
+            <nz-upload [nzAction]="''" nzListType="picture-card" [(nzFileList)]="fileList"
+              [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview" (nzChange)="handleChange($event)">
               <div>
                 <span nz-icon nzType="plus"></span>
                 <div style="margin-top: 8px">Upload</div>
               </div>
             </nz-upload>
-            <nz-modal
-              [nzVisible]="previewVisible"
-              [nzContent]="modalContent"
-              [nzFooter]="null"
-              (nzOnCancel)="previewVisible = false"
-            >
+            <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+              (nzOnCancel)="previewVisible = false">
               <ng-template #modalContent>
                 <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
               </ng-template>
@@ -44,24 +34,13 @@
       <div class="flex">
         <label>
           <span class="required">Title</span>
-          <input
-            class="input"
-            type="text"
-            placeholder="Mirak Lawati"
-            autocomplete="off"
-            formControlName="title"
-          />
+          <input class="input" type="text" placeholder="Mirak Lawati" autocomplete="off" formControlName="title" />
         </label>
 
         <label>
           <span class="required" for="dob">Date</span>
-          <ne-datepicker
-            language="en"
-            [date]="date"
-            dateIn="AD"
-            (dateInBS)="updateNepaliDate($event)"
-            (dateInAD)="updateEnglishDate($event)"
-          >
+          <ne-datepicker language="en" [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event)"
+            (dateInAD)="updateEnglishDate($event)">
           </ne-datepicker>
         </label>
       </div>
@@ -69,43 +48,27 @@
       <div class="flex">
         <label>
           <span class="required">Time</span>
-          <input
-            class="input"
-            type="time"
-            placeholder="12:15"
-            autocomplete="off"
-            formControlName="startTime"
-          />
+          <input class="input" type="time" placeholder="12:15" autocomplete="off" formControlName="startTime" />
         </label>
         <label>
           <span class="ticket">Ticket</span>
-          <input
-            class="input"
-            type="number"
-            placeholder=""
-            autocomplete="off"
-            formControlName="ticketPrice"
-          />
+          <input class="input" type="number" placeholder="" autocomplete="off" formControlName="ticketPrice" />
         </label>
       </div>
 
       <div class="flex">
         <label>
           <span class="required">Description</span>
-          <textarea
-            formControlName="description"
-            nz-input
-            placeholder="District level tournament"
-            [nzAutosize]="{ minRows: 4, maxRows: 6 }"
-          ></textarea>
+          <textarea formControlName="description" nz-input placeholder="District level tournament"
+            [nzAutosize]="{ minRows: 4, maxRows: 6 }"></textarea>
         </label>
       </div>
 
-      <button class="submit" (click)="onSave()">Save</button>
+      <button class="submit" (click)="onSave()">{{mode==='add'?"Save":'Update' }}</button>
     </form>
   </section>
 
   <section class="members-list-section">
-    <app-events-list [data$]="event$" />
+    <app-events-list [data$]="event$" (sendEventId)="edit($event)" />
   </section>
 </div>

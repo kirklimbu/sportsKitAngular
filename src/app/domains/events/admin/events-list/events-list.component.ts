@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Router } from '@angular/router';
 // import { InlineSVGModule } from 'ng-inline-svg-2';
@@ -11,6 +11,9 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { IEvents } from '../../data/events.model';
 import { Observable } from 'rxjs';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { TopScrollerService } from 'src/app/shared/services/top-scroller.service';
+
 
 @Component({
   selector: 'app-events-list',
@@ -22,7 +25,8 @@ import { Observable } from 'rxjs';
     NzAvatarModule,
     NzButtonModule,
     NzIconModule,
-    NzTagModule
+    NzTagModule,
+    NzSpaceModule
     // InlineSVGModule
   ],
   templateUrl: './events-list.component.html',
@@ -30,7 +34,11 @@ import { Observable } from 'rxjs';
 })
 export class EventsListComponent implements OnInit {
   @Input() data$!: Observable<IEvents[]>
+  // @Output() sendEventId: any = new EventEmitter();
+  @Output() sendEventId = new EventEmitter<number>();
 
+
+  private topScrollerService = inject(TopScrollerService)
   private eventService = inject(EventsService)
   private router = inject(Router)
   private readonly cd = inject(ChangeDetectorRef)
@@ -73,9 +81,8 @@ export class EventsListComponent implements OnInit {
 
 
   onEdit(id: number) {
-    id
-      ? this.router.navigate(['/admin/events/add-event'], { queryParams: { id: id } })
-      : this.router.navigate(['/admin/events/add-event']);
-    // this.router.navigate(['/auth/question-add'], { queryParams: { id: id, setMasterId: this.form.controls['setMasterId'].value } })
+    this.topScrollerService.navigateToTop()
+    this.sendEventId.emit(id)
   }
+
 }

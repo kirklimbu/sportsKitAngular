@@ -4,6 +4,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { CommonModule } from '@angular/common';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { CountUpDirective } from 'src/app/shared/util-common/directives/count-up.directive';
+
 
 @Component({
   selector: 'app-members',
@@ -13,7 +15,8 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
     NzStatisticModule,
     NzGridModule,
     NzButtonModule,
-    NzTypographyModule
+    NzTypographyModule,
+    CountUpDirective
   ],
   templateUrl: './members.component.html',
   styleUrl: './members.component.scss'

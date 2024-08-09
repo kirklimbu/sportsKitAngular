@@ -42,6 +42,27 @@
                 <label>
                     <input class="input" type="text" placeholder="" autocomplete="off" formControlName="name">
                 </label>
+
+                <span class="required">Address</span>
+                <label>
+                    <input class="input" type="text" placeholder="" autocomplete="off" formControlName="address">
+                </label>
+
+            </div>
+
+            <div class="flex">
+                <span class="required">Mobile1</span>
+                <label>
+                    <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile1">
+                </label>
+
+                <span class="not-compulsory">Mobile2</span>
+                <label>
+                    <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile2">
+                </label>
+
+            </div>
+            <div class="flex">
                 <label>
                     <span class="required" for="dob">D.O.B</span>
                     <ne-datepicker [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event)"
@@ -50,20 +71,6 @@
                 </label>
             </div>
 
-            <div class="flex">
-                <span class="required">Mobile1</span>
-                <label>
-                    <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile1">
-                </label>
-            </div>
-
-            <div class="flex">
-                <span class="not-compulsory">Mobile2</span>
-                <label>
-                    <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile2">
-                </label>
-
-            </div>
             <div class="flex">
                 <label for="MemberType">
                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select type of member"

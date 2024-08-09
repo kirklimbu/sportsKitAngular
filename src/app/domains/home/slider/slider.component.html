@@ -1,9 +1,9 @@
-<div class="slider animate__animated animate__slideInUp animate__delay-1s ">
+<div class="slider animate__animated animate__slideInUp animate__delay-1s animate__slow ">
 
   <nz-carousel nzAutoPlay>
     @for (index of (bannerData) ; track index.bannerId) {
     <div nz-carousel-content>
-      <img [src]="index.image" alt="slider image">
+      <img [ngSrc]="index.image" height="585" width="1600" [priority]="true" alt="slider image">
       <h3 class="text-danger">{{ index.title }}</h3>
     </div>
     }

@@ -4,7 +4,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Component, Input, OnInit, inject } from '@angul
 
 
 import { NzSpinModule } from 'ng-zorro-antd/spin';
-// import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @Component({
   standalone: true,
   selector: 'app-spinner',
@@ -13,7 +13,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
   imports: [
     CommonModule,
     NzSpinModule,
-    // NgxSpinnerModule
+    NgxSpinnerModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

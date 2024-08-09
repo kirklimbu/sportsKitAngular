@@ -108,6 +108,7 @@ export class MemberEntryComponent implements OnInit {
   initForm(): FormGroup {
     return (this.form = this.fb.group({
       memberId: [0],
+      address: [0],
       name: ['', [Validators.required]],
       dob: ['', [Validators.required]],
       memberShipTypeId: ['', [Validators.required]],
@@ -172,10 +173,7 @@ export class MemberEntryComponent implements OnInit {
           'success',
           'Member added successfully.'
         );
-        this.form.reset();
-        this.previewImage = '';
-        this.date = new Date();
-        location.reload();
+        this.resetForm();
       });
   }
 
@@ -203,6 +201,12 @@ export class MemberEntryComponent implements OnInit {
         this.date = new Date(BSDate);
         // this.cd.detectChanges();
       });
+  }
+
+  private resetForm(): void {
+    this.form.reset();
+    this.date = new Date();
+    this.fileList = []
   }
 
 }

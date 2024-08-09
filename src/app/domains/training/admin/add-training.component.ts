@@ -9,12 +9,12 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { Observable, map, switchMap } from 'rxjs';
 
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { MemberService } from '../members/data/services/member.service';
-import { TrainingService } from './data/services/training.service';
+import { MemberService } from '../../members/data/services/member.service';
+import { TrainingService } from '../data/services/training.service';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { ITraining } from './data/model/training.model';
+import { ITraining } from '../data/model/training.model';
 
 @Component({
   selector: 'app-add-training',

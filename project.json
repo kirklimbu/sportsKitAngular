@@ -29,7 +29,8 @@
         "styles": [
           "./node_modules/leaflet/dist/leaflet.css",
           "./src/styles.scss",
-          "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
+          "./node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+          "node_modules/ngx-spinner/animations/cube-transition.css"
         ],
         "scripts": ["node_modules/jquery/dist/jquery.min.js"],
         "server": "src/main.server.ts",

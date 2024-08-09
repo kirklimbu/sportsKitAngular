@@ -123,7 +123,7 @@ export class EventsAddComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.buildForm();
     // if (this.mode === 'edit') return this.edit();
-    this.checkFormStatus();
+    this.edit(0);
   }
   get f() {
     return this.form.controls;
@@ -135,10 +135,10 @@ export class EventsAddComponent implements OnInit {
     );
     this.eventId$.pipe(takeUntil(this.unsubscribe$)).subscribe((_res: any) => {
       console.log('fomn res', _res);
-      if (_res) {
+      if (_res > 0) {
         this.mode = 'edit';
-        this.edit();
       }
+      // this.edit();
     });
   }
 
@@ -146,29 +146,26 @@ export class EventsAddComponent implements OnInit {
    *
    * edit
    */
-  edit() {
-    this.event$ = this.eventId$.pipe(
-      switchMap((query: number) => this.eventService.getFormValues(query))
-    );
-    this.event$.pipe(takeUntil(this.unsubscribe$)).subscribe((_res: any) => {
-      // console.log('fomn res', _res);
-      this.form.patchValue(_res);
-      this.fileList = [
-        {
-          eventId: _res.eventId,
-          name: _res.title,
-          status: 'done',
-          url: _res.image,
-        },
-      ];
-      this.previewImage = _res.image;
-      const BSDate = this._nepaliDatepickerService.BSToAD(
-        _res.eventDate,
-        'yyyy/mm/dd'
-      );
-      this.date = new Date(BSDate);
-      this.changeDetector.detectChanges();
-    });
+  edit(id: number) {
+    this.eventService.getFormValues(id)
+      .pipe(takeUntil(this.unsubscribe$)).subscribe((_res: any) => {
+        this.form.patchValue(_res);
+        this.fileList = [
+          {
+            eventId: _res.eventId,
+            name: _res.title,
+            status: 'done',
+            url: _res.image,
+          },
+        ];
+        this.previewImage = _res.image;
+        const BSDate = this._nepaliDatepickerService.BSToAD(
+          _res.eventDate,
+          'yyyy/mm/dd'
+        );
+        this.date = new Date(BSDate);
+        this.changeDetector.detectChanges();
+      });
   }
 
   private buildForm() {
@@ -205,16 +202,14 @@ export class EventsAddComponent implements OnInit {
     );
   }
 
-  resetFile(): void {
-    this.croppedImage = '';
-    this.fileName = 'No file selected';
-    this.selectedFile.nativeElement.value = null;
-    this.showCropper = false;
-    this.enableUpload = false;
+  private resetForm(): void {
+    this.form.reset();
+    this.date = new Date();
+    this.fileList = [];
   }
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {
-    // console.log('sel file', file);
+
     if (!file.url && !file['preview']) {
       file['preview'] = await getBase64(file.originFileObj!);
     }
@@ -224,7 +219,6 @@ export class EventsAddComponent implements OnInit {
 
   // nepali date picker
   updateNepaliDate($event: string) {
-    // console.log('updaet nepali', $event);
     this.form.patchValue({ eventDate: $event });
   }
   updateEnglishDate($event: string) {
@@ -239,44 +233,24 @@ export class EventsAddComponent implements OnInit {
     this.isLoading = true;
     console.log('form val', this.form.value);
 
-    this.eventService
-      .addEvent(this.form.value)
-      .pipe(takeUntil(this.unsubscribe$))
+    this.event$ = this.eventService
+      .addEvent(this.form.value);
+
+    this.event$.pipe(takeUntil(this.unsubscribe$))
       .subscribe((_res: any) => {
         console.log('res', _res);
-
-        this.croppedImage = '';
-        // this.isLoading = false;
         if (_res) {
-          // route to vendor home page
+
           this.messageService.createMessage(
             'success',
             'Event added successfully.'
           );
-          // this.onCancel();
-          this.form.reset();
-          this.previewImage = '';
-          this.date = new Date();
-          this.event$ = of(_res);
-          location.reload();
-          this.changeDetector.detectChanges();
+          this.resetForm();
         }
       });
   }
 
-  /**
-   * cancel
-   */
-  onCancel(): void {
-    if (this.form.value) {
-      this.form.reset();
-      this.form.patchValue({
-        fileList: null,
-      });
-      this.fileName = 'No file selected';
-      this.mode = 'add';
-    }
-  }
+
 
   private checkNull(value: string): void {
     this.form.controls[`${value}`].value === null

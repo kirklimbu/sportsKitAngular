@@ -41,28 +41,30 @@
             </nz-space>
         </nz-descriptions-item>
         <nz-descriptions-item nzTitle="Name" [nzSpan]="1">
-            <p>{{userProfile.member.name}}</p>
+            <p>{{userProfile.member.name|titlecase}}</p>
         </nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Address" [nzSpan]="1">
-            <p>{{userProfile.member.address}}</p>
-        </nz-descriptions-item>
-
-        <nz-descriptions-item nzTitle="Membership Type"
-            [nzSpan]="1">{{userProfile.member.memberShip}}</nz-descriptions-item>
         <nz-descriptions-item nzTitle="Mobile" [nzSpan]="1">
             <p>{{userProfile.member.mobile1}}</p> /
             <p>{{userProfile.member.mobile2}}</p>
         </nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Last payment" [nzSpan]="1">
-            <p>
-                {{userProfile.member.lastPaymentDate}}
-            </p>
+        <nz-descriptions-item nzTitle="Address" [nzSpan]="1">
+            <p>{{userProfile.member.address|titlecase}}</p>
         </nz-descriptions-item>
         <nz-descriptions-item nzTitle="D.O.B" [nzSpan]="1">
             <P>
                 {{userProfile.member.dob}}
             </P>
         </nz-descriptions-item>
+
+        <nz-descriptions-item nzTitle="Membership Type"
+            [nzSpan]="1">{{userProfile.member.memberShip}}</nz-descriptions-item>
+
+        <nz-descriptions-item nzTitle="Last payment" [nzSpan]="1">
+            <p>
+                {{userProfile.member.lastPaymentDate}}
+            </p>
+        </nz-descriptions-item>
+
 
 
     </nz-descriptions>
@@ -85,7 +87,13 @@
             </p>
 
         </nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Email" [nzSpan]="2">
+        <nz-descriptions-item nzTitle="Mobile" [nzSpan]="1">
+            <p>{{item.mobile}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Address" [nzSpan]="1">
+            <p>{{item.address|titlecase}}</p>
+        </nz-descriptions-item>
+        <nz-descriptions-item nzTitle="Email" [nzSpan]="1">
 
             <p>
                 {{item.email}}
@@ -94,12 +102,8 @@
         <nz-descriptions-item nzTitle="D.O.B" [nzSpan]="1">
             <p>{{item.DOB}}</p>
         </nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Address" [nzSpan]="1">
-            <p>{{item.address|titlecase}}</p>
-        </nz-descriptions-item>
-        <nz-descriptions-item nzTitle="Mobile" [nzSpan]="1">
-            <p>{{item.mobile}}</p>
-        </nz-descriptions-item>
+
+
     </nz-descriptions>
     }
     }

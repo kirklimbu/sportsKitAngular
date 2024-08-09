@@ -9,5 +9,6 @@ export interface ITrainee {
     trainingMasterId: number | 0;
     statusId: number | 0;
     training: string;
+    file: string;
 }
 

@@ -1,8 +1,5 @@
-<section
-  id="events"
-  class="content-container animate__animated animate__fadeInLeft animate__delay-1s"
->
-  <div class="message-section">
+<section id="events" class="content-container animate__animated animate__fadeInUp animate__delay-5s">
+  <div class="message-section ">
     <div class="sub-title">
       <span>Our Events </span>
     </div>
@@ -18,12 +15,7 @@
         academy provides a platform for skill development, competition, and
         community engagement.Some of the glimpses of these events are ...
       </p>
-      <a
-        routerLink="/events/list-events"
-        title="View all events"
-        class="all-events"
-        (click)="showAllEvents()"
-      >
+      <a routerLink="/events/list-events" title="View all events" class="all-events" (click)="showAllEvents()">
         <small>View all events...</small>
       </a>
     </div>
@@ -32,27 +24,14 @@
   <div class="image-section">
     @for (event of data; track $index) {
 
-    <nz-card
-      nzHoverable
-      style="text-justify: justify"
-      [nzCover]="coverTemplate"
-      [nzActions]="[actionSetting, actionEdit, actionEllipsis]"
-    >
-      <nz-card-meta
-        [nzTitle]="event.title"
-        [nzDescription]="event.description | truncate : 35"
-      >
+    <nz-card nzHoverable style="text-justify: justify" [nzCover]="coverTemplate"
+      [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+      <nz-card-meta [nzTitle]="event.title" [nzDescription]="event.description | truncate : 35">
       </nz-card-meta>
     </nz-card>
 
     <ng-template #coverTemplate>
-      <img
-        [title]="event.title"
-        [ngSrc]="event.image"
-        [alt]="event.title"
-        height="240"
-        width="240"
-      />
+      <img [title]="event.title" [ngSrc]="event.image" [alt]="event.title" height="240" width="240" />
     </ng-template>
 
     <ng-template #actionSetting>
@@ -64,13 +43,7 @@
       </span>
     </ng-template>
     <ng-template #actionEllipsis>
-      <button
-        title="Show more"
-        nz-button
-        nzType="default"
-        nzShape="circle"
-        routerLink="/events/all-events"
-      >
+      <button title="Show more" nz-button nzType="default" nzShape="circle" routerLink="/events/all-events">
         <span nz-icon nzType="right" nzTheme="outline"></span>
       </button>
     </ng-template>

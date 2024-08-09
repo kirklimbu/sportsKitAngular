@@ -35,12 +35,12 @@
           <a [routerLink]="['/admin/list-member']"></a>
         </span>
       </li>
-      <li nz-menu-item>
+      <!-- <li nz-menu-item>
         <span nz-icon nzType="usergroup-add"></span>
         <span nz-tooltip nzTooltipTitle="Trainee">Trainee
           <a [routerLink]="['/admin/trainee']"></a>
         </span>
-      </li>
+      </li> -->
       <li nz-menu-item>
         <span nz-icon nzTitle="Events" nzType="schedule"></span>
         <span nz-tooltip nzTooltipTitle="Events">
@@ -49,6 +49,19 @@
         </span>
       </li>
       }
+      <li nz-menu-item>
+        <span nz-icon nzTitle="Training" nzType="team"></span>
+        <span nz-tooltip nzTooltipTitle="Training">Training
+          <a [routerLink]="['/admin/training']"></a>
+        </span>
+      </li>
+
+      <li nz-menu-item>
+        <span nz-icon nzType="usergroup-add"></span>
+        <span nz-tooltip nzTooltipTitle="Trainee">Trainee
+          <a [routerLink]="['/admin/trainee']"></a>
+        </span>
+      </li>
       <!-- <li nz-menu-item>
                 <span nz-icon nzTitle="Inquiry" nzType="question-circle"></span>
                 <span nz-tooltip nzTooltipTitle="Inquiry">

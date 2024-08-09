@@ -3,7 +3,8 @@ export const environment = {
   // appVersion: require('../../package.json').version,
   production: true,
   // apiUrl: 'https://fakestoreapi.com/',
-  apiUrl: 'http://162.0.230.55:9093/dba/api/', // test-namecheap (namecheap ip)
+  // apiUrl: 'http://162.0.230.55:9093/dba/api/', // test-namecheap (namecheap ip)
+  apiUrl: 'http://http://dmknamunabadmintonacademy.com/dba/api/', // test-namecheap (namecheap ip)
 
   menuUrl: '/assets/data/Menu',
   // defaultImage: '/assets/images/default-image.png',

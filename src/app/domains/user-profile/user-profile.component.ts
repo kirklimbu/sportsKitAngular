@@ -57,7 +57,7 @@ import { NepaliDatepickerModule, NepaliDatepickerService } from 'nepali-datepick
 export class UserProfileComponent implements OnInit {
 
 
-  id$!: Observable<number>;
+  id$!: Observable<any>;
   userProfile!: LoginResponseDto
   userProfile$!: Observable<LoginResponseDto>
 
@@ -100,30 +100,43 @@ export class UserProfileComponent implements OnInit {
 
   private checkFormStatus() {
     this.id$ = this.route.queryParamMap.pipe(
-      map((params: ParamMap) => Number(params.get('memberId')))
+      map((params: ParamMap) => {
+        const userId = Number(params.get('id'))
+        const memberId = Number(params.get('memberId'))
+        const traineeId = Number(params.get('traineeId'))
+        return { userId, memberId, traineeId }
+      })
     );
     this.id$.pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
         console.log('fomn res', _res);
-
-        if (_res > 0) {
-
-          this.getMemberDetails()
+        if (_res.traineeId > 0) {
+          this.getTraineeDetails(_res.userId)
+        } else if (_res.memberId > 0) {
+          this.getMemberDetails(_res.memberId)
         } else {
-          this.getUserDetails()
+          this.getUserDetails(_res.userId)
         }
+
       });
   }
 
-  private getUserDetails() {
-    const id = this.userDetailService.getUserId()
-    this.userProfile$ = this.usersService.getUserById({ userId: id })
+  private getUserDetails(id: number) {
+    if (id === 0) {
+      const userId = this.userDetailService.getUserId()
+      this.userProfile$ = this.usersService.getUserById({ userId: userId })
+    } else {
+      this.userProfile$ = this.usersService.getUserById({ userId: id })
+    }
   }
 
-  private getMemberDetails() {
-    this.userProfile$ = this.id$.pipe(
-      switchMap((query: number) => this.usersService.getUserById({ memberId: query }))
-    );
+  private getMemberDetails(id: number) {
+    this.userProfile$ = this.usersService.getUserById({ memberId: id })
+
+  }
+  private getTraineeDetails(id: number) {
+    this.userProfile$ = this.usersService.getUserById({ traineeId: id });
+
   }
 
   getUserRole(): void {

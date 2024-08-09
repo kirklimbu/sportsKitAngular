@@ -66,12 +66,14 @@
 
         <td>
           <div class="action-buttons">
+            <nz-space>
 
-            <button nzTooltipTitle="Edit" nzTooltipPlacement="topLeft" nz-tooltip nz-button nzType="primary" nzGhost
-              (click)="onEdit(member.eventId)"><span nz-icon nzType="form"></span></button>
-            <button nzTooltipTitle="Delete" nzTooltipPlacement="topLeft" nz-tooltip nz-button nzDanger><span nz-icon
-                nzType="delete"></span></button>
 
+              <button *nzSpaceItem nzTooltipTitle="Edit" nzTooltipPlacement="topLeft" nz-tooltip nz-button
+                nzType="primary" nzGhost (click)="onEdit(member.eventId)"><span nz-icon nzType="form"></span></button>
+              <button *nzSpaceItem nzTooltipTitle="Delete" nzTooltipPlacement="topLeft" nz-tooltip nz-button
+                nzDanger><span nz-icon nzType="delete"></span></button>
+            </nz-space>
           </div>
         </td>
       </tr>

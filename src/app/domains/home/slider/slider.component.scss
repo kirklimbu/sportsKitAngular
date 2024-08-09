@@ -1,7 +1,7 @@
 @import 'src/assets/scss/_variables.scss';
 
 nz-carousel {
-  background-color: $primary-color;
+  background-color: $tone-green-light;
   width: 100%;
 }
 
@@ -39,7 +39,7 @@ h3 {
     height: 25vw;
 
     img {
-      height: auto;
+      // height: auto;
       height: 25vw;
     }
   }

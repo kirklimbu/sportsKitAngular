@@ -10,6 +10,7 @@
         </h3>
     </div>
 
+
     <div class="site-page-header-ghost-wrapper">
         <nz-page-header [nzGhost]="false">
 
@@ -18,12 +19,12 @@
             <!-- <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle> -->
             <nz-page-header-extra>
                 <nz-space>
-                    <div *nzSpaceItem class="training-selector">
-                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select training"
-                            [(ngModel)]="selectedValue">
-                            @for (training of trainingList$|async; track $index) {
 
-                            <nz-option [nzLabel]="training.trainer" [nzValue]="training.trainingMasterId"></nz-option>
+                    <div [formGroup]="form" *nzSpaceItem class="training-selector">
+                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select training"
+                            formControlName="trainingMasterId">
+                            @for (training of trainingList$|async; track $index) {
+                            <nz-option [nzLabel]="training.title" [nzValue]="training.trainingMasterId"></nz-option>
                             }
 
                         </nz-select>
@@ -32,9 +33,9 @@
                         <span nz-icon nzType="search" (click)="onSearch()"></span>
                     </button>
                     <!-- <button *nzSpaceItem nz-button>Operation</button> -->
-                    <button [disabled]="!(data$|async)" *nzSpaceItem nz-button nzType="primary"
-                        routerLink="/admin/trainee/add-trainee"><span nz-icon nzType="plus"
-                            nzTheme="outline"></span>Add</button>
+
+                    <button [disabled]="!showAddButton" *nzSpaceItem nz-button nzType="primary" (click)="onAdd()"><span
+                            nz-icon nzType="plus" nzTheme="outline"></span>Trainee</button>
                 </nz-space>
             </nz-page-header-extra>
 
@@ -44,7 +45,7 @@
     @if(data$|async;as data ){
 
     <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
-        [nzScroll]="{ x: '600px', y: '635px' }">
+        [nzScroll]="{ x: '900px', y: '635px' }">
         <thead>
             <tr>
 
@@ -60,40 +61,42 @@
             </tr>
         </thead>
         <tbody>
-            @for (training of nzTable.data; track $index) {
+            @for (trainee of nzTable.data; track $index) {
 
             <tr>
                 <td class="text-center">
-                    <nz-avatar nzIcon="user" [nzSrc]="training.profilePic"></nz-avatar>
+                    <nz-avatar nzIcon="user" [nzSrc]="trainee.profilePic"></nz-avatar>
                 </td>
 
-                <td>{{ training.name |titlecase }}</td>
+                <td>{{ trainee.name |titlecase }}</td>
                 <td>
 
-                    {{ training.address|titlecase }}
+                    {{ trainee.address|titlecase }}
                 </td>
                 <td>
-                    {{training.mobile}}
+                    {{trainee.mobile}}
                 </td>
 
-                <td>{{training.email}}</td>
-                <td>{{training.dob}}</td>
+                <td>{{trainee.email}}</td>
+                <td>{{trainee.dob}}</td>
                 <td>
-                    {{training.training}}
+                    {{trainee.training}}
                 </td>
 
 
                 <td>
                     <div class="action-buttons">
-
-                        <button nzTooltipTitle="View More" nzTooltipPlacement="topLeft" nz-tooltip nz-button
-                            nzType="primary" nzGhost (click)="onViewMore(training.trainingMasterId)">
-                            <span nz-icon nzType="eye"></span>
-                        </button>
-                        <button nzTooltipTitle="Edit " nzTooltipPlacement="topLeft" nz-tooltip nz-button><span nz-icon
-                                nzType="edit" (click)="onEdit(training.trainingMasterId)">
-                            </span>
-                        </button>
+                        <nz-space>
+                            <button *nzSpaceItem nzTooltipTitle="View More" nzTooltipPlacement="topLeft" nz-tooltip
+                                nz-button nzType="primary" nzGhost routerLink="/admin/user-profile"
+                                [queryParams]="{traineeId:trainee.traineeId}">
+                                <span nz-icon nzType="eye"></span>
+                            </button>
+                            <button *nzSpaceItem nzTooltipTitle="Edit " nzTooltipPlacement="topLeft" nz-tooltip
+                                nz-button><span nz-icon nzType="edit" (click)="onEdit(trainee.traineeId)">
+                                </span>
+                            </button>
+                        </nz-space>
 
                     </div>
                 </td>

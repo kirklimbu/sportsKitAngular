@@ -15,7 +15,7 @@ export class TrainingService {
 
   getFormValues(id: any): Observable<any> {
     return this.http.get<any>(
-      `${this.apiUrl}auth/training/form`, { params: id }
+      `${this.apiUrl}auth/training/master/form`, { params: id }
     );
   }
 
@@ -23,13 +23,13 @@ export class TrainingService {
     console.log('saving training',);
 
     return this.http.post<ITraining[]>(
-      `${this.apiUrl}auth/training/save`, { ...training }
+      `${this.apiUrl}auth/training/master/save`, { ...training }
     );
   }
 
 
   getAllTraining(): Observable<ITraining[]> {
-    return this.http.get<ITraining[]>(`${this.apiUrl}auth/training/list`);
+    return this.http.get<ITraining[]>(`${this.apiUrl}training/master/list`);
   }
 
 }

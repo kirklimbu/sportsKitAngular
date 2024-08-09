@@ -1,6 +1,6 @@
-<div class="concentric-rings">
-    <div id="member" class="content-container animate__animated animate__fadeInLeft animate__delay-1s ">
-        <div class="message-section">
+<div class="concentric-rings animate__animated animate__fadeInUp animate__delay-4s animate__slow">
+    <div id="member" class="content-container 	">
+        <div class="message-section ">
             <div class="sub-title">
                 <span>Members
                 </span>
@@ -28,26 +28,28 @@
         </div>
 
         <div class="image-section">
+            @if (data) {
 
             <div class="members">
-                <h2>{{data?.lifeTimeMemberCount}}</h2>
+                <h2 [countUp]="data.lifeTimeMemberCount " [duration]="5000"></h2>
                 <p>Lifetime Members</p>
             </div>
             <div class="members">
-                <h2>{{data?.yearlyMemberCount}}</h2>
+                <h2 [countUp]="data.yearlyMemberCount " [duration]="5000"></h2>
                 <p>Yearly Members</p>
             </div>
             <div class="members">
-                <h2>{{data?.quarterlyMemberCount}}</h2>
+                <h2 [countUp]="data.quarterlyMemberCount " [duration]="5000"></h2>
                 <p>Quarterly Members</p>
             </div>
             <div class="members">
-                <h2>{{data?.monthlyMemberCount}}</h2>
-
+                <h2 [countUp]="data.monthlyMemberCount " [duration]="5000"></h2>
                 <p>Monthly Members</p>
             </div>
+            }
 
         </div>
+
 
 
 

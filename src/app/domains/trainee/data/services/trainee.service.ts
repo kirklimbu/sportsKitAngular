@@ -18,20 +18,24 @@ export class TraineeService {
 
   getFormValues(id: any): Observable<any> {
     return this.http.get<any>(
-      `${this.apiUrl}auth/training/form`, { params: id }
+      `${this.apiUrl}auth/trainee/form`, { params: id }
     );
   }
 
   saveTrainee(training: ITrainee): Observable<ITrainee[]> {
     console.log('saving training',);
-
+    console.log('saving memeber', training);
+    const formData = new FormData();
+    formData.append('form', JSON.stringify(training));
+    formData.append('file', training.file);
+    console.log('fsdfa', formData);
     return this.http.post<ITrainee[]>(
-      `${this.apiUrl}auth/training/save`, { ...training }
+      `${this.apiUrl}auth/trainee/save`, formData
     );
   }
 
 
   getAllTrainee(id: number): Observable<ITrainee[]> {
-    return this.http.get<ITrainee[]>(`${this.apiUrl}auth/training/list?trainingMasterId=${id}`);
+    return this.http.get<ITrainee[]>(`${this.apiUrl}auth/trainee/list?trainingMasterId=${id}`);
   }
 }

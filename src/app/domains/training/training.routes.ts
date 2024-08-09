@@ -1,12 +1,13 @@
 
 import { Routes } from '@angular/router';
-import { TrainingComponent } from './training.component';
-import { AddTrainingComponent } from './add-training.component';
+
+import { AddTrainingComponent } from './admin/add-training.component';
+import { AllTrainingsComponent } from './admin/all-trainings/all-trainings.component';
 
 export const FEATURE_TRAINING_ROUTES: Routes = [
     {
         path: '',
-        component: TrainingComponent,
+        component: AllTrainingsComponent,
     },
     {
         path: 'add-training',
