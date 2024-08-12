@@ -14,6 +14,10 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { Role } from 'src/app/shared/util-auth/models/user.model';
+import { UserDetailsService } from 'src/app/shared/util-common/userDetails.service';
+import { Store } from '@ngxs/store';
+import { AuthState } from 'src/app/domains/auth/login/state/login.state';
 
 @Component({
   selector: 'app-all-trainings',
@@ -36,16 +40,25 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
   styleUrl: './all-trainings.component.scss'
 })
 export class AllTrainingsComponent {
-
+  // props
+  userRole: Role | undefined
   data$!: Observable<ITraining[]>;
 
   private readonly trainingService = inject(TrainingService);
   private readonly cd = inject(ChangeDetectorRef);
+  private readonly userDetailService = inject(UserDetailsService);
   private readonly router = inject(Router);
+  private readonly store = inject(Store);
 
 
   ngOnInit(): void {
     this.fetchMembers();
+    this.checkUser();
+  }
+
+
+  checkUser(): void {
+    this.userRole = this.store.selectSnapshot(AuthState.userRole);
   }
 
 
@@ -53,10 +66,13 @@ export class AllTrainingsComponent {
     this.data$ = this.trainingService.getAllTraining();
   }
 
+  onAddDetail(id: number) {
+    this.router.navigate(['/admin/training/add-detail'], { queryParams: { id: id, detailId: 0, view: false } })
 
+  }
 
   onViewMore(id: number): void {
-    this.router.navigate(['/admin/user-profile'], { queryParams: { memberId: id } })
+    this.router.navigate(['/admin/training/detail'], { queryParams: { id: id, detailId: 0, view: true } })
   }
   onEdit(id: number): void {
     this.router.navigate(['/admin/training/add-training'], { queryParams: { id: id } })

@@ -16,6 +16,28 @@ button {
   // animation: pulse 1s linear infinite;
 }
 
+[nz-button] {
+  background-color: $gold;
+  border-color: $white;
+  color: $white;
+  // font-size: 18px;
+
+  // padding: 3rem;
+  &:hover {
+    background-color: $primary-color;
+    border: 1px solid $white;
+    background-position: 0;
+  }
+
+  background: {
+    image: linear-gradient(45deg, $primary-color 50%, transparent 50%);
+    position: 100%;
+    size: 300%;
+  }
+
+  transition: background 400ms ease-in-out;
+}
+
 .content-container {
   // padding: 1rem;
   padding: 3rem 2rem;
@@ -69,9 +91,16 @@ span[nz-typography]+span[nz-typography] {
 }
 
 // cards
+[nz-card]:hover {
+  transform: scale(1.01);
+}
 
 .ant-card {
   margin-bottom: 0;
+
+  &:hover {
+    transform: scale(1.01);
+  }
 }
 
 .ant-card-cover {
@@ -193,13 +222,18 @@ span[nz-typography]+span[nz-typography] {
 th,
 td {
   text-align: center;
+  text-wrap: wrap;
 }
 
 .ant-table .ant-table-thead>tr>th {
   font-weight: bold;
   text-align: center;
-
 }
+
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-body>table>tbody>tr>td {
+  text-wrap: wrap;
+}
+
 
 
 img {

@@ -57,7 +57,6 @@ export class AddTraineeComponent {
   isLoading$!: Observable<boolean>;
   date: any = new Date();
 
-
   private readonly _nepaliDatepickerService = inject(NepaliDatepickerService);
   private readonly traineeService = inject(TraineeService);
   private readonly unsubscribe$ = inject(DestroyRef);
@@ -93,7 +92,7 @@ export class AddTraineeComponent {
   private checkFormStatus() {
     this.memberId$ = this.route.queryParamMap.pipe(
       map((params: ParamMap) => {
-        const trainingMasterId = Number(params.get('trainingMasterId'))
+        const trainingMasterId = Number(params.get('id'))
         const traineeId = Number(params.get('traineeId'))
         this.trainingMasterId = trainingMasterId
         return { trainingMasterId, traineeId }

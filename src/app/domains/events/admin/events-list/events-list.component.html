@@ -32,7 +32,7 @@
 
       <tr>
         <td nzEllipsis>
-          <img height="150" width="150" [src]="member.image" alt="">
+          <img height="150" width="150" [ngSrc]="member.image" [alt]="member.title">
           <!-- <nz-avatar nzIcon="user" [nzSrc]="member.image"></nz-avatar> -->
         </td>
         <td>{{ member.title |titlecase }}</td>

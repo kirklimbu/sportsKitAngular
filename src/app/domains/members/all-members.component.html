@@ -12,7 +12,7 @@
 
 
     @if(data$|async;as data ){
-
+    @if (userRole==='Admin') {
     <div class="site-page-header-ghost-wrapper">
         <nz-page-header [nzGhost]="false">
             <!-- <nz-page-header-title>Title</nz-page-header-title> -->
@@ -28,6 +28,8 @@
 
         </nz-page-header>
     </div>
+
+    }
 
     <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
         [nzScroll]="{ x: '600px', y: '635px' }">

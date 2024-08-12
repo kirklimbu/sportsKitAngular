@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, DestroyRef, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Router } from '@angular/router';
 // import { InlineSVGModule } from 'ng-inline-svg-2';
@@ -13,6 +13,7 @@ import { IEvents } from '../../data/events.model';
 import { Observable } from 'rxjs';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { TopScrollerService } from 'src/app/shared/services/top-scroller.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 
 @Component({
@@ -41,25 +42,21 @@ export class EventsListComponent implements OnInit {
   private topScrollerService = inject(TopScrollerService)
   private eventService = inject(EventsService)
   private router = inject(Router)
+  private readonly destroy$ = inject(DestroyRef)
   private readonly cd = inject(ChangeDetectorRef)
 
   constructor() { }
 
   ngOnInit() {
-    (this.data$.subscribe(res => {
-      console.log('init', res)
-    }));
     this.fetchEvents();
   }
 
   ngOnChanges(): void {
-    // (this.data$.subscribe(res => {
-    // }));
+
     console.log('onchanges')
     if (!this.data$) this.fetchEvents()
 
     this.data$ = this.data$
-    // this.cd.detectChanges();
   }
 
   private fetchEvents() {
@@ -74,10 +71,6 @@ export class EventsListComponent implements OnInit {
   }
 
 
-  onAdd() {
-    // if (!this.form.controls['setMasterId'].value) return this.messageService.createMessage('error', 'Set is missing. Please select set.')
-    // this.router.navigate(['/auth/question-add'], { queryParams: { setMasterId: this.form.controls['setMasterId'].value } })
-  }
 
 
   onEdit(id: number) {

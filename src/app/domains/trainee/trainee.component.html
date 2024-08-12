@@ -34,8 +34,12 @@
                     </button>
                     <!-- <button *nzSpaceItem nz-button>Operation</button> -->
 
-                    <button [disabled]="!showAddButton" *nzSpaceItem nz-button nzType="primary" (click)="onAdd()"><span
-                            nz-icon nzType="plus" nzTheme="outline"></span>Trainee</button>
+                    @if (userRole==='Admin') {
+                    <button [disabled]="!showAddButton" *nzSpaceItem nz-button nzType="primary" (click)="onAdd()">
+                        <span nz-icon nzType="plus" nzTheme="outline"></span>
+                        Trainee
+                    </button>
+                    }
                 </nz-space>
             </nz-page-header-extra>
 
@@ -92,10 +96,12 @@
                                 [queryParams]="{traineeId:trainee.traineeId}">
                                 <span nz-icon nzType="eye"></span>
                             </button>
+                            @if (userRole==='Admin') {
                             <button *nzSpaceItem nzTooltipTitle="Edit " nzTooltipPlacement="topLeft" nz-tooltip
                                 nz-button><span nz-icon nzType="edit" (click)="onEdit(trainee.traineeId)">
                                 </span>
                             </button>
+                            }
                         </nz-space>
 
                     </div>

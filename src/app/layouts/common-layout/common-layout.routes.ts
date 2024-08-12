@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { PrivacyPolicyComponent } from 'src/app/domains/privacy-policy/privacy-policy.component';
+import { TraineeComponent } from 'src/app/domains/trainee/trainee.component';
+import { TrainingComponent } from 'src/app/domains/training/training.component';
 // import { StudyInJapanComponent } from '../../study-destinations/study-in-japan/study-in-japan.component';
 // import { StudyInKoreaComponent } from '../../study-destinations/study-in-korea/study-in-korea.component';
 // import { IeltsComponent } from '../../test-preparations/ielts/ielts.component';
@@ -25,6 +27,13 @@ export const COMMON_LAYOUT_ROUTES: Routes = [
             breadcrumb: 'Events'
         },
         loadChildren: () => import('./../../domains/events').then(m => m.FEATURE_EVENTS_ROUTES),
+    },
+    {
+        path: 'training',
+        data: {
+            breadcrumb: 'training'
+        },
+        component: TrainingComponent,
     },
     {
         path: 'privacy',

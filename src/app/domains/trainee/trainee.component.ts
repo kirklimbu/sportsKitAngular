@@ -19,6 +19,9 @@ import { ITraining } from '../training/data/model/training.model';
 import { TrainingService } from '../training/data/services/training.service';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Role } from 'src/app/shared/util-auth/models/user.model';
+import { Store } from '@ngxs/store';
+import { AuthState } from '../auth/login/state/login.state';
 
 export interface AutocompleteOptionGroups {
   title: string;
@@ -56,6 +59,7 @@ export interface AutocompleteOptionGroups {
 export class TraineeComponent implements OnInit {
 
   form!: FormGroup;
+  userRole: Role | undefined;
   showAddButton: boolean = false
   inputValue?: string;
   optionGroups: AutocompleteOptionGroups[] = [];
@@ -70,11 +74,17 @@ export class TraineeComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly destroy$ = inject(DestroyRef);
   private readonly fb = inject(FormBuilder);
+  private readonly store = inject(Store);
 
 
   ngOnInit(): void {
     this.initForm();
+    this.checkUser();
     this.fetchAllTraining();
+  }
+
+  checkUser(): void {
+    this.userRole = this.store.selectSnapshot(AuthState.userRole);
   }
 
 

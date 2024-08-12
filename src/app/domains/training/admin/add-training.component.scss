@@ -39,6 +39,8 @@ nz-select {
 
 }
 
+.ant-list-vertical .ant-list-item-main {}
+
 
 .admin-members-section {
     display: flex;
@@ -178,6 +180,7 @@ nz-select {
 
     }
 
+
     .memberentry-section {
         max-width: 450px;
     }
@@ -187,7 +190,7 @@ nz-select {
 
     }
 
-    flex {
+    .flex {
         display: flex;
         // flex-direction: column;
 

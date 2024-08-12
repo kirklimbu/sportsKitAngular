@@ -6,6 +6,7 @@ import {
   ViewChild,
   inject,
   OnInit,
+  DestroyRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -15,7 +16,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { Observable, ReplaySubject, of } from 'rxjs';
 
@@ -28,12 +29,9 @@ import { Observable, ReplaySubject, of } from 'rxjs';
 // } from 'ngx-image-cropper';
 import { FormSubmitButtonsComponent } from 'src/app/shared/ui-common/form-submit-buttons/form-submit-buttons.component';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
-import { AuthState } from '../../../auth/login/state/login.state';
 import { Store } from '@ngxs/store';
-import { Messages } from 'src/app/shared/util-logger/messages.enum';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { EventsService } from '../../data/services/events.service';
-
 import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
 import { converterDate } from 'src/app/shared/util-logger/convert-date';
 import { NzModalModule } from 'ng-zorro-antd/modal';
@@ -49,6 +47,7 @@ import {
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { EventsListComponent } from '../events-list/events-list.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -90,56 +89,29 @@ export class EventsAddComponent implements OnInit {
 
   form!: FormGroup;
   addedFiles: any[] = [];
-  croppedImage: any = '';
-  defaultImg = 'https://bulma.io/images/placeholders/480x480.png';
-  fileName = 'FILE NOT SELECTED';
-  showCropper = false;
-  enableUpload = false;
-  finalImage: unknown;
-  values: unknown[] = [{ value: '' }];
-  imageChangedEvent: any = '';
   mode = 'add';
-  isLoading = false;
-  errorMessage: string | undefined;
 
   eventId$!: Observable<number>;
   event$!: Observable<any>;
 
-  private readonly unsubscribe$: ReplaySubject<boolean> = new ReplaySubject(1);
-  @ViewChild('fileInput', { static: false }) selectedFile!: ElementRef;
-  @ViewChild('cropper', { static: false }) private scrollCropper!: ElementRef;
-
   private _nepaliDatepickerService = inject(NepaliDatepickerService);
+  private readonly unsubscribe$ = inject(DestroyRef)
+
   constructor(
     private readonly changeDetector: ChangeDetectorRef,
     private fb: FormBuilder,
     private eventService: EventsService,
     private messageService: MessageService,
-    private store: Store,
-    private route: ActivatedRoute,
-    private router: Router
+
   ) { }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.buildForm();
-    // if (this.mode === 'edit') return this.edit();
     this.edit(0);
   }
+
   get f() {
     return this.form.controls;
-  }
-
-  private checkFormStatus() {
-    this.eventId$ = this.route.queryParamMap.pipe(
-      map((params: ParamMap) => Number(params.get('id')))
-    );
-    this.eventId$.pipe(takeUntil(this.unsubscribe$)).subscribe((_res: any) => {
-      console.log('fomn res', _res);
-      if (_res > 0) {
-        this.mode = 'edit';
-      }
-      // this.edit();
-    });
   }
 
   /**
@@ -148,7 +120,7 @@ export class EventsAddComponent implements OnInit {
    */
   edit(id: number) {
     this.eventService.getFormValues(id)
-      .pipe(takeUntil(this.unsubscribe$)).subscribe((_res: any) => {
+      .pipe(takeUntilDestroyed(this.unsubscribe$)).subscribe((_res: any) => {
         this.form.patchValue(_res);
         this.fileList = [
           {
@@ -159,11 +131,15 @@ export class EventsAddComponent implements OnInit {
           },
         ];
         this.previewImage = _res.image;
-        const BSDate = this._nepaliDatepickerService.BSToAD(
-          _res.eventDate,
-          'yyyy/mm/dd'
-        );
-        this.date = new Date(BSDate);
+        if (_res.eventDate) {
+          const BSDate = this._nepaliDatepickerService.BSToAD(
+            _res.eventDate,
+            'yyyy/mm/dd'
+          );
+          this.date = new Date(BSDate);
+        } else {
+          this.date = new Date();
+        }
         this.changeDetector.detectChanges();
       });
   }
@@ -230,13 +206,11 @@ export class EventsAddComponent implements OnInit {
 
   onSave() {
     this.checkNull('eventDate');
-    this.isLoading = true;
     console.log('form val', this.form.value);
 
     this.event$ = this.eventService
       .addEvent(this.form.value);
-
-    this.event$.pipe(takeUntil(this.unsubscribe$))
+    this.event$.pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
         console.log('res', _res);
         if (_res) {

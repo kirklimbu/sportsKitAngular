@@ -74,39 +74,6 @@ nz-select {
   border: 1px solid lightgray;
 }
 
-// .title {
-//   font-size: 28px;
-//   color: $primary-color;
-//   font-weight: 600;
-//   letter-spacing: -1px;
-//   position: relative;
-//   display: flex;
-//   align-items: center;
-//   padding-left: 30px;
-// }
-
-// .title::before,
-// .title::after {
-//   position: absolute;
-//   content: '';
-//   height: 16px;
-//   width: 16px;
-//   border-radius: 50%;
-//   left: 0px;
-//   background-color: $primary-color;
-// }
-
-// .title::before {
-//   width: 18px;
-//   height: 18px;
-//   background-color: $primary-color;
-// }
-
-// .title::after {
-//   width: 18px;
-//   height: 18px;
-//   animation: pulse 1s linear infinite;
-// }
 
 .message,
 .signin {
@@ -126,27 +93,6 @@ nz-select {
   text-decoration: underline $primary-color;
 }
 
-
-.ticket {
-  font-weight: bold;
-}
-
-@keyframes pulse {
-  from {
-    transform: scale(0.9);
-    opacity: 1;
-  }
-
-  to {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-
-.required {
-  font-size: 12px;
-  font-weight: bold;
-}
 
 @media (width<=576px) {
   .memberentry-section {

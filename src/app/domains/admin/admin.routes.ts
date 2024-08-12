@@ -18,7 +18,15 @@ import { FEATURE_TRAINEE_ROUTES } from '../trainee/trainee.routes';
 export const FEATURE_ADMIN_ROUTES: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
+    redirectTo: '/admin/user-profile',
+    pathMatch: 'full',
+  },
+  {
+    canActivate: [hasRoleGuard],
+    data: {
+      roles: [Role.ADMIN],
+    },
+    path: "",
     loadChildren: () =>
       import('../members').then((m) => FEATURE_MEMBERS_ROUTES),
   },
@@ -71,6 +79,11 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
     },
     path: 'profile',
     component: OrganizationComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '/admin/user-profile',
+    pathMatch: 'full',
   },
 
 ];

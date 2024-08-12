@@ -1,3 +1,4 @@
+import { ITraining } from 'src/app/domains/training/data/model/training.model';
 import { ChangeDetectorRef, Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -14,7 +15,7 @@ import { TrainingService } from '../data/services/training.service';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
-import { ITraining } from '../data/model/training.model';
+
 
 @Component({
   selector: 'app-add-training',

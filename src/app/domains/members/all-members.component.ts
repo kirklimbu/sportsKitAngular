@@ -26,6 +26,9 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { Role } from 'src/app/shared/util-auth/models/user.model';
+import { Store } from '@ngxs/store';
+import { AuthState } from '../auth/login/state/login.state';
 
 
 interface DataItem {
@@ -58,6 +61,9 @@ interface DataItem {
 
 })
 export class AllMembersComponent implements OnInit {
+
+  // props
+  userRole: Role | undefined
   data$!: Observable<IMember[]>;
 
 
@@ -65,11 +71,16 @@ export class AllMembersComponent implements OnInit {
   private readonly memberService = inject(MemberService);
   private readonly cd = inject(ChangeDetectorRef);
   private readonly router = inject(Router);
+  private readonly store = inject(Store);
 
   ngOnInit(): void {
+    this.checkUser();
     this.fetchMembers();
   }
 
+  private checkUser(): void {
+    this.userRole = this.store.selectSnapshot(AuthState.userRole);
+  }
 
   private fetchMembers(): void {
     this.data$ = this.memberService.getAllMembers();
@@ -77,7 +88,7 @@ export class AllMembersComponent implements OnInit {
 
 
 
-  onViewMore(id: number) {
+  onViewMore(id: number): void {
     this.router.navigate(['/admin/user-profile'], { queryParams: { memberId: id } })
   }
 

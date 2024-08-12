@@ -12,7 +12,7 @@
 
 
     @if(data$|async;as data ){
-
+    @if(userRole==='Admin'){
     <div class="site-page-header-ghost-wrapper">
         <nz-page-header [nzGhost]="false">
             <!-- <nz-page-header-title>Title</nz-page-header-title> -->
@@ -28,6 +28,8 @@
 
         </nz-page-header>
     </div>
+    }
+
 
     <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
         [nzScroll]="{ x: '900px', y: '635px' }">
@@ -51,12 +53,12 @@
 
             <tr>
 
-                <td>{{ training.title |titlecase }}</td>
-                <td>
+                <td (click)="onViewMore(training.trainingMasterId)">{{ training.title |titlecase }}</td>
+                <td (click)="onViewMore(training.trainingMasterId)">
 
                     {{ training.trainer|titlecase }}
                 </td>
-                <td>
+                <td (click)="onViewMore(training.trainingMasterId)">
                     {{training.type}}
                 </td>
 
@@ -90,10 +92,16 @@
                                 nz-button nzType="primary" nzGhost (click)="onViewMore(training.trainingMasterId)">
                                 <span nz-icon nzType="eye"></span>
                             </button>
+                            @if (userRole==='Admin') {
+                            <button *nzSpaceItem nzTooltipTitle="Add " nzTooltipPlacement="topLeft" nz-tooltip
+                                nz-button><span nz-icon nzType="plus" (click)="onAddDetail(training.trainingMasterId)">
+                                </span>
+                            </button>
                             <button *nzSpaceItem nzTooltipTitle="Edit " nzTooltipPlacement="topLeft" nz-tooltip
                                 nz-button><span nz-icon nzType="edit" (click)="onEdit(training.trainingMasterId)">
                                 </span>
                             </button>
+                            }
                         </nz-space>
 
                     </div>

@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
 })
 export class UserDetailsService {
 
-  isAuthenticated$!: Observable<boolean>;
+  // isAuthenticated$!: Observable<boolean>;
 
-  store = inject(Store)
+  private readonly store = inject(Store)
 
   getUserStatus() {
     const isAuthenticated$ = this.store.select(AuthState.isAuthenticated);
@@ -33,7 +33,6 @@ export class UserDetailsService {
     const role = this.store.selectSnapshot(AuthState.userRole);
     return role;
   }
-
 
   getUserDetails(): LoginResponseDto {
     const user = this.store.selectSnapshot(AuthState.userDetails);
