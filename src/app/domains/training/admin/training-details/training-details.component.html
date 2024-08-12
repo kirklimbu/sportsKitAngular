@@ -13,6 +13,7 @@
 
     @if(data$|async;as data ){
 
+    @if(userRole=='Admin'){
     <div class="site-page-header-ghost-wrapper">
         <nz-page-header [nzGhost]="false">
             <!-- <nz-page-header-title>Title</nz-page-header-title> -->
@@ -28,6 +29,7 @@
 
         </nz-page-header>
     </div>
+    }
 
     <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
         [nzScroll]="{ x: '600px', y: '635px' }">
@@ -66,11 +68,13 @@
                                 (click)="onViewMore(training.trainingMasterId,training.trainingDetailId)">
                                 <span nz-icon nzType="eye"></span>
                             </button>
+                            @if(userRole=='Admin'){
                             <button *nzSpaceItem nzTooltipTitle="Edit " nzTooltipPlacement="topLeft" nz-tooltip
                                 nz-button (click)="onEdit(training.trainingMasterId,training.trainingDetailId)"><span
                                     nz-icon nzType="edit">
                                 </span>
                             </button>
+                            }
                         </nz-space>
 
                     </div>

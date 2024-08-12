@@ -111,7 +111,7 @@ export class UserProfileComponent implements OnInit {
       .subscribe((_res: any) => {
         console.log('fomn res', _res);
         if (_res.traineeId > 0) {
-          this.getTraineeDetails(_res.userId)
+          this.getTraineeDetails(_res.traineeId)
         } else if (_res.memberId > 0) {
           this.getMemberDetails(_res.memberId)
         } else {

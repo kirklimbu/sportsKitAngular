@@ -84,7 +84,7 @@ export class TrainingComponent {
         if (!res) {
           this.router.navigate(['/auth/login'])
         } else {
-          this.router.navigate(['/auth/login'])
+          this.router.navigate(['/admin/trainee'])
 
         }
       });

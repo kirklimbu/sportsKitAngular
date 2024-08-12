@@ -20,6 +20,9 @@ import { TrainingService } from '../../data/services/training.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ITrainingDetail2 } from '../../data/model/training-detail2.model';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { Role } from 'src/app/shared/util-auth/models/user.model';
+import { Store } from '@ngxs/store';
+import { AuthState } from 'src/app/domains/auth/login/state/login.state';
 
 
 @Component({
@@ -48,6 +51,7 @@ export class TrainingDetailsComponent implements OnInit {
 
   //props
   mode = 'add'
+  userRole: Role | undefined;
   trainingMasterId!: number;
   trainingId$!: Observable<any>
   data$!: Observable<ITrainingDetail2[]>
@@ -55,9 +59,16 @@ export class TrainingDetailsComponent implements OnInit {
   private route = inject(ActivatedRoute)
   private readonly destroy$ = inject(DestroyRef)
   private readonly trainingService = inject(TrainingService)
+  private readonly store = inject(Store);
 
   ngOnInit(): void {
+
+    this.checkUser()
     this.checkFormStatus()
+  }
+
+  checkUser(): void {
+    this.userRole = this.store.selectSnapshot(AuthState.userRole);
   }
   private checkFormStatus() {
     this.trainingId$ = this.route.queryParamMap.pipe(

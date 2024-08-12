@@ -68,6 +68,9 @@ export class AddTrainingDetailsComponent {
     this.checkFormStatus();
   }
 
+
+
+
   private buildForm() {
     this.form = this.fb.group({
       trainingDetailId: [0],
