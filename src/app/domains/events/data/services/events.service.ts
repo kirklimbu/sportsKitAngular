@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 import { toFormData } from 'src/app/shared/util-common/toFormData';
 import { environment } from 'src/environments/environment';
+import { IEvents } from '../events.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,16 +18,16 @@ export class EventsService {
   }
 
   // getFormValues;
-  getFormValues(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}auth/event/form?eventId=${id}`);
+  getFormValues(id: number): Observable<IEvents> {
+    return this.http.get<IEvents>(`${this.apiUrl}auth/event/form?eventId=${id}`);
   }
 
-  addEvent(form: any) {
+  addEvent(form: any): Observable<CustomResponse> {
     const formData = new FormData();
     formData.append('form', JSON.stringify(form));
     formData.append('file', form.file);
 
-    return this.http.post<any[]>(`${this.apiUrl}auth/event/save`, formData);
+    return this.http.post<CustomResponse>(`${this.apiUrl}auth/event/save`, formData);
   }
 
   addEventImage(file: any) {

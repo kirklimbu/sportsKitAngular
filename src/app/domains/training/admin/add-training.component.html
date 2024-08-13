@@ -31,14 +31,14 @@
             <div class="flex">
                 <label>
                     <span class="required" for="dob">Start Date</span>
-                    <ne-datepicker language="en" [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event,'start')"
-                        (dateInAD)="updateEnglishDate($event,'start')">
+                    <ne-datepicker language="en" [date]="startDate" dateIn="AD"
+                        (dateInBS)="updateNepaliDate($event,'start')" (dateInAD)="updateEnglishDate($event,'start')">
                     </ne-datepicker>
                 </label>
                 <label>
                     <span class="required" for="dob">End Date</span>
-                    <ne-datepicker language="en" [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event,'end')"
-                        (dateInAD)="updateEnglishDate($event,'end')">
+                    <ne-datepicker language="en" [date]="endDate" dateIn="AD"
+                        (dateInBS)="updateNepaliDate($event,'end')" (dateInAD)="updateEnglishDate($event,'end')">
                     </ne-datepicker>
                 </label>
             </div>

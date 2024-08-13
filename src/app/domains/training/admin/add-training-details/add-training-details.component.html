@@ -39,21 +39,7 @@
             <!-- <button class="submit" (click)="addSubDetail()">Add Link</button> -->
             <button nz-button nzShape="round" (click)="addSubDetail()"><span nz-icon nzType="plus"></span></button>
 
-            <!--
-                 <ng-container formArrayName="subDetailList">
-                    @for (link of subDetail.controls; track $index) {
-    
-                    <div [formGroupName]="$index" class="flex">
-                        <label>
-                            <span class="required">Link</span>
-                            <input class="input" type="text" placeholder="" autocomplete="off" formControlName="link" />
-                        </label>
-                        <button class="submit" (click)="removeLink($index)">Remove Link</button>
-    
-                    </div>
-                    }
-                </ng-container> 
-            -->
+
 
             <ng-container formArrayName="subDetailList">
                 @for (link of subDetail.controls; track $index) {
@@ -72,17 +58,20 @@
                             </ul>
                         </div>
 
+                        @if(trainingDetails){
+
                         <nz-list nzItemLayout="vertical">
                             @for (item of trainingDetails.subDetailList; track item) {
                             <div class="video-container">
                                 <nz-list-item>
                                     <nz-list-item-extra>
-                                        <youtube-player [videoId]="item.link" />
+                                        <youtube-player [videoId]="item.ytlink" />
                                     </nz-list-item-extra>
                                 </nz-list-item>
                             </div>
                             }
                         </nz-list>
+                        }
                     </nz-list-item>
                 </nz-list>
                 }
@@ -112,7 +101,7 @@
     <div class="video-container">
         <nz-list>
             <nz-list-item>
-                <youtube-player [videoId]="item.link" />
+                <youtube-player [videoId]="item.ytlink" />
             </nz-list-item>
         </nz-list>
     </div>

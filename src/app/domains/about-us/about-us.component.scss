@@ -1,5 +1,6 @@
 @import 'src/assets/scss/_variables.scss';
 
+
 .image-section {
   position: relative;
   box-sizing: border-box;
@@ -39,6 +40,21 @@ p {
 
   overflow: hidden;
   transition: opacity linear 1s, width linear 1s;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.content-container {
+  animation: fadeOut 3s forwards;
+  animation-timeline: scroll(block nearest);
 }
 
 /* Small devices such as large phones (640px and up) */

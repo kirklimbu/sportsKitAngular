@@ -1,4 +1,7 @@
 import { Routes } from '@angular/router';
+import { EventsListComponent } from 'src/app/domains/events/admin/events-list/events-list.component';
+import { EventsComponent } from 'src/app/domains/events/events.component';
+import { TotalEventsComponent } from 'src/app/domains/events/total-events/total-events.component';
 import { PrivacyPolicyComponent } from 'src/app/domains/privacy-policy/privacy-policy.component';
 import { TraineeComponent } from 'src/app/domains/trainee/trainee.component';
 import { TrainingComponent } from 'src/app/domains/training/training.component';
@@ -21,12 +24,19 @@ export const COMMON_LAYOUT_ROUTES: Routes = [
         },
         loadChildren: () => import('./../../domains/home').then(m => m.FEATURE_HOME_ROUTES),
     },
+    // {
+    //     path: 'events',
+    //     data: {
+    //         breadcrumb: 'Events'
+    //     },
+    //     loadChildren: () => import('./../../domains/events').then(m => m.FEATURE_EVENTS_ROUTES),
+    // },
     {
         path: 'events',
         data: {
-            breadcrumb: 'Events'
+            breadcrumb: 'events'
         },
-        loadChildren: () => import('./../../domains/events').then(m => m.FEATURE_EVENTS_ROUTES),
+        component: TotalEventsComponent,
     },
     {
         path: 'training',

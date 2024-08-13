@@ -1,9 +1,11 @@
 @if(data){
 
 <section id="about-us" class="content-container animate__animated animate__fadeInUp animate__delay-2s animate__slower">
-  <app-spinner />
-  <!-- @for(content of data; track $index){ -->
 
+  <!-- @for(content of data; track $index){ -->
+  <div class="image-section">
+    <img [ngSrc]="data.image" alt="About us" loading="lazy" height="400" width="400" />
+  </div>
   <div class="message-section">
     <div class="sub-title">
       <span>{{ data.subTitle }} </span>
@@ -36,9 +38,7 @@
       {{ show ? 'Show less' : 'Show more' }}
     </button>
   </div>
-  <div class="image-section">
-    <img [ngSrc]="data.image" alt="About us" loading="lazy" height="400" width="400" />
-  </div>
+
   <!-- } -->
 </section>
 }

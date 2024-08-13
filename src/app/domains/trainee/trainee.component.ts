@@ -22,6 +22,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Role } from 'src/app/shared/util-auth/models/user.model';
 import { Store } from '@ngxs/store';
 import { AuthState } from '../auth/login/state/login.state';
+import { TitleCaseDirective } from 'src/app/shared/util-common/directives/titleCase.directive';
 
 export interface AutocompleteOptionGroups {
   title: string;
@@ -46,7 +47,9 @@ export interface AutocompleteOptionGroups {
     NzPageHeaderModule,
     NzSpaceModule,
     NzAutocompleteModule,
-    NzSelectModule
+    NzSelectModule,
+    // project
+    // TitleCaseDirective
   ],
   templateUrl: './trainee.component.html',
   styleUrl: './trainee.component.scss',

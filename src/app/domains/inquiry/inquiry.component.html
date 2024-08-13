@@ -1,0 +1,38 @@
+<section>
+    <div *ngIf="data$|async as table">
+
+        <nz-table #borderedTable nzBordered nzTitle="Student Inquiry List" [nzData]="table" [nzFrontPagination]="false">
+            <thead>
+                <tr>
+                    <th>Sn.</th>
+                    <th>Name</th>
+                    <th>Subject</th>
+                    <th>Remarks</th>
+                    <th>Mobile</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (data of borderedTable.data; track data.name;let i = $index) {
+                <tr>
+                    <td>{{ i+1}}.</td>
+                    <td>{{ data.name }}</td>
+                    <td>{{ data.type |titlecase}}</td>
+                    <td>{{ data.remarks }}</td>
+                    <td>{{ data.mobile }}</td>
+                    <td>{{ data.email }}</td>
+                    <td></td>
+                </tr>
+
+                }
+                @empty {
+                <tr>
+                    No data found.
+                </tr>
+                }
+
+            </tbody>
+        </nz-table>
+    </div>
+</section>

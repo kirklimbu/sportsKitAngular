@@ -19,7 +19,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormSubmitButtonsComponent } from 'src/app/shared/ui-common/form-submit-buttons/form-submit-buttons.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { map, takeUntil } from 'rxjs';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
@@ -59,7 +59,7 @@ export class AddOrganizationComponent implements OnInit {
   private readonly messageService = inject(MessageService);
   private readonly organizationService = inject(OrganizationService);
   private readonly destoyref$ = inject(DestroyRef);
-  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly unsubscribe$ = inject(DestroyRef);
 
   ngOnInit(): void {
@@ -100,28 +100,25 @@ export class AddOrganizationComponent implements OnInit {
             url: _res.logo,
           },
         ];
-        this.previewImage = _res.logo;
+
       });
   }
 
   onSave() {
-    // this.isLoading = true;
-    console.log('form val', this.form.value);
 
     this.organizationService
       .addOrganization(this.form.value)
       .pipe(takeUntilDestroyed(this.destoyref$))
       .subscribe((_res: any) => {
-        console.log('res', _res);
 
         if (_res) {
-          // route to vendor home page
+
           this.messageService.createMessage(
             'success',
             'Organization details added successfully.'
           );
           // this.onCancel();
-          this.form.reset();
+          this.router.navigate(['admin/profile'])
         }
       });
   }
@@ -136,7 +133,7 @@ export class AddOrganizationComponent implements OnInit {
       file: info?.['file']?.originFileObj,
     });
 
-    // on Delete
+
   }
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {

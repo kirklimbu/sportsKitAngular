@@ -18,4 +18,5 @@ export interface ITrainingSubDetail {
     trainingDetailId: number;
     trainingMasterId: number;
     link: string;
+    ytlink: string;
 }

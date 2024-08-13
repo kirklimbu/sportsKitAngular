@@ -1,3 +1,4 @@
+
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -7,6 +8,7 @@ import {
   inject,
   OnInit,
   DestroyRef,
+
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -16,7 +18,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { map, takeUntil } from 'rxjs/operators';
+import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { Observable, ReplaySubject, of } from 'rxjs';
 
@@ -48,6 +50,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { EventsListComponent } from '../events-list/events-list.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -85,7 +88,7 @@ export class EventsAddComponent implements OnInit {
   previewVisible = false;
   showButton = true;
   fileList: any[] = [];
-  date: any = new Date();
+  date: any;
 
   form!: FormGroup;
   addedFiles: any[] = [];
@@ -96,51 +99,71 @@ export class EventsAddComponent implements OnInit {
 
   private _nepaliDatepickerService = inject(NepaliDatepickerService);
   private readonly unsubscribe$ = inject(DestroyRef)
-
-  constructor(
-    private readonly changeDetector: ChangeDetectorRef,
-    private fb: FormBuilder,
-    private eventService: EventsService,
-    private messageService: MessageService,
-
-  ) { }
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
+  private readonly fb = inject(FormBuilder);
+  private readonly messageService = inject(MessageService);
+  private readonly eventService = inject(EventsService)
+  private readonly cd = inject(ChangeDetectorRef)
 
   ngOnInit(): void {
     this.buildForm();
-    this.edit(0);
+    this.checkFormStatus();
   }
 
   get f() {
     return this.form.controls;
   }
 
+
+
+  private checkFormStatus() {
+    this.eventId$ = this.route.queryParamMap.pipe(
+      map((params: ParamMap) => Number(params.get('id')))
+    );
+    this.eventId$.pipe(takeUntilDestroyed(this.unsubscribe$))
+      .subscribe((_res: any) => {
+        console.log('event add res', _res);
+
+        if (_res > 0) this.mode = 'edit';
+        this.edit();
+      });
+  }
+
+
   /**
    *
    * edit
    */
-  edit(id: number) {
-    this.eventService.getFormValues(id)
-      .pipe(takeUntilDestroyed(this.unsubscribe$)).subscribe((_res: any) => {
+  edit() {
+    this.event$ = this.eventId$.pipe(
+      switchMap((query: number) => this.eventService.getFormValues(query))
+    );
+    this.event$.pipe(takeUntilDestroyed(this.unsubscribe$))
+      .subscribe((_res: any) => {
+        console.log('res', _res);
+
         this.form.patchValue(_res);
+        if (_res.form.eventId == 0) {
+          this.fileList = []
+          this.previewImage = _res.form.profilePic;
+          this.date = null;
+          return;
+        }
+
         this.fileList = [
           {
-            eventId: _res.eventId,
-            name: _res.title,
+            traineeId: _res.form.eventId,
+            name: _res.form.title,
             status: 'done',
-            url: _res.image,
+            url: _res.form.image,
           },
         ];
-        this.previewImage = _res.image;
-        if (_res.eventDate) {
-          const BSDate = this._nepaliDatepickerService.BSToAD(
-            _res.eventDate,
-            'yyyy/mm/dd'
-          );
-          this.date = new Date(BSDate);
-        } else {
-          this.date = new Date();
-        }
-        this.changeDetector.detectChanges();
+        const BSDate = this._nepaliDatepickerService.BSToAD(
+          _res.form.eventDate,
+          'yyyy/mm/dd'
+        );
+        this.date = new Date(BSDate);
       });
   }
 
@@ -178,11 +201,6 @@ export class EventsAddComponent implements OnInit {
     );
   }
 
-  private resetForm(): void {
-    this.form.reset();
-    this.date = new Date();
-    this.fileList = [];
-  }
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {
 
@@ -205,21 +223,21 @@ export class EventsAddComponent implements OnInit {
   }
 
   onSave() {
-    this.checkNull('eventDate');
+    // this.checkNull('eventDate');
     console.log('form val', this.form.value);
 
     this.event$ = this.eventService
       .addEvent(this.form.value);
     this.event$.pipe(takeUntilDestroyed(this.unsubscribe$))
-      .subscribe((_res: any) => {
+      .subscribe((_res: CustomResponse) => {
         console.log('res', _res);
         if (_res) {
 
           this.messageService.createMessage(
             'success',
-            'Event added successfully.'
+            _res.message
           );
-          this.resetForm();
+          this.router.navigate(['/admin/events'])
         }
       });
   }

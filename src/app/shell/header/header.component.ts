@@ -7,6 +7,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { RouterModule } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { RouterLinkActive } from '@angular/router';
+
 
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
@@ -29,7 +31,7 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
         // ng
         RouterModule,
         CommonModule,
-
+        RouterLinkActive,
         NgOptimizedImage,
         // third-party
         NzAvatarModule,
@@ -58,6 +60,7 @@ export class HeaderComponent {
     isExpand!: boolean;
     size = '12px'
 
+    clicked: boolean = false;
 
     @Input() data!: any
 
@@ -66,8 +69,6 @@ export class HeaderComponent {
     private readonly destroyRef = inject(DestroyRef);
     private homeService = inject(HomeService)
     // private store = inject(Store)
-
-
 
 
 

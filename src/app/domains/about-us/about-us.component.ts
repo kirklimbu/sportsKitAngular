@@ -6,7 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { SanitizeHtmlPipe } from "../../shared/util-common/pipes/sanitize-html.pipe";
 import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
-import { SpinnerComponent } from 'src/app/shared/ui-common/spinner/spinner.component';
+
 
 
 @Component({
@@ -17,8 +17,8 @@ import { SpinnerComponent } from 'src/app/shared/ui-common/spinner/spinner.compo
     NzButtonModule,
     NgOptimizedImage,
     SanitizeHtmlPipe,
-    TruncatePipe,
-    SpinnerComponent
+    TruncatePipe
+
   ],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.scss'

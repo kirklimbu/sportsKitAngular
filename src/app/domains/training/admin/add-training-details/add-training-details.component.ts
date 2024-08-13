@@ -7,11 +7,11 @@ import { ReactiveFormsModule, FormGroup, FormBuilder, Validators, FormArray } fr
 import { NepaliDatepickerModule, NepaliDatepickerService } from 'nepali-datepicker-angular';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, distinctUntilChanged, map, shareReplay, switchMap } from 'rxjs';
 import { converterDate } from 'src/app/shared/util-logger/convert-date';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
 
-import { ActivatedRoute, ParamMap, RouterModule } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
@@ -19,6 +19,7 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { ITrainingDetail } from '../../data/model/training-detail.model';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { YouTubePlayer } from '@angular/youtube-player';
+import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 
 @Component({
   selector: 'app-add-training-details',
@@ -35,8 +36,9 @@ import { YouTubePlayer } from '@angular/youtube-player';
     NzPageHeaderModule,
     NzSpaceModule,
     NepaliDatepickerModule,
+    NzModalModule,
     NzListModule,
-    YouTubePlayer
+    YouTubePlayer,
   ],
   templateUrl: './add-training-details.component.html',
   styleUrl: './add-training-details.component.scss'
@@ -45,11 +47,12 @@ export class AddTrainingDetailsComponent {
   form!: FormGroup;
   mode = 'add';
   videoId!: string;
+  trainingMasterId!: number;
   showDetails = 'false'
   trainingDetails!: ITrainingDetail;
   fileList: any[] = [];
-  date: any = new Date();
-
+  date: any;
+  items: any;
 
 
   trainingDetails$!: Observable<ITrainingDetail2[]>
@@ -60,15 +63,14 @@ export class AddTrainingDetailsComponent {
   private readonly messageService = inject(MessageService)
   private readonly trainingService = inject(TrainingService)
   private readonly route = inject(ActivatedRoute)
-  items: any;
+  private readonly modal = inject(NzModalService)
+  private readonly router = inject(Router);
 
 
   ngOnInit(): void {
     this.buildForm();
     this.checkFormStatus();
   }
-
-
 
 
   private buildForm() {
@@ -79,12 +81,12 @@ export class AddTrainingDetailsComponent {
       description: [''],
       startDate: [],
       subDetailList: this.fb.array([
-        this.fb.group({
-          link: [''],
-          trainingSubDetailId: [],
-          trainingDetailId: [],
-          trainingMasterId: [],
-        })
+        // this.fb.group({
+        //   link: [''],
+        //   trainingSubDetailId: [],
+        //   trainingDetailId: [],
+        //   trainingMasterId: [],
+        // })
       ])
     });
   }
@@ -100,19 +102,50 @@ export class AddTrainingDetailsComponent {
 
   // // Helper method to get the 'subItems' FormArray inside an 'item'
   addSubDetail() {
-    const subDetail = this.fb.group({
+    let subDetail: FormGroup = this.fb.group({
       link: [''],
       trainingSubDetailId: [],
       trainingDetailId: [],
       trainingMasterId: [],
-    });
+    })
+    subDetail.controls['link']
+      .valueChanges
+      .pipe(distinctUntilChanged(),
+        shareReplay(1),
+        takeUntilDestroyed(this.unsubscribe$))
+      .subscribe(value => {
+        console.log('link change', value);
+      });
+
 
     // Add the new sub-item form group to the nested FormArray
     this.subDetail.push(subDetail);
   }
 
   removeLink(i: number) {
-    this.subDetail.removeAt(i);
+    // this.subDetail.removeAt(i);
+    this.delete(i)
+  }
+
+  delete(i: number) {
+    console.log('number', i);
+    this.modal.confirm({
+      nzTitle: 'Are you sure delete this link?',
+      nzContent: '<b style="color: red;">Deleted links cannot be recovered.</b>',
+      nzOkText: 'Delete',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: (res) => {
+        console.log('ok', res);
+        this.subDetail.removeAt(i);
+
+      },
+      nzCancelText: 'Cancel',
+      nzOnCancel: (cancel) => {
+        console.log('Cancel', cancel);
+      }
+    });
+
   }
 
 
@@ -126,10 +159,14 @@ export class AddTrainingDetailsComponent {
       }
       )
     );
-    this.trainingMasterId$.pipe(takeUntilDestroyed(this.unsubscribe$))
+    this.trainingMasterId$
+      .pipe(
+        distinctUntilChanged(),
+        shareReplay(1),
+        takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
         console.log('res', _res);
-
+        this.trainingMasterId = _res.trainingMasterId
         this.showDetails = _res.showDetails;
         this.edit();
       });
@@ -140,22 +177,30 @@ export class AddTrainingDetailsComponent {
     this.trainingDetails$ = this.trainingMasterId$.pipe(
       switchMap((query: number) => this.trainingService.getDetailFormValues(query))
     );
-    this.trainingDetails$.pipe(takeUntilDestroyed(this.unsubscribe$))
+    this.trainingDetails$
+      .pipe(
+        distinctUntilChanged(),
+        shareReplay(1),
+        takeUntilDestroyed(this.unsubscribe$),
+      )
       .subscribe((_res: any) => {
-        console.log('res', _res);
+        // console.log('default form res', _res);
         this.form.patchValue(_res.form);
         // this.trainingDetails = _res.form
-        if (this.showDetails == 'true') {
-        }
-        this.getYoutubeVideoLink(_res)
-        if (_res.form.subDetailList) {
-          _res.form.subDetailList.forEach((detail: string) => {
-            this.subDetail.push(this.fb.group(detail))
-          });
-        }
 
+        this.getYoutubeVideoLink(_res);
+
+        // patch formArray on edit
+        _res.form.subDetailList.forEach((detail: string) => {
+          console.log('link', detail);
+
+          this.subDetail.push(this.fb.group(detail))
+        });
+
+
+        // date
         if (!_res.form.startDate) {
-          this.date = new Date();
+          // this.date = new Date();
           return;
         }
         const BSDate = this._nepaliDatepickerService.BSToAD(
@@ -170,17 +215,17 @@ export class AddTrainingDetailsComponent {
 
   getYoutubeVideoLink(data: any) {
     // console.log('data', data);
-
+    // start from here
     const regex = /^https?:\/\/(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/|v\/|)([^&\s]+)/;
     this.trainingDetails = data.form
     this.trainingDetails.subDetailList.forEach((subDetail: any) => {
       const match = subDetail.link.match(regex);
       if (match && match[1]) {
-        subDetail.link = match[1];
+        subDetail.ytlink = match[1];
       }
 
+      console.log('fila data', this.trainingDetails);
     });
-    console.log('fila data', this.trainingDetails);
   }
 
   // nepali date picker
@@ -212,7 +257,9 @@ export class AddTrainingDetailsComponent {
             'success',
             _res.message
           );
-          this.resetForm();
+          // trainingMasterId
+          this.router.navigate(['admin/training/detail'], { queryParams: { id: this.trainingMasterId } })
+
         }
       });
   }

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ITraining } from '../model/training.model';
 import { ITrainingDetail } from '../model/training-detail.model';
 import { ITrainingDetail2 } from '../model/training-detail2.model';
+import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,10 @@ export class TrainingService {
     );
   }
 
-  saveTraining(training: ITraining): Observable<ITraining[]> {
+  saveTraining(training: ITraining): Observable<CustomResponse> {
     console.log('saving training',);
 
-    return this.http.post<ITraining[]>(
+    return this.http.post<CustomResponse>(
       `${this.apiUrl}auth/training/master/save`, { ...training }
     );
   }

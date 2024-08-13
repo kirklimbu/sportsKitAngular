@@ -12,6 +12,24 @@
 
 
   @if(data$|async;as data ){
+  @if (userRole==='Admin') {
+  <div class="site-page-header-ghost-wrapper">
+    <nz-page-header [nzGhost]="false">
+      <!-- <nz-page-header-title>Title</nz-page-header-title> -->
+      <!-- <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle> -->
+      <nz-page-header-extra>
+        <nz-space>
+          <!-- <button *nzSpaceItem nz-button>Operation</button> -->
+          <!-- <button *nzSpaceItem nz-button>Operation</button> -->
+          <button *nzSpaceItem nz-button nzType="primary" routerLink="/admin/events/add-event"><span nz-icon
+              nzType="plus" nzTheme="outline"></span>Add</button>
+        </nz-space>
+      </nz-page-header-extra>
+
+    </nz-page-header>
+  </div>
+
+  }
 
   <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
     [nzScroll]="{ x: '600px', y: '635px' }">
@@ -71,8 +89,9 @@
 
               <button *nzSpaceItem nzTooltipTitle="Edit" nzTooltipPlacement="topLeft" nz-tooltip nz-button
                 nzType="primary" nzGhost (click)="onEdit(member.eventId)"><span nz-icon nzType="form"></span></button>
-              <button *nzSpaceItem nzTooltipTitle="Delete" nzTooltipPlacement="topLeft" nz-tooltip nz-button
-                nzDanger><span nz-icon nzType="delete"></span></button>
+              <!-- <button *nzSpaceItem nzTooltipTitle="Delete" nzTooltipPlacement="topLeft" nz-tooltip nz-button
+                nzDanger><span nz-icon nzType="delete"></span>
+              </button> -->
             </nz-space>
           </div>
         </td>

@@ -11,6 +11,7 @@ import { FEATURE_USERS_ROUTES } from '../user/users.routes';
 import { FEATURE_PAYMENT_ROUTES } from '../payment/payment.routes';
 import { FEATURE_TRAINING_ROUTES } from '../training/training.routes';
 import { FEATURE_TRAINEE_ROUTES } from '../trainee/trainee.routes';
+import { InquiryComponent } from '../inquiry/inquiry.component';
 
 // import { DashboardComponent } from '../dashboard/dashboard.component';
 // import { InquiryComponent } from '../inquiry/inquiry.component';
@@ -72,6 +73,15 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
     path: 'organization',
     component: AddOrganizationComponent,
   },
+  {
+    canActivate: [hasRoleGuard],
+    data: {
+      roles: [Role.ADMIN],
+    },
+    path: 'inquiry',
+    component: InquiryComponent,
+  },
+
   {
     canActivate: [hasRoleGuard],
     data: {

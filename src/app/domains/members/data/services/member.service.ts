@@ -20,13 +20,13 @@ export class MemberService {
     );
   }
 
-  saveMember(qustion: any): Observable<IMember[]> {
+  saveMember(qustion: any): Observable<CustomResponse> {
     console.log('saving memeber', qustion);
     const formData = new FormData();
     formData.append('form', JSON.stringify(qustion));
     formData.append('file', qustion.file);
     console.log('fsdfa', formData);
-    return this.http.post<IMember[]>(
+    return this.http.post<CustomResponse>(
       `${this.apiUrl}auth/member/save`,
       formData
     );

@@ -9,12 +9,13 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { Observable, map, switchMap } from 'rxjs';
 
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MemberService } from '../../members/data/services/member.service';
 import { TrainingService } from '../data/services/training.service';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class AddTrainingComponent implements OnInit {
   // props
   mode = 'add';
   form!: FormGroup;
-  date: any = new Date();
+  startDate: any;
+  endDate: any;
   trainingId$!: Observable<any>;
   member$!: Observable<any>;
   trainingList$!: Observable<ITraining[]>;
@@ -48,6 +50,7 @@ export class AddTrainingComponent implements OnInit {
   private readonly trainingService = inject(TrainingService);
   private readonly unsubscribe$ = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly cd = inject(ChangeDetectorRef);
   private readonly fb = inject(FormBuilder);
   private readonly messageService = inject(MessageService);
@@ -90,7 +93,6 @@ export class AddTrainingComponent implements OnInit {
     );
     this.trainingId$.pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
-        console.log('rs', _res);
 
         if (_res.trainingMasterId > 0) this.mode = 'edit';
         this.edit();
@@ -120,13 +122,12 @@ export class AddTrainingComponent implements OnInit {
     this.trainingService
       .saveTraining(this.form.value)
       .pipe(takeUntilDestroyed(this.unsubscribe$))
-      .subscribe((user: ITraining[]) => {
+      .subscribe((res: CustomResponse) => {
         this.messageService.createMessage(
           'success',
-          'Training added successfully.'
+          res.message
         );
-        this.form.reset();
-        this.date = new Date();
+        this.router.navigate(['/admin/training'])
 
       });
   }
@@ -139,9 +140,11 @@ export class AddTrainingComponent implements OnInit {
       .subscribe((_res: any) => {
         this.trainingType = _res.trainingTypeList;
         this.form.patchValue(_res.form);
+        // trainingMasterId
+        if (_res.form.trainingMasterId == 0) {
 
-        if (!_res.form.startDate) {
-          this.date = new Date();
+          this.startDate = null;
+          this.endDate = null;
           return;
         }
 
@@ -149,7 +152,14 @@ export class AddTrainingComponent implements OnInit {
           _res.form.startDate,
           'yyyy/mm/dd'
         );
-        this.date = new Date(BSDate);
+        this.startDate = new Date(BSDate);
+        const BSEDate = this._nepaliDatepickerService.BSToAD(
+          _res.form.endDate,
+          'yyyy/mm/dd'
+        );
+        this.endDate = new Date(BSEDate);
+
+
       });
   }
 

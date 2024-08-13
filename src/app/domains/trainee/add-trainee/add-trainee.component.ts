@@ -9,7 +9,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzUploadChangeParam, NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
 import { ITrainee } from '../data/model/trainee.model';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TraineeService } from '../data/services/trainee.service';
@@ -55,12 +55,13 @@ export class AddTraineeComponent {
   trainee$!: Observable<any>;
   traineeList$!: Observable<ITrainee[]>;
   isLoading$!: Observable<boolean>;
-  date: any = new Date();
+  date: any;
 
   private readonly _nepaliDatepickerService = inject(NepaliDatepickerService);
   private readonly traineeService = inject(TraineeService);
   private readonly unsubscribe$ = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly cd = inject(ChangeDetectorRef);
   private readonly fb = inject(FormBuilder);
   private readonly messageService = inject(MessageService);
@@ -151,7 +152,7 @@ export class AddTraineeComponent {
           'success',
           'Trainee added successfully.'
         );
-        this.resetForm()
+        this.router.navigate(['/admin/trainee'])
       });
   }
 
@@ -161,8 +162,20 @@ export class AddTraineeComponent {
     );
     this.member$.pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
+
+        console.log('trainee add', _res);
+
         this.trainingType = _res.memberShipTypeList
         this.form.patchValue(_res.form);
+        // traineeId
+
+        if (_res.form.traineeId == 0) {
+          this.fileList = []
+          this.previewImage = _res.form.profilePic;
+          this.date = null;
+          return;
+        }
+
         this.fileList = [
           {
             traineeId: _res.form.traineeId,
@@ -171,17 +184,12 @@ export class AddTraineeComponent {
             url: _res.form.profilePic,
           },
         ];
-        this.previewImage = _res.form.profilePic;
-        if (_res.form.dob) {
+        const BSDate = this._nepaliDatepickerService.BSToAD(
+          _res.form.dob,
+          'yyyy/mm/dd'
+        );
+        this.date = new Date(BSDate);
 
-          const BSDate = this._nepaliDatepickerService.BSToAD(
-            _res.form.dob,
-            'yyyy/mm/dd'
-          );
-          this.date = new Date(BSDate);
-        } else {
-          this.date = new Date();
-        }
         // this.cd.detectChanges();
       });
   }

@@ -23,11 +23,6 @@ import { CoachesComponent } from '../coaches/coaches.component';
 import { MembersComponent } from '../members/members.component';
 
 import {
-  fadeInUpOnEnterAnimation,
-  slideInDownAnimation,
-  slideInDownOnEnterAnimation,
-} from 'angular-animations';
-import {
   trigger,
   transition,
   style,
@@ -61,18 +56,6 @@ import { GallariesComponent } from '../gallaries/gallaries.component';
     EventsComponent,
   ],
 
-  animations: [
-    trigger('expandableState', [
-      transition(':enter', [
-        style({ height: '0', opacity: 0 }),
-        animate('500ms', style({ height: '*', opacity: 1 })),
-      ]),
-      transition(':leave', [
-        style({ height: '*', opacity: 1 }),
-        animate('500ms', style({ height: '0', opacity: 0 })),
-      ]),
-    ]),
-  ],
 })
 export class HomeComponent implements OnInit {
   bannerData!: any;

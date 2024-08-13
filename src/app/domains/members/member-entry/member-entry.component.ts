@@ -36,6 +36,8 @@ import { IMember } from '../data/models/member.model';
 // import { NepaliDatepickerModule } from 'nepali-datepicker-angular';
 import { NepaliDatepickerModule, NepaliDatepickerService } from 'nepali-datepicker-angular';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TitleCaseDirective } from 'src/app/shared/util-common/directives/titleCase.directive';
+import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -59,6 +61,7 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
     NepaliDatepickerModule,
     // project
     AllMembersComponent,
+    TitleCaseDirective
   ],
   templateUrl: './member-entry.component.html',
   styleUrl: './member-entry.component.scss',
@@ -82,12 +85,13 @@ export class MemberEntryComponent implements OnInit {
   member$!: Observable<any>;
   memberList$!: Observable<IMember[]>;
   isLoading$!: Observable<boolean>;
-  date: any = new Date();
+  date: any = null;
 
   private readonly _nepaliDatepickerService = inject(NepaliDatepickerService);
   private readonly memberService = inject(MemberService);
   private readonly unsubscribe$ = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly cd = inject(ChangeDetectorRef);
   private readonly fb = inject(FormBuilder);
   private readonly messageService = inject(MessageService);
@@ -108,7 +112,7 @@ export class MemberEntryComponent implements OnInit {
   initForm(): FormGroup {
     return (this.form = this.fb.group({
       memberId: [0],
-      address: [0],
+      address: [],
       name: ['', [Validators.required]],
       dob: ['', [Validators.required]],
       memberShipTypeId: ['', [Validators.required]],
@@ -165,15 +169,18 @@ export class MemberEntryComponent implements OnInit {
   // save member
   onSave(): void {
 
+    console.log('form', this.form.value);
+
     this.memberService
       .saveMember(this.form.value)
       .pipe(takeUntilDestroyed(this.unsubscribe$))
-      .subscribe((user: IMember[]) => {
+      .subscribe((res: CustomResponse) => {
         this.messageService.createMessage(
           'success',
-          'Member added successfully.'
+          res.message,
+          7_000
         );
-        this.resetForm();
+        this.router.navigate(['/admin/list-member'])
       });
   }
 
@@ -183,30 +190,33 @@ export class MemberEntryComponent implements OnInit {
     );
     this.member$.pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
+        console.log('memer res', _res);
+
         this.memberShipType = _res.memberShipTypeList
         this.form.patchValue(_res.form);
+        if (_res.form.memberId == 0) {
+          this.fileList = []
+          this.previewImage = _res.form.profilePic;
+          this.date = null;
+          return;
+        }
+
         this.fileList = [
           {
-            memberId: _res.form.memberId,
+            traineeId: _res.form.traineeId,
             name: _res.form.name,
             status: 'done',
             url: _res.form.profilePic,
           },
         ];
-        this.previewImage = _res.form.profilePic;
         const BSDate = this._nepaliDatepickerService.BSToAD(
           _res.form.dob,
           'yyyy/mm/dd'
         );
         this.date = new Date(BSDate);
+
         // this.cd.detectChanges();
       });
-  }
-
-  private resetForm(): void {
-    this.form.reset();
-    this.date = new Date();
-    this.fileList = []
   }
 
 }

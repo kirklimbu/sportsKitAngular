@@ -82,12 +82,16 @@
             }
           }
 
+
+
           .ant-badge {
             color: $body-color;
             font-size: 18px;
           }
 
         }
+
+
 
         &:hover ::before {
           content: "";
@@ -101,12 +105,20 @@
 
     }
 
+
     .nav-left {
       margin-left: 10px;
     }
 
     .nav-right {
       margin-right: 10px;
+
+      li>a:active {
+        color: $gold;
+      }
+
+
+
     }
 
     .desktop-toggle {
