@@ -1,18 +1,12 @@
 @import 'src/assets/scss/_variables.scss';
 
-demo-loadmore-list {
-    min-height: 350px;
-}
-
-.loadmore {
-    text-align: center;
-    margin-top: 12px;
-    height: 32px;
-    line-height: 32px;
-}
 
 ::ng-deep .ant-list-item-action {
     margin-left: 16px;
+}
+
+.ant-card {
+    margin: 4px;
 }
 
 i {

@@ -18,8 +18,9 @@
                 <span class="not-compulsory">Profile pic</span>
                 <label for="">
                     <div class="clearfix">
-                        <nz-upload [nzAction]="''" nzListType="picture-card" [(nzFileList)]="fileList"
-                            [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview"
+                        <nz-upload nzAccept=".png,.jpg,.jpeg" [nzSize]="10000"
+                            [nzFileType]="'image/png,image/jpeg,image/jpg'" nzListType="picture-card"
+                            [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 1"
                             (nzChange)="handleChange($event)">
                             <div>
                                 <span nz-icon nzType="plus"></span>

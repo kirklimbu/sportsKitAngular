@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, DestroyRef, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
@@ -10,7 +10,7 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzTagModule } from 'ng-zorro-antd/tag';
-import { Observable, distinctUntilChanged, shareReplay } from 'rxjs';
+import { Observable, distinctUntilChanged, map, shareReplay } from 'rxjs';
 import { ITrainee } from './data/model/trainee.model';
 import { TraineeService } from './data/services/trainee.service';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
@@ -62,11 +62,13 @@ export interface AutocompleteOptionGroups {
 export class TraineeComponent implements OnInit {
 
   form!: FormGroup;
+  trainingMasterId!: number
+  trainingId$!: Observable<any>;
+
+
   userRole: Role | undefined;
   showAddButton: boolean = false
-  inputValue?: string;
-  optionGroups: AutocompleteOptionGroups[] = [];
-  selectedId!: number
+
   data$!: Observable<ITrainee[]>;
   trainingList$!: Observable<ITraining[]>;
 
@@ -75,15 +77,18 @@ export class TraineeComponent implements OnInit {
   private readonly messageService = inject(MessageService);
   private readonly cd = inject(ChangeDetectorRef);
   private readonly router = inject(Router);
-  private readonly destroy$ = inject(DestroyRef);
+
   private readonly fb = inject(FormBuilder);
   private readonly store = inject(Store);
+  private readonly route = inject(ActivatedRoute);
+  private readonly unsubscribe$ = inject(DestroyRef);
 
 
   ngOnInit(): void {
     this.initForm();
     this.checkUser();
     this.fetchAllTraining();
+    this.checkFormStatus();
   }
 
   checkUser(): void {
@@ -95,11 +100,14 @@ export class TraineeComponent implements OnInit {
     this.form = this.fb.group({
       trainingMasterId: [0],
     })
-    this.form.controls['trainingMasterId']
-      .valueChanges
+
+    //  #TODO Enhance logic on this part
+    //  #BUG DOUBLE API CALL 
+    const id = this.form.controls['trainingMasterId']
+    id.valueChanges
       .pipe(distinctUntilChanged(),
-        shareReplay(1),
-        takeUntilDestroyed(this.destroy$))
+        shareReplay({ bufferSize: 1, refCount: true }),
+        takeUntilDestroyed(this.unsubscribe$))
       .subscribe(value => {
         console.log(value);
         this.showAddButton = false;
@@ -107,17 +115,43 @@ export class TraineeComponent implements OnInit {
       });
 
   }
+
+  private checkFormStatus() {
+    const id$: Observable<{ trainingMasterId: number, traineeId: number }> = this.route.queryParamMap.pipe(
+      map((params: ParamMap) => {
+        const trainingMasterId = Number(params.get('id'))
+        const traineeId = Number(params.get('traineeId'))
+        this.trainingMasterId = trainingMasterId
+        return { trainingMasterId, traineeId }
+      }
+      )
+    )
+    id$.pipe(
+      distinctUntilChanged(),
+      shareReplay({ bufferSize: 1, refCount: true }),
+      takeUntilDestroyed(this.unsubscribe$))
+      .subscribe((_res: any) => {
+        console.log('query res', _res);
+        if (_res.trainingMasterId === 0) return;
+        this.form.patchValue({ trainingMasterId: _res.trainingMasterId })
+        this.onSearch()
+      });
+  }
+
+
   // 2 times api call vayo
 
   onSearch(): void {
     this.showAddButton = false;
     const id = this.form.controls['trainingMasterId'].value
     if (!id) return this.messageService.createMessage('error', 'Please select training.', 4_000);
-    this.data$ = this.traineeService.getAllTrainee(id);
-    this.data$
+    this.data$ = this.traineeService.getAllTrainee(id)
       .pipe(distinctUntilChanged(),
-        shareReplay(1),
-        takeUntilDestroyed(this.destroy$))
+        shareReplay({ bufferSize: 1, refCount: true }),
+      );
+    this.data$
+      .pipe(
+        takeUntilDestroyed(this.unsubscribe$))
       .subscribe(res => {
         console.log(res);
         if (res) {
@@ -129,7 +163,15 @@ export class TraineeComponent implements OnInit {
   }
 
   private fetchAllTraining(): void {
-    this.trainingList$ = this.trainingService.getAllTraining();
+    this.trainingList$ = this.trainingService.getAllTraining()
+      .pipe(
+        shareReplay({ bufferSize: 1, refCount: true }),
+      );
+    // this.trainingList$ = this.trainingService.getAllTraining()
+    //   .pipe(distinctUntilChanged(),
+    //     shareReplay({ bufferSize: 1, refCount: true }),
+    //     takeUntilDestroyed(this.destroy$));
+    // return this.trainingList$;
 
 
   }

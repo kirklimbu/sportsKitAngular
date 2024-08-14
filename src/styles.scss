@@ -96,15 +96,11 @@ span[nz-typography]+span[nz-typography] {
 }
 
 // cards
-[nz-card]:hover {
-  transform: scale(1.01);
-}
 
 .ant-card {
-  margin-bottom: 0;
 
   &:hover {
-    transform: scale(1.01);
+    // transform: scale(1.01);
   }
 }
 

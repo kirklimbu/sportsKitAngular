@@ -84,7 +84,7 @@ export class TrainingComponent {
         if (!res) {
           this.router.navigate(['/auth/login'])
         } else {
-          this.router.navigate(['/admin/trainee'])
+          this.router.navigate(['/admin/trainee'], { queryParams: { id: id } })
 
         }
       });

@@ -3,7 +3,7 @@
     @if ( userProfile.user){
 
     <p class="title" style=" margin-bottom: 24px;">User Profile</p>
-    <nz-descriptions [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 } " nzTitle="Personal">
+    <nz-descriptions nzLayout="vertical" [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 } " nzTitle="Personal">
         <nz-descriptions-item nzTitle=" Name" [nzSpan]="1">
             <p>
 
@@ -33,10 +33,11 @@
 
     @if(userProfile.member){
     <nz-divider></nz-divider>
-    <nz-descriptions [nzExtra]="memberButtons" [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
-        nzTitle="Member Details">
-        <nz-descriptions-item nzTitle="Profile Pic" [nzSpan]="1">
-            <nz-avatar nzIcon="user" [nzSrc]="userProfile.member.profilePic"></nz-avatar>
+    <nz-descriptions nzLayout="vertical" [nzExtra]="memberButtons"
+        [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }" nzTitle="Member Details">
+        <nz-descriptions-item nzTitle="Profile image" [nzSpan]="1">
+            <nz-avatar [nzShape]="'square'" [nzSize]="128" nzIcon="user"
+                [nzSrc]="userProfile.member.profilePic"></nz-avatar>
             <nz-space [nzSize]="12">
             </nz-space>
         </nz-descriptions-item>
@@ -75,9 +76,9 @@
     @for(item of trainee; track $index) {
 
     <nz-divider></nz-divider>
-    <nz-descriptions [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }" nzTitle="Trainee">
+    <nz-descriptions nzLayout="vertical" [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }" nzTitle="Trainee">
         <nz-descriptions-item nzTitle="Profile Pic" [nzSpan]="1">
-            <nz-avatar nzIcon="user" [nzSrc]="item.profilePic"></nz-avatar>
+            <nz-avatar [nzShape]="'square'" [nzSize]="128" nzIcon="user" [nzSrc]="item.profilePic"></nz-avatar>
             <nz-space [nzSize]="12">
             </nz-space> </nz-descriptions-item>
         <nz-descriptions-item nzTitle="Name" [nzSpan]="1">

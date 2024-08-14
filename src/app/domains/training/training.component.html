@@ -1,5 +1,5 @@
 <div class="content-container">
-    <div class="table-container container light animate__animated   animate__slower animate__fadeInUp ">
+    <div class="table-container container light animate__animated  animate__slideInUp ">
 
         <div class="sub-title">
             <span> Training
@@ -12,12 +12,15 @@
         </div>
 
 
-        @if(data$|async;as data ){
+        <!-- @if(data$|async;as data ){ -->
         <nz-list>
             @for (item of data$|async; track item) {
             <!-- <nz-card nzTitle="Pushes open the window" nzSize="small"> And raises the spyglass. </nz-card> -->
-            <nz-ribbon [nzColor]="'red'" [nzPlacement]="'start'" nzText="Active">
-                <nz-card>
+            <!-- @if(item.hasStopReg){ -->
+
+            <nz-ribbon [nzPlacement]="'start'" [nzColor]="item.hasStopReg?'red':'white'"
+                [nzText]="item.hasStopReg?'Active':''">
+                <nz-card nzSize="small">
                     <nz-list-item>
                         <nz-list-item-meta>
                             <nz-list-item-meta-title>
@@ -52,10 +55,13 @@
                                     <i class="fas fa-users"></i>
                                     156
                                 </p>
+                                @if (item.hasStopReg) {
+
                                 <button nz-button nzType="default" nzShape="round"
                                     (click)="onJoin(item.trainingMasterId)">
                                     Join now <span nz-icon nzType="right"></span>
                                 </button>
+                                }
                             </nz-list-item-meta-description>
                         </nz-list-item-meta>
                         <nz-list-item-action>
@@ -65,10 +71,12 @@
                 </nz-card>
             </nz-ribbon>
 
+            <!-- } -->
+
 
             }
         </nz-list>
-        }
+        <!-- } -->
 
     </div>
 </div>
