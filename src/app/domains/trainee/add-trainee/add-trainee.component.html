@@ -17,9 +17,10 @@
                 <label for="">
                     <span class="not-compulsory">Profile Pic</span>
                     <div class="clearfix">
-                        <nz-upload [nzFileType]="'image/png,image/jpeg,image/jpg'" [nzAction]="''"
-                            nzListType="picture-card" [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 1"
-                            [nzPreview]="handlePreview" (nzChange)="handleChange($event)">
+                        <nz-upload nzAction="http://localhost:4200" [nzFileType]="'image/png,image/jpeg,image/jpg'"
+                            [nzAction]="''" nzListType="picture-card" [(nzFileList)]="fileList"
+                            [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview"
+                            (nzChange)="handleChange($event)">
                             <div>
                                 <span nz-icon nzType="plus"></span>
                                 <div style="margin-top: 8px">Upload</div>

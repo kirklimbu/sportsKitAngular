@@ -15,7 +15,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { FormsModule } from '@angular/forms';
 import { IMember } from './data/models/member.model';
 import { MemberService } from './data/services/member.service';
-import { Observable } from 'rxjs';
+import { Observable, distinctUntilChanged, shareReplay } from 'rxjs';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -65,9 +65,7 @@ export class AllMembersComponent implements OnInit {
   // props
   userRole: Role | undefined
   data$!: Observable<IMember[]>;
-
-
-
+  data: any
   private readonly memberService = inject(MemberService);
   private readonly cd = inject(ChangeDetectorRef);
   private readonly router = inject(Router);
@@ -83,7 +81,11 @@ export class AllMembersComponent implements OnInit {
   }
 
   private fetchMembers(): void {
-    this.data$ = this.memberService.getAllMembers();
+    // this.data$ = this.memberService.getAllMembers()
+    this.data$ = this.memberService.getAllMembers()
+      .pipe(
+        shareReplay({ bufferSize: 1, refCount: true }))
+
   }
 
 

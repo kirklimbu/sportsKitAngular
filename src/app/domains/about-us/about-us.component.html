@@ -15,15 +15,7 @@
         {{ data.title }}
       </span>
     </div>
-    <!-- <div class="image-section">
-        <img
-          [ngSrc]="data?.image"
-          alt="About us"
-          loading="lazy"
-          height="600"
-          width="500"
-        />
-      </div> -->
+
     @if (!show) {
     <div class="description text-muted">
       <p [innerText]="data?.description | truncate : 800" [ngClass]="show ? 'expand' : 'collapse'"></p>

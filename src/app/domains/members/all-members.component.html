@@ -31,7 +31,7 @@
 
     }
 
-    <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
+    <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="(data$|async)"
         [nzScroll]="{ x: '600px', y: '635px' }">
         <thead>
             <tr>

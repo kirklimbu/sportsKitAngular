@@ -1,0 +1,53 @@
+@if(data$|async;as data){
+
+<section id="about-us" class="content-container ">
+
+    <!-- @for(content of data; track $index){ -->
+
+    <div class="message-section">
+        <div class="sub-title">
+            <!-- <span>{{ data.subTitle }} </span> -->
+        </div>
+        <div class="title text-bolder">
+            <span>
+                {{ data.title }}
+            </span>
+        </div>
+
+        <div class="image-section ">
+            <img [ngSrc]="data.image" alt="About us" loading="lazy" height="400" width="400" />
+        </div>
+
+        <nz-space>
+            <time *nzSpaceItem datetime="2020-05-25 12:00:00">
+                <p>
+                    <i class="fas fa-calendar-alt mr-2"></i>{{data.eventDate}}
+                </p>
+            </time>
+            <time *nzSpaceItem>
+                <p>
+
+                    <i class="fas fa-clock mr-2"></i>{{data.startTime}}
+                </p>
+            </time>
+        </nz-space>
+
+        @if (!show) {
+        <div class="description text-muted">
+            <p [innerText]="data?.description " [ngClass]="show ? 'expand' : 'collapse'"></p>
+        </div>
+
+        }@else {
+        <div class="description text-muted">
+            <p [innerText]="data?.description"></p>
+        </div>
+        }
+        <button nz-button nzShape="round" (click)="scrollTo('#about-us')">
+            {{ show ? 'Show less' : 'Show more' }}
+        </button>
+    </div>
+
+    <!-- } -->
+
+</section>
+}

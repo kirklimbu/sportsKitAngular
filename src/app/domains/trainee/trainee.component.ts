@@ -87,7 +87,7 @@ export class TraineeComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     this.checkUser();
-    this.fetchAllTraining();
+    // this.fetchAllTraining();
     this.checkFormStatus();
   }
 
@@ -111,8 +111,8 @@ export class TraineeComponent implements OnInit {
       .subscribe(value => {
         console.log(value);
         this.showAddButton = false;
-
       });
+    this.fetchAllTraining();
 
   }
 

@@ -37,6 +37,12 @@ export class EventsService {
     );
   }
 
+
+  getEventDetail(id: any): Observable<IEvents> {
+    console.log('eventsid', id);
+
+    return this.http.get<IEvents>(`${this.apiUrl}auth/event`, { params: id });
+  }
   // getSearchedTags(query?: any): Observable<any[]> {
   //   const queries = { query: query.query };
   //   return this.http.get<any[]>(`${apiUrl}tag/search?`, {

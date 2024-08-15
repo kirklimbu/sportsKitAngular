@@ -42,8 +42,8 @@ time i {
     display: flex;
 
     box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
-    border-radius: 10px;
-    margin: 0 0 2rem 0;
+    border-radius: .15rem;
+    margin: 1rem 0;
     overflow: hidden;
     position: relative;
     color: #ffffff;
@@ -150,7 +150,17 @@ time i {
     }
 }
 
+@media screen and (min-width: 320px) {
+    .container {
+        padding: 1rem 3rem;
+    }
+}
+
 @media screen and (min-width: 769px) {
+    .container {
+        padding: 1rem 7rem;
+    }
+
     .postcard {
         flex-wrap: inherit;
 
@@ -163,8 +173,8 @@ time i {
         }
 
         .postcard__img {
-            max-width: 400px;
-            max-height: 100%;
+            width: 500px;
+            min-height: 300px;
             transition: transform 0.3s ease;
         }
 

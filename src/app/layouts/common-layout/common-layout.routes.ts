@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { EventsListComponent } from 'src/app/domains/events/admin/events-list/events-list.component';
+import { EventDetailsComponent } from 'src/app/domains/events/event-details.component';
 import { EventsComponent } from 'src/app/domains/events/events.component';
 import { TotalEventsComponent } from 'src/app/domains/events/total-events/total-events.component';
 import { PrivacyPolicyComponent } from 'src/app/domains/privacy-policy/privacy-policy.component';
@@ -37,6 +38,13 @@ export const COMMON_LAYOUT_ROUTES: Routes = [
             breadcrumb: 'events'
         },
         component: TotalEventsComponent,
+    },
+    {
+        path: 'events/detail',
+        data: {
+            breadcrumb: 'events'
+        },
+        component: EventDetailsComponent,
     },
     {
         path: 'training',

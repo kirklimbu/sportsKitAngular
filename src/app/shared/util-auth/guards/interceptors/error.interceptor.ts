@@ -37,6 +37,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         }
         // server-side error
         console.log('server error', error);
+        if (error.status == 404 || error.status == 405) return throwError(() => new Error(errorMessage));
+        // if (error.status == 405) return throwError(() => new Error(errorMessage));
+
         if (error.status !== 200) {
 
           errorMessage = `${error.error.message}`;

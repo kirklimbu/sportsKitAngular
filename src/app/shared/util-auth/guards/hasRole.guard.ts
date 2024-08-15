@@ -10,8 +10,8 @@ export const hasRoleGuard: CanActivateFn = (route, state) => {
     const userRole: Role | undefined = inject(UserDetailsService).getUserRole();
 
     const expectedRoles: Role[] = route.data['roles'];
-    console.log('roles', userRole);
-    console.log('exp roles', expectedRoles);
+    // console.log('roles', userRole);
+    // console.log('exp roles', expectedRoles);
 
     const hasRole: boolean = expectedRoles.some((role) => userRole === role);
 

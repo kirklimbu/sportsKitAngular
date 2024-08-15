@@ -1,0 +1,193 @@
+@import 'src/assets/scss/_variables.scss';
+
+
+.image-section {
+    position: relative;
+    box-sizing: border-box;
+    background-color: greenyellow;
+    width: 24Opx;
+    border-radius: .75rem;
+
+    img {
+        object-fit: cover;
+        margin-top: -3rem;
+        border-radius: .75rem;
+    }
+}
+
+button {
+    background: transparent;
+    // border-radius: 0;
+    color: $gold;
+    border: 1px solid $gold;
+
+    &:hover {
+        color: $primary-color;
+        border: 1px solid $primary-color;
+        background-position: 0;
+    }
+
+    background: {
+        image: linear-gradient(45deg, $gold 50%, transparent 50%);
+        position: 100%;
+        size: 300%;
+    }
+
+}
+
+p {
+
+    overflow: hidden;
+    transition: opacity linear 1s, width linear 1s;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+// .content-container {
+//     animation: fadeOut 3s forwards;
+//     animation-timeline: scroll(block nearest);
+// }
+
+/* Small devices such as large phones (640px and up) */
+@media (min-width: 320px) {
+    .content-container {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 2rem;
+        min-height: 600px;
+        padding: 3rem 2rem;
+    }
+
+    .image-section {
+        padding: 1rem;
+        width: 310px;
+
+        img {
+            height: 310px;
+            width: 310px;
+        }
+    }
+
+    .message-section {
+        margin-bottom: 3rem;
+
+        .sub-title {
+            margin-top: 2rem;
+        }
+
+        .description {
+            margin-top: 2rem;
+        }
+
+        button {
+            height: 34px;
+        }
+    }
+
+    // about-us
+}
+
+/* Medium devices such as tablets (768px and up) */
+@media only screen and (min-width: 768px) {
+    .content-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        min-height: 600px;
+        padding: 2rem 2rem;
+
+        // background: rgb(233, 185, 98);
+        .image-section {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            padding: 0;
+            width: 500px;
+            margin-top: 2rem;
+
+            img {
+                width: 380px;
+                flex: 1;
+            }
+        }
+
+        .message-section {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+
+            .description {
+                display: flex;
+                flex-wrap: wrap;
+                width: 400px;
+            }
+
+            button {
+                height: auto;
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    .content-container {
+        display: flex;
+        flex-direction: row;
+        gap: 3rem;
+        min-height: 600px;
+        padding: 2rem 7rem;
+
+        // background: rgb(233, 185, 98);
+        .image-section {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            padding: 3%;
+            width: 500px;
+            // height: 500px;
+            margin-top: 6rem;
+
+            img {
+                width: 480px;
+                height: auto;
+                flex: 1;
+            }
+        }
+
+        .message-section {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+
+            .description {
+                display: flex;
+                flex-wrap: wrap;
+                width: 600px;
+            }
+
+            button {
+                height: auto;
+                width: 100px;
+            }
+        }
+    }
+}
+
+/* Large devices such as laptops (1024px and up) */
+// @media only screen and (min-width: 64em) {
+//   .content-container {
+//     padding: 0 6rem;
+//     // background: rgb(233, 185, 98);
+//   }
+//   .image-section {
+//     padding: 23%;
+//   }
+// }

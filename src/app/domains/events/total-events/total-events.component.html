@@ -1,25 +1,5 @@
-<!-- <section class="container">
-
-    <ul>
-        @for (item of events$|async; track $index) {
-
-        <li>
-            <a href="">
-                <figure>
-                    <img [src]='item.image' [alt]='item.title'>
-                    <figcaption>{{item.description}}</figcaption>
-                </figure>
-            </a>
-        </li>
-        }
-
-    </ul>
-
-</section> -->
-
-
 <section class="light animate__animated animate__slideInUp ">
-    <div class=" container ">
+    <div class="container">
         <div class=" message-section ">
             <div class=" sub-title">
                 <span>Our Events
@@ -47,13 +27,13 @@
         </div>
         @for (item of events$|async; track $index) {
 
-        <article class="postcard light green">
+        <article class="postcard light green" (click)="showMore(item.eventId)">
             <a class="postcard__img_link">
                 <img class="postcard__img" [src]="item.image" alt="Image Title" />
             </a>
             <div class="postcard__text t-dark">
 
-                <h1 class="postcard__title blue"><a href="#">{{item.title}}</a></h1>
+                <h1 class="postcard__title blue title"><a href="#">{{item.title}}</a></h1>
                 <div class="postcard__subtitle small">
                     <time datetime="2020-05-25 12:00:00">
                         <p>
@@ -71,7 +51,7 @@
 
                 </div>
                 <div class="postcard__bar"></div>
-                <div class="postcard__preview-txt">{{item.description | truncate : 400}}</div>
+                <div class="postcard__preview-txt">{{item.description | truncate : 100}}</div>
                 <ul class="postcard__tagbox">
 
                 </ul>
