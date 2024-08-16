@@ -31,6 +31,9 @@ export class EventDetailsComponent {
   private readonly unsubscribe$ = inject(DestroyRef);
   private readonly eventService = inject(EventsService)
 
+
+
+  // #TODO UI FOR THIS PAGE
   ngOnInit() {
     this.checkFormStatus()
   }

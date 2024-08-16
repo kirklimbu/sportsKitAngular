@@ -53,8 +53,9 @@ p {
 }
 
 .content-container {
-  animation: fadeOut 3s forwards;
-  animation-timeline: scroll(block nearest);
+  // height: 100vh;
+  // animation: fadeOut 3s forwards;
+  // animation-timeline: scroll(block nearest);
 }
 
 /* Small devices such as large phones (640px and up) */

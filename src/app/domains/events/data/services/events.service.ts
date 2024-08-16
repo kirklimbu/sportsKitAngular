@@ -5,6 +5,7 @@ import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 import { toFormData } from 'src/app/shared/util-common/toFormData';
 import { environment } from 'src/environments/environment';
 import { IEvents } from '../events.model';
+import { query } from 'express';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +19,8 @@ export class EventsService {
   }
 
   // getFormValues;
-  getFormValues(id: number): Observable<IEvents> {
-    return this.http.get<IEvents>(`${this.apiUrl}auth/event/form?eventId=${id}`);
+  getFormValues(id: any): Observable<IEvents> {
+    return this.http.get<IEvents>(`${this.apiUrl}auth/event/form`, { params: id });
   }
 
   addEvent(form: any): Observable<CustomResponse> {

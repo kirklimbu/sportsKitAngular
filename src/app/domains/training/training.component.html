@@ -1,16 +1,17 @@
 <div class="content-container">
-    <div class="table-container container light animate__animated  animate__slideInUp ">
+    <div class="table-container container light animate__animated  animate__fadeInUp animate__slow">
+        <div class=" message-section animate__animated animate__fadeInUp ">
 
-        <div class="sub-title">
-            <span> Training
-            </span>
+            <div class=" sub-title">
+                <span> Training
+                </span>
+            </div>
+            <div class="title text-bolder">
+                <h3>
+                    All Trainings
+                </h3>
+            </div>
         </div>
-        <div class="title text-bolder">
-            <h3>
-                All Trainings
-            </h3>
-        </div>
-
 
         <!-- @if(data$|async;as data ){ -->
         <nz-list>
@@ -33,25 +34,32 @@
                             </nz-list-item-meta-title>
                             <nz-list-item-meta-description>
 
-                                <p>
+                                <p nz-tooltip nzTooltipTitle="Trainer" [nzTooltipPlacement]="['topLeft', 'leftTop']">
                                     <!-- <span nz-icon nzType="user-switch" nzTheme="outline"></span> -->
-                                    <i class="fas fa-user-ninja"></i> {{ item.trainer }}
+                                    <i class="fas fa-user-ninja"></i> {{
+                                    item.trainer
+                                    }}
                                 </p>
 
 
-                                <p>
+                                <p nz-tooltip nzTooltipTitle="Date of training"
+                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
                                     <i class="fas fa-calendar-alt mr-2"></i>{{item.startDate}}-{{item.endDate}}
                                 </p>
-                                <p>
+                                <p nz-tooltip nzTooltipTitle="Time of training"
+                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
                                     <i class="fas fa-stopwatch-20"></i>{{item.fromTime}}-{{item.toTime}}
                                 </p>
-                                <p>
+                                <p nz-tooltip nzTooltipTitle="Type of training"
+                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
                                     <i class="fas fa-clock mr-2"></i>{{item.type}}
                                 </p>
-                                <p>
+                                <p nz-tooltip nzTooltipTitle="Training fee"
+                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
                                     <i class="fas fa-money-bill-alt mr-2"></i>{{item.fee|currency:'NRP':'रु ':'1.0-0'}}
                                 </p>
-                                <p>
+                                <p nz-tooltip nzTooltipTitle="Total enrolled trainees"
+                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
                                     <i class="fas fa-users"></i>
                                     156
                                 </p>

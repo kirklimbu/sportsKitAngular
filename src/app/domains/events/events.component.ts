@@ -37,7 +37,7 @@ export class EventsComponent {
     console.log('events ');
 
 
-    this.router.navigate(['/events/all-events'])
+    this.router.navigate(['/events'])
   }
 
 }

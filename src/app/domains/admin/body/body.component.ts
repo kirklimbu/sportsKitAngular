@@ -56,7 +56,7 @@ export class BodyComponent implements OnInit {
   checkUser(): void {
     this.userRole = this.userDetailService.getUserRole();
 
-    console.log('role', this.userRole);
+    // console.log('role', this.userRole);
 
   }
 

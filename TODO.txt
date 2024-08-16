@@ -1,7 +1,0 @@
-#TODO_LIST
-1. #TODO Training table --> hide add/edit button for user/trainee/member #DONE
-2. #TODO Training list page in home page
-3. #TODO Add training detail page 
-4. #TODO Show training detail page 
-5. #TODO show trainig content page 
-6. #TODO member edit

@@ -2,11 +2,8 @@
 import {
   Component,
   DestroyRef,
-  ElementRef,
-  Renderer2,
   inject,
   OnInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
 } from '@angular/core';
@@ -97,7 +94,6 @@ export class MemberEntryComponent implements OnInit {
   private readonly messageService = inject(MessageService);
 
 
-
   ngOnInit(): void {
     this.initForm();
     this.checkFormStatus()
@@ -122,8 +118,6 @@ export class MemberEntryComponent implements OnInit {
     }));
   }
 
-
-
   private checkFormStatus() {
     this.memberId$ = this.route.queryParamMap.pipe(
       map((params: ParamMap) => Number(params.get('id')))
@@ -135,6 +129,13 @@ export class MemberEntryComponent implements OnInit {
       });
   }
 
+  beforeUpload = (file: NzUploadFile): boolean => {
+    this.form.patchValue({
+      file: file
+    });
+    return false;
+  };
+
   handleChange(info: NzUploadChangeParam): void {
 
     // if (!info.fileList[0]) {
@@ -144,6 +145,7 @@ export class MemberEntryComponent implements OnInit {
     this.form.patchValue({
       file: info?.['file']?.originFileObj,
     });
+
   }
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {

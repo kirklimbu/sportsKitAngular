@@ -49,6 +49,7 @@ export class AddTraineeComponent {
   member$!: Observable<any>;
   trainingList$!: Observable<ITraining[]>;
 
+
   fileList: any[] = [];
   trainingType: any[] = [];
   memberId$!: Observable<unknown>;
@@ -65,6 +66,9 @@ export class AddTraineeComponent {
   private readonly cd = inject(ChangeDetectorRef);
   private readonly fb = inject(FormBuilder);
   private readonly messageService = inject(MessageService);
+  avatarUrl: string | undefined;
+  loading = false;
+
 
   ngOnInit(): void {
     this.initForm();
@@ -100,7 +104,8 @@ export class AddTraineeComponent {
       }
       )
     );
-    this.memberId$.pipe(takeUntilDestroyed(this.unsubscribe$))
+    this.memberId$
+      .pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
         console.log('query res', _res);
 
@@ -109,18 +114,74 @@ export class AddTraineeComponent {
       });
   }
 
-  handleChange(info: NzUploadChangeParam): void {
+  // handleChange(info: NzUploadChangeParam): void {
 
-    // if (!info.fileList[0]) {
-    //   return this.messageService.createMessage('error', 'Please select file.');
-    // }
+  //   console.log('handle change', info);
 
-    this.form.patchValue({
-      file: info?.['file']?.originFileObj,
-    });
+
+  //   // this.form.patchValue({
+  //   //   file: info?.['file']?.originFileObj,
+  //   // });
+  // }
+
+  handleChange(info: { file: NzUploadFile }): void {
+    console.log('handle change');
+
+    switch (info.file.status) {
+      case 'uploading':
+        this.loading = true;
+        break;
+      case 'done':
+        // Get this url from response in real world.
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.loading = false;
+          this.avatarUrl = img;
+        });
+        break;
+      case 'error':
+        console.log('handel chg err');
+
+        // this.msg.error('Network error');
+        this.loading = false;
+        break;
+    }
   }
 
+
+  beforeUpload = (file: any): boolean => {
+
+    console.log('b4 upload file', file.originFileObj);
+
+
+    this.form.patchValue({
+      file: file
+    });
+
+    // if (!file.url && !file['preview']) {
+    //   file['preview'] = getBase64(file.originFileObj!);
+    // }
+    // this.previewImage = file.url || file['preview'];
+    // this.previewVisible = false;
+    this.getBase64(file, (img: string) => {
+      this.loading = false;
+      this.avatarUrl = img;
+    });
+
+    return false;
+  };
+
+  private getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
+  }
+
+  // #BUG 500 EROR ON FILE NzUpload AND NO PREVIEW AND DELETE OPTION SHOWN
+
+
   handlePreview = async (file: NzUploadFile): Promise<void> => {
+    console.log('handle preview', file);
+
 
     if (!file.url && !file['preview']) {
       file['preview'] = await getBase64(file.originFileObj!);
@@ -143,6 +204,7 @@ export class AddTraineeComponent {
 
   // save member
   onSave(): void {
+    const trainingMasterId = this.form.controls['trainingMasterId'].value
 
     this.traineeService
       .saveTrainee(this.form.value)
@@ -152,7 +214,7 @@ export class AddTraineeComponent {
           'success',
           'Trainee added successfully.'
         );
-        this.router.navigate(['/admin/trainee'])
+        this.router.navigate(['/admin/trainee'], { queryParams: { id: trainingMasterId } })
       });
   }
 
@@ -190,7 +252,7 @@ export class AddTraineeComponent {
         );
         this.date = new Date(BSDate);
 
-        // this.cd.detectChanges();
+        this.cd.detectChanges();
       });
   }
 

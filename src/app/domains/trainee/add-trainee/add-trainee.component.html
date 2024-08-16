@@ -17,15 +17,20 @@
                 <label for="">
                     <span class="not-compulsory">Profile Pic</span>
                     <div class="clearfix">
-                        <nz-upload nzAction="http://localhost:4200" [nzFileType]="'image/png,image/jpeg,image/jpg'"
-                            [nzAction]="''" nzListType="picture-card" [(nzFileList)]="fileList"
-                            [nzShowButton]="fileList.length < 1" [nzPreview]="handlePreview"
-                            (nzChange)="handleChange($event)">
-                            <div>
+                        <nz-upload [nzBeforeUpload]="beforeUpload" [nzFileType]="'image/png,image/jpeg,image/jpg'"
+                            nzListType="picture-card" [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 1"
+                            [nzPreview]="handlePreview" (nzChange)="handleChange($event)">
+                            <!-- <div>
                                 <span nz-icon nzType="plus"></span>
                                 <div style="margin-top: 8px">Upload</div>
-                            </div>
+                            </div> -->
+                            <ng-container *ngIf="!avatarUrl">
+                                <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+                                <div class="ant-upload-text">Upload</div>
+                            </ng-container>
+                            <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
                         </nz-upload>
+
                         <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
                             (nzOnCancel)="previewVisible = false">
                             <ng-template #modalContent>
@@ -46,8 +51,6 @@
                     <span class="required">Mobile</span>
                     <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="mobile" />
                 </label>
-
-
             </div>
 
 
@@ -69,7 +72,7 @@
                         (dateInAD)="updateEnglishDate($event)">
                     </ne-datepicker>
                 </label>
-                <label for="MemberType">
+                <!-- <label for="MemberType">
                     <span class="required" for="dob">Training type</span>
 
                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select type of member"
@@ -79,7 +82,7 @@
                         }
 
                     </nz-select>
-                </label>
+                </label> -->
             </div>
 
 

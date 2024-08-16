@@ -1,6 +1,6 @@
-<section id="events" class="content-container animate__animated animate__fadeInUp animate__delay-5s">
-  <div class="message-section ">
-    <div class="sub-title">
+<section id="events" class="content-container ">
+  <div class="message-section animate__animated animate__fadeIn animate__slower">
+    <div class=" sub-title">
       <span>Our Events </span>
     </div>
     <div class="title text-bolder">
@@ -15,13 +15,13 @@
         academy provides a platform for skill development, competition, and
         community engagement.Some of the glimpses of these events are ...
       </p>
-      <a routerLink="/events/list-events" title="View all events" class="all-events" (click)="showAllEvents()">
+      <a routerLink="/events" title="View all events" class="all-events" (click)="showAllEvents()">
         <small>View all events...</small>
       </a>
     </div>
   </div>
 
-  <div class="image-section">
+  <div class="image-section animate__animated animate__fadeIn ">
     @for (event of data; track $index) {
 
     <nz-card nzHoverable style="text-justify: justify" [nzCover]="coverTemplate"

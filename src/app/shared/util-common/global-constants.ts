@@ -24,4 +24,9 @@ export class GlobalConstants {
      * }
      */
 
+    // SEO
+    public static description = ""
+    public static keywords = ""
+    public static website = ""
+
 }

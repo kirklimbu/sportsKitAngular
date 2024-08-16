@@ -136,6 +136,15 @@ export class AddOrganizationComponent implements OnInit {
 
   }
 
+
+  beforeUpload = (file: NzUploadFile): boolean => {
+    this.form.patchValue({
+      file: file
+    });
+    return false;
+  };
+
+
   handlePreview = async (file: NzUploadFile): Promise<void> => {
     // console.log('sel file', file);
     if (!file.url && !file['preview']) {

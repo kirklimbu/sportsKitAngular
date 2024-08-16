@@ -1,6 +1,6 @@
-<section class="light animate__animated animate__slideInUp ">
+<section class="light  ">
     <div class="container">
-        <div class=" message-section ">
+        <div class=" message-section animate__animated animate__fadeInUp ">
             <div class=" sub-title">
                 <span>Our Events
                 </span>
@@ -27,7 +27,7 @@
         </div>
         @for (item of events$|async; track $index) {
 
-        <article class="postcard light green" (click)="showMore(item.eventId)">
+        <article class="postcard light green animate__animated animate__fadeInUp" (click)="showMore(item.eventId)">
             <a class="postcard__img_link">
                 <img class="postcard__img" [src]="item.image" alt="Image Title" />
             </a>

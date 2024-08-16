@@ -35,6 +35,7 @@ import { getDeviceId } from 'src/app/shared/util-common/generateDeviceId';
 import { Store } from '@ngxs/store';
 import { AuthState } from '../auth/login/state/login.state';
 import { GallariesComponent } from '../gallaries/gallaries.component';
+import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
 
 @Component({
   selector: 'app-home',
@@ -63,6 +64,8 @@ export class HomeComponent implements OnInit {
   eventData!: any;
   aboutUsData!: any;
   coachData!: any;
+  companyInfo!: GlobalConstants
+
   private readonly titleService = inject(Title);
   private readonly metaService = inject(Meta);
 
@@ -70,8 +73,10 @@ export class HomeComponent implements OnInit {
   private readonly homeService = inject(HomeService);
   private readonly store = inject(Store);
 
+
+
   ngOnInit(): void {
-    this.titleService.setTitle('Namuna Badminton Academy');
+    this.titleService.setTitle('DNB Academy');
     this.metaService.addTags([
       {
         name: 'description',
@@ -96,7 +101,7 @@ export class HomeComponent implements OnInit {
           'Valley Multi Education Network Consultancy in Kathmandu offers comprehensive services including EPS TOPIK preparation, study in Korea, study in Japan, and IELTS classes. Start your journey with us today!',
       },
       { property: 'og:image', content: 'URL_to_image' },
-      { property: 'og:url', content: 'https://www.valleymulti.com/home' },
+      { property: 'og:url', content: 'http://www.dmknamunabadmintonacademy.com/' },
       { property: 'og:type', content: 'website' },
     ]);
 

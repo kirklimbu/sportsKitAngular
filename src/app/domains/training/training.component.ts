@@ -21,6 +21,7 @@ import { Store } from '@ngxs/store';
 import { AuthState } from '../auth/login/state/login.state';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 @Component({
   selector: 'app-training',
@@ -29,6 +30,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     RouterModule,
     CommonModule,
     FormsModule,
+    // third-party
     NzTableModule,
     NzDropDownModule,
     NzAvatarModule,
@@ -40,6 +42,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     NzListModule,
     NzSpaceModule,
     NzBadgeModule,
+    NzToolTipModule,
+    // project
     TruncatePipe
   ],
   templateUrl: './training.component.html',
