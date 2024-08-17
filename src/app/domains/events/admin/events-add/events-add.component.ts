@@ -81,7 +81,7 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   ],
   templateUrl: './events-add.component.html',
   styleUrls: ['./events-add.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventsAddComponent implements OnInit {
   previewImage: string | undefined = '';
@@ -93,6 +93,9 @@ export class EventsAddComponent implements OnInit {
   form!: FormGroup;
   addedFiles: any[] = [];
   mode = 'add';
+
+  avatarUrl: string | undefined;
+  loading = false;
 
   eventId$!: Observable<{}>;
   event$!: Observable<IEvents>;
@@ -128,13 +131,48 @@ export class EventsAddComponent implements OnInit {
     return this.form.controls;
   }
 
-  beforeUpload = (file: NzUploadFile): boolean => {
+  handleChange(info: { file: NzUploadFile }): void {
+    console.log('handle change');
+
+    switch (info.file.status) {
+      case 'uploading':
+        this.loading = true;
+        break;
+      case 'done':
+        // Get this url from response in real world.
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.loading = false;
+          this.avatarUrl = img;
+        });
+        break;
+      case 'error':
+        console.log('handel chg err');
+
+        // this.msg.error('Network error');
+        this.loading = false;
+        break;
+    }
+  }
+
+
+  beforeUpload = (file: any): boolean => {
     this.form.patchValue({
       file: file
     });
+
+    this.getBase64(file, (img: string) => {
+      this.loading = false;
+      this.avatarUrl = img;
+    });
+    // this.cd.detectChanges();
     return false;
   };
 
+  private getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
+  }
 
   private initFormMode(): void {
     this.eventId$ = this.route.queryParamMap.pipe(
@@ -226,21 +264,21 @@ export class EventsAddComponent implements OnInit {
 
 
 
-  handleChange(info: NzUploadChangeParam): void {
-    console.log('set file', info);
-    if (!info.fileList[0]) {
-      return this.messageService.createMessage('error', 'Please select file.');
-    }
-    // this.fileList.push(info.fileList[0])
-    this.form.patchValue({
-      file: info?.['file']?.originFileObj,
-    });
+  // handleChange(info: NzUploadChangeParam): void {
+  //   console.log('set file', info);
+  //   if (!info.fileList[0]) {
+  //     return this.messageService.createMessage('error', 'Please select file.');
+  //   }
+  //   // this.fileList.push(info.fileList[0])
+  //   this.form.patchValue({
+  //     file: info?.['file']?.originFileObj,
+  //   });
 
-    // on Delete
-    if (info.file.status === 'removed') {
-      this.onDeleteFile(info.file['eventId']);
-    }
-  }
+  //   // on Delete
+  //   if (info.file.status === 'removed') {
+  //     this.onDeleteFile(info.file['eventId']);
+  //   }
+  // }
 
   onDeleteFile(docId: number): void {
     this.addedFiles = this.addedFiles.filter(

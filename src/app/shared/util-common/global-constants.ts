@@ -6,10 +6,14 @@ export class GlobalConstants {
     public static email = "namunabadmintonacademy@gmail.com";
     public static facebook = "https://www.facebook.com/profile.php?id=61557909320358";
     public static instagram = "example@gmail.com";
-    public static HEAD_OFFICE = "Damak-7, Jhapa, Nepal";
-    public static HEAD_OFFICE_PHONE = "9852626222";
-    public static BRANCH_ADDRESS = "example@gmail.com";
-    public static BRANCH_PHONE = "example@gmail.com";
+    public static STREET_ADDRESS = "Damak-7";
+    public static ADDRESS_LOCALITY = 'Jhapa';
+    public static ADDRESS_REGION = 'Province 1';
+    public static POSTAL_CODE = '57217';
+    public static ADDRESS_COUNTRY = 'NP';
+    public static AREA_SERVED = 'Nepal';
+    public static MOBILE = "9852626222";
+    public static EMAIL = "namunabadmintonacademy";
     public static allowedImageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
     public static allowedAudioTypes = ['audio/mpeg', 'audio/wav',];
     public static maxFileSize = 100000;
@@ -25,8 +29,39 @@ export class GlobalConstants {
      */
 
     // SEO
-    public static description = ""
-    public static keywords = ""
-    public static website = ""
+    public static SEOdescription = "Discover our Badminton Academy, featuring top-notch training facilities, regular tournaments, and dedicated practice courts. Join us for a membership today!"
+    public static SEOkeywords = `badminton academy,
+    badminton training facilities,
+    badminton tournaments,
+    badminton practice court,
+    badminton academy membership,
+    badminton coaching,
+    professional badminton training,
+    local badminton clubs,
+    join badminton academy,
+    badminton lessons,
+    badminton classes near me,
+    badminton courses,
+    badminton tournament registration,
+    youth badminton academy,
+    adult badminton lessons,
+    badminton skill development,
+    badminton training program,
+    competitive badminton training,
+    badminton practice sessions,
+    badminton training for beginners,
+    advanced badminton coaching,
+    badminton club membership,
+    indoor badminton courts,
+    reserve badminton court,
+    badminton academy fees,
+    find badminton training,
+    top badminton academies,
+    badminton academy for kids,
+    badminton workshop,
+    badminton training schedule,
+
+`
+    public static website = "http://www.dmknamunabadmintonacademy.com"
 
 }

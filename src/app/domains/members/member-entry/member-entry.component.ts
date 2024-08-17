@@ -62,7 +62,7 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   ],
   templateUrl: './member-entry.component.html',
   styleUrl: './member-entry.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MemberEntryComponent implements OnInit {
   // props
@@ -83,6 +83,9 @@ export class MemberEntryComponent implements OnInit {
   memberList$!: Observable<IMember[]>;
   isLoading$!: Observable<boolean>;
   date: any = null;
+
+  avatarUrl: string | undefined;
+  loading = false;
 
   private readonly _nepaliDatepickerService = inject(NepaliDatepickerService);
   private readonly memberService = inject(MemberService);
@@ -129,23 +132,53 @@ export class MemberEntryComponent implements OnInit {
       });
   }
 
-  beforeUpload = (file: NzUploadFile): boolean => {
+  beforeUpload = (file: any): boolean => {
+
     this.form.patchValue({
       file: file
     });
+
+    this.getBase64(file, (img: string) => {
+      this.loading = false;
+      this.avatarUrl = img;
+    });
+
+    // this.cd.detectChanges();
     return false;
   };
 
-  handleChange(info: NzUploadChangeParam): void {
+  handleChange(info: { file: NzUploadFile }): void {
 
     // if (!info.fileList[0]) {
     //   return this.messageService.createMessage('error', 'Please select file.');
     // }
 
-    this.form.patchValue({
-      file: info?.['file']?.originFileObj,
-    });
+    switch (info.file.status) {
+      case 'uploading':
+        this.loading = true;
+        break;
+      case 'done':
+        // Get this url from response in real world.
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.loading = false;
+          this.avatarUrl = img;
+        });
+        break;
+      case 'error':
+        console.log('handel chg err');
 
+        // this.msg.error('Network error');
+        this.loading = false;
+        break;
+    }
+
+  }
+
+
+  private getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
   }
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {

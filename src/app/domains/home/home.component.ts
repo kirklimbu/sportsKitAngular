@@ -64,7 +64,6 @@ export class HomeComponent implements OnInit {
   eventData!: any;
   aboutUsData!: any;
   coachData!: any;
-  companyInfo!: GlobalConstants
 
   private readonly titleService = inject(Title);
   private readonly metaService = inject(Meta);
@@ -81,27 +80,26 @@ export class HomeComponent implements OnInit {
       {
         name: 'description',
         content:
-          'Valley Multi Education Network Consultancy in Kathmandu offers comprehensive services including EPS TOPIK preparation, study in Korea, study in Japan, and IELTS classes. Start your journey with us today!',
+          GlobalConstants.SEOdescription
       },
       {
         name: 'keywords',
         content:
-          'EPS TOPIK, study in Korea, study in Japan, IELTS classes, education consultancy, Kathmandu, Valley Multi Education Network, EPS TOPIK preparation, study abroad,Japanese/Korean language classes, Nepal',
+          GlobalConstants.SEOkeywords
       },
-      { name: 'author', content: 'Valley Multi Education Network Consultancy' },
+      { name: 'author', content: GlobalConstants.appTitle },
       { name: 'robots', content: 'index, follow' },
       {
         property: 'og:title',
-        content:
-          'Valley Multi Education Network Consultancy | EPS TOPIK, Study in Korea, Study in Japan, IELTS Classes in Kathmandu',
+        content: GlobalConstants.appTitle
+
       },
       {
         property: 'og:description',
-        content:
-          'Valley Multi Education Network Consultancy in Kathmandu offers comprehensive services including EPS TOPIK preparation, study in Korea, study in Japan, and IELTS classes. Start your journey with us today!',
+        content: GlobalConstants.SEOdescription
       },
-      { property: 'og:image', content: 'URL_to_image' },
-      { property: 'og:url', content: 'http://www.dmknamunabadmintonacademy.com/' },
+      { property: 'og:image', content: GlobalConstants.appLogo },
+      { property: 'og:url', content: GlobalConstants.website },
       { property: 'og:type', content: 'website' },
     ]);
 
@@ -111,29 +109,27 @@ export class HomeComponent implements OnInit {
       script.type = 'application/ld+json';
       script.text = JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'EducationalOrganization',
-        name: 'Damak Namuna Badminton Academy',
-        url: 'https://www.valleymulti.com/home',
-        logo: 'URL_to_logo',
+        '@type': 'Badminton Academy',
+        name: GlobalConstants.appTitle,
+        url: GlobalConstants.website,
+        logo: GlobalConstants.appLogo,
         sameAs: [
-          'https://www.facebook.com/valleymenc',
-          'https://www.instagram.com/valleymenc/',
-          'https://www.linkedin.com/company/valley-multi-education-network/',
+          GlobalConstants.facebook,
         ],
         contactPoint: {
           '@type': 'ContactPoint',
-          telephone: '+977-9767223789 ',
-          contactType: 'Customer Service',
+          telephone: GlobalConstants.MOBILE,
+          contactType: 'Inquiry',
         },
         description:
-          'Valley Multi Education Network Consultancy in Kathmandu offers comprehensive services including EPS TOPIK preparation, study in Korea, study in Japan, and IELTS classes.',
+          GlobalConstants.SEOdescription,
         address: {
           '@type': 'PostalAddress',
-          streetAddress: 'Chabahill, Opposite to Chabahil stupa',
-          addressLocality: 'Kathmandu',
-          addressRegion: 'Bagmati',
-          postalCode: '44600',
-          addressCountry: 'NP',
+          streetAddress: GlobalConstants.STREET_ADDRESS,
+          addressLocality: GlobalConstants.ADDRESS_LOCALITY,
+          addressRegion: GlobalConstants.ADDRESS_REGION,
+          postalCode: GlobalConstants.POSTAL_CODE,
+          addressCountry: GlobalConstants.ADDRESS_COUNTRY,
         },
         areaServed: 'Nepal',
       });

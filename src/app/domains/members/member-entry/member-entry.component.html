@@ -22,17 +22,22 @@
                             [nzFileType]="'image/png,image/jpeg,image/jpg'" nzListType="picture-card"
                             [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 1"
                             (nzChange)="handleChange($event)">
-                            <div>
+                            <!-- <div>
                                 <span nz-icon nzType="plus"></span>
                                 <div style="margin-top: 8px">Upload</div>
-                            </div>
+                            </div> -->
+                            <ng-container *ngIf="!avatarUrl">
+                                <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+                                <div class="ant-upload-text">Upload</div>
+                            </ng-container>
+                            <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
                         </nz-upload>
-                        <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
+                        <!-- <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
                             (nzOnCancel)="previewVisible = false">
                             <ng-template #modalContent>
                                 <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
                             </ng-template>
-                        </nz-modal>
+                        </nz-modal> -->
                     </div>
                 </label>
             </div>

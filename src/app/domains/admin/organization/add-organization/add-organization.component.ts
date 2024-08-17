@@ -54,6 +54,9 @@ export class AddOrganizationComponent implements OnInit {
   previewVisible = false;
   fileList: any[] = [];
   addedFiles: any[] = [];
+  avatarUrl: string | undefined;
+  loading = false;
+
 
   private readonly fb = inject(FormBuilder);
   private readonly messageService = inject(MessageService);
@@ -137,12 +140,26 @@ export class AddOrganizationComponent implements OnInit {
   }
 
 
-  beforeUpload = (file: NzUploadFile): boolean => {
+  beforeUpload = (file: any): boolean => {
+
     this.form.patchValue({
       file: file
     });
+
+    this.getBase64(file, (img: string) => {
+      this.loading = false;
+      this.avatarUrl = img;
+    });
+
+    // this.cd.detectChanges();
     return false;
   };
+
+  private getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
+  }
 
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {

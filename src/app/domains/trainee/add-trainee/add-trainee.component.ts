@@ -114,16 +114,6 @@ export class AddTraineeComponent {
       });
   }
 
-  // handleChange(info: NzUploadChangeParam): void {
-
-  //   console.log('handle change', info);
-
-
-  //   // this.form.patchValue({
-  //   //   file: info?.['file']?.originFileObj,
-  //   // });
-  // }
-
   handleChange(info: { file: NzUploadFile }): void {
     console.log('handle change');
 
@@ -150,23 +140,16 @@ export class AddTraineeComponent {
 
   beforeUpload = (file: any): boolean => {
 
-    console.log('b4 upload file', file.originFileObj);
-
-
     this.form.patchValue({
       file: file
     });
 
-    // if (!file.url && !file['preview']) {
-    //   file['preview'] = getBase64(file.originFileObj!);
-    // }
-    // this.previewImage = file.url || file['preview'];
-    // this.previewVisible = false;
     this.getBase64(file, (img: string) => {
       this.loading = false;
       this.avatarUrl = img;
     });
 
+    this.cd.detectChanges();
     return false;
   };
 

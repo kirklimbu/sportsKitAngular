@@ -90,11 +90,11 @@ export class MapComponent {
         
                <span style="color:#707376;">Location:</span>       
                 <br/>
-                <b style="padding-bottom:4px;"> ${this.info.HEAD_OFFICE}</b>
+                <b style="padding-bottom:4px;"> ${this.info.STREET_ADDRESS, this.info.ADDRESS_LOCALITY, this.info.AREA_SERVED}</b>
                 <br/> 
                        <span style="color:#707376; margin:6px 0;">Mobile:</span>       
                  <br/>
-                <b style="padding-bottom:4px;">${this.info.HEAD_OFFICE_PHONE}</b>
+                <b style="padding-bottom:4px;">${this.info.MOBILE}</b>
                 <br/>
                 <small style="color:crimson;">Please click on map to get direction.</small>
         </div>

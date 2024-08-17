@@ -39,7 +39,7 @@ export class MakePaymentComponent {
   form!: FormGroup;
   mode = 'add'
   paymentList$!: Observable<IMemberPayment[]>
-  date: any = new Date();
+  date: any;
 
   paymentId$!: Observable<any>
   private readonly _nepaliDatepickerService = inject(NepaliDatepickerService);
@@ -137,12 +137,14 @@ export class MakePaymentComponent {
     this.paymentList$.pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
 
-        this.form.patchValue(_res);
-        const BSDate = this._nepaliDatepickerService.BSToAD(
-          _res.paymentDate,
-          'yyyy/mm/dd'
-        );
-        this.date = new Date(BSDate);
+        if (_res.paymentDate) {
+          this.form.patchValue(_res);
+          const BSDate = this._nepaliDatepickerService.BSToAD(
+            _res.paymentDate,
+            'yyyy/mm/dd'
+          );
+          this.date = new Date(BSDate);
+        }
         // this.cd.detectChanges();
       });
   }
