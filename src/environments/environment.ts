@@ -11,12 +11,11 @@ export const environment = {
   apiUrl: 'http://dmknamunabadmintonacademy.com/dba/api/', // prod ip
   // apiUrl: 'http://103.104.29.53:9091/dba/api/', // home ip
 
-
   menuUrl: '/assets/data/Menu',
   defaultImage: '../../../assets/images/logo.png',
   USERDATA_KEY: 'authf649fc9a5f55',
   // X_TenantID: 'test',
-  X_TenantID: 'dba', //prod
+  X_TenantID: 'dba', //pro
   UserAgent: 'webAgent',
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   firebaseConfig: {

@@ -1,4 +1,3 @@
-
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -6,7 +5,6 @@ import {
   inject,
   OnInit,
   DestroyRef,
-
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -16,7 +14,15 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { exhaustMap, map, shareReplay, switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import {
+  exhaustMap,
+  map,
+  shareReplay,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
+} from 'rxjs/operators';
 
 import { Observable } from 'rxjs';
 
@@ -48,9 +54,7 @@ import { EventsListComponent } from '../events-list/events-list.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 import { IEvents } from '../../data/events.model';
-
-
-
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -76,6 +80,7 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
     NzUploadModule,
     NzModalModule,
     NzIconModule,
+    NzCheckboxModule,
     NepaliDatepickerModule,
     EventsListComponent,
   ],
@@ -97,23 +102,22 @@ export class EventsAddComponent implements OnInit {
   avatarUrl: string | undefined;
   loading = false;
 
-  eventId$!: Observable<{}>;
+  eventId$!: Observable<object>;
   event$!: Observable<IEvents>;
 
   private _nepaliDatepickerService = inject(NepaliDatepickerService);
-  private readonly unsubscribe$ = inject(DestroyRef)
+  private readonly unsubscribe$ = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly fb = inject(FormBuilder);
   private readonly messageService = inject(MessageService);
-  private readonly eventService = inject(EventsService)
-  private readonly cd = inject(ChangeDetectorRef)
+  private readonly eventService = inject(EventsService);
+  private readonly cd = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
     this.buildForm();
     this.initFormMode();
   }
-
 
   private buildForm() {
     this.form = this.fb.group({
@@ -123,6 +127,7 @@ export class EventsAddComponent implements OnInit {
       eventDate: [],
       startTime: [],
       ticketPrice: [0],
+      hasActive: [],
       file: ['', [Validators.required]],
     });
   }
@@ -154,10 +159,9 @@ export class EventsAddComponent implements OnInit {
     }
   }
 
-
   beforeUpload = (file: any): boolean => {
     this.form.patchValue({
-      file: file
+      file: file,
     });
 
     this.getBase64(file, (img: string) => {
@@ -177,29 +181,29 @@ export class EventsAddComponent implements OnInit {
   private initFormMode(): void {
     this.eventId$ = this.route.queryParamMap.pipe(
       map((params: ParamMap) => {
-        const id = Number(params.get('id'))
-        return { eventId: id }
+        const id = Number(params.get('id'));
+        return { eventId: id };
       }),
       shareReplay(1)
-    )
+    );
     this.eventId$
       .pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
         console.log('res', _res);
 
-        if (_res) this.edit()
-      })
+        if (_res) this.edit();
+      });
   }
 
   /**
-  *
-  * edit
-  */
+   *
+   * edit
+   */
   edit() {
     this.event$ = this.eventId$.pipe(
-      switchMap((query: {}) => this.eventService.getFormValues(query)),
+      switchMap((query: object) => this.eventService.getFormValues(query)),
       tap(() => console.log('API call made')),
-      take(1), // take only the first response
+      take(1) // take only the first response
     );
     this.event$
 
@@ -213,7 +217,7 @@ export class EventsAddComponent implements OnInit {
 
         this.form.patchValue(_res);
         if (_res.eventId == 0) {
-          this.fileList = []
+          this.fileList = [];
           this.previewImage = _res.profilePic;
           this.date = null;
           return;
@@ -244,12 +248,8 @@ export class EventsAddComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: CustomResponse) => {
         if (_res) {
-
-          this.messageService.createMessage(
-            'success',
-            _res.message
-          );
-          this.router.navigate(['/admin/events'])
+          this.messageService.createMessage('success', _res.message);
+          this.router.navigate(['/admin/events']);
         }
       });
   }
@@ -257,12 +257,9 @@ export class EventsAddComponent implements OnInit {
   private getEventIdFromRoute(): Observable<number> {
     return this.route.queryParamMap.pipe(
       map((params: ParamMap) => Number(params.get('id'))),
-      shareReplay(1),
+      shareReplay(1)
     );
   }
-
-
-
 
   // handleChange(info: NzUploadChangeParam): void {
   //   console.log('set file', info);
@@ -286,9 +283,7 @@ export class EventsAddComponent implements OnInit {
     );
   }
 
-
   handlePreview = async (file: NzUploadFile): Promise<void> => {
-
     if (!file.url && !file['preview']) {
       file['preview'] = await getBase64(file.originFileObj!);
     }
@@ -306,9 +301,4 @@ export class EventsAddComponent implements OnInit {
   onDateChange($event: string) {
     // console.log('date', $event);
   }
-
-
-
-
-
 }

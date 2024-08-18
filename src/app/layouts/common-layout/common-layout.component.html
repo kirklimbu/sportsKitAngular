@@ -1,18 +1,20 @@
 <nz-layout class="layout">
-    <app-header-top [data]="headerTopData" />
-    <app-header [data]="headerData" />
-    <nz-content class="main-content">
-        <nz-breadcrumb>
-            <!-- <nz-breadcrumb-item>Home</nz-breadcrumb-item> -->
-            <!-- <nz-breadcrumb-item>List</nz-breadcrumb-item> -->
-            <!-- <nz-breadcrumb-item>App</nz-breadcrumb-item> -->
-        </nz-breadcrumb>
-        <!-- <div class="inner-content">
+  <app-header-top [data]="headerTopData" />
+  <app-header [data]="headerData" />
+  <nz-content class="main-content">
+    <nz-breadcrumb>
+      <!-- <nz-breadcrumb-item>Home</nz-breadcrumb-item> -->
+      <!-- <nz-breadcrumb-item>List</nz-breadcrumb-item> -->
+      <!-- <nz-breadcrumb-item>App</nz-breadcrumb-item> -->
+    </nz-breadcrumb>
+    <!-- <div class="inner-content">
         </div> -->
-        <router-outlet></router-outlet>
-    </nz-content>
-    <app-scroll-to-top />
-    <nz-footer>
-        <app-footer [footerData]="footerData" />
-    </nz-footer>
+    <router-outlet></router-outlet>
+  </nz-content>
+  <app-scroll-to-top />
+  <nz-footer #footerSection>
+    @defer (on viewport(footerSection);when footerData) {
+    <app-footer [footerData]="footerData" />
+    }
+  </nz-footer>
 </nz-layout>

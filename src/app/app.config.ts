@@ -32,7 +32,7 @@ const ngZorroConfig: NzConfig = {
 };
 
 export function tokenGetter() {
-  let token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
   if (!token) {
     localStorage.setItem("token", ".")

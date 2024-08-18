@@ -23,15 +23,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
   templateUrl: './coaches.component.html',
   styleUrl: './coaches.component.scss',
   animations: [
-    trigger('fadeSlideInLeft', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(10px)' }),
-        animate('500ms', style({ opacity: 1, transform: 'translateY(0)' })),
-      ]),
-      transition(':leave', [
-        animate('500ms', style({ opacity: 0, transform: 'translateY(10px)' })),
-      ]),
-    ]),
+    
   ]
 })
 export class CoachesComponent {

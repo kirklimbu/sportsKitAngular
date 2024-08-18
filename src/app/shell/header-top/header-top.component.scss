@@ -12,7 +12,7 @@
   flex-wrap: wrap;
 
   marquee {
-    color: $gold;
+    color: $green;
     // width: 500px;
   }
 
@@ -25,15 +25,12 @@
   }
 
   .info {
-
     place-items: center;
     justify-content: center;
     color: white;
     font-weight: 400;
     // margin-left: 3rem;
   }
-
-
 }
 
 @media only screen and (min-width: 320px) {
@@ -42,7 +39,6 @@
       marquee {
         width: 200px;
         margin-left: 2rem;
-
       }
 
       flex: 2;
@@ -75,7 +71,6 @@
 
 @media only screen and (min-width: 768px) {
   .top-bar {
-
     .info {
       display: flex;
       flex: 2;
@@ -89,15 +84,11 @@
         width: 500px;
       }
 
-
-
       a {
         color: white;
         padding: 4px 8px;
         font-size: medium;
         line-height: 50%;
-
-
 
         &:last-child {
           padding-right: 4rem;

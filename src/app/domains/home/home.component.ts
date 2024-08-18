@@ -21,14 +21,6 @@ import { NgOptimizedImage } from '@angular/common';
 import { AboutUsComponent } from '../about-us/about-us.component';
 import { CoachesComponent } from '../coaches/coaches.component';
 import { MembersComponent } from '../members/members.component';
-
-import {
-  trigger,
-  transition,
-  style,
-  animate,
-  state,
-} from '@angular/animations';
 import { EventsComponent } from '../events/events.component';
 import { OurLocationComponent } from '../our-location/our-location.component';
 import { getDeviceId } from 'src/app/shared/util-common/generateDeviceId';
@@ -56,7 +48,6 @@ import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
     MembersComponent,
     EventsComponent,
   ],
-
 })
 export class HomeComponent implements OnInit {
   bannerData!: any;
@@ -72,31 +63,26 @@ export class HomeComponent implements OnInit {
   private readonly homeService = inject(HomeService);
   private readonly store = inject(Store);
 
-
-
   ngOnInit(): void {
     this.titleService.setTitle('DNB Academy');
     this.metaService.addTags([
       {
         name: 'description',
-        content:
-          GlobalConstants.SEOdescription
+        content: GlobalConstants.SEOdescription,
       },
       {
         name: 'keywords',
-        content:
-          GlobalConstants.SEOkeywords
+        content: GlobalConstants.SEOkeywords,
       },
       { name: 'author', content: GlobalConstants.appTitle },
       { name: 'robots', content: 'index, follow' },
       {
         property: 'og:title',
-        content: GlobalConstants.appTitle
-
+        content: GlobalConstants.appTitle,
       },
       {
         property: 'og:description',
-        content: GlobalConstants.SEOdescription
+        content: GlobalConstants.SEOdescription,
       },
       { property: 'og:image', content: GlobalConstants.appLogo },
       { property: 'og:url', content: GlobalConstants.website },
@@ -113,16 +99,13 @@ export class HomeComponent implements OnInit {
         name: GlobalConstants.appTitle,
         url: GlobalConstants.website,
         logo: GlobalConstants.appLogo,
-        sameAs: [
-          GlobalConstants.facebook,
-        ],
+        sameAs: [GlobalConstants.facebook],
         contactPoint: {
           '@type': 'ContactPoint',
           telephone: GlobalConstants.MOBILE,
           contactType: 'Inquiry',
         },
-        description:
-          GlobalConstants.SEOdescription,
+        description: GlobalConstants.SEOdescription,
         address: {
           '@type': 'PostalAddress',
           streetAddress: GlobalConstants.STREET_ADDRESS,

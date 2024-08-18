@@ -1,88 +1,103 @@
 <div class="table-container">
+  <div class="sub-title">
+    <span> Training </span>
+  </div>
+  <div class="title text-bolder">
+    <h3>Training Details</h3>
+  </div>
 
-    <div class="sub-title">
-        <span> Training
-        </span>
-    </div>
-    <div class="title text-bolder">
-        <h3>
-            Training Details
-        </h3>
-    </div>
+  @if(data$|async;as data ){ @if(userRole==='Admin'){
+  <div class="site-page-header-ghost-wrapper">
+    <nz-page-header [nzGhost]="false">
+      <!-- <nz-page-header-title>Title</nz-page-header-title> -->
+      <!-- <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle> -->
+      <nz-page-header-extra>
+        <nz-space>
+          <!-- <button *nzSpaceItem nz-button>Operation</button> -->
+          <!-- <button *nzSpaceItem nz-button>Operation</button> -->
+          <button *nzSpaceItem nz-button nzType="primary" (click)="onAdd()">
+            <span nz-icon nzType="plus" nzTheme="outline"></span>Add
+          </button>
+        </nz-space>
+      </nz-page-header-extra>
+    </nz-page-header>
+  </div>
+  }
 
+  <nz-table
+    [nzFrontPagination]="false"
+    #nzTable
+    [nzBordered]="true"
+    [nzData]="data"
+    [nzScroll]="{ x: '600px', y: '635px' }"
+  >
+    <thead>
+      <tr>
+        <th>Title</th>
 
-    @if(data$|async;as data ){
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (training of nzTable.data; track $index) {
 
-    @if(userRole=='Admin'){
-    <div class="site-page-header-ghost-wrapper">
-        <nz-page-header [nzGhost]="false">
-            <!-- <nz-page-header-title>Title</nz-page-header-title> -->
-            <!-- <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle> -->
-            <nz-page-header-extra>
-                <nz-space>
-                    <!-- <button *nzSpaceItem nz-button>Operation</button> -->
-                    <!-- <button *nzSpaceItem nz-button>Operation</button> -->
-                    <button *nzSpaceItem nz-button nzType="primary" (click)="onAdd()"><span nz-icon nzType="plus"
-                            nzTheme="outline"></span>Add</button>
-                </nz-space>
-            </nz-page-header-extra>
+      <tr>
+        <td
+          (click)="
+            onViewMore(training.trainingMasterId, training.trainingDetailId)
+          "
+        >
+          {{ training.title | titlecase }}
+        </td>
+        <td
+          (click)="
+            onViewMore(training.trainingMasterId, training.trainingDetailId)
+          "
+        >
+          {{ training.startDate }}
+        </td>
 
-        </nz-page-header>
-    </div>
-    }
-
-    <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
-        [nzScroll]="{ x: '600px', y: '635px' }">
-        <thead>
-            <tr>
-
-                <th>
-                    Title
-                </th>
-
-                <th>Date</th>
-                <th>Action</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            @for (training of nzTable.data; track $index) {
-
-            <tr>
-
-
-                <td (click)="onViewMore(training.trainingMasterId,training.trainingDetailId)">
-                    {{training.title|titlecase}}
-                </td>
-                <td (click)="onViewMore(training.trainingMasterId,training.trainingDetailId)">
-                    {{training.startDate}}
-                </td>
-
-
-                <td>
-                    <div class="action-buttons">
-                        <nz-space>
-
-                            <button *nzSpaceItem nzTooltipTitle="View More" nzTooltipPlacement="topLeft" nz-tooltip
-                                nz-button nzType="primary" nzGhost
-                                (click)="onViewMore(training.trainingMasterId,training.trainingDetailId)">
-                                <span nz-icon nzType="eye"></span>
-                            </button>
-                            @if(userRole=='Admin'){
-                            <button *nzSpaceItem nzTooltipTitle="Edit " nzTooltipPlacement="topLeft" nz-tooltip
-                                nz-button (click)="onEdit(training.trainingMasterId,training.trainingDetailId)"><span
-                                    nz-icon nzType="edit">
-                                </span>
-                            </button>
-                            }
-                        </nz-space>
-
-                    </div>
-                </td>
-            </tr>
-            }
-        </tbody>
-    </nz-table>
-    }
-
+        <td>
+          <div class="action-buttons">
+            <nz-space>
+              <button
+                *nzSpaceItem
+                nzTooltipTitle="View More"
+                nzTooltipPlacement="topLeft"
+                nz-tooltip
+                nz-button
+                nzType="primary"
+                nzGhost
+                (click)="
+                  onViewMore(
+                    training.trainingMasterId,
+                    training.trainingDetailId
+                  )
+                "
+              >
+                <span nz-icon nzType="eye"></span>
+              </button>
+              @if(userRole==='Admin'){
+              <button
+                *nzSpaceItem
+                nzTooltipTitle="Edit "
+                nzTooltipPlacement="topLeft"
+                nz-tooltip
+                nz-button
+                (click)="
+                  onEdit(training.trainingMasterId, training.trainingDetailId)
+                "
+              >
+                <span nz-icon nzType="edit"> </span>
+              </button>
+              }
+            </nz-space>
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </nz-table>
+  }
 </div>

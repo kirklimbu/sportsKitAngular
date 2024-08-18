@@ -1,12 +1,31 @@
-import { DestroyRef, Directive, ElementRef, Input, OnInit, Renderer2, inject } from '@angular/core';
+import {
+  DestroyRef,
+  Directive,
+  ElementRef,
+  Input,
+  OnInit,
+  Renderer2,
+  inject,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { BehaviorSubject, combineLatest, switchMap, animationFrameScheduler, interval, map, takeWhile, endWith, distinctUntilChanged, takeUntil } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  switchMap,
+  animationFrameScheduler,
+  interval,
+  map,
+  takeWhile,
+  endWith,
+  distinctUntilChanged,
+} from 'rxjs';
 
 const easeOutQuad = (x: number): number => x * (2 - x);
 
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: '[countUp]',
-  standalone: true
+  standalone: true,
 })
 export class CountUpDirective implements OnInit {
   private readonly count$ = new BehaviorSubject(0);
@@ -18,7 +37,7 @@ export class CountUpDirective implements OnInit {
   ]).pipe(
     switchMap(([count, duration]) => {
       // get the time when animation is triggered
-      const startTime = animationFrameScheduler.now();
+      const startTime = animationFrameScheduler?.now();
 
       return interval(0, animationFrameScheduler).pipe(
         // calculate elapsed time
@@ -49,12 +68,11 @@ export class CountUpDirective implements OnInit {
     this.duration$.next(duration);
   }
 
-  private readonly destroy$ = inject(DestroyRef)
+  private readonly destroy$ = inject(DestroyRef);
   constructor(
     private readonly elementRef: ElementRef,
-    private readonly renderer: Renderer2,
-
-  ) { }
+    private readonly renderer: Renderer2
+  ) {}
 
   ngOnInit(): void {
     this.displayCurrentCount();
@@ -71,5 +89,4 @@ export class CountUpDirective implements OnInit {
         );
       });
   }
-
 }

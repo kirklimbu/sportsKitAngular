@@ -13,26 +13,10 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 @Component({
   selector: 'app-gallaries',
   standalone: true,
-  imports: [CommonModule,
-    NgOptimizedImage,
-    NzTypographyModule,
-    NzButtonModule],
+  imports: [CommonModule, NgOptimizedImage, NzTypographyModule, NzButtonModule],
   templateUrl: './gallaries.component.html',
   styleUrl: './gallaries.component.scss',
-  animations: [
-    fadeInUpOnEnterAnimation({
-      anchor: 'enter',
-      duration: 1000,
-      delay: 100,
-      translate: '30px',
-    }),
-    bounceOutDownOnLeaveAnimation({
-      anchor: 'leave',
-      duration: 500,
-      delay: 200,
-      translate: '40px',
-    }),
-  ],
+  animations: [],
 })
 export class GallariesComponent implements OnInit {
   gallary: any[] = [];
@@ -53,6 +37,8 @@ export class GallariesComponent implements OnInit {
 
   scrollTo(elem: string) {
     console.log(elem);
-    document?.querySelector(elem)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document
+      ?.querySelector(elem)
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
