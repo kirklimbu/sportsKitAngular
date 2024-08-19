@@ -47,6 +47,8 @@ import { ITrainingDetail } from '../../data/model/training-detail.model';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { YouTubePlayer } from '@angular/youtube-player';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
+import { YoutubeLinkPipe } from 'src/app/shared/util-common/pipes/youtubeLink.pipe';
+import { FormSubmitButtonsComponent } from 'src/app/shared/ui-common/form-submit-buttons/form-submit-buttons.component';
 
 @Component({
   selector: 'app-add-training-details',
@@ -66,6 +68,8 @@ import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
     NzModalModule,
     NzListModule,
     YouTubePlayer,
+    YoutubeLinkPipe,
+    FormSubmitButtonsComponent,
   ],
   templateUrl: './add-training-details.component.html',
   styleUrl: './add-training-details.component.scss',
@@ -150,11 +154,14 @@ export class AddTrainingDetailsComponent implements OnInit {
     this.subDetail.push(subDetail);
   }
 
-  showModal(): void {
+  showModal(id: number): void {
+    console.log('showmodal', id);
+
     this.isVisible = true;
   }
 
-  onRemoveLink(id: number): void {
+  onRemoveLink(id?: number): void {
+    console.log('remove link', id, this.form.value);
     this.isLoading = true;
     this.trainingService
       .deleteLink({ trainingSubDetailId: id })
@@ -164,13 +171,19 @@ export class AddTrainingDetailsComponent implements OnInit {
           this.messageService.createMessage('success', _res.message);
           this.isVisible = false;
           this.isLoading = false;
+          // this.cd.detectChanges();
+          location.reload();
         }
-        this.cd.detectChanges();
+        // this.cd.detectChanges();
       });
   }
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+
+  onCancel() {
+    location.reload();
   }
 
   private checkFormStatus() {
@@ -202,6 +215,7 @@ export class AddTrainingDetailsComponent implements OnInit {
   }
 
   // #BUG onEdit failed to patch trainingSubDetailId
+  // #TODO training link double aayo edit garda
   edit() {
     this.trainingDetails$ = this.trainingMasterId$.pipe(
       switchMap((query: number) =>

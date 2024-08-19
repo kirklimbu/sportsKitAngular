@@ -11,8 +11,6 @@ export interface ITrainingDetail {
 }
 
 
-
-
 export interface ITrainingSubDetail {
     trainingSubDetailId: number;
     trainingDetailId: number;

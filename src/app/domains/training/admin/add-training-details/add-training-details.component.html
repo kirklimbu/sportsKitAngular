@@ -57,34 +57,34 @@
         @for (link of subDetail.controls; track $index) {
         <nz-list nzItemLayout="vertical">
           <nz-list-item [formGroupName]="$index">
-            <div class="">
-              <label>
-                <span class="not-compulsory">Link</span>
-                <input
-                  class="input"
-                  type="text"
-                  placeholder=""
-                  autocomplete="off"
-                  formControlName="link"
-                />
-              </label>
-              @if(trainingDetails){
-              <!-- #TODO DOUBLE REPEATED YOUTUBE VIDEO SHOWN ON EDIT -->
-              <nz-list nzItemLayout="vertical">
-                @for (item of trainingDetails.subDetailList; track item) {
-                <div class="video-container">
-                  <nz-list-item>
-                    <nz-list-item-extra>
-                      <youtube-player [videoId]="item.ytlink" />
-                    </nz-list-item-extra>
-                  </nz-list-item>
-                </div>
-                }
-              </nz-list>
-              }
+            <!-- <div class=""> -->
+            <label>
+              <span class="not-compulsory">Link</span>
+              <input
+                class="input"
+                type="text"
+                placeholder=""
+                autocomplete="off"
+                formControlName="link"
+              />
+            </label>
+            @if(trainingDetails){
+
+            <!-- #BUG EUTA LINK DELETE GARDA ARKO LINK DELETE VAYO -->
+            <!-- #TODO -->
+            <nz-list nzItemLayout="vertical">
+              <div class="video-container">
+                <nz-list-item>
+                  <nz-list-item-extra>
+                    <youtube-player
+                      [videoId]="link.value.link | youtubeLinkPipe"
+                    />
+                  </nz-list-item-extra>
+                </nz-list-item>
+              </div>
               <ul nz-list-item-actions>
                 <nz-list-item-action>
-                  <span nz-icon nzType="delete" (click)="showModal()"
+                  <span nz-icon nzType="delete" (click)="showModal(link.value)"
                     >Delete</span
                   >
                   <nz-modal
@@ -95,7 +95,7 @@
                     [(nzVisible)]="isVisible"
                     [nzOkLoading]="isLoading"
                     (nzOnCancel)="handleCancel()"
-                    (nzOnOk)="onRemoveLink(link.value.trainingSubDetailId)"
+                    (nzOnOk)="onRemoveLink(link.value)"
                   >
                     <ng-container *nzModalContent>
                       <strong> Are you sure delete this link?<br /> </strong>
@@ -105,14 +105,21 @@
                   </nz-modal>
                 </nz-list-item-action>
               </ul>
-            </div>
+            </nz-list>
+            }
+            <!-- </div> -->
           </nz-list-item>
         </nz-list>
         }
       </ng-container>
-      <button class="submit" (click)="onSave()">
-        {{ mode === 'add' ? 'Save' : 'Update' }}
-      </button>
+      <div>
+        <app-form-submit-buttons
+          [primaryButtonLabel]="'Save'"
+          [secondaryButtonLabel]="'Cancel'"
+          (save)="onSave()"
+          (cancel)="onCancel()"
+        />
+      </div>
     </form>
   </section>
 </div>

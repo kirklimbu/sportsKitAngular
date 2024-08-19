@@ -1,201 +1,186 @@
 @import 'src/assets/scss/_variables.scss';
 
 ::ng-deep .ant-upload-list-picture-card .ant-upload-list-item-error {
-    border-color: white;
+  border-color: white;
 }
 
 ::ng-deep .nepali-date-picker .np_datepicker_input --active {
-    border-radius: 0;
-    outline: none !important;
+  border-radius: 0;
+  outline: none !important;
 }
 
 ::ng-deep .nepali-date-picker .np_datepicker_input {
-    border-radius: 0 !important;
-    outline: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
 }
 
 ::ng-deep .nepali-date-picker {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 ::ng-deep .nepali-date-picker .datepicker__options-container {
-    background-color: $primary-color !important;
+  background-color: $primary-color !important;
 }
 
 ::ng-deep .nepali-date-picker .datepicker__date--active {
-    background-color: $primary-color !important;
+  background-color: $primary-color !important;
 }
 
 ::ng-deep.nepali-date-picker .form-icon svg {
-    // background-color: $primary-color !important;
-    right: 24px !important;
-    top: 20px !important;
-
+  // background-color: $primary-color !important;
+  right: 24px !important;
+  top: 20px !important;
 }
 
-
 ::ng-deep .ant-list-vertical .ant-list-item-main {
-    width: 200px;
+  width: 200px;
 }
 
 ::ng-deep .ant-list-vertical .ant-list-item-extra {
-    margin-left: 0;
-
+  margin-left: 0;
 }
 
 .anticon {
-    color: $red;
+  color: $red;
 }
 
 [nz-button] {
-    width: 62px;
+  width: 62px;
 }
 
 .admin-members-section {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 
-    .memberentry-section {
-        flex: 1;
-    }
+  .memberentry-section {
+    flex: 1;
+  }
 
-    .members-list-section {
-        flex: 1;
-        margin-top: 2rem;
-    }
+  .members-list-section {
+    flex: 1;
+    margin-top: 2rem;
+  }
 }
 
 .memberentry-section {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 1rem;
-    background-color: #fff;
-    border-radius: 2px;
-    position: relative;
-    border: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 2px;
+  position: relative;
+  border: 1px solid lightgray;
 }
 
 [nz-icon] :hover {
-    color: $gold;
+  color: $gold;
 }
 
-
 @media (width<=576px) {
-    .memberentry-section {
-        max-width: 250px;
+  .memberentry-section {
+    max-width: 250px;
+  }
+
+  .form {
+    padding: 14px;
+  }
+
+  .flex {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      width: 100%;
     }
+  }
 
-    .form {
-        padding: 14px;
-    }
+  .video-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px;
+    height: 200px;
+  }
 
-    .flex {
-        display: flex;
-        flex-direction: column;
+  ::ng-deep .youtube-player-placeholder {
+    width: 220px !important;
+    height: 200px !important;
+    border-radius: 0.25rem;
+  }
 
-        label {
-            width: 100%;
-        }
-    }
-
-    .video-container {
-        display: flex;
-        flex-wrap: wrap;
-        width: 300px;
-        height: 200px;
-    }
-
-    ::ng-deep .youtube-player-placeholder {
-        width: 250px !important;
-        height: 200px !important;
-        border-radius: .25rem;
-    }
-
-    ::ng-deep .youtube-player {
-        width: 250px !important;
-    }
-
+  ::ng-deep .youtube-player {
+    width: 220px !important;
+  }
 }
 
 @media (min-width: 768px) {
-    ::ng-deep .nepali-date-picker .form-icon svg {
-        // background-color: $primary-color !important;
-        right: 24px;
-        top: 20px;
+  ::ng-deep .nepali-date-picker .form-icon svg {
+    // background-color: $primary-color !important;
+    right: 24px;
+    top: 20px;
+  }
 
+  .memberentry-section {
+    max-width: 450px;
+  }
+
+  .form {
+    padding: 22px;
+  }
+
+  .flex {
+    display: flex;
+    // flex-direction: column;
+
+    label {
+      width: 100%;
     }
+  }
 
-    .memberentry-section {
-        max-width: 450px;
-    }
-
-    .form {
-        padding: 22px;
-
-    }
-
-    .flex {
-        display: flex;
-        // flex-direction: column;
-
-
-        label {
-            width: 100%;
-        }
-
-
-    }
-
-    ::ng-deep .youtube-player-placeholder {
-        min-width: 450px !important;
-        height: 250px !important;
-        border-radius: .25rem;
-    }
+  ::ng-deep .youtube-player-placeholder {
+    width: 420px !important;
+    height: 250px !important;
+    border-radius: 0.25rem;
+  }
 }
 
 @media only screen and (min-width: 991px) {
-    ::ng-deep.nepali-date-picker .form-icon svg {
+  ::ng-deep.nepali-date-picker .form-icon svg {
+    right: 24px;
+    top: 20px;
+  }
 
-        right: 24px;
-        top: 20px;
+  .form {
+    padding: 20px;
+    width: 600px;
+  }
 
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    // flex-direction: column;
+
+    label {
+      // width: 50%;
+      flex: 0 0 47%;
     }
+  }
 
-    .form {
-        padding: 20px;
-        width: 600px;
-    }
-
-    .flex {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        // flex-direction: column;
-
-        label {
-            // width: 50%;
-            flex: 0 0 47%;
-        }
-
-    }
-
-
-
-    ::ng-deep .youtube-player-placeholder {
-        min-width: 450px !important;
-        height: 250px !important;
-        border-radius: .25rem;
-    }
+  ::ng-deep .youtube-player-placeholder {
+    min-width: 450px !important;
+    height: 250px !important;
+    border-radius: 0.25rem;
+  }
 }
 
 .form label .input {
-    padding: 16px
+  padding: 16px;
 }
