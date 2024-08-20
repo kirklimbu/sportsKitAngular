@@ -84,7 +84,10 @@
               </div>
               <ul nz-list-item-actions>
                 <nz-list-item-action>
-                  <span nz-icon nzType="delete" (click)="showModal(link.value)"
+                  <span
+                    nz-icon
+                    nzType="delete"
+                    (click)="showModal(link.value.trainingSubDetailId,$index)"
                     >Delete</span
                   >
                   <nz-modal
@@ -95,7 +98,7 @@
                     [(nzVisible)]="isVisible"
                     [nzOkLoading]="isLoading"
                     (nzOnCancel)="handleCancel()"
-                    (nzOnOk)="onRemoveLink(link.value)"
+                    (nzOnOk)="onRemoveLink()"
                   >
                     <ng-container *nzModalContent>
                       <strong> Are you sure delete this link?<br /> </strong>

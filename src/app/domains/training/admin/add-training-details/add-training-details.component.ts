@@ -88,6 +88,9 @@ export class AddTrainingDetailsComponent implements OnInit {
   items: any;
   isVisible = false;
   isLoading = false;
+  // delete
+  selectedTrainingSubDetailId!: number;
+  selectedTrainingSubDetailIndex!: number;
 
   trainingDetails$!: Observable<ITrainingDetail2[]>;
   trainingMasterId$!: Observable<any>;
@@ -132,6 +135,8 @@ export class AddTrainingDetailsComponent implements OnInit {
     return this.form.get('subDetailList') as FormArray;
   }
 
+  // #BUG show details garda sabai youtube link display gareko xaena
+  // START FROM HERE
   // // Helper method to get the 'subItems' FormArray inside an 'item'
   addSubDetail() {
     const subDetail: FormGroup = this.fb.group({
@@ -154,17 +159,21 @@ export class AddTrainingDetailsComponent implements OnInit {
     this.subDetail.push(subDetail);
   }
 
-  showModal(id: number): void {
-    console.log('showmodal', id);
-
+  showModal(id: number, index: number): void {
+    this.selectedTrainingSubDetailId = id;
+    this.selectedTrainingSubDetailIndex = index;
     this.isVisible = true;
   }
 
-  onRemoveLink(id?: number): void {
-    console.log('remove link', id, this.form.value);
+  onRemoveLink(): void {
+    if (!this.selectedTrainingSubDetailId) {
+      this.subDetail.removeAt(this.selectedTrainingSubDetailIndex);
+      return;
+    }
+
     this.isLoading = true;
     this.trainingService
-      .deleteLink({ trainingSubDetailId: id })
+      .deleteLink({ trainingSubDetailId: this.selectedTrainingSubDetailId })
       .pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res) => {
         if (_res.message) {
@@ -237,7 +246,7 @@ export class AddTrainingDetailsComponent implements OnInit {
 
         // patch formArray on edit
         _res.form.subDetailList.forEach((detail: string) => {
-          console.log('subDetailList link', detail);
+          // console.log('subDetailList link', detail)
 
           this.subDetail.push(this.fb.group(detail));
         });
