@@ -12,55 +12,54 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 @Component({
   selector: 'app-event-details',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     NzButtonModule,
     NgOptimizedImage,
     SanitizeHtmlPipe,
-    NzSpaceModule
+    NzSpaceModule,
   ],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.scss',
 })
 export class EventDetailsComponent {
   show = false;
-  id$!: Observable<{}>;
+  id$!: Observable<object>;
 
   data$!: Observable<IEvents>;
 
   private readonly route = inject(ActivatedRoute);
   private readonly unsubscribe$ = inject(DestroyRef);
-  private readonly eventService = inject(EventsService)
-
-
+  private readonly eventService = inject(EventsService);
 
   // #TODO UI FOR THIS PAGE
   ngOnInit() {
-    this.checkFormStatus()
+    this.checkFormStatus();
   }
 
   private checkFormStatus() {
     this.id$ = this.route.queryParamMap.pipe(
       map((params: ParamMap) => {
-        const id = Number(params.get('id'))
-        return { eventId: id }
+        const id = Number(params.get('id'));
+        return { eventId: id };
       })
     );
-    this.id$.pipe(takeUntilDestroyed(this.unsubscribe$))
+    this.id$
+      .pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
-        this.getEventDetail(_res)
-      })
+        this.getEventDetail(_res);
+      });
   }
 
   getEventDetail(id: any) {
-    this.data$ = this.eventService.getEventDetail(id)
-
+    this.data$ = this.eventService.getEventDetail(id);
   }
 
   scrollTo(elem: string) {
     console.log(elem);
     this.show = !this.show;
-    document?.querySelector(elem)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document
+      ?.querySelector(elem)
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
-
-

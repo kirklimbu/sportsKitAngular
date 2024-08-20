@@ -1,90 +1,109 @@
-<div class="content-container">
-    <div class="table-container container light animate__animated  animate__fadeInUp animate__slow">
-        <div class=" message-section animate__animated animate__fadeInUp ">
-
-            <div class=" sub-title">
-                <span> Training
-                </span>
-            </div>
-            <div class="title text-bolder">
-                <h3>
-                    All Trainings
-                </h3>
-            </div>
-        </div>
-
-        <!-- @if(data$|async;as data ){ -->
-        <nz-list>
-            @for (item of data$|async; track item) {
-            <!-- <nz-card nzTitle="Pushes open the window" nzSize="small"> And raises the spyglass. </nz-card> -->
-            <!-- @if(item.hasStopReg){ -->
-
-            <nz-ribbon [nzPlacement]="'start'" [nzColor]="item.hasStopReg?'red':'white'"
-                [nzText]="item.hasStopReg?'Active':''">
-                <nz-card nzSize="small">
-                    <nz-list-item>
-                        <nz-list-item-meta>
-                            <nz-list-item-meta-title>
-                                <h5>
-                                    <span>
-
-                                        {{ item.title |titlecase }}
-                                    </span>
-                                </h5>
-                            </nz-list-item-meta-title>
-                            <nz-list-item-meta-description>
-
-                                <p nz-tooltip nzTooltipTitle="Trainer" [nzTooltipPlacement]="['topLeft', 'leftTop']">
-                                    <!-- <span nz-icon nzType="user-switch" nzTheme="outline"></span> -->
-                                    <i class="fas fa-user-ninja"></i> {{
-                                    item.trainer
-                                    }}
-                                </p>
-
-
-                                <p nz-tooltip nzTooltipTitle="Date of training"
-                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
-                                    <i class="fas fa-calendar-alt mr-2"></i>{{item.startDate}}-{{item.endDate}}
-                                </p>
-                                <p nz-tooltip nzTooltipTitle="Time of training"
-                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
-                                    <i class="fas fa-stopwatch-20"></i>{{item.fromTime}}-{{item.toTime}}
-                                </p>
-                                <p nz-tooltip nzTooltipTitle="Type of training"
-                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
-                                    <i class="fas fa-clock mr-2"></i>{{item.type}}
-                                </p>
-                                <p nz-tooltip nzTooltipTitle="Training fee"
-                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
-                                    <i class="fas fa-money-bill-alt mr-2"></i>{{item.fee|currency:'NRP':'रु ':'1.0-0'}}
-                                </p>
-                                <p nz-tooltip nzTooltipTitle="Total enrolled trainees"
-                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
-                                    <i class="fas fa-users"></i>
-                                    156
-                                </p>
-                                @if (item.hasStopReg) {
-
-                                <button nz-button nzType="default" nzShape="round"
-                                    (click)="onJoin(item.trainingMasterId)">
-                                    Join now <span nz-icon nzType="right"></span>
-                                </button>
-                                }
-                            </nz-list-item-meta-description>
-                        </nz-list-item-meta>
-                        <nz-list-item-action>
-
-                        </nz-list-item-action>
-                    </nz-list-item>
-                </nz-card>
-            </nz-ribbon>
-
-            <!-- } -->
-
-
-            }
-        </nz-list>
-        <!-- } -->
-
+<div class="content-container container">
+  <div
+    class="table-container container light animate__animated animate__fadeInUp animate__slow"
+  >
+    <div class="message-section animate__animated animate__fadeInUp">
+      <div class="sub-title">
+        <span> Training </span>
+      </div>
+      <div class="title text-bolder">
+        <h3>All Trainings</h3>
+      </div>
     </div>
+
+    <!-- @if(data$|async;as data ){ -->
+    <nz-list>
+      @for (item of data$|async; track item) {
+      <!-- <nz-card nzTitle="Pushes open the window" nzSize="small"> And raises the spyglass. </nz-card> -->
+      <!-- @if(item.hasStopReg){ -->
+
+      <nz-ribbon
+        [nzPlacement]="'start'"
+        [nzColor]="item.hasStopReg ? 'red' : 'white'"
+        [nzText]="item.hasStopReg ? 'Active' : ''"
+      >
+        <nz-card nzSize="small">
+          <nz-list-item>
+            <nz-list-item-meta>
+              <nz-list-item-meta-title>
+                <h5>
+                  <span>
+                    {{ item.title | titlecase }}
+                  </span>
+                </h5>
+              </nz-list-item-meta-title>
+              <nz-list-item-meta-description>
+                <p
+                  nz-tooltip
+                  nzTooltipTitle="Trainer"
+                  [nzTooltipPlacement]="['topLeft', 'leftTop']"
+                >
+                  <!-- <span nz-icon nzType="user-switch" nzTheme="outline"></span> -->
+                  <i class="fas fa-user-ninja"></i> {{ item.trainer }}
+                </p>
+
+                <p
+                  nz-tooltip
+                  nzTooltipTitle="Date of training"
+                  [nzTooltipPlacement]="['topLeft', 'leftTop']"
+                >
+                  <i class="fas fa-calendar-alt mr-2"></i
+                  >{{ item.startDate }}-{{ item.endDate }}
+                </p>
+                <p
+                  nz-tooltip
+                  nzTooltipTitle="Time of training"
+                  [nzTooltipPlacement]="['topLeft', 'leftTop']"
+                >
+                  <i class="fas fa-stopwatch-20"></i>{{ item.fromTime }}-{{
+                    item.toTime
+                  }}
+                </p>
+                <p
+                  nz-tooltip
+                  nzTooltipTitle="Type of training"
+                  [nzTooltipPlacement]="['topLeft', 'leftTop']"
+                >
+                  <i class="fas fa-clock mr-2"></i>{{ item.type }}
+                </p>
+                <p
+                  nz-tooltip
+                  nzTooltipTitle="Training fee"
+                  [nzTooltipPlacement]="['topLeft', 'leftTop']"
+                >
+                  <i class="fas fa-money-bill-alt mr-2"></i
+                  >{{ item.fee | currency : 'NRP' : 'रु ' : '1.0-0' }}
+                </p>
+                <p
+                  nz-tooltip
+                  nzTooltipTitle="Total enrolled trainees"
+                  [nzTooltipPlacement]="['topLeft', 'leftTop']"
+                >
+                  <i class="fas fa-users"></i>
+                  156
+                </p>
+                @if (item.hasStopReg) {
+
+                <button
+                  nz-button
+                  nzType="default"
+                  nzShape="round"
+                  (click)="onJoin(item.trainingMasterId)"
+                >
+                  Join now <span nz-icon nzType="right"></span>
+                </button>
+                }
+              </nz-list-item-meta-description>
+            </nz-list-item-meta>
+            <nz-list-item-action> </nz-list-item-action>
+          </nz-list-item>
+        </nz-card>
+      </nz-ribbon>
+
+      <!-- } -->
+
+      }
+    </nz-list>
+    <!-- } -->
+  </div>
 </div>

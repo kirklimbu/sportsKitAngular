@@ -5,7 +5,11 @@ import { tap } from 'rxjs/operators';
 
 import { Auth } from './login.actions';
 import { Login, Logout } from './login.model';
-import { LoginResponseDto, Role, UserModel } from 'src/app/shared/util-auth/models/user.model';
+import {
+  LoginResponseDto,
+  Role,
+  UserModel,
+} from 'src/app/shared/util-auth/models/user.model';
 import { AuthService } from 'src/app/shared/util-auth/services/auth-http/auth.service';
 
 // Initialize the state
@@ -19,7 +23,6 @@ const defaults: LoginResponseDto = {
     name: '',
     role: Role?.NONE,
     mobile: '',
-
   },
   // token: '',
   // roleId: 0,
@@ -30,7 +33,7 @@ const defaults: LoginResponseDto = {
   // addressOne: '',
   // addressTwo: '',
   // email: '',
-}
+};
 
 @State<LoginResponseDto>({
   name: 'auth',
@@ -43,7 +46,6 @@ const defaults: LoginResponseDto = {
       name: '',
       role: Role?.NONE,
       mobile: '',
-
     },
     member: {
       memberId: 0,
@@ -55,16 +57,11 @@ const defaults: LoginResponseDto = {
       status: '',
       profilePic: '',
     },
-    traineeList: {
-
-    },
-
+    traineeList: {},
   },
 })
-
 @Injectable()
 export class AuthState {
-
   @Selector()
   static token(state: LoginResponseDto): string | null | undefined {
     return state.user?.token;
@@ -99,18 +96,22 @@ export class AuthState {
       // addressTwo: state?.addressTwo,
       user: state.user,
       member: state.member,
-      traineeList: state.traineeList
+      traineeList: state.traineeList,
     };
   }
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
   @Action(Login)
   login(ctx: StateContext<LoginResponseDto>, action: Login) {
     return this.authService
-      .login(action.payload.username, action.payload.password, action.payload.deviceId)
+      .login(
+        action.payload.username,
+        action.payload.password,
+        action.payload.deviceId
+      )
       .pipe(
         tap((result: LoginResponseDto) => {
-          console.log('calling auth state', result)
+          console.log('calling auth state', result);
           ctx.patchState({
             // name: result.name,
             // role: result.role,
@@ -130,11 +131,16 @@ export class AuthState {
   }
 
   @Action(Logout)
-  logout(ctx: StateContext<LoginResponseDto>) {
-    ctx.setState({
-      ...defaults
-    });
-
+  logout({ setState, getState }: StateContext<LoginResponseDto>) {
+    getState();
+    return this.authService.logout().pipe(
+      tap(() => {
+        setState({ ...defaults });
+      })
+    );
+    // ctx.setState({
+    //   ...defaults,
+    // });
   }
 
   //   @Action(Auth.LoginRedirect)

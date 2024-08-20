@@ -83,9 +83,8 @@ export class LoginComponent implements OnInit {
     private userDetailsService: UserDetailsService,
     private router: Router,
     private seoService: SeoService,
-    private store: Store
-  ) // private modalService: NgbModal,
-  {
+    private store: Store // private modalService: NgbModal,
+  ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
     // if user is admin navigate to dashboard else home
@@ -167,7 +166,7 @@ export class LoginComponent implements OnInit {
            * if admin logged in route to admin dashboard
            * else home page
            */
-          const userDetails = this.store.selectSnapshot(AuthState.userDetails);
+          // const userDetails = this.store.selectSnapshot(AuthState.userDetails);
 
           // if (userDetails?.role?.includes('Admin')) {
           //   this.router.navigate(['/admin/user-profile']);

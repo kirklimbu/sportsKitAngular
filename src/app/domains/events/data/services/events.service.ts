@@ -20,7 +20,9 @@ export class EventsService {
 
   // getFormValues;
   getFormValues(id: any): Observable<IEvents> {
-    return this.http.get<IEvents>(`${this.apiUrl}auth/event/form`, { params: id });
+    return this.http.get<IEvents>(`${this.apiUrl}auth/event/form`, {
+      params: id,
+    });
   }
 
   addEvent(form: any): Observable<CustomResponse> {
@@ -28,7 +30,10 @@ export class EventsService {
     formData.append('form', JSON.stringify(form));
     formData.append('file', form.file);
 
-    return this.http.post<CustomResponse>(`${this.apiUrl}auth/event/save`, formData);
+    return this.http.post<CustomResponse>(
+      `${this.apiUrl}auth/event/save`,
+      formData
+    );
   }
 
   addEventImage(file: any) {
@@ -38,11 +43,10 @@ export class EventsService {
     );
   }
 
-
   getEventDetail(id: any): Observable<IEvents> {
     console.log('eventsid', id);
 
-    return this.http.get<IEvents>(`${this.apiUrl}auth/event`, { params: id });
+    return this.http.get<IEvents>(`${this.apiUrl}event`, { params: id });
   }
   // getSearchedTags(query?: any): Observable<any[]> {
   //   const queries = { query: query.query };

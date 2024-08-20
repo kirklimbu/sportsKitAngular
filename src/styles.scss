@@ -18,7 +18,6 @@ button {
 
 .nepali-date-picker .np_datepicker_input {
   color: $black !important;
-
 }
 
 [nz-button] {
@@ -75,17 +74,16 @@ button {
 
 span[nz-typography] {
   display: block;
-  margin: .25rem;
+  margin: 0.25rem;
   font-weight: $font-weight-light;
   font-size: $font-size-sm;
 }
 
-span[nz-typography]+span[nz-typography] {
+span[nz-typography] + span[nz-typography] {
   margin-top: 8px;
-
 }
 
-// file 
+// file
 ::ng-deep .ant-upload-list-picture-card .ant-upload-list-item-error {
   border-color: white;
 }
@@ -98,7 +96,6 @@ span[nz-typography]+span[nz-typography] {
 // cards
 
 .ant-card {
-
   &:hover {
     // transform: scale(1.01);
   }
@@ -157,7 +154,7 @@ span[nz-typography]+span[nz-typography] {
   border-radius: 1px;
 }
 
-.form label .input+span {
+.form label .input + span {
   position: absolute;
   left: 10px;
   top: 15px;
@@ -167,19 +164,19 @@ span[nz-typography]+span[nz-typography] {
   transition: 0.3s ease;
 }
 
-.form label .input:placeholder-shown+span {
+.form label .input:placeholder-shown + span {
   top: 15px;
   font-size: 0.9em;
 }
 
-.form label .input:focus+span,
-.form label .input:valid+span {
+.form label .input:focus + span,
+.form label .input:valid + span {
   top: 0px;
   // font-size: 0.7em;
   font-weight: 600;
 }
 
-.form label .input:valid+span {
+.form label .input:valid + span {
   color: $primary-color;
 }
 
@@ -226,28 +223,33 @@ td {
   text-wrap: wrap;
 }
 
-.ant-table .ant-table-thead>tr>th {
+.ant-table .ant-table-thead > tr > th {
   font-weight: bold;
   text-align: center;
 }
 
-.ant-table.ant-table-bordered>.ant-table-container>.ant-table-body>table>tbody>tr>td {
+.ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-body
+  > table
+  > tbody
+  > tr
+  > td {
   text-wrap: wrap;
 }
 
-
-
 img {
-
-  transition: all .5s ease;
+  transition: all 0.5s ease;
 
   &:hover {
     transform: scale(1.03, 1.03);
   }
 }
 
+i {
+  margin-right: 8px;
+}
 // animation
-
 
 @media only screen and (min-width: 320px) {
   .content-with-button {
