@@ -2,8 +2,8 @@
 export interface IOrganization {
   name: string;
   address: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
   mobile: string;
   emailOne: string;
   emailTwo: string;

@@ -28,6 +28,7 @@ import { Store } from '@ngxs/store';
 import { AuthState } from '../auth/login/state/login.state';
 import { GallariesComponent } from '../gallaries/gallaries.component';
 import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
+import { IOrganization } from '../admin/organization/data/models/organization/organization.model';
 
 @Component({
   selector: 'app-home',
@@ -55,6 +56,7 @@ export class HomeComponent implements OnInit {
   eventData!: any;
   aboutUsData!: any;
   coachData!: any;
+  locationData!: IOrganization;
 
   private readonly titleService = inject(Title);
   private readonly metaService = inject(Meta);
@@ -133,6 +135,7 @@ export class HomeComponent implements OnInit {
         this.coachData = res.homeContentList[1];
         this.bannerData = res.bannerList;
         this.memberData = res.member;
+        this.locationData = res.organization;
         this.eventData = res.eventList.slice(0, 3);
       });
   }

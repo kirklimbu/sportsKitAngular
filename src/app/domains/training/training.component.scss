@@ -49,8 +49,17 @@ h5 {
 
   transition: background 400ms ease-in-out;
 }
+@media screen and (min-width: 420px) {
+  .ant-card {
+    padding: 1rem 3rem;
+  }
+}
 @media screen and (min-width: 769px) {
   .container {
     padding: 1rem 7rem;
+  }
+
+  .ant-card {
+    padding: 2rem 3rem;
   }
 }

@@ -7,7 +7,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { ContactUsFormComponent } from './contact-us-form/contact-us-form.component';
 import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
-
+import { IOrganization } from '../admin/organization/data/models/organization/organization.model';
 
 @Component({
   selector: 'app-our-location',
@@ -22,19 +22,13 @@ import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
     NzImageModule,
     // project
     MapComponent,
-    ContactUsFormComponent
+    ContactUsFormComponent,
   ],
   templateUrl: './our-location.component.html',
-  styleUrls: ['./our-location.component.scss']
+  styleUrls: ['./our-location.component.scss'],
 })
 export class OurLocationComponent {
-
-
   // props
-  readonly info = GlobalConstants
-  @Input() data: any;
-
-
-
-
+  readonly info = GlobalConstants;
+  @Input() data!: IOrganization;
 }
