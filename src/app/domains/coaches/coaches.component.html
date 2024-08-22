@@ -1,45 +1,48 @@
 <div>
+  @if(data){
 
-    @if(data){
+  <section id="coach" class="content-container">
+    <div
+      class="message-section animate__animated animate__fadeInUp animate__delay-3s animate__slower"
+    >
+      <div class="sub-title">
+        <span>{{ data.subTitle }}</span>
+      </div>
+      <div class="title text-bolder">
+        <span> {{ data.title }} </span>
+      </div>
+      <!-- <small nz-typography nzType="secondary">Head Coach</small> -->
 
-    <section id="coach"
-        class="  content-container animate__animated animate__slideInUp animate__delay-3s animate__slower">
+      <div nz-typography nzType="secondary" class="description">
+        @if(!show){
 
+        <p [innerText]="data?.description | truncate : 800"></p>
+        }@else {
+        <p [innerText]="data?.description"></p>
+        }
 
+        <button
+          nz-button
+          nzType="default"
+          nzShape="round"
+          (click)="scrollTo('#coach')"
+        >
+          {{ show ? 'Show less' : 'Show more' }}
+        </button>
+      </div>
+    </div>
 
-        <div class="message-section ">
-            <div class="sub-title">
-                <span>{{data.subTitle}}</span>
-
-            </div>
-            <div class="title text-bolder">
-                <span>
-                    {{data.title}} </span>
-            </div>
-            <!-- <small nz-typography nzType="secondary">Head Coach</small> -->
-
-            <div nz-typography nzType="secondary" class="description ">
-
-                @if(!show){
-
-                <p [innerText]="data?.description |truncate:800">
-                </p>
-                }@else {
-                <p [innerText]="data?.description ">
-                </p>
-                }
-
-                <button nz-button nzType="default" nzShape="round" (click)="scrollTo('#coach')"> {{show ? 'Show less' :
-                    'Show more'}}</button>
-
-
-            </div>
-        </div>
-
-        <div class="image-section  ">
-            <img [ngSrc]="data.image" [alt]="data.title" loading="lazy" height="400" width="400">
-
-        </div>
-    </section>
-    }
+    <div
+      class="image-section animate__animated animate__slideInUp animate__delay-3s animate__slower"
+    >
+      <img
+        [ngSrc]="data.image"
+        [alt]="data.title"
+        loading="lazy"
+        height="400"
+        width="400"
+      />
+    </div>
+  </section>
+  }
 </div>

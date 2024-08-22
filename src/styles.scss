@@ -12,34 +12,27 @@ body {
 }
 
 button {
-  transition: background 400ms ease-in-out;
-  // animation: pulse 1s linear infinite;
-}
+  color: $gold;
+  border: 1px solid $gold;
+  background: transparent;
 
-.nepali-date-picker .np_datepicker_input {
-  color: $black !important;
-}
-
-[nz-button] {
-  background-color: $gold;
-  border-color: $white;
-  color: $white;
-  // font-size: 18px;
-
-  // padding: 3rem;
   &:hover {
-    background-color: $primary-color;
-    border: 1px solid $white;
+    color: $primary-color;
+    border: 1px solid $primary-color;
     background-position: 0;
   }
 
   background: {
-    image: linear-gradient(45deg, $primary-color 50%, transparent 50%);
+    image: linear-gradient(45deg, $gold 50%, transparent 50%);
     position: 100%;
     size: 300%;
   }
 
   transition: background 400ms ease-in-out;
+}
+
+.nepali-date-picker .np_datepicker_input {
+  color: $black !important;
 }
 
 .content-container {
@@ -207,13 +200,6 @@ span[nz-typography] + span[nz-typography] {
 //     background-color: $primary-color;
 //   }
 // }
-.description {
-  text-align: justify;
-}
-
-.image-section {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
 
 // table
 .ng-table,
@@ -249,7 +235,25 @@ img {
 i {
   margin-right: 8px;
 }
-// animation
+
+// image and description section
+.description {
+  text-align: justify;
+}
+
+.image-section {
+  position: relative;
+  box-sizing: border-box;
+  background-color: greenyellow;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  img {
+    object-fit: cover;
+    margin-top: -3rem;
+    border-radius: 1rem;
+  }
+}
 
 @media only screen and (min-width: 320px) {
   .content-with-button {
@@ -269,6 +273,33 @@ i {
       width: 6%;
     }
   }
+
+  .image-section {
+    // padding: 6%;
+    padding: 1rem;
+    width: 315px;
+
+    img {
+      height: 315px;
+      width: 320px;
+    }
+  }
+
+  .message-section {
+    margin-bottom: 3rem;
+
+    .sub-title {
+      margin-top: 2rem;
+    }
+
+    .description {
+      margin-top: 2rem;
+    }
+
+    button {
+      height: 34px;
+    }
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -279,6 +310,89 @@ i {
   .sub-title {
     span::before {
       width: 2%;
+    }
+  }
+
+  .content-container {
+    display: flex;
+    gap: 2rem;
+    min-height: 600px;
+    padding: 2rem 2rem;
+
+    // background: rgb(233, 185, 98);
+    .image-section {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      padding: 0;
+      width: 500px;
+      margin-top: 2rem;
+
+      img {
+        width: 380px;
+        flex: 1;
+      }
+    }
+
+    .message-section {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      .description {
+        display: flex;
+        flex-wrap: wrap;
+        width: 400px;
+      }
+
+      button {
+        height: auto;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .content-container {
+    display: flex;
+    place-content: center;
+
+    gap: 7rem;
+    min-height: 600px;
+    padding: 2rem 7rem;
+
+    // background: rgb(233, 185, 98);
+    .image-section {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      padding: 3%;
+      width: 500px;
+      // height: 500px;
+      margin-top: 2rem;
+
+      img {
+        width: 480px;
+        height: 480px;
+        flex: 1;
+      }
+    }
+
+    .message-section {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      .description {
+        display: flex;
+        flex-wrap: wrap;
+        width: 600px;
+      }
+
+      button {
+        height: auto;
+        width: 100px;
+      }
     }
   }
 }

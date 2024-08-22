@@ -15,10 +15,13 @@ select:focus {
   border: none;
 }
 
+.content-container {
+  display: flex;
+  place-content: center;
+}
 .location-container {
   width: 100%;
   margin: 0rem auto;
-
 
   .location-content {
     text-align: justify;
@@ -112,8 +115,11 @@ select:focus {
 }
 
 @media (min-width: 992px) {
+  .content-container {
+    gap: 0;
+  }
   .location-content {
-    max-width: 1200px;
+    width: 60rem;
     margin: 2rem 6rem;
     display: flex;
   }
@@ -133,7 +139,7 @@ select:focus {
 
     .map-section {
       margin: 0;
-      padding: 24px 7rem;
+      padding: 2rem;
       position: relative;
       width: 100%;
     }

@@ -1,71 +1,109 @@
 @import 'src/assets/scss/_variables.scss';
 
 .content-container {
-    text-justify: justify;
-    background-color: $tone-green-light;
-    // font-family: $font-primary;
+  text-justify: justify;
+  background-color: $tone-green-light;
+  display: flex;
+  place-content: center;
+  // font-family: $font-primary;
 }
 
 .image-section {
-    box-shadow: none;
+  box-shadow: none;
+  background: none;
+  img {
+    aspect-ratio: 1/1;
+  }
 }
 
 .message-section {
-    padding-bottom: 2rem;
-}
-
-.image-section {
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-    place-items: center;
-    font-family: $font-primary;
+  margin: 0;
+  //   padding-bottom: 2rem;
 }
 
 .ant-card-meta-title {
-    font-family: $font-primary;
+  font-family: $font-primary;
 }
 
 small {
-    font-family: $font-primary;
-    color: $gold;
+  font-family: $font-primary;
+  color: $gold;
 
-    &:hover {
-        cursor: pointer;
-        transform: scale(1.3);
-    }
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.3);
+  }
 }
 
 @media (min-width: 320px) {
-    .content-container {
-
-        .image-section {
-            img {
-                width: 350px;
-                height: 240px;
-            }
-        }
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    place-content: center;
+    .image-section {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2rem;
+      gap: 1rem;
+      width: 350px;
+      img {
+        margin: 0.25rem;
+        width: 350px;
+        height: 240px;
+      }
     }
+
+    .message-section {
+      //   margin: 0;
+      padding-bottom: 2rem;
+    }
+  }
 }
 
 @media (min-width: 768px) {
-    .content-container {
+  .content-container {
+    display: flex;
+    flex-direction: row;
+    padding: 2rem 7rem;
 
-        padding: 2rem 7rem;
+    .image-section {
+      display: flex;
+      flex-direction: row;
+      width: auto;
+      gap: 1rem;
 
-        .image-section {
-            // width: 400px;
-
-
-            img {
-                width: 300px;
-                height: 300px;
-            }
-        }
+      img {
+        width: 300px;
+        height: 300px;
+      }
     }
+  }
 }
 
-@media (min-width: 990px) {}
+@media (min-width: 990px) {
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 7rem;
+    gap: 0;
+    .image-section {
+      display: flex;
+      flex-direction: row;
+      place-content: center;
+      width: auto;
+
+      img {
+        width: 300px;
+        height: 300px;
+      }
+    }
+    .message-section {
+      place-content: center;
+      padding-bottom: 0;
+
+      .description {
+        width: 60rem;
+      }
+    }
+  }
+}
