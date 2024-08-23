@@ -72,7 +72,7 @@ span[nz-typography] {
   font-size: $font-size-sm;
 }
 
-span[nz-typography] + span[nz-typography] {
+span[nz-typography]+span[nz-typography] {
   margin-top: 8px;
 }
 
@@ -147,7 +147,7 @@ span[nz-typography] + span[nz-typography] {
   border-radius: 1px;
 }
 
-.form label .input + span {
+.form label .input+span {
   position: absolute;
   left: 10px;
   top: 15px;
@@ -157,19 +157,19 @@ span[nz-typography] + span[nz-typography] {
   transition: 0.3s ease;
 }
 
-.form label .input:placeholder-shown + span {
+.form label .input:placeholder-shown+span {
   top: 15px;
   font-size: 0.9em;
 }
 
-.form label .input:focus + span,
-.form label .input:valid + span {
+.form label .input:focus+span,
+.form label .input:valid+span {
   top: 0px;
   // font-size: 0.7em;
   font-weight: 600;
 }
 
-.form label .input:valid + span {
+.form label .input:valid+span {
   color: $primary-color;
 }
 
@@ -209,18 +209,12 @@ td {
   text-wrap: wrap;
 }
 
-.ant-table .ant-table-thead > tr > th {
+.ant-table .ant-table-thead>tr>th {
   font-weight: bold;
   text-align: center;
 }
 
-.ant-table.ant-table-bordered
-  > .ant-table-container
-  > .ant-table-body
-  > table
-  > tbody
-  > tr
-  > td {
+.ant-table.ant-table-bordered>.ant-table-container>.ant-table-body>table>tbody>tr>td {
   text-wrap: wrap;
 }
 
