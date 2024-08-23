@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { CountUpDirective } from 'src/app/shared/util-common/directives/count-up.directive';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { CountUpDirective } from 'src/app/shared/util-common/directives/count-up
   standalone: true,
   imports: [
     CommonModule,
+    RouterModule,
     NzStatisticModule,
     NzGridModule,
     NzButtonModule,

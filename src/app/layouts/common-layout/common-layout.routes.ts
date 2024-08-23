@@ -32,27 +32,7 @@ export const COMMON_LAYOUT_ROUTES: Routes = [
     //     },
     //     loadChildren: () => import('./../../domains/events').then(m => m.FEATURE_EVENTS_ROUTES),
     // },
-    {
-        path: 'events',
-        data: {
-            breadcrumb: 'events'
-        },
-        component: TotalEventsComponent,
-    },
-    {
-        path: 'events/detail',
-        data: {
-            breadcrumb: 'events'
-        },
-        component: EventDetailsComponent,
-    },
-    {
-        path: 'training',
-        data: {
-            breadcrumb: 'training'
-        },
-        component: TrainingComponent,
-    },
+
     {
         path: 'privacy',
         data: {

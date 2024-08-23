@@ -1,0 +1,80 @@
+<div class="container">
+
+    <!-- <div class="sub-title">
+        <span> Members
+        </span>
+    </div>
+    <div class="title text-bolder">
+        <h3>
+            All members
+        </h3>
+    </div> -->
+
+
+    @if(data$|async;as data ){
+
+
+    <div class="card-container">
+        @for (item of data; track $index) {
+        <div class="">
+            @switch (item.memberShip) {
+            @case ('Life') {
+            <nz-ribbon nzColor="gold" [nzText]="'Permanent'">
+                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+                    <nz-card-meta [nzTitle]="item.name|titlecase" nzDescription=""></nz-card-meta>
+                </nz-card>
+            </nz-ribbon>
+            }
+            @case ('Monthly') {
+            <nz-ribbon nzColor="#3f87f5" [nzText]="item.memberShip|titlecase">
+                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+                    <nz-card-meta [nzTitle]="item.name|titlecase" nzDescription=""></nz-card-meta>
+                </nz-card>
+            </nz-ribbon>
+            }
+            @default {
+            <nz-ribbon nzColor="#87d068" [nzText]="item.memberShip|titlecase">
+                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+                    <nz-card-meta [nzTitle]="item.name|titlecase" nzDescription=""></nz-card-meta>
+                </nz-card>
+            </nz-ribbon>
+            }
+
+            }
+
+            <ng-template #coverTemplate>
+                <img alt="example" [src]="item.profilePic" />
+            </ng-template>
+            <ng-template #actionSetting>
+
+                <a nz-tooltip nzTooltipTitle="Call now" href="tel:{{item.mobile1}}">
+                    <i class="fa-solid fa-phone"></i>
+                    {{item.mobile1 }}
+                </a>
+
+            </ng-template>
+            <ng-template title="Membership type" #actionEdit>
+                <span nz-tooltip nzTooltipTitle="Membership type">
+
+                    <i class="fa-solid fa-user"></i>
+                    {{ item.memberShip|titlecase }}
+                </span>
+            </ng-template>
+            <ng-template #actionEllipsis>
+                <span nz-tooltip nzTooltipTitle="Date of birth">
+
+                    <i class="fa-regular fa-calendar"></i>
+                    {{item.dob}}
+                </span>
+
+            </ng-template>
+        </div>
+
+        <!-- Repeat the card structure for more items -->
+        }
+    </div>
+
+
+    }
+
+</div>

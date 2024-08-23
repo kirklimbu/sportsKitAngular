@@ -33,15 +33,15 @@
                 <a routerLinkActive="active" class="navbar-link" routerLink="/home">Home</a>
             </li>
             <li class="nav-item">
-                <a routerLinkActive="active" class="navbar-link" routerLink="/events">Events</a>
+                <a routerLinkActive="active" class="navbar-link" routerLink="/home/events">Events</a>
             </li>
             <li class="nav-item">
-                <a routerLinkActive="active" class="navbar-link" routerLink="/training">Training</a>
+                <a routerLinkActive="active" class="navbar-link" routerLink="/home/training">Training</a>
             </li>
 
 
             <li class="nav-item">
-                <a routerLinkActive="active" class="navbar-link" routerLink="/tournaments">Tournaments</a>
+                <a routerLinkActive="active" class="navbar-link" routerLink="/home/tournaments">Tournaments</a>
             </li>
             <li class="nav-item">
                 <a routerLinkActive="active" class="navbar-link" routerLink="/tiesheet">Tiesheet</a>
@@ -82,7 +82,7 @@
             </li> -->
             <li class="nav-item">
                 <a routerLinkActive="active" data-after="member" class="navbar-link"
-                    (click)="scrollTo('#member')">Members</a>
+                    routerLink="/home/all-member">Members</a>
             </li>
             <li class="nav-item">
                 <a routerLinkActive="active" data-after="member" class="navbar-link" routerLink="/privacy">Privacy
