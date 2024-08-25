@@ -17,7 +17,7 @@ import {
   NzUploadModule,
 } from 'ng-zorro-antd/upload';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
-import { UrlService } from 'src/app/shared/util-logger/url.service';
+// import { UrlService } from 'src/app/shared/util-logger/url.service';
 import { UserComponent } from '../user.component';
 import { UsersService } from '../data/services/users.service';
 import { Router } from '@angular/router';
@@ -81,7 +81,7 @@ export class AddUserComponent implements OnInit {
   private readonly userService = inject(UsersService);
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
-  private readonly urlService = inject(UrlService);
+  // private readonly urlService = inject(UrlService);
   private readonly messageService = inject(MessageService);
 
   ngOnInit() {

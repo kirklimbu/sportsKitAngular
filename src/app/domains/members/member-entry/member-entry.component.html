@@ -18,8 +18,9 @@
                 <span class="not-compulsory">Profile pic</span>
                 <label for="">
                     <div class="clearfix">
-                        <nz-upload class="avatar-uploader" [nzBeforeUpload]="beforeUpload" nzAccept=".png,.jpg,.jpeg"
-                            [nzSize]="10000" [nzFileType]="'image/png,image/jpeg,image/jpg'" nzListType="picture-card"
+                        <nz-upload style="height: 180px;width: 180px; margin-bottom: .75rem;" class="avatar-uploader"
+                            [nzBeforeUpload]="beforeUpload" nzAccept=".png,.jpg,.jpeg" [nzSize]="10000"
+                            [nzFileType]="'image/png,image/jpeg,image/jpg'" nzListType="picture-card"
                             [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 1"
                             (nzChange)="handleChange($event)">
                             <!-- <div>
@@ -30,7 +31,7 @@
                                 <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
                                 <div class="ant-upload-text">Upload</div>
                             </ng-container>
-                            <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+                            <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 180px;height: 180px; " />
                         </nz-upload>
                         <!-- <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
                             (nzOnCancel)="previewVisible = false">
@@ -72,7 +73,7 @@
             <div class="flex">
                 <label>
                     <span class="required" for="dob">D.O.B</span>
-                    <ne-datepicker [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event)"
+                    <ne-datepicker language="en" [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event)"
                         (dateInAD)="updateEnglishDate($event)">
                     </ne-datepicker>
                 </label>

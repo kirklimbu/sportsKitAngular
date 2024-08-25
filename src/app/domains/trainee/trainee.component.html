@@ -34,12 +34,12 @@
                     </button>
                     <!-- <button *nzSpaceItem nz-button>Operation</button> -->
 
-                    @if (userRole==='Admin') {
+                    <!-- @if (userRole==='Admin') { -->
                     <button [disabled]="!showAddButton" *nzSpaceItem nz-button nzType="primary" (click)="onAdd()">
                         <span nz-icon nzType="plus" nzTheme="outline"></span>
                         Trainee
                     </button>
-                    }
+                    <!-- } -->
                 </nz-space>
             </nz-page-header-extra>
 
@@ -69,7 +69,7 @@
 
             <tr>
                 <td class="text-center">
-                    <nz-avatar nzIcon="user" [nzSrc]="trainee.profilePic"></nz-avatar>
+                    <nz-avatar [nzSize]="90" nzIcon="user" [nzSrc]="trainee.profilePic"></nz-avatar>
                 </td>
 
                 <td>{{ trainee.name |titlecase }}</td>

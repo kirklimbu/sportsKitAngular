@@ -10,7 +10,7 @@ import { ConfirmedValidator } from 'src/app/shared/util-logger/confirm-password.
 import { FormSubmitButtonsComponent } from 'src/app/shared/ui-common/form-submit-buttons/form-submit-buttons.component';
 // import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { UrlService } from 'src/app/shared/util-logger/url.service';
+// import { UrlService } from 'src/app/shared/util-logger/url.service';
 // import { MessageService } from 'src/app/shared/util-logger/message.service';
 import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -45,7 +45,7 @@ export class RegistrationComponent {
     private route: ActivatedRoute,
     // public activeModal: NgbActiveModal,
     // public modal: NgbModal,
-    public urlService: UrlService,
+    // public urlService: UrlService,
     // public messageService: MessageService,
   ) {
 

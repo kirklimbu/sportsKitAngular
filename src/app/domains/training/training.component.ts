@@ -20,6 +20,7 @@ import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
 import { Store } from '@ngxs/store';
 import { AuthState } from '../auth/login/state/login.state';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Navigate } from '@ngxs/router-plugin';
 
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
@@ -72,7 +73,9 @@ export class TrainingComponent {
 
 
   onViewMore(id: number): void {
-    this.router.navigate(['/admin/user-profile'], { queryParams: { memberId: id } })
+    this.store.dispatch(new Navigate(['/training']))
+
+    this.router.navigate(['/admin/training/detail'], { queryParams: { id: id } })
   }
   onEdit(id: number): void {
     this.router.navigate(['/admin/training/add-training'], { queryParams: { id: id } })

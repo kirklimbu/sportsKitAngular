@@ -18,34 +18,47 @@
         </p>
       </div>
     </div>
-    @for (item of events$|async; track $index) {
+    @if(!(events$|async)){
+    <ng-container>
+      <section id="about-us" class="container content-container animate__animated animate__fadeInUp">
+        <nz-skeleton-element nzType="image" [nzActive]="true"></nz-skeleton-element>
+        <nz-skeleton [nzActive]="true">
+        </nz-skeleton>
+      </section>
+    </ng-container>
+    }@else {
+    <ng-container>
+      @for ((item of events$|async); track $index) {
+      <nz-ribbon class="animate__animated animate__fadeInUp" [nzPlacement]="'start'"
+        [nzColor]="item.hasActive? 'red' : 'transparent'" [nzText]="item.hasActive ? 'Active' : ''">
+        <article class="postcard light green " (click)="showMore(item.eventId)">
+          <a class="postcard__img_link">
+            <img class="postcard__img" [src]="item.image" alt="Image Title" />
+          </a>
+          <div class="postcard__text t-dark">
+            <h1 class="postcard__title blue title">
+              <a>{{ item.title }}</a>
+            </h1>
+            <div class="postcard__subtitle small">
+              <time datetime="2020-05-25 12:00:00">
+                <p><i class="fas fa-calendar-alt mr-2"></i>{{ item.eventDate }}</p>
+              </time>
+              <time>
+                <p><i class="fas fa-clock mr-2"></i>{{ item.startTime }}</p>
+              </time>
+            </div>
+            <div class="postcard__bar"></div>
+            <div class="postcard__preview-txt">
+              {{ item.description | truncate : 100 }}
+            </div>
+            <ul class="postcard__tagbox"></ul>
+          </div>
+        </article>
+      </nz-ribbon>
 
-    <article
-      class="postcard light green animate__animated animate__fadeInUp"
-      (click)="showMore(item.eventId)"
-    >
-      <a class="postcard__img_link">
-        <img class="postcard__img" [src]="item.image" alt="Image Title" />
-      </a>
-      <div class="postcard__text t-dark">
-        <h1 class="postcard__title blue title">
-          <a>{{ item.title }}</a>
-        </h1>
-        <div class="postcard__subtitle small">
-          <time datetime="2020-05-25 12:00:00">
-            <p><i class="fas fa-calendar-alt mr-2"></i>{{ item.eventDate }}</p>
-          </time>
-          <time>
-            <p><i class="fas fa-clock mr-2"></i>{{ item.startTime }}</p>
-          </time>
-        </div>
-        <div class="postcard__bar"></div>
-        <div class="postcard__preview-txt">
-          {{ item.description | truncate : 100 }}
-        </div>
-        <ul class="postcard__tagbox"></ul>
-      </div>
-    </article>
+      }
+    </ng-container>
     }
+
   </div>
 </section>

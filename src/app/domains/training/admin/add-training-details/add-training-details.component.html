@@ -15,24 +15,13 @@
       <div class="flex">
         <label>
           <span class="required">Title</span>
-          <input
-            class="input"
-            type="text"
-            placeholder=""
-            autocomplete="off"
-            formControlName="title"
-          />
+          <input class="input" type="text" placeholder="" autocomplete="off" formControlName="title" />
         </label>
 
         <label>
           <span class="required" for="dob">Date</span>
-          <ne-datepicker
-            language="en"
-            [date]="date"
-            dateIn="AD"
-            (dateInBS)="updateNepaliDate($event)"
-            (dateInAD)="updateEnglishDate($event)"
-          >
+          <ne-datepicker language="en" [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event)"
+            (dateInAD)="updateEnglishDate($event)">
           </ne-datepicker>
         </label>
       </div>
@@ -40,12 +29,8 @@
       <div class="flex">
         <label>
           <span class="required">Description</span>
-          <textarea
-            formControlName="description"
-            nz-input
-            placeholder=""
-            [nzAutosize]="{ minRows: 4, maxRows: 6 }"
-          ></textarea>
+          <textarea formControlName="description" nz-input placeholder=""
+            [nzAutosize]="{ minRows: 4, maxRows: 6 }"></textarea>
         </label>
       </div>
       <!-- <button class="submit" (click)="addSubDetail()">Add Link</button> -->
@@ -60,46 +45,24 @@
             <!-- <div class=""> -->
             <label>
               <span class="not-compulsory">Link</span>
-              <input
-                class="input"
-                type="text"
-                placeholder=""
-                autocomplete="off"
-                formControlName="link"
-              />
+              <input class="input" type="text" placeholder="" autocomplete="off" formControlName="link" />
             </label>
             @if(trainingDetails){
 
-            <!-- #BUG EUTA LINK DELETE GARDA ARKO LINK DELETE VAYO -->
-            <!-- #TODO -->
             <nz-list nzItemLayout="vertical">
               <div class="video-container">
                 <nz-list-item>
                   <nz-list-item-extra>
-                    <youtube-player
-                      [videoId]="link.value.link | youtubeLinkPipe"
-                    />
+                    <youtube-player [videoId]="link.value.link | youtubeLinkPipe" />
                   </nz-list-item-extra>
                 </nz-list-item>
               </div>
               <ul nz-list-item-actions>
                 <nz-list-item-action>
-                  <span
-                    nz-icon
-                    nzType="delete"
-                    (click)="showModal(link.value.trainingSubDetailId,$index)"
-                    >Delete</span
-                  >
-                  <nz-modal
-                    nzTitle="DELETE"
-                    nzOkText="Delete"
-                    nzCancelText="Cancel"
-                    [nzOkDanger]="true"
-                    [(nzVisible)]="isVisible"
-                    [nzOkLoading]="isLoading"
-                    (nzOnCancel)="handleCancel()"
-                    (nzOnOk)="onRemoveLink()"
-                  >
+                  <span nz-icon nzType="delete" (click)="showModal(link.value.trainingSubDetailId,$index)">Delete</span>
+                  <nz-modal nzTitle="DELETE" nzOkText="Delete" nzCancelText="Cancel" [nzOkDanger]="true"
+                    [(nzVisible)]="isVisible" [nzOkLoading]="isLoading" (nzOnCancel)="handleCancel()"
+                    (nzOnOk)="onRemoveLink()">
                     <ng-container *nzModalContent>
                       <strong> Are you sure delete this link?<br /> </strong>
                       <small> *Note: </small>
@@ -116,12 +79,8 @@
         }
       </ng-container>
       <div>
-        <app-form-submit-buttons
-          [primaryButtonLabel]="'Save'"
-          [secondaryButtonLabel]="'Cancel'"
-          (save)="onSave()"
-          (cancel)="onCancel()"
-        />
+        <app-form-submit-buttons [primaryButtonLabel]="'Save'" [secondaryButtonLabel]="'Cancel'" (save)="onSave()"
+          (cancel)="onCancel()" />
       </div>
     </form>
   </section>

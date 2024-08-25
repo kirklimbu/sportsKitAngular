@@ -1,50 +1,37 @@
-import { DestroyRef, Injectable, inject } from "@angular/core";
-import { takeUntilDestroyed } from "@angular/core/rxjs-interop";
-import { Router, RoutesRecognized } from "@angular/router";
-import { BehaviorSubject, Observable, filter, pairwise } from "rxjs";
+import { Injectable } from '@angular/core';
+import { State, Selector, Action, StateContext } from '@ngxs/store';
+import { RouterNavigated } from '@ngxs/router-plugin';
 
-@Injectable({
-  providedIn: "root",
+export interface UrlStateModel {
+  previousUrl: string;
+  currentUrl: string;
+}
+
+@Injectable()
+@State<UrlStateModel>({
+  name: 'url',
+  defaults: {
+    previousUrl: '',
+    currentUrl: ''
+  }
 })
-export class UrlService {
-  private previousUrl: BehaviorSubject<string> = new BehaviorSubject<string>(
-    ''
-  );
-  private currentUrl: BehaviorSubject<string> = new BehaviorSubject<string>(
-    ''
-  );
-  public previousUrl$: Observable<string> = this.previousUrl.asObservable();
-  public currentUrl$: Observable<string> = this.currentUrl.asObservable();
-  // previousURL!: string
-  destroyRef = inject(DestroyRef)
-
-  constructor(
-    private router: Router,
-  ) {
-    this.setPreviousPage()
+export class UrlState {
+  @Selector()
+  static previousUrl(state: UrlStateModel) {
+    return state.previousUrl;
   }
 
-  private setPreviousPage() {
-
-    this.router.events
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
-      .subscribe((events: RoutesRecognized[]) => {
-        // console.log('urls ', events);
-
-        this.currentUrl.next(events[1].url);
-        this.previousUrl.next(events[0].urlAfterRedirects);
-        // console.log('previous url', this.previousUrl);
-      });
-
+  @Selector()
+  static currentUrl(state: UrlStateModel) {
+    return state.currentUrl;
   }
 
-  setPreviousUrl(previousUrl: string) {
-    this.previousUrl.next(previousUrl);
-  }
-  setCurrentUrl(currentUrl: string) {
-    this.currentUrl.next(currentUrl);
-  }
-
-
+  // @Action(RouterNavigated)
+  // handleRouterNavigation(ctx: StateContext<UrlStateModel>, action: RouterNavigated) {
+  //   const { previousUrl, url } = action.event;
+  //   ctx.patchState({
+  //     previousUrl,
+  //     currentUrl: url
+  //   });
+  // }
 }

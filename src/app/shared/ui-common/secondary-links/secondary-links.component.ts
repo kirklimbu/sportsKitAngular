@@ -22,12 +22,12 @@ export class SecondaryLinksComponent {
 
 
   onPrimaryLinkClick(data: any) {
-    console.log('1click', data);
+
     this.primaryAction.emit(data);
   }
 
   onSecondaryLinkClick(data: any) {
-    console.log('2click', data);
+
     this.secondaryAction.emit(data);
   }
 }

@@ -1,22 +1,21 @@
 @import 'src/assets/scss/_variables.scss';
 
 .image-section {
-  //   position: relative;
-  //   box-sizing: border-box;
-  //   background-color: greenyellow;
-  //   width: 24Opx;
-  //   border-radius: 0.15rem;
+  padding: 0;
+  box-shadow: none;
+  background-color: transparent;
 
   img {
+    margin: 1rem 0;
     object-fit: cover;
     border-radius: 0.25rem;
-    aspect-ratio: 9/6 auto;
+    aspect-ratio: 16/9 auto;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 }
 
 button {
   background: transparent;
-  // border-radius: 0;
   color: $gold;
   border: 1px solid $gold;
 
@@ -26,11 +25,7 @@ button {
     background-position: 0;
   }
 
-  background: {
-    // image: linear-gradient(45deg, $gold 50%, transparent 50%);
-    // position: 100%;
-    // size: 300%;
-  }
+
 }
 
 p {
@@ -63,26 +58,27 @@ p {
     align-content: center;
     gap: 2rem;
     min-height: 600px;
-    // padding: 3rem 2rem;
 
     .image-section {
-      // padding: 1rem;
       width: 310px;
       margin: 1rem 0;
 
+
       img {
-        height: 310px;
+        height: auto;
         width: 310px;
-        //   padding: 1rem 0;
+        aspect-ratio: 16/9 auto;
       }
     }
 
     .message-section {
       width: 310px;
       margin-bottom: 3rem;
+
       .title {
         font-size: 2rem;
       }
+
       .sub-title {
         margin-top: 2rem;
       }
@@ -96,6 +92,7 @@ p {
       }
     }
   }
+
   // about-us
 }
 
@@ -108,19 +105,13 @@ p {
     align-items: center;
     place-content: center;
 
-    // background: rgb(233, 185, 98);
     .image-section {
-      //   display: flex;
-      //   flex-direction: column;
-      //   flex-wrap: wrap;
-      //   padding: 0;
-      //   width: 500px;
-      //   margin-top: 2rem;
 
       img {
         width: 380px;
-        height: 400px;
+        height: auto;
         flex: 1;
+        aspect-ratio: 16/9;
       }
     }
 
@@ -149,14 +140,18 @@ p {
     align-content: center;
     align-items: center;
     place-content: center;
+
     .image-section {
       width: 780px;
-      height: 450px;
+      height: auto;
+      padding: 0;
 
       img {
+        // margin: 1rem 0;
         width: 780px;
-        height: 450px;
+        height: auto;
         flex: 1;
+        aspect-ratio: 16/9;
       }
     }
 

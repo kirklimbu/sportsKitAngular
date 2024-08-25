@@ -100,7 +100,6 @@ export class AddTrainingDetailsComponent implements OnInit {
   private readonly messageService = inject(MessageService);
   private readonly trainingService = inject(TrainingService);
   private readonly route = inject(ActivatedRoute);
-  private readonly modal = inject(NzModalService);
   private readonly router = inject(Router);
   private readonly cd = inject(ChangeDetectorRef);
 
@@ -135,9 +134,7 @@ export class AddTrainingDetailsComponent implements OnInit {
     return this.form.get('subDetailList') as FormArray;
   }
 
-  // #BUG show details garda sabai youtube link display gareko xaena
-  // START FROM HERE
-  // // Helper method to get the 'subItems' FormArray inside an 'item'
+  // Helper method to get the 'subItems' FormArray inside an 'item'
   addSubDetail() {
     const subDetail: FormGroup = this.fb.group({
       link: [''],
@@ -215,7 +212,6 @@ export class AddTrainingDetailsComponent implements OnInit {
         takeUntilDestroyed(this.unsubscribe$)
       )
       .subscribe((_res: any) => {
-        console.log('res', _res);
         this.trainingMasterId = _res.trainingMasterId;
         this.trainingDetailId = _res.trainingDetailId;
         this.showDetails = _res.showDetails;
@@ -223,8 +219,7 @@ export class AddTrainingDetailsComponent implements OnInit {
       });
   }
 
-  // #BUG onEdit failed to patch trainingSubDetailId
-  // #TODO training link double aayo edit garda
+
   edit() {
     this.trainingDetails$ = this.trainingMasterId$.pipe(
       switchMap((query: number) =>
@@ -240,20 +235,15 @@ export class AddTrainingDetailsComponent implements OnInit {
       .subscribe((_res: any) => {
         // console.log('default form res', _res);
         this.form.patchValue(_res.form);
-        // this.trainingDetails = _res.form
-
         this.getYoutubeVideoLink(_res);
 
         // patch formArray on edit
         _res.form.subDetailList.forEach((detail: string) => {
-          // console.log('subDetailList link', detail)
-
           this.subDetail.push(this.fb.group(detail));
         });
 
         // date
         if (!_res.form.startDate) {
-          // this.date = new Date();
           return;
         }
         const BSDate = this._nepaliDatepickerService.BSToAD(
@@ -293,7 +283,7 @@ export class AddTrainingDetailsComponent implements OnInit {
   }
 
   onSave() {
-    console.log('form ', this.form.value);
+    // console.log('form ', this.form.value);
 
     this.checkNull('startDate');
     console.log('form val', this.form.value);

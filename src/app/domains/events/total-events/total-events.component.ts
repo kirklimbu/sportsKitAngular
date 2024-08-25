@@ -1,15 +1,20 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { EventsService } from '../data/services/events.service';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
 import { Router } from '@angular/router';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 @Component({
   selector: 'app-total-events',
   standalone: true,
   imports: [CommonModule,
-    TruncatePipe
+    TruncatePipe,
+    NgOptimizedImage,
+    NzBadgeModule,
+    NzSkeletonModule
   ],
   templateUrl: './total-events.component.html',
   styleUrl: './total-events.component.scss',
@@ -25,10 +30,10 @@ export class TotalEventsComponent implements OnInit {
   }
 
   fetchAllEvents() {
-    this.events$ = this.eventsService.getAllEvents()
+    this.events$ = this.eventsService.getAllEvents().pipe(shareReplay(1))
   }
 
   showMore(id: number) {
-    this.router.navigate(['/events/detail',], { queryParams: { id: id } })
+    this.router.navigate(['/home/events/detail',], { queryParams: { id: id } })
   }
 }

@@ -2,11 +2,7 @@
   @if ((userProfile$|async);as userProfile){ @if ( userProfile.user){
 
   <p class="title" style="margin-bottom: 24px">User Profile</p>
-  <nz-descriptions
-    nzLayout="vertical"
-    [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
-    nzTitle="Personal"
-  >
+  <nz-descriptions nzLayout="vertical" [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }" nzTitle="Personal">
     <nz-descriptions-item nzTitle=" Name" [nzSpan]="1">
       <div class="details">
         {{ userProfile?.user?.name | titlecase }}
@@ -30,44 +26,39 @@
   </nz-descriptions>
   } @if(userProfile.member){
   <nz-divider></nz-divider>
-  <nz-descriptions
-    nzLayout="vertical"
-    [nzExtra]="memberButtons"
-    [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
-    nzTitle="Member Details"
-  >
+  <nz-descriptions nzLayout="vertical" [nzExtra]="memberButtons"
+    [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }" nzTitle="Member Details">
     <nz-descriptions-item nzTitle="Profile image" [nzSpan]="1">
-      <nz-avatar
-        [nzShape]="'square'"
-        [nzSize]="128"
-        nzIcon="user"
-        [nzSrc]="userProfile.member.profilePic"
-      ></nz-avatar>
+      <nz-avatar [nzShape]="'square'" [nzSize]="128" nzIcon="user" [nzSrc]="userProfile.member.profilePic"></nz-avatar>
       <nz-space [nzSize]="12"> </nz-space>
     </nz-descriptions-item>
     <nz-descriptions-item nzTitle="Name" [nzSpan]="1">
-      <p>{{ userProfile.member.name | titlecase }}</p>
+      <p class="details">{{ userProfile.member.name | titlecase }}</p>
     </nz-descriptions-item>
     <nz-descriptions-item nzTitle="Mobile" [nzSpan]="1">
-      <p>{{ userProfile.member.mobile1 }}</p>
+      <p class="details">{{ userProfile.member.mobile1 }}</p>
       /
-      <p>{{ userProfile.member.mobile2 }}</p>
+      <p class="details">{{ userProfile.member.mobile2 }}</p>
     </nz-descriptions-item>
     <nz-descriptions-item nzTitle="Address" [nzSpan]="1">
-      <p>{{ userProfile.member.address | titlecase }}</p>
+      <p class="details">{{ userProfile.member.address | titlecase }}</p>
     </nz-descriptions-item>
     <nz-descriptions-item nzTitle="D.O.B" [nzSpan]="1">
-      <P>
+      <p class="details">
         {{ userProfile.member.dob }}
-      </P>
+      </p>
     </nz-descriptions-item>
 
-    <nz-descriptions-item nzTitle="Membership Type" [nzSpan]="1">{{
-      userProfile.member.memberShip
-    }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Membership Type" [nzSpan]="1">
+      <p class="details">
+        {{
+        userProfile.member.memberShip
+        }}
+      </p>
+    </nz-descriptions-item>
 
     <nz-descriptions-item nzTitle="Last payment" [nzSpan]="1">
-      <p>
+      <p class="details">
         {{ userProfile.member.lastPaymentDate }}
       </p>
     </nz-descriptions-item>
@@ -76,38 +67,29 @@
   $index) {
 
   <nz-divider></nz-divider>
-  <nz-descriptions
-    nzLayout="vertical"
-    [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }"
-    nzTitle="Trainee"
-  >
+  <nz-descriptions nzLayout="vertical" [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }" nzTitle="Trainee">
     <nz-descriptions-item nzTitle="Profile Pic" [nzSpan]="1">
-      <nz-avatar
-        [nzShape]="'square'"
-        [nzSize]="128"
-        nzIcon="user"
-        [nzSrc]="item.profilePic"
-      ></nz-avatar>
+      <nz-avatar [nzShape]="'square'" [nzSize]="128" nzIcon="user" [nzSrc]="item.profilePic"></nz-avatar>
       <nz-space [nzSize]="12"> </nz-space>
     </nz-descriptions-item>
     <nz-descriptions-item nzTitle="Name" [nzSpan]="1">
-      <p>
+      <p class="details">
         {{ item.name | titlecase }}
       </p>
     </nz-descriptions-item>
     <nz-descriptions-item nzTitle="Mobile" [nzSpan]="1">
-      <p>{{ item.mobile }}</p>
+      <p class="details">{{ item.mobile }}</p>
     </nz-descriptions-item>
     <nz-descriptions-item nzTitle="Address" [nzSpan]="1">
-      <p>{{ item.address | titlecase }}</p>
+      <p class="details">{{ item.address | titlecase }}</p>
     </nz-descriptions-item>
     <nz-descriptions-item nzTitle="Email" [nzSpan]="1">
-      <p>
+      <p class="details">
         {{ item.email }}
       </p>
     </nz-descriptions-item>
     <nz-descriptions-item nzTitle="D.O.B" [nzSpan]="1">
-      <p>{{ item.dob }}</p>
+      <p class="details">{{ item.dob }}</p>
     </nz-descriptions-item>
   </nz-descriptions>
   } }
@@ -116,27 +98,20 @@
     @if (userRole==='Admin') {
     <nz-radio-group>
       <label title="Edit Details" nz-radio-button nzValue="large">
-        <a (click)="onEdit(userProfile.member?.memberId)"
-          ><span nz-icon nzType="edit" nzTheme="outline"></span> Details</a
-        >
+        <a (click)="onEdit(userProfile.member?.memberId)"><span nz-icon nzType="edit" nzTheme="outline"></span>
+          Details</a>
       </label>
-      <label title="Add Payment" nz-radio-button nzValue="default"
-        ><a (click)="onMakePayment(userProfile.member?.memberId)"
-          ><span nz-icon nzType="plus" nzTheme="outline"></span> Payment</a
-        ></label
-      >
-      <label title="Edit Payment" nz-radio-button nzValue="small"
-        ><a (click)="onEditPayment(userProfile.member?.memberId)"
-          ><span nz-icon nzType="edit" nzTheme="outline"></span> Payment</a
-        ></label
-      >
+      <label title="Add Payment" nz-radio-button nzValue="default"><a
+          (click)="onMakePayment(userProfile.member?.memberId)"><span nz-icon nzType="plus" nzTheme="outline"></span>
+          Payment</a></label>
+      <label title="Edit Payment" nz-radio-button nzValue="small"><a
+          (click)="onEditPayment(userProfile.member?.memberId)"><span nz-icon nzType="edit" nzTheme="outline"></span>
+          Payment</a></label>
     </nz-radio-group>
     }
-    <label title="Payment History" nz-radio-button nzValue="small"
-      ><a (click)="onViewPaymentHistory(userProfile.member?.memberId)">
-        <span nz-icon nzType="history" nzTheme="outline"></span> History</a
-      ></label
-    >
+    <label title="Payment History" nz-radio-button nzValue="small"><a
+        (click)="onViewPaymentHistory(userProfile.member?.memberId)">
+        <span nz-icon nzType="history" nzTheme="outline"></span> History</a></label>
   </ng-template>
   }
 </ng-container>

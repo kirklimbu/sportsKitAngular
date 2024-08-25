@@ -8,6 +8,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { EventsService } from './data/services/events.service';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 
 @Component({
   selector: 'app-event-details',
@@ -18,6 +19,7 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
     NgOptimizedImage,
     SanitizeHtmlPipe,
     NzSpaceModule,
+    NzSkeletonModule
   ],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.scss',

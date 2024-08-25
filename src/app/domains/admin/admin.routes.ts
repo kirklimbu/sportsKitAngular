@@ -56,7 +56,10 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
     loadChildren: () => import('../payment').then((m) => FEATURE_PAYMENT_ROUTES),
   },
   {
-
+    canActivate: [hasRoleGuard],
+    data: {
+      roles: [Role.ADMIN, Role.USER],
+    },
     path: 'training',
     loadChildren: () => import('../training').then((m) => FEATURE_TRAINING_ROUTES),
   },

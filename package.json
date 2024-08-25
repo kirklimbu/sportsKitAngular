@@ -22,6 +22,7 @@
     "@angular/youtube-player": "^18.1.4",
     "@asymmetrik/ngx-leaflet": "^18.0.1",
     "@auth0/angular-jwt": "^5.2.0",
+    "@ngxs/router-plugin": "^18.1.1",
     "@ngxs/storage-plugin": "^18.0.0",
     "@ngxs/store": "^18.0.0",
     "@nx/angular": "19.4.3",

@@ -14,13 +14,13 @@ import { HttpTokenInterceptorService } from './shared/util-auth/guards/intercept
 import { appRoutes } from './app.routes';
 import { AuthState } from './domains/auth/login/state/login.state';
 import { NgxsModule, provideStore } from '@ngxs/store';
-import { NgxsStoragePluginModule, withNgxsStoragePlugin } from '@ngxs/storage-plugin';
+import { withNgxsStoragePlugin, } from '@ngxs/storage-plugin';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ErrorInterceptor } from './shared/util-auth/guards/interceptors/error.interceptor';
-// import { LoaderInterceptor } from './shared/util-auth/guards/interceptors/loader.interceptor';
 import { NgxsReduxDevtoolsPlugin, withNgxsReduxDevtoolsPlugin } from '@ngxs/devtools-plugin';
-import { Auth } from './domains/auth/login/state/login.actions';
 import { LoaderInterceptor } from './shared/util-auth/guards/interceptors/loader.interceptor';
+import { withNgxsRouterPlugin, NavigationActionTiming } from '@ngxs/router-plugin';
+import { UrlState } from './shared/util-logger/url.service';
 
 
 registerLocaleData(en);
@@ -74,6 +74,13 @@ export const appConfig: ApplicationConfig = {
       [AuthState],
       withNgxsStoragePlugin({
         keys: '*'
+      }),
+    ),
+    provideStore(
+      [UrlState],
+      withNgxsRouterPlugin({
+        navigationActionTiming: NavigationActionTiming.PostActivation,
+        // history: true
       })
     ),
     importProvidersFrom(NgxsModule.forRoot([AuthState])),

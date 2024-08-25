@@ -14,13 +14,7 @@
     </div>
 
     <div class="image-section animate__animated animate__fadeInUp">
-      <img
-        [ngSrc]="data.image"
-        alt="About us"
-        loading="lazy"
-        height="400"
-        width="400"
-      />
+      <img [ngSrc]="data.image" [alt]="data.title" loading="lazy" height="400" width="400" />
     </div>
 
     <nz-space>
@@ -36,10 +30,20 @@
       <p [innerText]="data.description"></p>
     </div>
     <!-- <button nz-button nzShape="round" (click)="scrollTo('#about-us')">
-            {{ show ? 'Show less' : 'Show more' }}
-        </button> -->
+              {{ show ? 'Show less' : 'Show more' }}
+          </button> -->
   </div>
 
   <!-- } -->
+</section>
+
+
+}@else {
+<section id="about-us" class="container content-container">
+
+  <nz-skeleton-element nzType="image" [nzActive]="true"></nz-skeleton-element>
+  <nz-skeleton [nzActive]="true">
+
+  </nz-skeleton>
 </section>
 }

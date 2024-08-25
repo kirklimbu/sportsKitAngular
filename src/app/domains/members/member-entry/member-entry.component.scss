@@ -45,6 +45,17 @@ nz-select {
 }
 
 
+:host ::ng-deep .ant-upload-list-picture-card-container {
+  width: 200px;
+  height: 200px;
+  padding-bottom: 1rem;
+}
+
+:host ::ng-deep .ant-upload-list-picture-card .ant-upload-list-item {
+  width: 200px;
+  height: 200px;
+}
+
 .admin-members-section {
   display: flex;
   gap: 1rem;

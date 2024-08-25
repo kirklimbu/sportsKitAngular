@@ -1,3 +1,4 @@
+import { UrlState } from './../../../shared/util-logger/url.service';
 import {
   Component,
   DestroyRef,
@@ -29,12 +30,16 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { RouterState } from '@ngxs/router-plugin';
+import { Actions, ofActionSuccessful } from '@ngxs/store';
+import { RouterDataResolved } from '@ngxs/router-plugin';
 
 import { SeoService } from 'src/app/shared/util-logger/seo.service';
 import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
 import { SecondaryLinksComponent } from 'src/app/shared/ui-common/secondary-links/secondary-links.component';
 import { getDeviceId } from 'src/app/shared/util-common/generateDeviceId';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -70,6 +75,8 @@ export class LoginComponent implements OnInit {
   @Input() showLinks = 'false';
 
   destroyRef = inject(DestroyRef);
+  actions$ = inject(Actions);
+
   // activeModal = inject(NgbActiveModal)
   formError!: TemplateRef<{
     validation: string;
@@ -77,7 +84,11 @@ export class LoginComponent implements OnInit {
     control: AbstractControl<any, any>;
   }> | null;
 
+
+  // private readonly urlService = inject(UrlState);
+
   constructor(
+    private routerState: RouterState,
     private fb: FormBuilder,
     private authService: AuthService,
     private userDetailsService: UserDetailsService,
@@ -96,6 +107,9 @@ export class LoginComponent implements OnInit {
     const title = 'Damak Namuna Badminton Academy';
     this.seoService.setMetaDescription(content);
     this.seoService.setMetaTitle(title);
+
+
+
   }
 
   ngOnInit(): void {
@@ -103,15 +117,30 @@ export class LoginComponent implements OnInit {
     this.checkUser();
   }
 
+  // check routes and navigate accordingly
+  // if user is from training page , clicked view more, send user to training detail page
+  // #TODO PREVIOUS ROUTER
   checkUser() {
-    const userDetails = this.store.selectSnapshot(AuthState.userDetails);
-    // console.log('user', userDetails);
-    if (userDetails.user.role?.includes('Admin')) {
-      console.log('amin');
 
+
+    // UrlState.previousUrl
+
+    // .pipe(takeUntilDestroyed(this.destroyRef))
+    // .subscribe((action: any) => {
+    // });
+
+    // console.log('previous url', UrlState.previousUrl);
+    const userDetails = this.store.selectSnapshot(AuthState.userDetails);
+    const currentPage = this.store.selectSnapshot(RouterState.state);
+    console.log('currentPage', currentPage, 'history', this.routerState);
+
+    // if ()
+    if (userDetails.user.role?.includes('Admin')) {
+      // console.log('amin');
       this.router.navigate(['auth/inquiry']);
       return;
     }
+
     console.log('no amin');
 
     this.router.navigate(['/auth/login']);
