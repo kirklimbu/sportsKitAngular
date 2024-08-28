@@ -14,7 +14,7 @@ export const FEATURE_TRAINEE_ROUTES: Routes = [
 
         canActivate: [hasRoleGuard],
         data: {
-            roles: [Role.ADMIN],
+            roles: [Role.ADMIN, Role.USER],
         },
         path: 'add-trainee',
         component: AddTraineeComponent,

@@ -257,17 +257,24 @@ export class AddTrainingDetailsComponent implements OnInit {
 
   getYoutubeVideoLink(data: any) {
     // console.log('data', data);
-    // start from here
-    const regex =
-      /^https?:\/\/(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/|v\/|)([^&\s]+)/;
+
     this.trainingDetails = data.form;
     this.trainingDetails.subDetailList.forEach((subDetail: any) => {
+      const siIndex = subDetail.link.indexOf('?si=');
+      if (siIndex !== -1) {
+
+        const match = subDetail.link.match(/https:\/\/youtu\.be\/([^?&]+)/);
+        return subDetail.ytlink = match[1];
+      }
+
+      const regex =
+        /^https?:\/\/(?:www\.)?youtube\.com\/(?:watch\?v=|embed\/|v\/|)([^&\s]+)/;
+
       const match = subDetail.link.match(regex);
       if (match && match[1]) {
         subDetail.ytlink = match[1];
       }
 
-      // console.log('fila data', this.trainingDetails);
     });
   }
 
