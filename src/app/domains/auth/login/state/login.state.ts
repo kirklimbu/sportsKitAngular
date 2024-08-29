@@ -1,7 +1,7 @@
 import { IMember } from './../../../members/data/models/member.model';
 import { Injectable } from '@angular/core';
 import { State, Selector, Action, StateContext } from '@ngxs/store';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { Auth } from './login.actions';
 import { Login, Logout } from './login.model';
@@ -11,6 +11,7 @@ import {
   UserModel,
 } from 'src/app/shared/util-auth/models/user.model';
 import { AuthService } from 'src/app/shared/util-auth/services/auth-http/auth.service';
+import { of, throwError } from 'rxjs';
 
 // Initialize the state
 const defaults: LoginResponseDto = {
@@ -100,7 +101,7 @@ export class AuthState {
     };
   }
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
   @Action(Login)
   login(ctx: StateContext<LoginResponseDto>, action: Login) {
     return this.authService
@@ -131,23 +132,20 @@ export class AuthState {
   }
 
   @Action(Logout)
-  logout({ setState, getState }: StateContext<LoginResponseDto>) {
-    getState();
+  logout(ctx: StateContext<LoginResponseDto>) {
     return this.authService.logout().pipe(
+      catchError((error) => {
+        console.error('Logout failed:', error); // Log the error
+        ctx.setState({ ...defaults }); // Reset state
+        // Return an empty observable to complete the stream
+        return of(null);
+      }),
+      // Set state in tap (only if there's no error)
       tap(() => {
-        setState({ ...defaults });
+        ctx.setState({ ...defaults });
       })
     );
-    // ctx.setState({
-    //   ...defaults,
-    // });
   }
-
-  //   @Action(Auth.LoginRedirect)
-  //   onLoginRedirect(ctx: StateContext<LoginResponseDto>) {
-  //     console.log("onLoginRedirect, navigating to /auth/login");
-  //     ctx.dispatch(new Navigate(["/auth/login"]));
-  //   }
 
   @Action(Auth.LoginSuccess)
   onLoginSuccess(

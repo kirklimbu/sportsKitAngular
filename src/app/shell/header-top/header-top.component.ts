@@ -1,7 +1,7 @@
 import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpBackend, HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 // third-party
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
@@ -35,15 +35,9 @@ export class HeaderTopComponent implements OnInit {
   isLoggedIn = false;
   userDetails!: any;
 
-  url = '/assets/data/pages/company_info.json';
-
-  openMap: { [name: string]: boolean } = {
-    sub1: false,
-    sub2: false,
-    sub3: false,
-  };
   headerData = GlobalConstants;
   info$!: Observable<any>;
+
   @Input() notificationCount!: number;
   @Input() imgUrl!: string;
   @Input() data: any;
@@ -52,21 +46,11 @@ export class HeaderTopComponent implements OnInit {
   messageService = inject(MessageService);
   destroyRef = inject(DestroyRef);
   store = inject(Store);
-  private httpClient = inject(HttpClient);
   private userDetailsService = inject(UserDetailsService);
 
-  private handler = inject(HttpBackend);
-  constructor() {
-    this.httpClient = new HttpClient(this.handler);
-  }
 
   ngOnInit(): void {
-    this.fetchInfo();
     this.getUserDetails();
-  }
-
-  fetchInfo() {
-    this.info$ = this.httpClient.get<any>(this.url);
   }
 
   private getUserDetails() {
