@@ -6,7 +6,7 @@ export interface IMember {
     mobile1: string;
     mobile2: string;
     status?: string;
-    profilePic?: string;
+    profilePic: string;
     address?: string;
     lastPaymentDate?: string;
 

@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Observable, shareReplay } from 'rxjs';
 import { IMember } from '../data/models/member.model';
 import { MemberService } from '../data/services/member.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
@@ -14,6 +14,7 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
   standalone: true,
   imports: [
     CommonModule,
+    NgOptimizedImage,
     NzCardModule,
     NzGridModule,
     NzIconModule,

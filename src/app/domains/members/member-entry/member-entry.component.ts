@@ -26,7 +26,6 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { ImageUploadDirective } from 'src/app/shared/util-common/directives/image-upload.directive';
 import { MemberService } from '../data/services/member.service';
 import { AllMembersComponent } from '../all-members.component';
 import { IMember } from '../data/models/member.model';
@@ -35,6 +34,7 @@ import { NepaliDatepickerModule, NepaliDatepickerService } from 'nepali-datepick
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TitleCaseDirective } from 'src/app/shared/util-common/directives/titleCase.directive';
 import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   new Promise((resolve, reject) => {
@@ -56,6 +56,7 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
     NzSelectModule,
     NzIconModule,
     NepaliDatepickerModule,
+    NzTypographyModule,
     // project
     AllMembersComponent,
     TitleCaseDirective
