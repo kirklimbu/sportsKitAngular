@@ -9,11 +9,7 @@
       </div>
       <div class="description text-muted">
         <p>
-          Namuna Badminton Academy offers various membership types to suit
-          different needs. Yearly members enjoy access to all facilities and
-          training programs for one year, with the option to renew annually.
-          Lifetime members receive a one-time, exclusive membership that grants
-          them permanent access to all academy benefits and services.
+          {{data.memberInfo}}
         </p>
         <button nz-button nzType="default" nzShape="round" routerLink="all-member" routerLink="/home/all-member">
           View more
@@ -22,25 +18,13 @@
     </div>
 
     <div class="image-section">
-      @if (data) {
-
+      @for(member of data.memberShipList;track member.memberShip){
       <div class="members">
-        <h2 [countUp]="data.lifeTimeMemberCount" [duration]="5000"></h2>
-        <p>Lifetime Members</p>
-      </div>
-      <div class="members">
-        <h2 [countUp]="data.yearlyMemberCount" [duration]="5000"></h2>
-        <p>Yearly Members</p>
-      </div>
-      <div class="members">
-        <h2 [countUp]="data.quarterlyMemberCount" [duration]="5000"></h2>
-        <p>Quarterly Members</p>
-      </div>
-      <div class="members">
-        <h2 [countUp]="data.monthlyMemberCount" [duration]="5000"></h2>
-        <p>Monthly Members</p>
+        <h2 [countUp]="member.count" [duration]="5000"></h2>
+        <p>{{member.memberShip|titlecase}} Members</p>
       </div>
       }
+
     </div>
   </div>
 </div>

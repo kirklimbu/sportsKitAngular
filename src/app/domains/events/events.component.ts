@@ -33,11 +33,4 @@ export class EventsComponent {
   private router = inject(Router)
 
 
-  showAllEvents() {
-    console.log('events ');
-
-
-    this.router.navigate(['/events'])
-  }
-
 }

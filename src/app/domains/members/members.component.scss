@@ -87,7 +87,7 @@
 @media (min-width: 320px) {
   .image-section {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     padding: 2rem;
     justify-content: center;
@@ -191,6 +191,7 @@
 
       .members {
         text-align: center;
+
         &:hover {
           transform: scale(1.2);
           transition: 400ms ease-in-out;
@@ -240,34 +241,26 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-image: radial-gradient(
-      circle,
+  background-image: radial-gradient(circle,
       transparent 20%,
       #fff 20%,
       #fff 30%,
-      transparent 30%
-    ),
-    radial-gradient(
-      circle,
+      transparent 30%),
+    radial-gradient(circle,
       transparent 40%,
       #f7f7f7 40%,
       #f7f7f7 50%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle,
+      transparent 50%),
+    radial-gradient(circle,
       transparent 60%,
       #e5e5e5 60%,
       #e5e5e5 70%,
-      transparent 70%
-    ),
-    radial-gradient(
-      circle,
+      transparent 70%),
+    radial-gradient(circle,
       transparent 80%,
       #d3d3d3 80%,
       #d3d3d3 90%,
-      transparent 90%
-    );
+      transparent 90%);
   background-size: 100% 100%;
   background-position: center;
 }

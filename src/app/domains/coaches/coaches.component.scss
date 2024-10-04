@@ -19,3 +19,151 @@ button {
 
   transition: background 400ms ease-in-out;
 }
+
+@media only screen and (min-width: 320px) {
+  .content-with-button {
+    gap: 36px;
+  }
+
+  .content-container {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 3rem 2rem;
+  }
+
+  .title {
+    text-justify: none;
+  }
+
+  .sub-title {
+    span::before {
+      width: 6%;
+    }
+  }
+
+  .image-section {
+    // padding: 6%;
+    padding: 1rem;
+    width: 350px;
+    height: 360px;
+
+    img {
+      height: 350px;
+      width: 350px;
+    }
+  }
+
+  .message-section {
+    margin-bottom: 3rem;
+
+    .sub-title {
+      margin-top: 2rem;
+    }
+
+    .description {
+      margin-top: 2rem;
+    }
+
+    button {
+      height: 34px;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .content-with-button {
+    gap: 42px;
+  }
+
+  .sub-title {
+    span::before {
+      width: 2%;
+    }
+  }
+
+  .content-container {
+    display: flex;
+    gap: 2rem;
+    min-height: 600px;
+    padding: 2rem 2rem;
+
+    // background: rgb(233, 185, 98);
+    .image-section {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      padding: 0;
+      width: 450px;
+      height: 460px;
+      margin-top: 2rem;
+
+      img {
+        width: 450px;
+        height: 450px;
+        flex: 1;
+      }
+    }
+
+    .message-section {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      .description {
+        display: flex;
+        flex-wrap: wrap;
+        width: 400px;
+      }
+
+      button {
+        height: auto;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .content-container {
+    display: flex;
+    flex-direction: row;
+    place-content: center;
+
+    gap: 5rem;
+    min-height: 600px;
+    padding: 2rem 7rem;
+
+    // background: rgb(233, 185, 98);
+    .image-section {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      padding: 3%;
+      width: 450px;
+      height: 460px;
+      margin-top: 2rem;
+
+      img {
+        width: 450px;
+        height: 450px;
+        flex: 1;
+      }
+    }
+
+    .message-section {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+
+      .description {
+        display: flex;
+        flex-wrap: wrap;
+        width: 600px;
+      }
+
+      button {
+        height: auto;
+        width: 100px;
+      }
+    }
+  }
+}

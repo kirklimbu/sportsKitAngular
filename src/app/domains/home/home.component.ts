@@ -134,7 +134,7 @@ export class HomeComponent implements OnInit {
         this.aboutUsData = res.homeContentList[0];
         this.coachData = res.homeContentList[1];
         this.bannerData = res.bannerList;
-        this.memberData = res.member;
+        this.memberData = res.memberShip;
         this.locationData = res.organization;
         this.eventData = res.eventList.slice(0, 3);
       });

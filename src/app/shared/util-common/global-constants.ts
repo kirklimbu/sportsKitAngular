@@ -1,7 +1,7 @@
 export class GlobalConstants {
 
     public static appURL = "";
-    public static appTitle = "Damak Namuna Badminton Academy";
+    public static appTitle = "Damak Namuna Badminton Academy ";
     public static appLogo = "assets/images/logo.png";
     public static email = "namunabadmintonacademy@gmail.com";
     public static facebook = "https://www.facebook.com/profile.php?id=61557909320358";
