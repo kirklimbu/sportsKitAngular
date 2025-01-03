@@ -69,9 +69,11 @@ export class MemberEntryComponent implements OnInit {
   // props
   mode = 'add';
   previewImage: string | undefined = '';
+  previewIDcard: string | undefined = '';
   previewVisible = false;
   showButton = true;
   fileList: any[] = [];
+  idCardList: any[] = [];
 
   form!: FormGroup;
   hasError!: boolean;
@@ -84,9 +86,22 @@ export class MemberEntryComponent implements OnInit {
   memberList$!: Observable<IMember[]>;
   isLoading$!: Observable<boolean>;
   date: any = null;
+  issueDate: any = null;
 
   avatarUrl: string | undefined;
+  idCard: string | undefined;
   loading = false;
+
+  readonly bloodGroup = [
+    'A+',
+    'A-',
+    'B+',
+    'B-',
+    'O+',
+    'O-',
+    'AB+',
+    'AB-',
+  ]
 
   private readonly _nepaliDatepickerService = inject(NepaliDatepickerService);
   private readonly memberService = inject(MemberService);
@@ -117,8 +132,13 @@ export class MemberEntryComponent implements OnInit {
       dob: ['', [Validators.required]],
       memberShipTypeId: ['', [Validators.required]],
       mobile1: ['', [Validators.required]],
+      mobile2: ['', [Validators.required]],
       file: [],
-      mobile2: [],
+      cardPic: [],
+      cardPictemp: [],
+      issueDate: [],
+      bloodGroup: [],
+      citizenShipNo: [],
     }));
   }
 
@@ -133,12 +153,14 @@ export class MemberEntryComponent implements OnInit {
       });
   }
 
-  beforeUpload = (file: any): boolean => {
+
+  profilePicUpload = (file: any): boolean => {
 
     this.form.patchValue({
       file: file
     });
 
+    // to display the image
     this.getBase64(file, (img: string) => {
       this.loading = false;
       this.avatarUrl = img;
@@ -148,11 +170,25 @@ export class MemberEntryComponent implements OnInit {
     return false;
   };
 
-  handleChange(info: { file: NzUploadFile }): void {
+  idCardUpload = (file: any): boolean => {
 
-    // if (!info.fileList[0]) {
-    //   return this.messageService.createMessage('error', 'Please select file.');
-    // }
+    this.form.patchValue({
+      cardPictemp: file
+    });
+
+    // to display the image
+    this.getBase64(file, (img: string) => {
+      this.loading = false;
+      this.idCard = img;
+    });
+
+    // this.cd.detectChanges();
+    return false;
+  };
+
+  handleChange(type: string, info: { file: NzUploadFile }): void {
+    console.log('handleChange info', type);
+
 
     switch (info.file.status) {
       case 'uploading':
@@ -162,15 +198,32 @@ export class MemberEntryComponent implements OnInit {
         // Get this url from response in real world.
         this.getBase64(info.file!.originFileObj!, (img: string) => {
           this.loading = false;
-          this.avatarUrl = img;
+          if (type === 'profilePic') {
+            this.avatarUrl = img;
+            this.form.patchValue({
+              file: info
+            });
+            return
+          }
+          this.idCard = img;
+
+          this.form.patchValue({
+            cardPic: info
+          });
         });
         break;
       case 'error':
         console.log('handel chg err');
 
         // this.msg.error('Network error');
-        this.loading = false;
-        break;
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.loading = false;
+          if (type === 'profilePic') {
+            this.avatarUrl = img;
+            return
+          }
+          this.idCard = img;
+        }); break;
     }
 
   }
@@ -178,22 +231,36 @@ export class MemberEntryComponent implements OnInit {
 
   private getBase64(img: File, callback: (img: string) => void): void {
     const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.addEventListener('load', () => {
+      if (reader.result) {
+        callback(reader.result.toString());
+      }
+    });
     reader.readAsDataURL(img);
   }
 
   handlePreview = async (file: NzUploadFile): Promise<void> => {
+    console.log('file handel prreview', file);
+
+
 
     if (!file.url && !file['preview']) {
-      file['preview'] = await getBase64(file.originFileObj!);
+      if (file.originFileObj) {
+        file['preview'] = await getBase64(file.originFileObj);
+      }
     }
     this.previewImage = file.url || file['preview'];
     this.previewVisible = true;
   };
 
   // nepali date picker
-  updateNepaliDate($event: string) {
-    this.form.patchValue({ dob: $event });
+  updateNepaliDate(type: string, $event: string) {
+    if (type === 'dob') {
+      this.form.patchValue({ dob: $event });
+      return;
+    }
+    this.form.patchValue({ issueDate: $event });
+
   }
   updateEnglishDate($event: string) {
     console.log('updaet eng', $event);
@@ -232,7 +299,9 @@ export class MemberEntryComponent implements OnInit {
         this.form.patchValue(_res.form);
         if (_res.form.memberId == 0) {
           this.fileList = []
+          this.idCardList = []
           this.previewImage = _res.form.profilePic;
+          this.previewIDcard = _res.form.cardPic;
           this.date = null;
           return;
         }
@@ -245,11 +314,24 @@ export class MemberEntryComponent implements OnInit {
             url: _res.form.profilePic,
           },
         ];
+        this.idCardList = [
+          {
+            traineeId: _res.form.traineeId,
+            name: _res.form.name,
+            status: 'done',
+            url: _res.form.cardPic,
+          },
+        ];
         const BSDate = this._nepaliDatepickerService.BSToAD(
           _res.form.dob,
           'yyyy/mm/dd'
         );
         this.date = new Date(BSDate);
+        const BSIssueDate = this._nepaliDatepickerService.BSToAD(
+          _res.form.issueDate,
+          'yyyy/mm/dd'
+        );
+        this.issueDate = new Date(BSIssueDate);
 
         // this.cd.detectChanges();
       });

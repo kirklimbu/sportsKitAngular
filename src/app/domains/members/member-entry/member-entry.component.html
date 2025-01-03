@@ -24,33 +24,49 @@
                     <!-- #TODO MOBILE IMAGE UPLOAD ISSUE -->
                     <div class="clearfix">
                         <nz-upload style="height: 180px;width: 180px; margin-bottom: .75rem;" class="avatar-uploader"
-                            [nzBeforeUpload]="beforeUpload" nzAccept=".png,.jpg,.jpeg" [nzSize]="10000"
-                            [nzFileType]="'image/png,image/jpeg,image/jpg'" nzListType="picture-card"
-                            [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 1"
-                            (nzChange)="handleChange($event)">
-                            <!-- <div>
-                                <span nz-icon nzType="plus"></span>
-                                <div style="margin-top: 8px">Upload</div>
-                            </div> -->
+                            [nzShowUploadList]="{'showRemoveIcon':true }" [nzBeforeUpload]="profilePicUpload"
+                            nzAccept=".png,.jpg,.jpeg" [nzSize]="10000" [nzFileType]="'image/png,image/jpeg,image/jpg'"
+                            nzListType="picture-card" [(nzFileList)]="fileList" [nzShowButton]="fileList.length < 1"
+                            (nzChange)="handleChange('profilePic',$event)">
+
                             <ng-container *ngIf="!avatarUrl">
                                 <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
                                 <div class="ant-upload-text">Upload</div>
                             </ng-container>
                             <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 180px;height: 180px; " />
                         </nz-upload>
-                        <!-- <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null"
-                            (nzOnCancel)="previewVisible = false">
-                            <ng-template #modalContent>
-                                <img [src]="previewImage" [ngStyle]="{ width: '100%' }" />
-                            </ng-template>
-                        </nz-modal> -->
+
+                    </div>
+                </label>
+            </div>
+            <div class="flex">
+                <span class="not-compulsory">ID Card</span>
+                <small>
+                    <span nz-typography nzType="danger">*Add square (1:1) photo.</span>
+
+                </small>
+                <label for="">
+                    <!-- #TODO MOBILE IMAGE UPLOAD ISSUE -->
+                    <div class="clearfix">
+                        <nz-upload style="height: 180px;width: 180px; margin-bottom: .75rem;" class="avatar-uploader"
+                            [nzShowUploadList]="{'showRemoveIcon':true }" [nzBeforeUpload]="idCardUpload"
+                            nzAccept=".png,.jpg,.jpeg" [nzSize]="10000" [nzFileType]="'image/png,image/jpeg,image/jpg'"
+                            nzListType="picture-card" [(nzFileList)]="idCardList" [nzShowButton]="idCardList.length < 1"
+                            (nzChange)="handleChange('idCard',$event)">
+
+                            <ng-container *ngIf="!idCard">
+                                <span class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></span>
+                                <div class="ant-upload-text">Upload</div>
+                            </ng-container>
+                            <img *ngIf="idCard" [src]="idCard" style="width: 180px;height: 180px; " />
+                        </nz-upload>
+
                     </div>
                 </label>
             </div>
 
+            <span class="required">Full name</span>
             <div class="flex">
-
-                <span class="required">Name</span>
                 <label>
                     <input appTitleCase class="input" type="text" placeholder="" autocomplete="off"
                         formControlName="name">
@@ -78,7 +94,7 @@
             <div class="flex">
                 <label>
                     <span class="required" for="dob">D.O.B</span>
-                    <ne-datepicker language="en" [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate($event)"
+                    <ne-datepicker language="en" [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate('dob',$event)"
                         (dateInAD)="updateEnglishDate($event)">
                     </ne-datepicker>
                 </label>
@@ -86,10 +102,40 @@
 
             <div class="flex">
                 <label for="MemberType">
+                    <span class="required" for="memberShipTypeId">MemberType</span>
+
                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select type of member"
                         formControlName="memberShipTypeId">
                         @for (item of memberShipType; track $index) {
                         <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        }
+
+                    </nz-select>
+                </label>
+
+            </div>
+            <div class="flex">
+                <span class="required">Citizenship number</span>
+                <label>
+                    <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="citizenShipNo">
+                </label>
+
+                <label>
+                    <span class="required" for="dob">Issue Date:</span>
+                    <ne-datepicker language="en" [date]="issueDate" dateIn="AD"
+                        (dateInBS)="updateNepaliDate('issueDate',$event)" (dateInAD)="updateEnglishDate($event)">
+                    </ne-datepicker>
+                </label>
+            </div>
+
+            <div class="flex">
+                <label for="bloodGroup">
+                    <span class="required" for="memberShipTypeId">Bloodgroup</span>
+
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select type of member"
+                        formControlName="bloodGroup">
+                        @for (item of bloodGroup; track $index) {
+                        <nz-option [nzLabel]="item" [nzValue]="item"></nz-option>
                         }
 
                     </nz-select>

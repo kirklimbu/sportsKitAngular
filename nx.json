@@ -1,7 +1,10 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",
@@ -20,8 +23,13 @@
   "targetDefaults": {
     "@angular-devkit/build-angular:application": {
       "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "production",
+        "^production"
+      ]
     },
     "@nx/eslint:lint": {
       "cache": true,
@@ -34,7 +42,11 @@
     },
     "@nx/jest:jest": {
       "cache": true,
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "inputs": [
+        "default",
+        "^production",
+        "{workspaceRoot}/jest.preset.js"
+      ],
       "options": {
         "passWithNoTests": true
       },
@@ -75,5 +87,6 @@
     }
   },
   "defaultProject": "sportsKitAngular",
-  "nxCloudAccessToken": "MTAyYTI1M2UtZGMzYS00ZTc2LWI2YjEtNjgwM2M4N2VhN2ZkfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "MTAyYTI1M2UtZGMzYS00ZTc2LWI2YjEtNjgwM2M4N2VhN2ZkfHJlYWQtd3JpdGU=",
+  "defaultBase": "main"
 }
