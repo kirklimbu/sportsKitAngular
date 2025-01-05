@@ -24,6 +24,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+
 import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NepaliDatepickerModule, NepaliDatepickerService } from 'nepali-datepicker-angular';
@@ -48,6 +50,7 @@ import { NepaliDatepickerModule, NepaliDatepickerService } from 'nepali-datepick
     NzButtonModule,
     NzRadioModule,
     NzIconModule,
+    NzTagModule,
     NepaliDatepickerModule,
 
   ],

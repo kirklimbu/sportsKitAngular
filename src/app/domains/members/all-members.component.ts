@@ -29,13 +29,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { Role } from 'src/app/shared/util-auth/models/user.model';
 import { Store } from '@ngxs/store';
 import { AuthState } from '../auth/login/state/login.state';
+import { SearchPipe } from 'src/app/shared/util-common/pipes/search.pipe';
 
-
-interface DataItem {
-  name: string;
-  age: number;
-  address: string;
-}
 
 @Component({
   selector: 'app-all-members',
@@ -53,7 +48,8 @@ interface DataItem {
     NzPageHeaderModule,
     NzSpaceModule,
     NzAutocompleteModule,
-    NzInputModule
+    NzInputModule,
+    SearchPipe
   ],
   templateUrl: './all-members.component.html',
   styleUrl: './all-members.component.scss',
@@ -64,8 +60,24 @@ export class AllMembersComponent implements OnInit {
 
   // props
   userRole: Role | undefined
-  data$!: Observable<IMember[]>;
   data: any
+
+  searchValue = '';
+  data$!: Observable<IMember[]>;
+  listOfColumn = [
+    {
+      title: 'Sn. No.',
+      compare: (a: any, b: any) => a.name.localeCompare(b.snNo),
+      priority: false,
+    },
+    {
+      title: 'Name',
+      compare: (a: any, b: any) => a.dob.localeCompare(b.name),
+      priority: false,
+    },
+  ];
+
+
   private readonly memberService = inject(MemberService);
   private readonly cd = inject(ChangeDetectorRef);
   private readonly router = inject(Router);

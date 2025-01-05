@@ -139,6 +139,7 @@ export class MemberEntryComponent implements OnInit {
       issueDate: [],
       bloodGroup: [],
       citizenShipNo: [],
+      snNo: [],
     }));
   }
 

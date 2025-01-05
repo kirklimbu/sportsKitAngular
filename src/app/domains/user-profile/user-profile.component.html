@@ -26,11 +26,24 @@
   </nz-descriptions>
   } @if(userProfile.member){
   <nz-divider></nz-divider>
+
   <nz-descriptions nzLayout="vertical" [nzExtra]="memberButtons"
     [nzColumn]="{ xxl: 4, xl: 3, lg: 3, md: 3, sm: 2, xs: 1 }" nzTitle="Member Details">
+
+
     <nz-descriptions-item nzTitle="Profile image" [nzSpan]="1">
       <nz-avatar [nzShape]="'square'" [nzSize]="128" nzIcon="user" [nzSrc]="userProfile.member.profilePic"></nz-avatar>
+
+      @if (userProfile.member.status==='Active' ) {
+      <nz-tag [nzColor]="'#87d068'">{{userProfile.member.status|titlecase}}</nz-tag>
+
+      } @else {
+      <nz-tag [nzColor]="' #D3D3D3'">{{ userProfile.member.status|titlecase }}</nz-tag>
+
+      }
+
       <nz-space [nzSize]="12"> </nz-space>
+
     </nz-descriptions-item>
     <nz-descriptions-item nzTitle="Name" [nzSpan]="1">
       <p class="details">{{ userProfile.member.name | titlecase }}</p>
@@ -56,12 +69,39 @@
         }}
       </p>
     </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Citizenship Number" [nzSpan]="1">
+      <p class="details">
+        {{
+        userProfile.member.citizenshipNo
+        }}
+      </p>
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Issue Date:" [nzSpan]="1">
+      <p class="details">
+        {{
+        userProfile.member.issueDate
+        }}
+      </p>
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="BloodGroup" [nzSpan]="1">
+      <p class="details">
+        {{
+        userProfile.member.bloodGroup |titlecase
+        }}
+      </p>
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="ID Card" [nzSpan]="1">
+
+      <img nz-image width="200px" height="300px" [nzSrc]="userProfile.member.cardPic" alt="Id Card" />
+      <nz-space [nzSize]="12"> </nz-space>
+    </nz-descriptions-item>
 
     <nz-descriptions-item nzTitle="Last payment" [nzSpan]="1">
       <p class="details">
         {{ userProfile.member.lastPaymentDate }}
       </p>
     </nz-descriptions-item>
+
   </nz-descriptions>
   } @if(userProfile.traineeList; as trainee){ @for(item of trainee; track
   $index) {

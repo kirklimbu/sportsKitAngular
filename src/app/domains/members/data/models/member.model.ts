@@ -1,5 +1,6 @@
 export interface IMember {
     memberId: number;
+    snNo: string;
     dob: string;
     name: string;
     memberShip: string;
@@ -9,5 +10,9 @@ export interface IMember {
     profilePic: string;
     address?: string;
     lastPaymentDate?: string;
+    bloodGroup: string;
+    citizenshipNo: string;
+    issueDate: string;
+    cardPic: string;
 
 }

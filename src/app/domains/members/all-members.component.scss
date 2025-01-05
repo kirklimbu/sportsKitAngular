@@ -22,6 +22,23 @@ nz-tag {
   min-width: 69px;
 }
 
+.table-operations {
+  // display: flex;
+  // gap: 4px;
+  padding: 12px 0px;
+
+  nz-input-group {
+    width: 25%;
+    background-color: white;
+  }
+
+  .action-button {
+    float: right;
+    font-weight:bold;
+    width:8rem;
+  }
+}
+
 /* .table-container {
   overflow-x: auto;
 }*/

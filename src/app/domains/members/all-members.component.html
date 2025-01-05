@@ -9,36 +9,49 @@
             All members
         </h3>
     </div>
+    <div class="table-operations">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input [(ngModel)]="searchValue" type="text" nz-input placeholder="Search memmber... " />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+            <span nz-icon nzType="search"></span>
+        </ng-template>
 
+        <button class="action-button"  nz-button nzType="primary" routerLinkActive
+            routerLink="/admin/add-member">
+            Add
+        </button>
+
+    </div>
 
     @if(data$|async;as data ){
-    @if (userRole==='Admin') {
     <div class="site-page-header-ghost-wrapper">
         <nz-page-header [nzGhost]="false">
+
             <!-- <nz-page-header-title>Title</nz-page-header-title> -->
             <!-- <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle> -->
+
+            @if (userRole==='Admin') {
+
             <nz-page-header-extra>
-                <nz-space>
-                    <!-- <button *nzSpaceItem nz-button>Operation</button> -->
-                    <!-- <button *nzSpaceItem nz-button>Operation</button> -->
-                    <button *nzSpaceItem nz-button nzType="primary" routerLink="/admin/add-member"><span nz-icon
-                            nzType="plus" nzTheme="outline"></span>Add</button>
-                </nz-space>
+
             </nz-page-header-extra>
 
+            }
         </nz-page-header>
     </div>
 
-    }
 
-    <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="(data)"
+    <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
         [nzScroll]="{ x: '600px', y: '635px' }">
         <thead>
             <tr>
                 <th></th>
-                <th>
-                    Name
-                </th>
+                @for (column of listOfColumn; track column) {
+            <th [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+              {{ column.title }}
+            </th>
+          }
                 <th>Mobile</th>
                 <th>Member Type</th>
                 <th>Action</th>
@@ -46,12 +59,13 @@
             </tr>
         </thead>
         <tbody>
-            @for (member of nzTable.data; track $index) {
+            @for (member of nzTable.data| search: searchValue;track $index) {
 
             <tr>
                 <td class="text-center">
                     <nz-avatar [nzSize]="90" nzIcon="user" [nzSrc]="member.profilePic"></nz-avatar>
                 </td>
+                <td>{{member.snNo}}</td>
                 <td>{{ member.name |titlecase }}</td>
                 <td>
                     <p>
