@@ -3,5 +3,5 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "notebook.defaultFormatter": "esbenp.prettier-vscode",
     "markdown.extension.tableFormatter.normalizeIndentation": true,
-    "files.autoSave": "afterDelay"
+    "files.autoSave": "off"
 }

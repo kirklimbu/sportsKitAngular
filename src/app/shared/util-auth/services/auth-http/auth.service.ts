@@ -74,6 +74,15 @@ export class AuthService {
     );
   }
 
+
+  forgetPassword(password: any): Observable<CustomResponse> {
+
+    return this.http.post<CustomResponse>(`${API_URL}auth/user/password/save`,
+      {
+        ...password
+      });
+  }
+
   // private methods
   private setAuthFromLocalStorage(auth: AuthModel): boolean {
     // store auth accessToken/refreshToken/epiresIn in local storage to keep user logged in between page refreshes

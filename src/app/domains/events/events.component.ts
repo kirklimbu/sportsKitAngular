@@ -33,4 +33,7 @@ export class EventsComponent {
   private router = inject(Router)
 
 
+  showMore(id: number) {
+    this.router.navigate(['/home/events/detail',], { queryParams: { id: id } })
+  }
 }
