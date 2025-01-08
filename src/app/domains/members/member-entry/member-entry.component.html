@@ -84,6 +84,14 @@
                 </label>
 
             </div>
+            <div class="flex">
+                <label>
+                    <span class="required" for="dob">D.O.B</span>
+                    <ne-datepicker language="en" [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate('dob',$event)"
+                        (dateInAD)="updateEnglishDate($event)">
+                    </ne-datepicker>
+                </label>
+            </div>
 
             <div class="flex">
                 <span class="required">Mobile1</span>
@@ -97,14 +105,7 @@
                 </label>
 
             </div>
-            <div class="flex">
-                <label>
-                    <span class="required" for="dob">D.O.B</span>
-                    <ne-datepicker language="en" [date]="date" dateIn="AD" (dateInBS)="updateNepaliDate('dob',$event)"
-                        (dateInAD)="updateEnglishDate($event)">
-                    </ne-datepicker>
-                </label>
-            </div>
+           
 
             <div class="flex">
                 <label for="MemberType">
@@ -125,6 +126,9 @@
                 <label>
                     <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="citizenShipNo">
                 </label>
+                 </div>
+
+            <div class="flex">
 
                 <label>
                     <span class="required" for="dob">Issue Date:</span>

@@ -26,6 +26,7 @@ nz-select {
 
 ::ng-deep .nepali-date-picker {
   box-shadow: none;
+  z-index: 1;
 }
 
 ::ng-deep .nepali-date-picker .datepicker__options-container {

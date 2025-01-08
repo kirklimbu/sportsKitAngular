@@ -67,12 +67,12 @@ export class AllMembersComponent implements OnInit {
   listOfColumn = [
     {
       title: 'Sn. No.',
-      compare: (a: any, b: any) => a.name.localeCompare(b.snNo),
+      compare: (a: any, b: any) => a.snNo.localeCompare(b.snNo),
       priority: false,
     },
     {
       title: 'Name',
-      compare: (a: any, b: any) => a.dob.localeCompare(b.name),
+      compare: (a: any, b: any) => a.name.localeCompare(b.name),
       priority: false,
     },
   ];
