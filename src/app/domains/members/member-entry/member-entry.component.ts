@@ -13,10 +13,11 @@ import {
   FormBuilder,
   Validators,
   ReactiveFormsModule,
+  FormsModule,
 } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, map, of, shareReplay, switchMap } from 'rxjs';
 import {
   NzUploadChangeParam,
   NzUploadFile,
@@ -28,8 +29,7 @@ import { MessageService } from 'src/app/shared/util-logger/message.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { MemberService } from '../data/services/member.service';
 import { AllMembersComponent } from '../all-members.component';
-import { IMember } from '../data/models/member.model';
-// import { NepaliDatepickerModule } from 'nepali-datepicker-angular';
+import { IJobType, IMember, IMemberRequirementDto, IMembershipType, IPositionType } from '../data/models/member.model';
 import { NepaliDatepickerModule, NepaliDatepickerService } from 'nepali-datepicker-angular';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TitleCaseDirective } from 'src/app/shared/util-common/directives/titleCase.directive';
@@ -50,6 +50,7 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
     // third-party
     NzUploadModule,
     NzModalModule,
@@ -57,10 +58,8 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
     NzIconModule,
     NepaliDatepickerModule,
     NzTypographyModule,
-    // project
-    AllMembersComponent,
     TitleCaseDirective
-  ],
+],
   templateUrl: './member-entry.component.html',
   styleUrl: './member-entry.component.scss',
   // changeDetection: ChangeDetectionStrategy.OnPush
@@ -80,7 +79,12 @@ export class MemberEntryComponent implements OnInit {
   showPassword = false;
   showcPassword = false;
 
-  memberShipType: any[] = []
+  memberShipType: IMembershipType[] = [];
+  positionType: IPositionType[] = [];
+  jobType: IJobType[] = [];
+
+  memberRequirements$!: Observable<IMemberRequirementDto>;
+
   memberId$!: Observable<number>;
   member$!: Observable<any>;
   memberList$!: Observable<IMember[]>;
@@ -140,6 +144,8 @@ export class MemberEntryComponent implements OnInit {
       bloodGroup: [],
       citizenShipNo: [],
       snNo: [],
+      jobTypeId: [],
+      positionTypeId: [],
     }));
   }
 
@@ -295,8 +301,7 @@ export class MemberEntryComponent implements OnInit {
     this.member$.pipe(takeUntilDestroyed(this.unsubscribe$))
       .subscribe((_res: any) => {
         console.log('memer res', _res);
-
-        this.memberShipType = _res.memberShipTypeList
+        this.jobType= _res.jobTypeList
         this.form.patchValue(_res.form);
         if (_res.form.memberId == 0) {
           this.fileList = []
@@ -333,9 +338,25 @@ export class MemberEntryComponent implements OnInit {
           'yyyy/mm/dd'
         );
         this.issueDate = new Date(BSIssueDate);
-
         // this.cd.detectChanges();
       });
+  }
+  //#TODO Reset dropdowns on job change
+  // #
+
+  onFetchMemberRequirements($event: any): void {
+    console.log('fetch member req', $event);
+    if(!$event) return;
+
+    this.form.patchValue({
+      jobTypeId: $event.id
+    });
+
+    START FROM HERE
+    this.memberRequirements$ = of({ positionTypeList:[],memberShipTypeList:[]})
+    this.memberRequirements$ = this.memberService
+      .getMemberRequirements($event)
+      .pipe(shareReplay(1));
   }
 
 }

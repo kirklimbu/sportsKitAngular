@@ -16,3 +16,24 @@ export interface IMember {
     cardPic: string;
 
 }
+
+export interface IJobType{
+    id: number;
+    name: string;
+    type: string;
+}
+export interface IPositionType{
+    id: number;
+    name: string;
+    type: string;
+}
+export interface IMembershipType {
+    id: number;
+    name: string;
+    type: string;
+}
+
+export interface IMemberRequirementDto { 
+    positionTypeList: IPositionType[];
+    memberShipTypeList: IMembershipType[];
+}

@@ -108,12 +108,41 @@
            
 
             <div class="flex">
+                <label for="Job">
+                    <span class="required" for="JOB">Job</span>
+
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Job"  formControlName="jobTypeId"
+                         (ngModelChange)="onFetchMemberRequirements($event)">
+                        @for (item of jobType; track item.id) {
+                        <nz-option [nzLabel]="item.name" [nzValue]="item"></nz-option>
+                        }
+
+                    </nz-select>
+                </label>
+            </div>
+            
+            <div class="flex">
+                <label for="Position">
+                    <span class="required" for="position">Position</span>
+
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Position " formControlName="positionTypeId"
+                      
+                    >
+                        @for (item of (memberRequirements$|async )?.positionTypeList;  track item.id) {
+                        <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
+                        }
+
+                    </nz-select>
+                </label>
+            </div>
+
+            <div class="flex">
                 <label for="MemberType">
                     <span class="required" for="memberShipTypeId">MemberType</span>
 
                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select type of member"
                         formControlName="memberShipTypeId">
-                        @for (item of memberShipType; track $index) {
+                        @for (item of (memberRequirements$|async )?.memberShipTypeList; track item.id) {
                         <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                         }
 

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IMember } from '../models/member.model';
+import { IMember, IMemberRequirementDto } from '../models/member.model';
 import { IMemberPayment } from '../models/member-payment';
 import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 
@@ -51,5 +51,9 @@ export class MemberService {
   savePayment(payment: any): Observable<any> {
     console.log('saving memeber', payment);
     return this.http.post<CustomResponse>(`${this.apiUrl}auth/member/payment/save`, payment, {});
+  }
+
+  getMemberRequirements(member: any): Observable<IMemberRequirementDto> {
+    return this.http.get<IMemberRequirementDto>(`${this.apiUrl}auth/member/requirement/list?parentId=${member.id}&parentType=${member.type}`);
   }
 }
