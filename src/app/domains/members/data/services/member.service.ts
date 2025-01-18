@@ -53,7 +53,8 @@ export class MemberService {
     return this.http.post<CustomResponse>(`${this.apiUrl}auth/member/payment/save`, payment, {});
   }
 
-  getMemberRequirements(member: any): Observable<IMemberRequirementDto> {
-    return this.http.get<IMemberRequirementDto>(`${this.apiUrl}auth/member/requirement/list?parentId=${member.id}&parentType=${member.type}`);
+  getMemberRequirements(id: number,type:string): Observable<IMemberRequirementDto> {
+
+    return this.http.get<IMemberRequirementDto>(`${this.apiUrl}auth/member/requirement/list?parentId=${id}&parentType=${type}`);
   }
 }

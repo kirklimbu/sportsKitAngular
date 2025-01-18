@@ -6,15 +6,19 @@ import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
 import { Router } from '@angular/router';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NepaliDateFormatterPipe } from 'src/app/shared/util-common/pipes/nepali-date-formatter.pipe';
 
 @Component({
   selector: 'app-total-events',
   standalone: true,
   imports: [CommonModule,
     TruncatePipe,
-    NgOptimizedImage,
+    NzToolTipModule,
     NzBadgeModule,
-    NzSkeletonModule
+    NzSkeletonModule,
+    // project
+    NepaliDateFormatterPipe
   ],
   templateUrl: './total-events.component.html',
   styleUrl: './total-events.component.scss',

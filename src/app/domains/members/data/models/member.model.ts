@@ -3,7 +3,7 @@ export interface IMember {
     snNo: string;
     dob: string;
     name: string;
-    memberShip: string;
+    memberShipType?: string;
     mobile1: string;
     mobile2: string;
     status?: string;
@@ -14,15 +14,17 @@ export interface IMember {
     citizenshipNo: string;
     issueDate: string;
     cardPic: string;
+    jobType?: string;
+    positionType?: string;
 
 }
 
-export interface IJobType{
+export interface IJobType {
     id: number;
     name: string;
     type: string;
 }
-export interface IPositionType{
+export interface IPositionType {
     id: number;
     name: string;
     type: string;
@@ -33,7 +35,7 @@ export interface IMembershipType {
     type: string;
 }
 
-export interface IMemberRequirementDto { 
+export interface IMemberRequirementDto {
     positionTypeList: IPositionType[];
     memberShipTypeList: IMembershipType[];
 }

@@ -8,6 +8,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NepaliDateFormatterPipe } from "../../../shared/util-common/pipes/nepali-date-formatter.pipe";
 
 @Component({
   selector: 'app-total-members',
@@ -19,8 +20,10 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
     NzGridModule,
     NzIconModule,
     NzBadgeModule,
-    NzToolTipModule
-  ],
+    NzToolTipModule,
+    // project
+    NepaliDateFormatterPipe
+],
   templateUrl: './total-members.component.html',
   styleUrl: './total-members.component.scss'
 })

@@ -67,7 +67,7 @@
             <span class="required">Sn No.</span>
             <div class="flex">
                 <label>
-                    <input class="input" min='1' type="number" placeholder="" autocomplete="off" formControlName="snNo">
+                    <input class="input" type="text" placeholder="" autocomplete="off" formControlName="snNo">
                 </label>
             </div>
 
@@ -105,30 +105,27 @@
                 </label>
 
             </div>
-           
+
 
             <div class="flex">
                 <label for="Job">
                     <span class="required" for="JOB">Job</span>
 
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Job"  formControlName="jobTypeId"
-                         (ngModelChange)="onFetchMemberRequirements($event)">
-                        @for (item of jobType; track item.id) {
-                        <nz-option [nzLabel]="item.name" [nzValue]="item"></nz-option>
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Job" formControlName="jobTypeId">
+                        @for (item of jobType; track $index) {
+                        <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                         }
 
                     </nz-select>
                 </label>
             </div>
-            
+
             <div class="flex">
                 <label for="Position">
                     <span class="required" for="position">Position</span>
-
-                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Position " formControlName="positionTypeId"
-                      
-                    >
-                        @for (item of (memberRequirements$|async )?.positionTypeList;  track item.id) {
+                    <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select Position "
+                        formControlName="positionTypeId">
+                        @for (item of positionType; track item.id) {
                         <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                         }
 
@@ -138,11 +135,10 @@
 
             <div class="flex">
                 <label for="MemberType">
-                    <span class="required" for="memberShipTypeId">MemberType</span>
-
+                    <span class="required" for="memberShipType">Member Type</span>
                     <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select type of member"
                         formControlName="memberShipTypeId">
-                        @for (item of (memberRequirements$|async )?.memberShipTypeList; track item.id) {
+                        @for (item of memberShipType; track item.id) {
                         <nz-option [nzLabel]="item.name" [nzValue]="item.id"></nz-option>
                         }
 
@@ -155,7 +151,7 @@
                 <label>
                     <input class="input" type="tel" placeholder="" autocomplete="off" formControlName="citizenShipNo">
                 </label>
-                 </div>
+            </div>
 
             <div class="flex">
 

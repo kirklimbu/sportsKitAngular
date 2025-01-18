@@ -30,19 +30,19 @@
               <nz-list-item-meta-description>
                 <p nz-tooltip nzTooltipTitle="Trainer" [nzTooltipPlacement]="['topLeft', 'leftTop']">
                   <!-- <span nz-icon nzType="user-switch" nzTheme="outline"></span> -->
-                  <i class="fas fa-user-ninja"></i> {{ item.trainer }}
+                  <i class="fas fa-user-ninja"></i> {{ item.trainer |titlecase }}
                 </p>
 
                 <p nz-tooltip nzTooltipTitle="Date of training" [nzTooltipPlacement]="['topLeft', 'leftTop']">
-                  <i class="fas fa-calendar-alt mr-2"></i>{{ item.startDate }}-{{ item.endDate }}
+                  <i class="fas fa-calendar-alt mr-2"></i>{{ item.startDate| nepaliDateFormatter }} - {{ item.endDate| nepaliDateFormatter }}
                 </p>
                 <p nz-tooltip nzTooltipTitle="Time of training" [nzTooltipPlacement]="['topLeft', 'leftTop']">
-                  <i class="fas fa-stopwatch-20"></i>{{ item.fromTime }}-{{
+                  <i class="fas fa-clock"></i>{{ item.fromTime }} - {{
                   item.toTime
                   }}
                 </p>
                 <p nz-tooltip nzTooltipTitle="Type of training" [nzTooltipPlacement]="['topLeft', 'leftTop']">
-                  <i class="fas fa-clock mr-2"></i>{{ item.type }}
+                  <i class="fas fa-layer-group mr-2"></i>{{ item.type }}
                 </p>
                 <p nz-tooltip nzTooltipTitle="Training fee" [nzTooltipPlacement]="['topLeft', 'leftTop']">
                   <i class="fas fa-money-bill-alt mr-2"></i>{{ item.fee | currency : 'NRP' : 'रु ' : '1.0-0' }}

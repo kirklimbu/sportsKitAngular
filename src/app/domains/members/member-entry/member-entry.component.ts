@@ -4,7 +4,6 @@ import {
   DestroyRef,
   inject,
   OnInit,
-  ChangeDetectionStrategy,
   ChangeDetectorRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,9 +16,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
-import { Observable, map, of, shareReplay, switchMap } from 'rxjs';
+import { Observable, distinctUntilChanged, map, of, shareReplay, switchMap } from 'rxjs';
 import {
-  NzUploadChangeParam,
   NzUploadFile,
   NzUploadModule,
 } from 'ng-zorro-antd/upload';
@@ -28,7 +26,6 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { MemberService } from '../data/services/member.service';
-import { AllMembersComponent } from '../all-members.component';
 import { IJobType, IMember, IMemberRequirementDto, IMembershipType, IPositionType } from '../data/models/member.model';
 import { NepaliDatepickerModule, NepaliDatepickerService } from 'nepali-datepicker-angular';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -112,14 +109,15 @@ export class MemberEntryComponent implements OnInit {
   private readonly unsubscribe$ = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly cd = inject(ChangeDetectorRef);
   private readonly fb = inject(FormBuilder);
   private readonly messageService = inject(MessageService);
 
 
   ngOnInit(): void {
     this.initForm();
-    this.checkFormStatus()
+    // console.log('0 initial form value', this.form.value);
+    
+    this.checkFormStatus();
   }
   // 
 
@@ -128,15 +126,14 @@ export class MemberEntryComponent implements OnInit {
     return this.form.controls;
   }
 
-  initForm(): FormGroup {
-    return (this.form = this.fb.group({
+  initForm():void {
+     this.form = this.fb.group({
       memberId: [0],
       address: [],
       name: ['', [Validators.required]],
       dob: ['', [Validators.required]],
-      memberShipTypeId: ['', [Validators.required]],
       mobile1: ['', [Validators.required]],
-      mobile2: ['', [Validators.required]],
+      mobile2: [''],
       file: [],
       cardPic: [],
       cardPictemp: [],
@@ -146,7 +143,21 @@ export class MemberEntryComponent implements OnInit {
       snNo: [],
       jobTypeId: [],
       positionTypeId: [],
-    }));
+      memberShipTypeId: [],
+     })
+    
+    const id = this.form.controls['jobTypeId']
+    id.valueChanges
+      .pipe(distinctUntilChanged(),
+        shareReplay({ bufferSize: 1, refCount: true }),
+        takeUntilDestroyed(this.unsubscribe$))
+      .subscribe(value => {
+        console.log('valueChanges', value);
+        this.resetValues();
+        this.onChangeJob(value,'JOB_TYPE');    
+
+      });
+
   }
 
   private checkFormStatus() {
@@ -279,8 +290,8 @@ export class MemberEntryComponent implements OnInit {
   // save member
   onSave(): void {
 
-    console.log('form', this.form.value);
-
+    console.log('form value on save', this.form.value);
+    
     this.memberService
       .saveMember(this.form.value)
       .pipe(takeUntilDestroyed(this.unsubscribe$))
@@ -294,23 +305,38 @@ export class MemberEntryComponent implements OnInit {
       });
   }
 
-  edit() {
+  edit() :void{
     this.member$ = this.memberId$.pipe(
       switchMap((query: number) => this.memberService.getFormValues(query))
     );
-    this.member$.pipe(takeUntilDestroyed(this.unsubscribe$))
+    this.member$
+      .pipe(
+        takeUntilDestroyed(this.unsubscribe$),
+        shareReplay(1)
+      
+    )
       .subscribe((_res: any) => {
-        console.log('memer res', _res);
-        this.jobType= _res.jobTypeList
+        console.log('1 res', _res);
+        
+        this.jobType = _res.jobTypeList
+        this.positionType = _res.positionTypeList;
+        this.memberShipType = _res.memberShipTypeList; 
+        // console.log('2 form before pathch', this.form.value);
+
         this.form.patchValue(_res.form);
-        if (_res.form.memberId == 0) {
+        // console.log('3 form after pathch', this.form.value);
+
+        if (_res.form.memberId === 0) {
           this.fileList = []
           this.idCardList = []
           this.previewImage = _res.form.profilePic;
           this.previewIDcard = _res.form.cardPic;
           this.date = null;
           return;
+          
         }
+
+        this.form.patchValue(_res.form);
 
         this.fileList = [
           {
@@ -340,24 +366,37 @@ export class MemberEntryComponent implements OnInit {
         this.issueDate = new Date(BSIssueDate);
         // this.cd.detectChanges();
       });
+   
   }
   //#TODO Reset dropdowns on job change
-  // #
 
-  onFetchMemberRequirements($event: any): void {
-    console.log('fetch member req', $event);
-    if(!$event) return;
+  onChangeJob(id: number, type: string): void {
+    
+    if (!id) return
+  
 
-    this.form.patchValue({
-      jobTypeId: $event.id
-    });
-
-    START FROM HERE
-    this.memberRequirements$ = of({ positionTypeList:[],memberShipTypeList:[]})
-    this.memberRequirements$ = this.memberService
-      .getMemberRequirements($event)
-      .pipe(shareReplay(1));
+    this.memberService
+      .getMemberRequirements(id, type)
+      .pipe(takeUntilDestroyed(this.unsubscribe$))
+      .subscribe((res: IMemberRequirementDto) => {
+        console.log('res', res);
+        this.positionType = res.positionTypeList;
+        this.memberShipType = res.memberShipTypeList;
+       
+      });
   }
+
+  resetValues() {
+    this.form.patchValue({
+      positionTypeId: null,
+      memberShipTypeId: null,
+    });
+    // this.form.get('positionTypeId')?.patchValue(0);
+    // this.form.get('memberShipTypeId')?.patchValue(0);
+  }
+
+  compareFn = (o1: any, o2: any): boolean => (o1 && o2 ? o1.id === o2.id : o1 === o2);
+
 
 }
 

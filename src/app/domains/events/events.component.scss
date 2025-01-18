@@ -64,6 +64,10 @@ small {
 }
 
 @media (min-width: 768px) {
+
+nz-card {
+    // width: 350px;
+  }
   .content-container {
     display: flex;
     flex-direction: row;

@@ -62,10 +62,26 @@
       </p>
     </nz-descriptions-item>
 
-    <nz-descriptions-item nzTitle="Membership Type" [nzSpan]="1">
+
+    <nz-descriptions-item nzTitle="Job Type" [nzSpan]="1">
       <p class="details">
         {{
-        userProfile.member.memberShip
+        userProfile.member.jobType
+        }}
+      </p>
+    </nz-descriptions-item>
+
+    <nz-descriptions-item nzTitle="Posititon" [nzSpan]="1">
+      <p class="details">
+        {{
+        userProfile.member.positionType
+        }}
+      </p>
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Membership " [nzSpan]="1">
+      <p class="details">
+        {{
+        userProfile.member.memberShipType
         }}
       </p>
     </nz-descriptions-item>

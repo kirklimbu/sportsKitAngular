@@ -2,10 +2,10 @@
   <div class="container">
     <div class="message-section animate__animated animate__fadeInUp">
       <div class="sub-title">
-        <span>Our Events </span>
+        <span> Event </span>
       </div>
       <div class="title text-bolder">
-        <span> Events </span>
+        <span>All Events </span>
       </div>
       <div class="description text-muted">
         <p>
@@ -37,11 +37,11 @@
           </a>
           <div class="postcard__text t-dark">
             <h1 class="postcard__title blue title">
-              <a>{{ item.title }}</a>
+              <a nz-tooltip [nzTooltipTitle]="item.title" >{{ item.title | truncate :64 }}</a>
             </h1>
             <div class="postcard__subtitle small">
               <time datetime="2020-05-25 12:00:00">
-                <p><i class="fas fa-calendar-alt mr-2"></i>{{ item.eventDate }}</p>
+                <p><i class="fas fa-calendar-alt mr-2"></i>{{ item.eventDate |nepaliDateFormatter }}</p>
               </time>
               <time>
                 <p><i class="fas fa-clock mr-2"></i>{{ item.startTime }}</p>
@@ -51,7 +51,7 @@
             <div class="postcard__preview-txt">
               {{ item.description | truncate : 100 }}
             </div>
-            <ul class="postcard__tagbox"></ul>
+
           </div>
         </article>
       </nz-ribbon>

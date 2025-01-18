@@ -33,6 +33,7 @@
     "jquery": "^3.7.1",
     "leaflet": "^1.9.4",
     "nepali-datepicker-angular": "^1.1.0",
+    "nepali-datetime": "^1.4.0",
     "ng-zorro-antd": "^18.0.1",
     "ngx-spinner": "^17.0.0",
     "rxjs": "~7.8.0",

@@ -53,7 +53,7 @@ const defaults: LoginResponseDto = {
       snNo: '',
       dob: '',
       name: '',
-      memberShip: '',
+      memberShipType: '',
       mobile1: '',
       mobile2: '',
       status: '',

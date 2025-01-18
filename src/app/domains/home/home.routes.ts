@@ -4,6 +4,7 @@ import { TotalMembersComponent } from "../members/total-members/total-members.co
 import { TotalEventsComponent } from "../events/total-events/total-events.component";
 import { EventDetailsComponent } from "../events/event-details.component";
 import { TrainingComponent } from "../training/training.component";
+import { TournamentComponent } from "../tournament/tournament.component";
 // import { StudyInJapanComponent } from "../study-destinations/study-in-japan/study-in-japan.component";
 
 export const FEATURE_HOME_ROUTES: Routes = [
@@ -37,6 +38,13 @@ export const FEATURE_HOME_ROUTES: Routes = [
             breadcrumb: 'training'
         },
         component: TrainingComponent,
+    },
+    {
+        path: 'tournaments',
+        data: {
+            breadcrumb: 'tournament'
+        },
+        component: TournamentComponent,
     },
 
 

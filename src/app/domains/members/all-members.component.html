@@ -17,8 +17,7 @@
             <span nz-icon nzType="search"></span>
         </ng-template>
 
-        <button class="action-button"  nz-button nzType="primary" routerLinkActive
-            routerLink="/admin/add-member">
+        <button class="action-button" nz-button nzType="primary" routerLinkActive routerLink="/admin/add-member">
             Add
         </button>
 
@@ -48,12 +47,14 @@
             <tr>
                 <th></th>
                 @for (column of listOfColumn; track column) {
-            <th [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
-              {{ column.title }}
-            </th>
-          }
+                <th [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+                    {{ column.title }}
+                </th>
+                }
                 <th>Mobile</th>
-                <th>Member Type</th>
+                <th>Job</th>
+                <th>Position</th>
+                <th>Membership</th>
                 <th>Action</th>
 
             </tr>
@@ -75,9 +76,13 @@
                         {{ member.mobile2 }}
                     </p>
                 </td>
+                <td>{{ member.jobType }}</td>
+                <td>{{ member.positionType }}</td>
 
-                <td>
-                    @switch (member.memberShip) {
+                <td>{{ member.memberShipType }}</td>
+                <!--   <td>
+
+                    @switch (member.memberShipType) {
                     @case ('Life') {
                     <nz-tag [nzColor]="'#FFD700'">{{member.memberShip|titlecase}}</nz-tag>
 
@@ -85,12 +90,12 @@
                     <nz-tag [nzColor]="'#3f87f5'">{{member.memberShip|titlecase}}</nz-tag>
 
                     }
-                    <!-- ANNUAL -->
+
                     @default {
                     <nz-tag [nzColor]="'#87d068'">{{member.memberShip|titlecase}}</nz-tag>
                     }
-                    }
-                </td>
+                    } 
+                </td>-->
 
                 <td>
                     <div class="action-buttons">

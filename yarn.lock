@@ -8638,6 +8638,11 @@ nepali-datepicker-angular@^1.1.0:
   dependencies:
     tslib "^2.1.0"
 
+nepali-datetime@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/nepali-datetime/-/nepali-datetime-1.4.0.tgz#0f20853cf82361904face45c06807d62c2de4054"
+  integrity sha512-kWgXPFrvo4ikLzQiY9Y5bh/s+3coRHUy8gNfFSRUVltjuwY8FCuDuI7Rgy3zzDIoaIVuWRt/R/P+RmyNGfSj6w==
+
 ng-zorro-antd@^18.0.1:
   version "18.2.1"
   resolved "https://registry.yarnpkg.com/ng-zorro-antd/-/ng-zorro-antd-18.2.1.tgz#79b303dd9507b0875e2615f0a16117efc0715bcb"

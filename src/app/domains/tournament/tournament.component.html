@@ -1,0 +1,88 @@
+<div class="content-container container">
+    <div class="table-container container light animate__animated animate__fadeInUp animate__slow">
+        <div class="message-section animate__animated animate__fadeInUp">
+            <div class="sub-title">
+                <span> Tournament </span>
+            </div>
+            <div class="title text-bolder">
+                <h3>All Tournaments</h3>
+            </div>
+        </div>
+
+        <!-- @if(data$|async;as data ){ -->
+        <nz-list>
+            @for (item of data$|async; track item.tournamentId) {
+            <!-- <nz-card nzTitle="Pushes open the window" nzSize="small"> And raises the spyglass. </nz-card> -->
+            <!-- @if(item.hasStopReg){ -->
+
+            <!-- <nz-ribbon [nzPlacement]="'start'" [nzColor]="item.hasStopReg ? 'red' : 'white'"
+                [nzText]="item.hasStopReg ? 'Active' : ''"> -->
+                <nz-card nzSize="small">
+                    <nz-list-item>
+                        <nz-list-item-meta>
+                            <nz-list-item-meta-title>
+                                <h5>
+                                    <span>
+                                        {{ item.title | titlecase }}
+                                    </span>
+                                </h5>
+                            </nz-list-item-meta-title>
+                            <nz-list-item-meta-description>
+                                <!-- <span nz-icon nzType="user-switch" nzTheme="outline"></span> -->
+                                <!-- <p nz-tooltip nzTooltipTitle="Trainer" [nzTooltipPlacement]="['topLeft', 'leftTop']">
+                                    <i class="fas fa-user-ninja"></i> {{ item.trainer }}
+                                </p> -->
+
+                                <p nz-tooltip nzTooltipTitle="Tournament date "
+                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
+                                    <i class="fas fa-calendar-alt mr-2"></i>{{ item.fromDate | nepaliDateFormatter }} - {{ item.toDate| nepaliDateFormatter }}
+                                </p>
+                                <p nz-tooltip nzTooltipTitle="Location" [nzTooltipPlacement]="['topLeft', 'leftTop']">
+                                                                    <i class="fas fa-location"></i> {{ item.location}}
+                                                                </p>
+                               
+                                <p nz-tooltip nzTooltipTitle="Tournament type"
+                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
+
+                                    <i class="fas fa-code-branch mr-2"></i>{{ item.tournamentType }}
+                                </p>
+                                <p nz-tooltip nzTooltipTitle="Tournament fee"
+                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
+                                    <i class="fas fa-money-bill-alt mr-2"></i>{{ item.entryFee | currency : 'NRP' : 'रु ' :
+                                    '1.0-0' }}
+                                </p>
+                                <p nz-tooltip nzTooltipTitle="Registered teams"
+                                    [nzTooltipPlacement]="['topLeft', 'leftTop']">
+                                    <i class="fas fa-users"></i>
+                                    <!-- <nz-icon nzType="team" nzTheme="outline" /> -->
+                                    {{item.gameCount|number}}
+                                </p>
+
+
+                                <!-- <button nz-button nzType="default" nzShape="round" (click)="onJoin(item.trainingMasterId)">
+                  Join now <span nz-icon nzType="right"></span>
+                </button> -->
+
+                                <!-- <nz-button-group>
+                                    <button nz-button nzType="primary" (click)="onJoin(item.trainingMasterId)">
+
+                                        Join now </button>
+                                    <button nz-button nzType="primary" (click)="onViewMore(item.trainingMasterId)">
+                                        View details <span nz-icon nzType="right"></span>
+                                    </button>
+                                </nz-button-group> -->
+
+                            </nz-list-item-meta-description>
+                        </nz-list-item-meta>
+                        <!-- <nz-list-item-action> </nz-list-item-action> -->
+                    </nz-list-item>
+                </nz-card>
+            <!-- </nz-ribbon> -->
+
+            <!-- } -->
+
+            }
+        </nz-list>
+        <!-- } -->
+    </div>
+</div>

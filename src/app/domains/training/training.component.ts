@@ -23,6 +23,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Navigate } from '@ngxs/router-plugin';
 
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NepaliDateFormatterPipe } from 'src/app/shared/util-common/pipes/nepali-date-formatter.pipe';
 
 @Component({
   selector: 'app-training',
@@ -45,7 +46,9 @@ import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
     NzBadgeModule,
     NzToolTipModule,
     // project
-    TruncatePipe
+    NepaliDateFormatterPipe
+
+
   ],
   templateUrl: './training.component.html',
   styleUrl: './training.component.scss',

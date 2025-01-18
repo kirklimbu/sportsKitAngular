@@ -1,3 +1,4 @@
+@import 'src/assets/scss/_variables.scss';
 .content-container {
     display: inline;
 }
@@ -26,4 +27,11 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    // &:hover{
+    //     color: $gold;
+    // }
+}
+
+.ant-card-actions:hover{
+        color: $gold;
 }

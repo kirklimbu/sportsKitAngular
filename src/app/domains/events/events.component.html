@@ -35,7 +35,7 @@
     </ng-template>
 
     <ng-template #actionSetting>
-      <span nz-icon nzType="">{{ event.eventDate }}</span>
+      <span nz-icon nzType="">{{ event.eventDate |nepaliDateFormatter }}</span>
     </ng-template>
     <ng-template #actionEdit>
       <span nz-icon nzType="">
@@ -47,7 +47,6 @@
         <span nz-icon nzType="right" nzTheme="outline"></span>
       </button>
     </ng-template>
-
     }
   </div>
 </section>

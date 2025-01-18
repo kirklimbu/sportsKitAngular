@@ -9,7 +9,7 @@
       </div>
       <div class="description text-muted">
         <p>
-          {{data.memberInfo}}
+          {{data?.memberInfo}}
         </p>
         <button nz-button nzType="default" nzShape="round" routerLink="all-member" routerLink="/home/all-member">
           View more
@@ -18,10 +18,10 @@
     </div>
 
     <div class="image-section">
-      @for(member of data.memberShipList;track member.memberShip){
+      @for(member of data?.memberShipList;track member.memberShip){
       <div class="members">
         <h2 [countUp]="member.count" [duration]="5000"></h2>
-        <p>{{member.memberShip|titlecase}} Members</p>
+        <p>{{member.memberShip|titlecase}} </p>
       </div>
       }
 

@@ -18,6 +18,7 @@ import { Role } from 'src/app/shared/util-auth/models/user.model';
 import { UserDetailsService } from 'src/app/shared/util-common/userDetails.service';
 import { Store } from '@ngxs/store';
 import { AuthState } from 'src/app/domains/auth/login/state/login.state';
+import { NzListModule } from 'ng-zorro-antd/list';
 
 @Component({
   selector: 'app-all-trainings',
@@ -34,7 +35,9 @@ import { AuthState } from 'src/app/domains/auth/login/state/login.state';
     NzTagModule,
     NzPageHeaderModule,
     NzSpaceModule,
-    NzToolTipModule
+    NzToolTipModule,
+    NzListModule,
+    
   ],
   templateUrl: './all-trainings.component.html',
   styleUrl: './all-trainings.component.scss'

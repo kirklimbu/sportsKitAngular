@@ -1,6 +1,6 @@
 <div class="container">
 
-    <!-- <div class="sub-title">
+    <div class="sub-title">
         <span> Members
         </span>
     </div>
@@ -8,38 +8,55 @@
         <h3>
             All members
         </h3>
-    </div> -->
+    </div>
 
 
     @if(data$|async;as data ){
 
 
     <div class="card-container">
-        @for (item of data; track $index) {
+        @for (item of data; track item.memberId) {
         <div class="">
-            @switch (item.memberShip) {
-            @case ('Life') {
-            <nz-ribbon nzColor="gold" [nzText]="'Permanent'">
-                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-                    <nz-card-meta [nzTitle]="item.name|titlecase" nzDescription=""></nz-card-meta>
-                </nz-card>
-            </nz-ribbon>
-            }
-            @case ('Monthly') {
-            <nz-ribbon nzColor="#3f87f5" [nzText]="item.memberShip|titlecase">
-                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-                    <nz-card-meta [nzTitle]="item.name|titlecase" nzDescription=""></nz-card-meta>
-                </nz-card>
-            </nz-ribbon>
-            }
-            @default {
-            <nz-ribbon nzColor="#87d068" [nzText]="item.memberShip|titlecase">
-                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-                    <nz-card-meta [nzTitle]="item.name|titlecase" nzDescription=""></nz-card-meta>
-                </nz-card>
-            </nz-ribbon>
-            }
 
+            @if(item.jobType==='Executive'){
+<nz-ribbon nzColor="#1e7f3a" [nzText]="item.positionType|uppercase">
+    <nz-card [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+        <nz-card-meta [nzTitle]="item.name|titlecase" nzDescription=""></nz-card-meta>
+    </nz-card>
+</nz-ribbon>
+            }@else {
+
+                @switch (item.memberShipType) {
+                @case ('Life Time Member') {
+                <nz-ribbon nzColor="red" [nzText]="item.memberShipType|titlecase">
+                    <nz-card [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+                        <nz-card-meta [nzTitle]="item.name|titlecase" nzDescription=""></nz-card-meta>
+                    </nz-card>
+                </nz-ribbon>
+                }
+                @case ('Yearly Member') {
+                <nz-ribbon nzColor="blue" [nzText]="item.memberShipType|titlecase">
+                    <nz-card [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+                        <nz-card-meta [nzTitle]="item.name|titlecase" nzDescription=""></nz-card-meta>
+                    </nz-card>
+                </nz-ribbon>
+                }
+                @case ('Monthly Member') {
+                <nz-ribbon nzColor="yellow" [nzText]="item.memberShipType|titlecase">
+                    <nz-card [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+                        <nz-card-meta [nzTitle]="item.name|titlecase" nzDescription=""></nz-card-meta>
+                    </nz-card>
+                </nz-ribbon>
+                }
+                @default {
+                <nz-ribbon nzColor="purple" [nzText]="item.memberShipType|titlecase">
+                    <nz-card [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+                        <nz-card-meta [nzTitle]="item.name|titlecase" nzDescription=""></nz-card-meta>
+                    </nz-card>
+                </nz-ribbon>
+                } 
+    
+                 }
             }
 
             <ng-template #coverTemplate>
@@ -48,7 +65,7 @@
             <ng-template #actionSetting>
 
                 <a nz-tooltip nzTooltipTitle="Call now" href="tel:{{item.mobile1}}">
-                    <i class="fa-solid fa-phone"></i>
+                    <i class="fa-solid fa-phone fa-lg"></i>
                     {{item.mobile1 }}
                 </a>
 
@@ -56,15 +73,15 @@
             <ng-template title="Membership type" #actionEdit>
                 <span nz-tooltip nzTooltipTitle="Membership type">
 
-                    <i class="fa-solid fa-user"></i>
-                    {{ item.memberShip|titlecase }}
+                    <!-- <i class="fa-solid fa-user"></i> -->
+                    {{ item.memberShipType|titlecase }}
                 </span>
             </ng-template>
             <ng-template #actionEllipsis>
                 <span nz-tooltip nzTooltipTitle="Date of birth">
 
-                    <i class="fa-regular fa-calendar"></i>
-                    {{item.dob}}
+                    <i class="fa-regular fa-calendar fa-lg"></i>
+                    {{item.dob| nepaliDateFormatter}}
                 </span>
 
             </ng-template>

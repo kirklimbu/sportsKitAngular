@@ -12,20 +12,32 @@ i {
   margin-right: 6px;
 }
 
-p:hover {
-  color: $primary-color;
-}
+// p:hover {
+//   color: $primary-color;
+// }
 
 h5 {
   font-weight: $font-weight-bold;
   font-family: $font-primary;
-
+    color: $primary-color;
+    &:hover{
+      cursor: pointer;
+              color: $gold;
+    }
   span::before {
     content: '';
     position: absolute;
     margin-top: 24px;
     border-bottom: 4px solid $gold;
   }
+}
+p {
+  margin-bottom: .25rem;
+  &:hover {
+      cursor: pointer;
+      color: $black;
+    }
+
 }
 
 [nz-button] {
