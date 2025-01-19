@@ -22,7 +22,6 @@ import { TrainingService } from '../training/data/services/training.service';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ITournament } from './data/model/tournament.model';
 import { TournamentService } from './data/tournament.service';
 import { NepaliDateFormatterPipe } from 'src/app/shared/util-common/pipes/nepali-date-formatter.pipe';
@@ -58,16 +57,16 @@ export class TournamentComponent {
   data$!: Observable<ITournament[]>;
 
   private readonly tournamentService = inject(TournamentService);
-  private readonly destroyRef = inject(DestroyRef)
-  private readonly store = inject(Store);
+
+
 
 
   ngOnInit(): void {
-    this.fetchMembers();
+    this.fetchData();
   }
 
 
-  private fetchMembers(): void {
+  private fetchData(): void {
     this.data$ = this.tournamentService.getAllPublicTournaments();
   }
 

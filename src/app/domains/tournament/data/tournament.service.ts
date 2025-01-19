@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { ITournament } from './model/tournament.model';
+import { IGame2DTO, ITournament } from './model/tournament.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -17,5 +17,18 @@ export class TournamentService {
 
   getAllPublicTournaments(): Observable<ITournament[]> {
     return this.http.get<ITournament[]>(`${this.apiUrl}tournament/list`);
+  }
+  // admin 
+  getAllAdminTournaments(): Observable<ITournament[]> {
+    return this.http.get<ITournament[]>(`${this.apiUrl}auth/admin/tournament/list`);
+  }
+
+  getAdminGames(tournamentId: number, round?: number,userId?: number,): Observable<IGame2DTO[]> {
+    return this.http.get<IGame2DTO[]>(`${this.apiUrl}tournament/game/list?tournamentId=${tournamentId}&round=${round}`);
+  }
+
+
+  getAdminRounds(tournamentId: number, userId?: number, round?: number): Observable<number[]> {
+    return this.http.get<number[]>(`${this.apiUrl}auth/tournament/round/list?tournamentId=${tournamentId}`,);
   }
 }

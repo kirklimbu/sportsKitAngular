@@ -37,17 +37,14 @@ export interface AutocompleteOptionGroups {
     ReactiveFormsModule,
     RouterModule,
     CommonModule,
-    FormsModule,
-    NzTableModule,
-    NzDropDownModule,
-    NzAvatarModule,
+
     NzButtonModule,
     NzIconModule,
-    NzTagModule,
+    NzTableModule,
     NzPageHeaderModule,
     NzSpaceModule,
-    NzAutocompleteModule,
     NzSelectModule,
+    NzAvatarModule
     // project
     // TitleCaseDirective
   ],
@@ -75,7 +72,6 @@ export class TraineeComponent implements OnInit {
   private readonly traineeService = inject(TraineeService);
   private readonly trainingService = inject(TrainingService);
   private readonly messageService = inject(MessageService);
-  private readonly cd = inject(ChangeDetectorRef);
   private readonly router = inject(Router);
 
   private readonly fb = inject(FormBuilder);

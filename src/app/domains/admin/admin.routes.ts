@@ -12,6 +12,7 @@ import { FEATURE_PAYMENT_ROUTES } from '../payment/payment.routes';
 import { FEATURE_TRAINING_ROUTES } from '../training/training.routes';
 import { FEATURE_TRAINEE_ROUTES } from '../trainee/trainee.routes';
 import { InquiryComponent } from '../inquiry/inquiry.component';
+import { FEATURE_TOURNAMENT_ROUTES } from '../tournament';
 
 // import { DashboardComponent } from '../dashboard/dashboard.component';
 // import { InquiryComponent } from '../inquiry/inquiry.component';
@@ -68,6 +69,17 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
     path: 'trainee',
     loadChildren: () => import('../trainee').then((m) => FEATURE_TRAINEE_ROUTES),
   },
+
+  // tournament
+  {
+    canActivate: [hasRoleGuard],
+    data: {
+      roles: [Role.ADMIN],
+    },
+    path: 'tournament',
+    loadChildren: () => import('../tournament').then((m) => FEATURE_TOURNAMENT_ROUTES),
+  },
+
   {
     canActivate: [hasRoleGuard],
     data: {

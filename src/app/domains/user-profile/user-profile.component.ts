@@ -39,7 +39,6 @@ import { NepaliDatepickerModule, NepaliDatepickerService } from 'nepali-datepick
     CommonModule,
     // ChipModule,
     // ButtonModule,
-    ReactiveFormsModule,
     NzDescriptionsModule,
     NzDrawerModule,
     NzListModule,
@@ -64,7 +63,6 @@ export class UserProfileComponent implements OnInit {
   userProfile!: LoginResponseDto
   userProfile$!: Observable<LoginResponseDto>
 
-  form!: FormGroup;
   userRole: Role | undefined
   address1$: Subject<string> = new Subject();
   showPersonalInfo = true; //default false rakhne
@@ -82,7 +80,6 @@ export class UserProfileComponent implements OnInit {
 
 
   constructor(private store: Store,
-    private fb: FormBuilder,
 
   ) {
     // this.fetchUserDetails();

@@ -1,0 +1,101 @@
+<div class="table-container">
+
+    <div class="sub-title">
+        <span> Games
+        </span>
+    </div>
+    <div class="title text-bolder">
+        <h3>
+            All Games
+        </h3>
+    </div>
+
+
+    <div class="site-page-header-ghost-wrapper">
+        <nz-page-header [nzGhost]="false">
+
+
+            <!-- <nz-page-header-title>Title</nz-page-header-title> -->
+            <!-- <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle> -->
+            <nz-page-header-extra>
+                <nz-space>
+
+                    <div [formGroup]="form" *nzSpaceItem class="training-selector">
+                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select round"
+                            formControlName="tournamentId">
+                            @for (round of roundList$|async; track $index) {
+                            <nz-option [nzLabel]="round" [nzValue]="round"></nz-option>
+                            }
+
+                        </nz-select>
+                    </div>
+                    <button *nzSpaceItem nz-button>
+                        <span nz-icon nzType="search" ></span>
+                    </button>
+                    <!-- <button *nzSpaceItem nz-button>Operation</button> -->
+
+                    
+                </nz-space>
+            </nz-page-header-extra>
+
+        </nz-page-header>
+    </div>
+
+    @if(data$|async;as data ){
+
+    <nz-list>
+        @for (item of data$|async; track item.tournamentId) {
+        <!-- <nz-card nzTitle="Pushes open the window" nzSize="small"> And raises the spyglass. </nz-card> -->
+        <!-- @if(item.hasStopReg){ -->
+    
+        <!-- <nz-ribbon [nzPlacement]="'start'" [nzColor]="item.hasStopReg ? 'red' : 'white'"
+                    [nzText]="item.hasStopReg ? 'Active' : ''"> -->
+        <nz-card nzSize="small">
+            <nz-list-item>
+                <nz-list-item-meta>
+                    <nz-list-item-meta-title>
+                        <h5>
+                            <span>
+                                {{ item.teamOnePlayerOne | titlecase }}
+                            </span>
+                        </h5>
+                        <h5>
+                            <span>
+                                {{ item.teamOnePlayerTwo | titlecase }}
+                            </span>
+                        </h5>
+                    </nz-list-item-meta-title>
+                    <nz-list-item-meta-title>
+                        <h5>
+                            <span>
+                                {{ item.teamTwoPlayerOne | titlecase }}
+                            </span>
+                        </h5>
+                        <h5>
+                            <span>
+                                {{ item.teamTwoPlayerTwo | titlecase }}
+                            </span>
+                        </h5>
+                    </nz-list-item-meta-title>
+                    <nz-list-item-meta-description>
+                        <!-- <span nz-icon nzType="user-switch" nzTheme="outline"></span> -->
+                        <!-- <p nz-tooltip nzTooltipTitle="Trainer" [nzTooltipPlacement]="['topLeft', 'leftTop']">
+                                        <i class="fas fa-user-ninja"></i> {{ item.trainer }}
+                                    </p> -->
+    
+                       
+                      
+                    </nz-list-item-meta-description>
+                </nz-list-item-meta>
+                <!-- <nz-list-item-action> </nz-list-item-action> -->
+            </nz-list-item>
+        </nz-card>
+        <!-- </nz-ribbon> -->
+    
+        <!-- } -->
+    
+        }
+    </nz-list>
+    }
+
+</div>

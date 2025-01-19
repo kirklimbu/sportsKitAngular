@@ -51,10 +51,16 @@
         </span>
       </li>
 
-      <li nz-menu-item>
+      <li nz-tooltip nzTooltipTitle="Trainee" nz-menu-item>
         <span nz-icon nzType="usergroup-add"></span>
         <span>Trainee
           <a nz-tooltip nzTooltipTitle="Trainee" [routerLink]="['/admin/trainee']"></a>
+        </span>
+      </li>
+      <li nz-tooltip nzTooltipTitle="Tournament" nz-menu-item>
+        <span nz-icon nzType="crown"></span>
+        <span>Tournament
+          <a  [routerLink]="['/admin/tournament']"></a>
         </span>
       </li>
       <!-- <li nz-menu-item>
