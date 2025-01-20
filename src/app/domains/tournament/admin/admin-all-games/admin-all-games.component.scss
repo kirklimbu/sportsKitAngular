@@ -1,0 +1,44 @@
+@import 'src/assets/scss/_variables.scss';
+
+nz-card {
+    margin: 1rem 0;
+
+
+    &:hover {
+        cursor: pointer;
+        // transform: scale(1.015);
+        box-shadow: $card-hover-shadow;
+    }
+}
+
+nz-select{
+    min-width: 150px;
+}
+
+h6 {
+    font-weight: 400;
+    color: #2f373f;
+
+    &:hover {
+        cursor: pointer;
+        color: $gold;
+    }
+}
+
+.teamA {
+    text-align: right;
+
+}
+
+.teamB {
+    text-align: left;
+}
+
+.vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: small;
+    color: $primary-color;
+}

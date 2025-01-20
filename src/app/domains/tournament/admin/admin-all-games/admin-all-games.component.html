@@ -11,7 +11,7 @@
     </div>
 
 
-    <div class="site-page-header-ghost-wrapper">
+    <div>
         <nz-page-header [nzGhost]="false">
 
 
@@ -21,20 +21,19 @@
                 <nz-space>
 
                     <div [formGroup]="form" *nzSpaceItem class="training-selector">
-                        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select round"
-                            formControlName="tournamentId">
+                        <nz-select nzShowSearch nzPlaceHolder="Select round" formControlName="tournamentId">
                             @for (round of roundList$|async; track $index) {
                             <nz-option [nzLabel]="round" [nzValue]="round"></nz-option>
                             }
 
                         </nz-select>
                     </div>
-                    <button *nzSpaceItem nz-button>
-                        <span nz-icon nzType="search" ></span>
-                    </button>
-                    <!-- <button *nzSpaceItem nz-button>Operation</button> -->
+                    <!-- <button *nzSpaceItem nz-button>
+                        <span nz-icon nzType="search"></span>
+                    </button> -->
+                    <button *nzSpaceItem nz-button printSectionId="print-section" ngxPrint>Print</button>
 
-                    
+
                 </nz-space>
             </nz-page-header-extra>
 
@@ -42,60 +41,81 @@
     </div>
 
     @if(data$|async;as data ){
+    <div id="print-section">
 
-    <nz-list>
         @for (item of data$|async; track item.tournamentId) {
-        <!-- <nz-card nzTitle="Pushes open the window" nzSize="small"> And raises the spyglass. </nz-card> -->
-        <!-- @if(item.hasStopReg){ -->
-    
-        <!-- <nz-ribbon [nzPlacement]="'start'" [nzColor]="item.hasStopReg ? 'red' : 'white'"
-                    [nzText]="item.hasStopReg ? 'Active' : ''"> -->
         <nz-card nzSize="small">
-            <nz-list-item>
-                <nz-list-item-meta>
-                    <nz-list-item-meta-title>
-                        <h5>
+            <div nz-row [nzGutter]="16" nzJustify="center">
+                <!-- teamA -->
+                <div nz-col nzSpan="10">
+
+
+                    <div class="players-name teamA">
+
+                        <h6>
                             <span>
                                 {{ item.teamOnePlayerOne | titlecase }}
                             </span>
-                        </h5>
-                        <h5>
+                        </h6>
+                        <h6>
                             <span>
                                 {{ item.teamOnePlayerTwo | titlecase }}
                             </span>
-                        </h5>
-                    </nz-list-item-meta-title>
-                    <nz-list-item-meta-title>
-                        <h5>
+                        </h6>
+                    </div>
+
+
+                </div>
+                <!-- END::TeamA -->
+
+                <div class="vs" nz-col nzSpan="2">
+                    VS
+                </div>
+                <!-- START::TeamB -->
+                <div nz-col nzSpan="10">
+
+
+                    <div class="players-name teamB">
+                        <h6>
                             <span>
                                 {{ item.teamTwoPlayerOne | titlecase }}
                             </span>
-                        </h5>
-                        <h5>
+                        </h6>
+                        <h6>
+
                             <span>
                                 {{ item.teamTwoPlayerTwo | titlecase }}
                             </span>
-                        </h5>
-                    </nz-list-item-meta-title>
-                    <nz-list-item-meta-description>
-                        <!-- <span nz-icon nzType="user-switch" nzTheme="outline"></span> -->
-                        <!-- <p nz-tooltip nzTooltipTitle="Trainer" [nzTooltipPlacement]="['topLeft', 'leftTop']">
-                                        <i class="fas fa-user-ninja"></i> {{ item.trainer }}
-                                    </p> -->
-    
-                       
-                      
-                    </nz-list-item-meta-description>
-                </nz-list-item-meta>
-                <!-- <nz-list-item-action> </nz-list-item-action> -->
-            </nz-list-item>
-        </nz-card>
-        <!-- </nz-ribbon> -->
-    
-        <!-- } -->
-    
-        }
-    </nz-list>
-    }
+                        </h6>
 
+
+                    </div>
+
+
+
+                </div>
+                <!-- END::TeamB -->
+            </div>
+            <div nz-row [nzGutter]="16" nzJustify="center">
+                <div nz-col nzSpan="10">
+                    <div class="umpire">
+
+                    </div>
+                </div>
+            </div>
+
+            <small>
+                <em>
+                    Umpire: {{item.umpireName|titlecase}}
+                </em>
+            </small>
+
+
+        </nz-card>
+
+        }
+
+
+    </div>
+    }
 </div>

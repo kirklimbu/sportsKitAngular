@@ -8653,6 +8653,13 @@ ng-zorro-antd@^18.0.1:
     date-fns "^2.16.1"
     tslib "^2.3.0"
 
+ngx-print@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-print/-/ngx-print-2.0.0.tgz#dc4fbfb8a5128544516b1e8345613402138873fc"
+  integrity sha512-AMdLvMlch2FmqiSI5RLDS5qtvb/4Dvhm4NbOeQ3EvmRXiqmM185vBt7EW1NVWCkqOicYXtfn3Rx87GXqPVyauw==
+  dependencies:
+    tslib "^2.3.0"
+
 ngx-spinner@^17.0.0:
   version "17.0.0"
   resolved "https://registry.yarnpkg.com/ngx-spinner/-/ngx-spinner-17.0.0.tgz#b3e1d54bb4c4e3cf6f949ef8dd1927dfa1e9058d"

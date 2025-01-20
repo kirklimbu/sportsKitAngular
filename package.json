@@ -35,6 +35,7 @@
     "nepali-datepicker-angular": "^1.1.0",
     "nepali-datetime": "^1.4.0",
     "ng-zorro-antd": "^18.0.1",
+    "ngx-print": "^2.0.0",
     "ngx-spinner": "^17.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

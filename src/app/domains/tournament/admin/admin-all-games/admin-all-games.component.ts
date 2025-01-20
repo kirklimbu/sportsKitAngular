@@ -5,20 +5,22 @@ import { Observable, distinctUntilChanged, map, shareReplay } from 'rxjs';
 import { TournamentService } from '../../data/tournament.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder } from '@angular/forms';
-import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzTagModule } from 'ng-zorro-antd/tag';
+
+
 import { IGame2DTO } from '../../data/model/tournament.model';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzFlexModule } from 'ng-zorro-antd/flex';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NgxPrintModule } from 'ngx-print';
 
 @Component({
   selector: 'app-admin-all-games',
@@ -35,7 +37,10 @@ import { NzCardModule } from 'ng-zorro-antd/card';
     NzSelectModule,
     NzToolTipModule,
     NzListModule,
-    NzCardModule
+    NzCardModule,
+    NzFlexModule,
+    NzGridModule,
+    NgxPrintModule
   ],
   templateUrl: './admin-all-games.component.html',
   styleUrl: './admin-all-games.component.scss'
