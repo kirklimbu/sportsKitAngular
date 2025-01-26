@@ -3,7 +3,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "notebook.defaultFormatter": "esbenp.prettier-vscode",
     "markdown.extension.tableFormatter.normalizeIndentation": true,
-    "files.autoSave": "afterDelay",
+    "files.autoSave": "off",
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#ff6433",
         "activityBar.background": "#ff6433",

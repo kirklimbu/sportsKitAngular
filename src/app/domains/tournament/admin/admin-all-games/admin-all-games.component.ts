@@ -47,6 +47,8 @@ import { NgxPrintModule } from 'ngx-print';
 })
 export class AdminAllGamesComponent {
 
+  // https://bwfworldtour.bwfbadminton.com/player/61444/kim-won-ho/tournament-results
+
 
   tournamentId!: number;
   form!: FormGroup;

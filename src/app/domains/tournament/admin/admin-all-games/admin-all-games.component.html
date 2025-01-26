@@ -31,7 +31,11 @@
                     <!-- <button *nzSpaceItem nz-button>
                         <span nz-icon nzType="search"></span>
                     </button> -->
-                    <button *nzSpaceItem nz-button printSectionId="print-section" ngxPrint>Print</button>
+                    <button nz-tooltip="Print now" nzType="primary" [useExistingCss]="true" *nzSpaceItem nz-button  printSectionId="print-section" ngxPrint>
+                                            <span nz-icon nzType="printer"></span>
+
+
+                        Print</button>
 
 
                 </nz-space>
@@ -41,7 +45,8 @@
     </div>
 
     @if(data$|async;as data ){
-    <div id="print-section">
+    <div id="print-section"   
+>
 
         @for (item of data$|async; track item.tournamentId) {
         <nz-card nzSize="small">
@@ -103,14 +108,6 @@
                     </div>
                 </div>
             </div>
-
-            <small>
-                <em>
-                    Umpire: {{item.umpireName|titlecase}}
-                </em>
-            </small>
-
-
         </nz-card>
 
         }
