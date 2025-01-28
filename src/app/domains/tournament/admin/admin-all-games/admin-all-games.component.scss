@@ -11,7 +11,7 @@ nz-card {
     }
 }
 
-nz-select{
+nz-select {
     min-width: 150px;
 }
 
@@ -41,4 +41,19 @@ h6 {
     font-weight: 500;
     font-size: small;
     color: $primary-color;
+}
+
+.title-card {
+    h3 {
+        text-align: center;
+    }
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
+
+
 }

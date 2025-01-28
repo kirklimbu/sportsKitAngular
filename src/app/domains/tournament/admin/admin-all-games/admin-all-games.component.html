@@ -31,8 +31,9 @@
                     <!-- <button *nzSpaceItem nz-button>
                         <span nz-icon nzType="search"></span>
                     </button> -->
-                    <button nz-tooltip="Print now" nzType="primary" [useExistingCss]="true" *nzSpaceItem nz-button  printSectionId="print-section" ngxPrint>
-                                            <span nz-icon nzType="printer"></span>
+                    <button nz-tooltip="Print now" nzType="primary" [useExistingCss]="true" *nzSpaceItem nz-button
+                        printSectionId="print-section" ngxPrint>
+                        <span nz-icon nzType="printer"></span>
 
 
                         Print</button>
@@ -45,9 +46,33 @@
     </div>
 
     @if(data$|async;as data ){
-    <div id="print-section"   
->
-
+    <div id="print-section">
+        <div class="title-card">
+            <nz-card nzSize="small">
+                <h3>Inter Damak Namuna Badminton Academy Tournament</h3>
+                <span class="left"><strong>Date: </strong>2081/06/03 - 2081/06/05</span> 
+                <span class="right"><strong>Location: </strong> Damak-1, Jhapa, Nepal</span>
+                <!-- <nz-page-header>
+                    <nz-page-header-title>Inter Damak Namuna Badminton Academy Tournament</nz-page-header-title>
+                    <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle>
+                    <nz-page-header-extra>
+                        <nz-space>
+                            <button *nzSpaceItem nz-button>Operation</button>
+                            <button *nzSpaceItem nz-button>Operation</button>
+                            <button *nzSpaceItem nz-button nzType="primary">Primary</button>
+                        </nz-space>
+                    </nz-page-header-extra>
+                    <nz-page-header-content>
+                        <nz-descriptions nzSize="small" [nzColumn]="1">
+                            <nz-descriptions-item nzTitle="Date" [nzSpan]="1">2081/06/03 -
+                                2081/06/05</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="Location" [nzSpan]="1">Damak-1, Jhapa,
+                                Nepal</nz-descriptions-item>
+                        </nz-descriptions>
+                    </nz-page-header-content>
+                </nz-page-header> -->
+            </nz-card>
+        </div>
         @for (item of data$|async; track item.tournamentId) {
         <nz-card nzSize="small">
             <div nz-row [nzGutter]="16" nzJustify="center">

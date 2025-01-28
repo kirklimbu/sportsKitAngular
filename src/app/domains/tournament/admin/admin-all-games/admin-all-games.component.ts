@@ -21,6 +21,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzFlexModule } from 'ng-zorro-antd/flex';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NgxPrintModule } from 'ngx-print';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 
 @Component({
   selector: 'app-admin-all-games',
@@ -40,7 +41,8 @@ import { NgxPrintModule } from 'ngx-print';
     NzCardModule,
     NzFlexModule,
     NzGridModule,
-    NgxPrintModule
+    NgxPrintModule,
+    NzDescriptionsModule
   ],
   templateUrl: './admin-all-games.component.html',
   styleUrl: './admin-all-games.component.scss'
