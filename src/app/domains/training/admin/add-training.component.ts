@@ -10,7 +10,6 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { Observable, map, switchMap } from 'rxjs';
 
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { MemberService } from '../../members/data/services/member.service';
 import { TrainingService } from '../data/services/training.service';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

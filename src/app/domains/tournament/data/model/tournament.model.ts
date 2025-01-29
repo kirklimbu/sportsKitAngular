@@ -29,3 +29,13 @@ export interface IGame2DTO {
     umpireId: number;
     umpireName: string;
 }
+
+export interface ITeam {
+    tournamentId: number;
+    playerOneId: number;
+    playerOneName: string;
+    playerTwoId: number;
+    playerTwoName: string;
+    address: string;
+    hasPaid: boolean;
+}

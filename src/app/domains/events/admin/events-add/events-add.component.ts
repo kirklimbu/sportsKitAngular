@@ -69,12 +69,11 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
   standalone: true,
   imports: [
     CommonModule,
-    TruncatePipe,
     ReactiveFormsModule,
     // CalendarModule,
     // ImageCropperModule,
     // project
-    FormSubmitButtonsComponent,
+
     // third-party
     NzInputModule,
     NzUploadModule,
@@ -82,7 +81,6 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
     NzIconModule,
     NzCheckboxModule,
     NepaliDatepickerModule,
-    EventsListComponent,
   ],
   templateUrl: './events-add.component.html',
   styleUrls: ['./events-add.component.scss'],

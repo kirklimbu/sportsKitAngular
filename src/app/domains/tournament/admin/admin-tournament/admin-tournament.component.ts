@@ -58,8 +58,12 @@ export class AdminTournamentComponent {
     this.data$ = this.tournamentService.getAllAdminTournaments();
   }
 
-  viewDetails(id: number):void {
+  onViewDetails(id: number):void {
       this.router.navigate(['/admin/tournament/all-games'], { queryParams: { id: id } })
+
+  }
+  onAddTeam(id: number):void {
+      this.router.navigate(['/admin/tournament/add-team'], { queryParams: { id: id } })
 
   }
 

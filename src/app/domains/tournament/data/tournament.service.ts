@@ -1,9 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { IGame2DTO, ITournament } from './model/tournament.model';
+import { IGame2DTO, ITeam, ITournament } from './model/tournament.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ITraining } from '../../training/data/model/training.model';
+import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,15 @@ export class TournamentService {
 
   getAdminRounds(tournamentId: number, userId?: number, round?: number): Observable<number[]> {
     return this.http.get<number[]>(`${this.apiUrl}auth/tournament/round/list?tournamentId=${tournamentId}`,);
+  }
+
+
+  saveTeam(team: any): Observable<CustomResponse> {
+    const formData = new FormData();
+    formData.append('form', JSON.stringify(team));
+    return this.http.post<CustomResponse>(
+      `${this.apiUrl}tournament/registration/save`,
+      formData
+    );
   }
 }

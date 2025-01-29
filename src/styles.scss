@@ -143,6 +143,18 @@ span[nz-typography]+span[nz-typography] {
 ::placeholder {
   color: $gray;
 }
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  // width: 450px;
+  // width: auto;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 2px;
+  position: relative;
+  border: 1px solid lightgray;
+}
 
 .form label {
   position: relative;
@@ -150,7 +162,7 @@ span[nz-typography]+span[nz-typography] {
 
 .form label .input {
   width: 100%;
-  padding: 10px 10px 20px 10px;
+  padding: 10px ;
   outline: 0;
   border: 1px solid rgba(105, 105, 105, 0.397);
   border-radius: 1px;

@@ -39,9 +39,6 @@ nz-select {
 
 }
 
-.ant-list-vertical .ant-list-item-main {}
-
-
 .admin-members-section {
     display: flex;
     gap: 1rem;
@@ -63,18 +60,18 @@ nz-select {
     flex-wrap: wrap;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    // width: 450px;
-    // width: auto;
-    padding: 1rem;
-    background-color: #fff;
-    border-radius: 2px;
-    position: relative;
-    border: 1px solid lightgray;
-}
+// .form {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 16px;
+//     // width: 450px;
+//     // width: auto;
+//     padding: 1rem;
+//     background-color: #fff;
+//     border-radius: 2px;
+//     position: relative;
+//     border: 1px solid lightgray;
+// }
 
 // .title {
 //   font-size: 28px;

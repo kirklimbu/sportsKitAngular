@@ -1,0 +1,55 @@
+<div class="container">
+    <section class="memberentry-section">
+        <div>
+            <div class="sub-title">
+                <span>Team </span>
+            </div>
+            <div class="title text-bolder">
+                <h3>{{ mode === 'add' ? 'New' : 'Update' }} Team</h3>
+            </div>
+        </div>
+
+        <form class="form" [formGroup]="form">
+            
+
+            <div class="flex">
+                <label>
+                    <span class="required">Player One</span>
+                    <input class="input" type="text" placeholder="Mirak Lawati" autocomplete="playerOneName"
+                        formControlName="playerOneName" />
+                </label>
+
+                
+            </div>
+
+            <div class="flex">
+                <label>
+                    <span class="required">Player Two</span>
+                    <input class="input" type="text" placeholder="Bikrant Rai" autocomplete="off"
+                        formControlName="playerTwoName" />
+                </label>
+                
+            </div>
+
+            <div class="flex">
+                <label>
+                    <span class="required">Address</span>
+                    <input class="input" type="text" placeholder="Damak" autocomplete="off" formControlName="address" />
+                </label>
+            </div>
+
+            
+            <div class="flex">
+                <label nz-checkbox formControlName="hasPaid"><span>hasPaid</span></label>
+            </div>
+
+            <button class="submit" (click)="onSave()">
+                {{ mode === 'add' ? 'Save' : 'Update' }}
+            </button>
+        </form>
+    </section>
+
+    <!-- <section class="members-list-section">
+    <app-events-list [data$]="event$" (sendEventId)="edit($event)" />
+  </section> -->
+</div>

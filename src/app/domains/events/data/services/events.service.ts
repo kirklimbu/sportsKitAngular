@@ -6,11 +6,13 @@ import { toFormData } from 'src/app/shared/util-common/toFormData';
 import { environment } from 'src/environments/environment';
 import { IEvents } from '../events.model';
 import { query } from 'express';
+import { ITeam } from 'src/app/domains/tournament/data/model/tournament.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventsService {
+  
   apiUrl = environment.apiUrl;
   private readonly http = inject(HttpClient);
 
@@ -55,4 +57,7 @@ export class EventsService {
   //     headers: headers,
   //   });
   // }
+
+
+
 }
