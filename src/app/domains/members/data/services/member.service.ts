@@ -27,7 +27,6 @@ export class MemberService {
     formData.append('file', qustion.file);
     formData.append('card', qustion.cardPictemp);
 
-    console.log('fsdfa', formData);
     return this.http.post<CustomResponse>(
       `${this.apiUrl}auth/member/save`,
       formData

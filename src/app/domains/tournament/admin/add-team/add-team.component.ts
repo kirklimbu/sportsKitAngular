@@ -27,6 +27,7 @@ import { TournamentService } from '../../data/tournament.service';
 export class AddTeamComponent {
 
   // props
+  tournamentId!: number;
   id$!: Observable<number>;
   form!: FormGroup;
   mode='add'
@@ -60,6 +61,7 @@ export class AddTeamComponent {
     this.id$ = this.route.queryParamMap.pipe(
       map((params: ParamMap) => {
         const tournamentId = Number(params.get('id'));
+        this.tournamentId = tournamentId;
         return tournamentId;
       })
     );
@@ -71,7 +73,6 @@ export class AddTeamComponent {
       )
       .subscribe((_res: any) => {
         this.form.patchValue({ tournamentId: _res })
-
       });
   }
 
@@ -86,6 +87,10 @@ export class AddTeamComponent {
         if (_res) {
           this.messageService.createMessage('success', _res.message);
           this.form.reset();
+          console.log('tournament id', this.tournamentId);
+          
+          this.form.patchValue({ tournamentId: this.tournamentId })
+
         }
       });
   }

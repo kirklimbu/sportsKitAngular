@@ -4,16 +4,14 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { ActivatedRoute, ParamMap, Router, RouterModule } from '@angular/router';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzTagModule } from 'ng-zorro-antd/tag';
+
 import { Observable, distinctUntilChanged, map, shareReplay } from 'rxjs';
 import { ITrainee } from './data/model/trainee.model';
 import { TraineeService } from './data/services/trainee.service';
-import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ITraining } from '../training/data/model/training.model';
 import { TrainingService } from '../training/data/services/training.service';
@@ -22,7 +20,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Role } from 'src/app/shared/util-auth/models/user.model';
 import { Store } from '@ngxs/store';
 import { AuthState } from '../auth/login/state/login.state';
-import { TitleCaseDirective } from 'src/app/shared/util-common/directives/titleCase.directive';
+
 
 export interface AutocompleteOptionGroups {
   title: string;
