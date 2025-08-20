@@ -8,7 +8,7 @@ export const environment = {
 
   production: false,
   // apiUrl: 'http://162.0.230.55:9093/dba/api/', // test-namecheap (namecheap ip)
-  apiUrl: 'http://dmknamunabadmintonacademy.com/dba/api/', // prod ip
+  apiUrl: 'https://dmknamunabadmintonacademy.com/dba/api/', // prod ip
   // apiUrl: 'http://103.104.29.53:9091/dba/api/', // home ip
 
   menuUrl: '/assets/data/Menu',
