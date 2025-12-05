@@ -19,7 +19,7 @@ body {
   background-color: $tone-green-light;
 }
 
-button {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+button {
   color: $gold;
   border: 1px solid $gold;
   background: transparent;
@@ -143,6 +143,7 @@ span[nz-typography]+span[nz-typography] {
 ::placeholder {
   color: $gray;
 }
+
 .form {
   display: flex;
   flex-direction: column;
@@ -162,7 +163,7 @@ span[nz-typography]+span[nz-typography] {
 
 .form label .input {
   width: 100%;
-  padding: 10px ;
+  padding: 10px;
   outline: 0;
   border: 1px solid rgba(105, 105, 105, 0.397);
   border-radius: 1px;
@@ -374,10 +375,10 @@ i {
   .content-container {
     display: flex;
     place-content: center;
-
     gap: 5rem;
     min-height: 600px;
     padding: 2rem 7rem;
+    margin-bottom: 4rem;
 
     // background: rgb(233, 185, 98);
     .image-section {

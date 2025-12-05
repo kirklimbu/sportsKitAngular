@@ -8,6 +8,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
 import { NzBackTopModule } from 'ng-zorro-antd/back-top';
 import { NepaliDateFormatterPipe } from "../../shared/util-common/pipes/nepali-date-formatter.pipe";
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 @Component({
   selector: 'app-events',
@@ -19,6 +20,7 @@ import { NepaliDateFormatterPipe } from "../../shared/util-common/pipes/nepali-d
     NzCardModule,
     NzIconModule,
     NzButtonModule,
+    NzGridModule,
     // project
     TruncatePipe,
     NepaliDateFormatterPipe

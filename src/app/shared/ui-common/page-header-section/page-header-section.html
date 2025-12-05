@@ -1,0 +1,13 @@
+<section class="section-header-container" [ngClass]="theme">
+    <div class="header-content">
+        @if (subtitle()) {
+        <div class="sub-title">{{ subtitle() }}</div>
+        }
+        @if (title()) {
+        <h2>{{ title() }}</h2>
+        }
+        @if (description()) {
+        <p class="section-intro">{{ description() }}</p>
+        }
+    </div>
+</section>

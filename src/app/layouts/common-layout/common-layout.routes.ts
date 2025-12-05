@@ -1,11 +1,5 @@
 import { Routes } from '@angular/router';
-import { EventsListComponent } from 'src/app/domains/events/admin/events-list/events-list.component';
-import { EventDetailsComponent } from 'src/app/domains/events/event-details.component';
-import { EventsComponent } from 'src/app/domains/events/events.component';
-import { TotalEventsComponent } from 'src/app/domains/events/total-events/total-events.component';
 import { PrivacyPolicyComponent } from 'src/app/domains/privacy-policy/privacy-policy.component';
-import { TraineeComponent } from 'src/app/domains/trainee/trainee.component';
-import { TrainingComponent } from 'src/app/domains/training/training.component';
 // import { StudyInJapanComponent } from '../../study-destinations/study-in-japan/study-in-japan.component';
 // import { StudyInKoreaComponent } from '../../study-destinations/study-in-korea/study-in-korea.component';
 // import { IeltsComponent } from '../../test-preparations/ielts/ielts.component';

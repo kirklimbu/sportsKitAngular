@@ -1,0 +1,118 @@
+.content-container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Title & Description */
+.header-section {
+  text-align: left;
+
+  h1 {
+    font-weight: 900;
+    font-size: 2rem;
+    max-width: 24ch;
+  }
+
+  p {
+    max-width: 60ch;
+    font-size: 1rem;
+    opacity: 0.85;
+  }
+
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 2.8rem;
+    }
+  }
+}
+
+/* Gallery Wrapper */
+.gallery-wrapper {
+  width: 100%;
+}
+
+/* Each image item */
+.gallery-item {
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    cursor: zoom-in;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 6px;
+  }
+
+  img:hover {
+    transform: scale(1.05);
+  }
+
+  @media (min-width: 768px) {
+    img {
+      height: 220px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    img {
+      height: 260px;
+    }
+  }
+}
+
+
+/* Outer container */
+.gallery-wrapper {
+  width: 100%;
+}
+
+/* NZ Grid Gutter provides horizontal + vertical spacing */
+.gallery-wrapper [nz-row] {
+  margin-top: -8px;  // fix first-row spacing
+}
+
+.gallery-wrapper [nz-col] {
+  padding-top: 8px; // vertical spacing for all devices
+}
+
+/* Card/image container */
+.gallery-item {
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+
+  padding: 4px; /* Adds inner spacing around each image */
+  box-sizing: border-box;
+
+  img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    cursor: zoom-in;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 6px;
+  }
+
+  img:hover {
+    transform: scale(1.05);
+  }
+
+  @media (min-width: 768px) {
+    img {
+      height: 220px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    img {
+      height: 260px;
+    }
+  }
+}
