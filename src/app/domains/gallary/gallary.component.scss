@@ -106,13 +106,30 @@
 
   @media (min-width: 768px) {
     img {
-      height: 220px;
+      height: 200px;
     }
   }
 
   @media (min-width: 1024px) {
     img {
-      height: 260px;
+      height: 200px;
     }
   }
 }
+
+// .gallery-img {
+//   width: 141%;
+//   aspect-ratio: 1;
+//   object-fit: cover;
+//   filter: grayscale(80%);
+//   transform: scale(var(--_t, 1)) rotate(-45deg);
+//   clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+//   cursor: pointer;
+//   transition: .2s linear;
+//   display: block;
+// }
+
+// .gallery-img:hover {
+//   filter: grayscale(0);
+//   --_t: 1.15;
+// }

@@ -1,62 +1,41 @@
 <article class="content-container flow">
 
-  @if (gallary$ | async; as gallary) {
+  @if ( gallary) {
 
-    <div class="header-section">
-      <app-page-header-section
-        [title]="gallary?.parent?.title"
-        subtitle="Gallery"
-        [description]="description"
-      />
-    </div>
+  <div class="header-section">
+    <app-page-header-section [title]="gallary?.parent?.title" subtitle="Gallery" [description]="description" />
+  </div>
 
-    <div class="gallery-wrapper">
-      <div nz-row nzGutter="16,16">
-        @for (item of gallary?.imageList; track item.serviceId) {
-          <div nz-col [nzXs]="12" [nzSm]="8" [nzMd]="6" [nzLg]="4">
-            <div class="gallery-item">
-              @if (!item) {
-                <img
-                  nz-image
-                  nzSrc="error"
-                  [nzFallback]="fallback"
-                  alt="image"
-                />
-              } @else {
-                <img
-                  nz-image
-                  [appLazyImg]="item"
-                  alt="gallery"
-                  loading="lazy"
-                />
-              }
-            </div>
-          </div>
-        }
+  <div class="gallery-wrapper">
+    <div nz-row nzGutter="16,16">
+      @for (item of gallary; track item.serviceId) {
+      <div nz-col [nzXs]="12" [nzSm]="8" [nzMd]="6" [nzLg]="4">
+        <div class="gallery-item">
+          @if (!item) {
+          <img class="gallery-img" nz-image nzSrc="error" [nzFallback]="fallback" alt="image" nzPreview="true" />
+          } @else {
+          <img nz-image class="gallery-img" [nzSrc]="item" [appLazyImg]="item" nzPreview="true" alt="gallery" />
+          }
+        </div>
       </div>
+      }
     </div>
+  </div>
 
   } @else {
 
-    <!-- Skeleton Loader -->
-    <div class="gallery-wrapper">
-      <div nz-row nzGutter="16">
-        <div
-          nz-col
-          [nzXs]="12"
-          [nzSm]="8"
-          [nzMd]="6"
-          [nzLg]="4"
-          *ngFor="let item of [1,2,3,4,5,6]"
-        >
-          <nz-card>
-            <nz-skeleton [nzActive]="true">
-              <nz-skeleton-element nzType="image"></nz-skeleton-element>
-            </nz-skeleton>
-          </nz-card>
-        </div>
+  <!-- Skeleton Loader -->
+  <div class="gallery-wrapper">
+    <div nz-row nzGutter="16">
+      <div nz-col [nzXs]="12" [nzSm]="8" [nzMd]="6" [nzLg]="4" *ngFor="let item of [1,2,3,4,5,6]">
+        <nz-card>
+          <nz-skeleton [nzActive]="true">
+            <nz-skeleton-element nzType="image"></nz-skeleton-element>
+          </nz-skeleton>
+        </nz-card>
       </div>
     </div>
+  </div>
 
   }
 

@@ -22,16 +22,16 @@ export class LazyImgDirective {
   private platformId = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.platformId);
 
-  // ✅ Inputs using Angular signals
+  // Inputs
   appLazyImg = input<string>();
   fallbackImg = input<string>('assets/images/no-image.png');
 
-  // ✅ Internal state signals
+  // Internal signals
   private isLoading = signal(true);
   private observer?: IntersectionObserver;
 
   constructor() {
-    // ✅ Apply shimmer effect reactively
+    // Shimmer effect
     effect(() => {
       const el = this.el.nativeElement;
       if (this.isLoading()) {
@@ -39,7 +39,7 @@ export class LazyImgDirective {
         this.renderer.setStyle(
           el,
           'background',
-          'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)'
+          'linear-gradient(90deg,#f0f0f0 25%,#e0e0e0 50%,#f0f0f0 75%)'
         );
         this.renderer.setStyle(el, 'backgroundSize', '200% 100%');
         this.renderer.setStyle(el, 'animation', 'shimmer 1.2s infinite linear');
@@ -47,62 +47,54 @@ export class LazyImgDirective {
         this.renderer.removeStyle(el, 'background');
         this.renderer.removeStyle(el, 'animation');
         this.renderer.setStyle(el, 'opacity', '1');
-        this.renderer.setStyle(el, 'transition', 'opacity 0.3s ease-in');
+        this.renderer.setStyle(el, 'transition', 'opacity 0.3s');
       }
     });
 
-    // ✅ Observe for lazy load trigger (browser only)
+    // Lazy loading
     if (this.isBrowser) {
       this.observeImage();
-    } else {
-      // SSR fallback: immediately set fallback or nothing
-      this.renderer.setAttribute(
-        this.el.nativeElement,
-        'src',
-        this.fallbackImg()
-      );
     }
 
-    // ✅ Auto cleanup on destroy
     this.destroyRef.onDestroy(() => this.observer?.disconnect());
   }
 
   private observeImage() {
-    if (!this.isBrowser) return;
-
-    if ('IntersectionObserver' in window) {
-      this.observer = new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            this.setImageSrc();
-            this.observer?.unobserve(this.el.nativeElement);
-          }
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.setImageSrc();
+          this.observer?.disconnect();
         }
       });
-      this.observer.observe(this.el.nativeElement);
-    } else {
-      // fallback for older browsers
-      this.setImageSrc();
-    }
+    });
+
+    this.observer.observe(this.el.nativeElement);
   }
+private setImageSrc() {
+  if (!this.isBrowser) return;
 
-  private setImageSrc() {
-    if (!this.isBrowser) return;
+  const el = this.el.nativeElement;
+  const src = this.appLazyImg() || this.fallbackImg();
 
-    const el = this.el.nativeElement;
-    const src = this.appLazyImg() || this.fallbackImg();
+  this.isLoading.set(true);
 
-    this.isLoading.set(true);
+  const onLoad = () => this.isLoading.set(false);
 
-    const onLoad = () => this.isLoading.set(false);
-    const onError = () => {
-      this.renderer.setAttribute(el, 'src', this.fallbackImg());
-      this.isLoading.set(false);
-    };
+  const onError = () => {
+    const fallback = this.fallbackImg();
+    this.renderer.setAttribute(el, 'src', fallback);
+    this.isLoading.set(false);
+  };
 
-    el.addEventListener('load', onLoad, { once: true });
-    el.addEventListener('error', onError, { once: true });
+  el.addEventListener('load', onLoad, { once: true });
+  el.addEventListener('error', onError, { once: true });
 
-    this.renderer.setAttribute(el, 'src', src);
-  }
+  // ✔ Only set NORMAL src
+  this.renderer.setAttribute(el, 'src', src);
+}
+
+
+
+ 
 }
