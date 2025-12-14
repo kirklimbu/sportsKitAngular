@@ -45,7 +45,7 @@ small {
     .image-section {
       display: flex;
       flex-direction: column;
-      margin-top: 2rem;
+      // margin-top: 2rem;
       gap: 1rem;
       width: 350px;
 
@@ -65,9 +65,10 @@ small {
 
 @media (min-width: 768px) {
 
-nz-card {
+  nz-card {
     // width: 350px;
   }
+
   .content-container {
     display: flex;
     flex-direction: row;
@@ -97,22 +98,29 @@ nz-card {
     .image-section {
       display: flex;
       flex-direction: row;
-      place-content: center;
-      width: auto;
+      justify-content: center;
+      align-items: flex-start;
+      width: 100%;
+      gap: 1.5rem;
+      flex-wrap: nowrap; // 🔥 forces all 3 cards to stay in one row
+
+      nz-card {
+        width: 300px; // 🔥 ensures equal width
+      }
 
       img {
         width: 280px;
         height: 280px;
-        // aspect-ratio: 1 auto;
       }
     }
 
     .message-section {
-      place-content: center;
-      padding-bottom: 13rem;
+      text-align: center;
+      // padding-bottom: 6rem;
 
       .description {
         width: 60rem;
+        margin: auto;
       }
     }
   }

@@ -174,14 +174,6 @@ p {
     }
   }
 }
-
-/* Large devices such as laptops (1024px and up) */
-// @media only screen and (min-width: 64em) {
-//   .content-container {
-//     padding: 0 6rem;
-//     // background: rgb(233, 185, 98);
-//   }
-//   .image-section {
-//     padding: 23%;
-//   }
-// }
+:host ::ng-deep .ant-card-actions {
+  margin: 4px 7px !important;
+}
