@@ -1,0 +1,201 @@
+<div nz-row nzJustify="start">
+    <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [nzXl]="24">
+        <div class="form-container">
+            <nz-card nzTitle="Add Team">
+                <form nz-form [nzLayout]="'vertical'" [formGroup]="form" (ngSubmit)="onSave()">
+                    <!-- START: Responsive Two-Column Layout -->
+                    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+                        <!-- First Column -->
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+                            <nz-form-item>
+                                <nz-form-control nzErrorTip="Please add Branch name!">
+                                    <div class="flex">
+                                        <nz-form-label nzRequired>Profile pic</nz-form-label>
+                                        <!-- <span class="not-compulsory">Profile pic</span> -->
+                                        <p>
+
+                                            <small>
+                                                <span nz-typography nzType="danger">*Add (16:9) photo.</span>
+                                            </small>
+                                        </p>
+                                        <label for="">
+                                            <!-- #TODO MOBILE IMAGE UPLOAD ISSUE -->
+                                            <div class="clearfix">
+                                                <nz-upload class="avatar-uploader"
+                                                    [nzShowUploadList]="{'showRemoveIcon':true }"
+                                                    [nzBeforeUpload]="profilePicUpload" nzAccept=".png,.jpg,.jpeg"
+                                                    [nzSize]="10000" [nzFileType]="'image/png,image/jpeg,image/jpg'"
+                                                    nzListType="picture-card" [(nzFileList)]="fileList"
+                                                    [nzShowButton]="fileList.length < 1"
+                                                    (nzChange)="handleChange($event)">
+
+                                                    @if(!avatarUrl){
+                                                    <ng-container>
+                                                        <span class="upload-icon" nz-icon
+                                                            [nzType]="loading ? 'loading' : 'plus'"></span>
+                                                        <div class="ant-upload-text">Upload</div>
+                                                    </ng-container>
+
+                                                    }
+                                                    @if (avatarUrl) {
+
+                                                    <img [src]="avatarUrl" width="450" height="250" alt="Images" />
+                                                    }
+                                                </nz-upload>
+
+                                            </div>
+                                        </label>
+                                    </div>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                    </div>
+
+                    <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
+
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+                            <nz-form-item>
+                                <nz-form-label nzRequired> Name</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add  name!">
+                                    <input nz-input formControlName="name" placeholder=" 3Inn Hotel" />
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+                            <nz-form-item>
+                                <nz-form-label>Category</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add Category">
+                                    <nz-select formControlName="categoryId" nzPlaceHolder="Select Office">
+                                        <nz-option [nzValue]="0" nzLabel="No Category"></nz-option>
+                                        @for(place of placeCategoryList;track place.categoryId){
+
+                                        <nz-option [nzValue]="place.categoryId" [nzLabel]="place.category"></nz-option>
+                                        }
+                                    </nz-select>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+                            <nz-form-item>
+                                <nz-form-label nzRequired>Address</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add  address!">
+                                    <input nz-input formControlName="address" placeholder=" Damak 5, Gorkhali tole" />
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+
+
+                        <!-- Second Column -->
+
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+
+                            <nz-form-item>
+                                <nz-form-label>Mobile</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add mobile number!">
+                                    <input nz-input formControlName="mobile" placeholder="9874563212" />
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+
+                        <!-- END: Responsive Two-Column Layout -->
+
+                        <!-- third Column -->
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+                            <nz-form-item>
+
+                                <nz-form-label>Phone</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add phone number!">
+                                    <input nz-input formControlName="phone" placeholder="023564789" />
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+
+                            <nz-form-item>
+
+                                <nz-form-label>Email</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add email!">
+                                    <input nz-input formControlName="email" placeholder="123@gmail.com" />
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+
+                        <!-- map section -->
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+
+                            <nz-form-item>
+
+                                <nz-form-label>Latitude</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add latitude!">
+                                    <input nz-input formControlName="latitude" placeholder="Latitude" />
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+
+                            <nz-form-item>
+
+                                <nz-form-label>Longitude</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add longitude!">
+                                    <input nz-input formControlName="longitude" placeholder="Longitude" />
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+
+                            <nz-form-item>
+
+                                <nz-form-label>Google maps link</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add google link!">
+                                    <input nz-input formControlName="mapLink" placeholder="Map Link" />
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="18">
+
+                            <nz-form-item>
+
+                                <nz-form-label>Google maps link</nz-form-label>
+                                <textarea nz-input formControlName="description" placeholder="Short description"
+                                    [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
+
+                            </nz-form-item>
+                        </div>
+
+                        <!-- map section -->
+
+
+                        <!-- Full-width items below the columns -->
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+                            <nz-form-item>
+                                <nz-form-label>Status</nz-form-label>
+                                <nz-form-control>
+                                    <nz-switch formControlName="hasActive" [nzCheckedChildren]="checkedTemplate"
+                                        [nzUnCheckedChildren]="unCheckedTemplate"></nz-switch>
+                                    <ng-template #checkedTemplate>Active</ng-template>
+                                    <ng-template #unCheckedTemplate>Not Active</ng-template>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+
+                    </div>
+
+                    <nz-divider></nz-divider>
+
+                    <nz-form-item>
+                        <nz-form-control>
+                            <div nz-row [nzJustify]="'end'">
+                                <div nz-col [nzXs]="24" [nzSm]="24" [nzLg]="'auto'">
+                                    <button [disabled]="!form.valid" nz-button [nzType]="'primary'"
+                                        class="submit-button">
+                                        {{ mode === 'add' ? 'SAVE' : 'UPDATE' }}
+                                    </button>
+                                </div>
+                            </div>
+                        </nz-form-control>
+                    </nz-form-item>
+                </form>
+            </nz-card>
+        </div>
+    </div>
+</div>

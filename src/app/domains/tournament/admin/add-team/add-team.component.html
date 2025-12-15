@@ -1,55 +1,116 @@
 <div class="container">
     <section class="memberentry-section">
-        <div>
+
+        <!-- HEADER -->
+        <div class="title">
             <div class="sub-title">
-                <span>Team </span>
+                <span>Tournament Panel
+                </span>
             </div>
-            <div class="title text-bolder">
-                <h3>{{ mode === 'add' ? 'New' : 'Update' }} Team</h3>
+            <div class=" text-bolder">
+                <h3>
+                    {{mode==='add'?"Save":"Update"}} Team
+                </h3>
             </div>
         </div>
 
-        <form class="form" [formGroup]="form">
-            
+        <form nz-form [formGroup]="form" class="team-form">
 
-            <div class="flex">
-                <label>
-                    <span class="required">Player One</span>
-                    <input class="input" type="text" placeholder="Mirak Lawati" autocomplete="playerOneName"
-                        formControlName="playerOneName" />
-                </label>
+            <!-- TEAM INFO -->
+            <nz-card class="section-card highlight" nzTitle="Team Information">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-input-group nzPrefixIcon="team">
+                            <input nz-input placeholder="Team Name (e.g. Damak Smashers)" formControlName="name" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </nz-card>
 
-                
-            </div>
+            <!-- PLAYER ONE -->
+            <nz-card class="section-card" nzTitle="Player One">
+                <div class="grid">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-input-group nzPrefixIcon="user">
+                                <input nz-input placeholder="Full Name" formControlName="playerOneName" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
 
-            <div class="flex">
-                <label>
-                    <span class="required">Player Two</span>
-                    <input class="input" type="text" placeholder="Bikrant Rai" autocomplete="off"
-                        formControlName="playerTwoName" />
-                </label>
-                
-            </div>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-input-group nzPrefixIcon="phone">
+                                <input nz-input type="tel" placeholder="Mobile Number"
+                                    formControlName="playerOneMobile" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
 
-            <div class="flex">
-                <label>
-                    <span class="required">Address</span>
-                    <input class="input" type="text" placeholder="Damak" autocomplete="off" formControlName="address" />
-                </label>
-            </div>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select formControlName="playerOneGender" nzPlaceHolder="Gender">
+                                <nz-option nzLabel="Male" nzValue="Male" />
+                                <nz-option nzLabel="Female" nzValue="Female" />
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </nz-card>
 
-            
-            <div class="flex">
-                <label nz-checkbox formControlName="hasPaid"><span>hasPaid</span></label>
-            </div>
+            <!-- PLAYER TWO -->
+            <nz-card class="section-card" nzTitle="Player Two">
+                <div class="grid">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-input-group nzPrefixIcon="user">
+                                <input nz-input placeholder="Full Name" formControlName="playerTwoName" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
 
-            <button class="submit" (click)="onSave()">
-                {{ mode === 'add' ? 'Save' : 'Update' }}
-            </button>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-input-group nzPrefixIcon="phone">
+                                <input nz-input type="tel" placeholder="Mobile Number"
+                                    formControlName="playerTwoMobile" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select formControlName="playerTwoGender" nzPlaceHolder="Gender">
+                                <nz-option nzLabel="Male" nzValue="Male" />
+                                <nz-option nzLabel="Female" nzValue="Female" />
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </nz-card>
+
+            <!-- META -->
+            <nz-card class="section-card" nzTitle="Additional Details">
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-input-group nzPrefixIcon="environment">
+                            <input nz-input placeholder="Address (e.g. Damak, Jhapa)" formControlName="address" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <label nz-checkbox formControlName="hasPaid">
+                        Registration Fee Paid
+                    </label>
+                </nz-form-item>
+            </nz-card>
+
+            <!-- ACTION -->
+
+            <button class="submit" (click)="onSave()">{{mode==='add'?"Save":"Update"}}</button>
+
+
         </form>
     </section>
-
-    <!-- <section class="members-list-section">
-    <app-events-list [data$]="event$" (sendEventId)="edit($event)" />
-  </section> -->
 </div>

@@ -1,35 +1,32 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input,
-  OnChanges,
   OnInit,
-  ViewEncapsulation,
-  inject,
+  inject
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 // third-party
-import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { FormsModule } from '@angular/forms';
-import { IMember } from './data/models/member.model';
-import { MemberService } from './data/services/member.service';
-import { Observable, distinctUntilChanged, shareReplay } from 'rxjs';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { Observable, shareReplay } from 'rxjs';
+import { IMember } from './data/models/member.model';
+import { MemberService } from './data/services/member.service';
 
-import { NzTagModule } from 'ng-zorro-antd/tag';
 import { Router, RouterModule } from '@angular/router';
-import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
-import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { Store } from '@ngxs/store';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzTagModule } from 'ng-zorro-antd/tag';
 import { Role } from 'src/app/shared/util-auth/models/user.model';
-import { Store } from '@ngxs/store';
-import { AuthState } from '../auth/login/state/login.state';
 import { SearchPipe } from 'src/app/shared/util-common/pipes/search.pipe';
+import { AuthState } from '../auth/login/state/login.state';
 
 
 @Component({

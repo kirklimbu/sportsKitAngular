@@ -1,11 +1,7 @@
 import { Route } from '@angular/router';
-import { COMMON_LAYOUT_ROUTES } from './layouts/common-layout/common-layout.routes';
-import { CommonLayoutComponent } from './layouts/common-layout/common-layout.component';
-import { LoginComponent } from './domains/auth/login/login.component';
-import { RegistrationComponent } from './domains/auth/registration/registration.component';
-import { MemberEntryComponent } from './domains/members/member-entry/member-entry.component';
 import { AdminComponent } from './domains/admin/admin.component';
-import { AuthGuard } from './shared/util-auth/guards/auth.guard';
+import { CommonLayoutComponent } from './layouts/common-layout/common-layout.component';
+import { COMMON_LAYOUT_ROUTES } from './layouts/common-layout/common-layout.routes';
 
 export const appRoutes: Route[] = [
     {

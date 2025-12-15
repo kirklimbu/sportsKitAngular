@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home.component';
-import { TotalMembersComponent } from '../members/total-members/total-members.component';
-import { TotalEventsComponent } from '../events/total-events/total-events.component';
 import { EventDetailsComponent } from '../events/event-details.component';
-import { TrainingComponent } from '../training/training.component';
-import { TournamentComponent } from '../tournament/tournament.component';
-import { GallariesComponent } from '../gallaries/gallaries.component';
+import { TotalEventsComponent } from '../events/total-events/total-events.component';
+import { FamousPlaces } from '../famous-places/public/famous-places/famous-places';
 import { GallaryComponent } from '../gallary/gallary.component';
+import { TotalMembersComponent } from '../members/total-members/total-members.component';
+import { TournamentComponent } from '../tournament/tournament.component';
+import { TrainingComponent } from '../training/training.component';
+import { HomeComponent } from './home.component';
 // import { StudyInJapanComponent } from "../study-destinations/study-in-japan/study-in-japan.component";
 
 export const FEATURE_HOME_ROUTES: Routes = [
@@ -53,5 +53,12 @@ export const FEATURE_HOME_ROUTES: Routes = [
       breadcrumb: 'gallery',
     },
     component: GallaryComponent,
+  },
+  {
+    path: 'famous-places',
+    data: {
+      breadcrumb: 'Places',
+    },
+    component: FamousPlaces,
   },
 ];

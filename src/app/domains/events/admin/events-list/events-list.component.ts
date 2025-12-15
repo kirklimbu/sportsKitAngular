@@ -56,7 +56,6 @@ export class EventsListComponent implements OnInit {
   private readonly cd = inject(ChangeDetectorRef)
   private readonly store = inject(Store);
 
-  constructor() { }
 
   ngOnInit() {
     this.checkUser();

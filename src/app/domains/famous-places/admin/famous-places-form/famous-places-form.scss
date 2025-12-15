@@ -1,0 +1,76 @@
+@import '../../../../../assets/scss/variables';
+
+
+
+button {
+    width: 100%; // Ensure it takes full width within its nz-col on small screens
+    // You might want to add some margin-top if it's too close to the divider
+    margin-top: 16px;
+    border-radius: 0;
+
+    font-weight: bold;
+    text-transform: uppercase;
+
+    @media (min-width: 992px) {
+        // For large devices and up (nzLg breakpoint)
+        width: 10rem; // Let it take its natural width
+
+    }
+}
+
+// You can also adjust the form-container padding if needed for mobile
+.form-container {
+    padding: 16px; // default
+
+    @media (min-width: 768px) {
+        // Medium devices and up
+        padding: 24px;
+    }
+}
+
+
+.editor-quill {
+    height: 90px;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+    min-height: 150px;
+}
+
+:host ::ng-deep .ck-editor {
+    // padding-left: 4rem;
+    margin-bottom: 16px;
+}
+
+:host ::ng-deep .ql-editor {
+    background-color: transparent;
+}
+
+:host::ng-deep .quill-editor {
+    border-radius: .5rem;
+
+}
+
+
+:host ::ng-deep .avatar-uploader>.ant-upload {
+    width: 400px;
+    height: 200px;
+}
+
+
+:host ::ng-deep .ant-upload-list-picture-card-container {
+    width: 400px;
+    height: 200px;
+    padding-bottom: 1rem;
+}
+
+:host ::ng-deep .ant-upload-list-picture-card .ant-upload-list-item {
+    width: 400px;
+    height: 200px;
+}
+
+img {
+    width: 400px;
+    height: 200px;
+    border-radius: $border-radius;
+}

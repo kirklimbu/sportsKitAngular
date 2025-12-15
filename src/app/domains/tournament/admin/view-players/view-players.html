@@ -1,0 +1,88 @@
+<div class="mobile-cards">
+    @for (team of filteredTeams; track $index) {
+
+    <nz-card class="team-card">
+
+        <h3>{{ team.name }}</h3>
+
+        <div class="player">
+            {{ team.playerOne }}
+            <nz-tag nzColor="blue">{{ team.playerOneGender }}</nz-tag>
+        </div>
+
+        <div class="player" *ngIf="team.playerTwo">
+            {{ team.playerTwo }}
+            <nz-tag nzColor="pink">{{ team.playerTwoGender }}</nz-tag>
+        </div>
+
+        <div class="meta">
+            <nz-tag nzColor="gold">{{ team.seed }}</nz-tag>
+            <nz-tag [nzColor]="team.status === 'Active' ? 'green' : 'red'">
+                {{ team.status }}
+            </nz-tag>
+        </div>
+
+        <!-- <button nz-button nzType="default" nzBlock nzShape="round">
+            View Team
+        </button> -->
+
+    </nz-card>
+    }
+</div>
+ <div class="table-operations">
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input [(ngModel)]="searchValue" type="text" nz-input placeholder="Search player... " />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+            <span nz-icon nzType="search"></span>
+        </ng-template>
+
+        <!-- <button class="action-button" nz-button nzType="primary" routerLinkActive routerLink="/admin/add-member">
+            Add
+        </button> -->
+
+    </div>
+<nz-table class="desktop-table" #nzTable [nzData]="teams" nzBordered [nzFrontPagination]="false">
+    <thead>
+        <tr>
+            <th>SN.</th>
+            <th>Team</th>
+            <th>Players</th>
+            <th>Address</th>
+            <th>Seed</th>
+            <th>Status</th>
+            <th nzAlign="center">Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (team of nzTable.data| search: searchValue; track $index) {
+        <tr>
+            <td>{{ $index + 1 }}.</td>
+            <td>{{ team.name }}</td>
+
+            <td>
+                {{ team.playerOne }}
+                <nz-tag>{{ team.playerOneGender }}</nz-tag>
+                <br />
+                {{ team.playerTwo }}
+                <nz-tag>{{ team.playerTwoGender }}</nz-tag>
+            </td>
+            <td>{{ team.address |titlecase }}</td>
+
+            <td><nz-tag nzColor="gold">{{ team.seed }}</nz-tag></td>
+
+            <td>
+                <nz-tag [nzColor]="team.status === 'Active' ? 'green' : 'red'">
+                    {{ team.status }}
+                </nz-tag>
+            </td>
+
+            <td nzAlign="center">
+                <!-- <button nz-button nzType="link">View</button>
+                <button nz-button nzDanger nzType="link">Delete</button> -->
+            </td>
+        </tr>
+        }
+    </tbody>
+</nz-table>

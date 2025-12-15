@@ -1,0 +1,112 @@
+@import 'src/assets/scss/_variables.scss';
+
+:host ::ng-deep .ant-card-body {
+    padding: 0;
+}
+
+
+.places-section {
+  background: $tone-green-light;
+  padding: 2rem 1rem;
+}
+
+/* INTRO */
+.places-intro {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    max-width: 40ch;
+    margin: auto;
+    color: $text-muted;
+  }
+
+  .view-all {
+    display: inline-block;
+    margin-top: 1rem;
+    color: $gold;
+    font-weight: 600;
+  }
+}
+
+/* CARD CONTAINER – MOBILE */
+.places-cards {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* CARD */
+.place-card {
+  min-width: 280px;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-6px);
+  }
+}
+
+.image-wrapper {
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+}
+
+.card-content {
+  padding: 1rem;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: $text-muted;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .explore-btn {
+    font-weight: 600;
+  }
+}
+
+/* TABLET */
+@media (min-width: 768px) {
+  .places-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    overflow: visible;
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 1024px) {
+  .places-section {
+    padding: 4rem 6rem;
+  }
+
+  .places-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .places-intro p {
+    max-width: 60ch;
+  }
+}

@@ -78,6 +78,13 @@ export const FEATURE_ADMIN_ROUTES: Routes = [
     },
     path: 'tournament',
     loadChildren: () => import('../tournament').then((m) => FEATURE_TOURNAMENT_ROUTES),
+  },{
+    canActivate: [hasRoleGuard],
+    data: {
+      roles: [Role.ADMIN],
+    },
+    path: 'places',
+    loadChildren: () => import('../famous-places').then((m) => m.FEATURE_ADMIN_ROUTES),
   },
 
   {

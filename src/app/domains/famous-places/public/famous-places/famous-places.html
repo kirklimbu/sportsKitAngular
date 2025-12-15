@@ -1,0 +1,48 @@
+<section id="jhapa-places" class="places-section">
+
+  <!-- Intro -->
+  <div class="places-intro">
+    <h2>Beautiful Places in Jhapa</h2>
+    <p>
+      Discover the natural beauty, culture, and hidden gems of Jhapa —
+      where nature meets tradition.
+    </p>
+    <a routerLink="/home/events" class="view-all">
+      Explore all places →
+    </a>
+  </div>
+
+  <!-- Cards -->
+  <div class="places-cards">
+    @for (event of data$|async; track $index) {
+      <nz-card nzHoverable class="place-card">
+
+        <div class="image-wrapper">
+          <img nz-image 
+            [appLazyImg]="event.docPath"
+            [nzSrc]="event.docPath" 
+            [alt]="event.name"
+            [title]="event.name"
+            priority
+          />
+        </div>
+
+        <div class="card-content">
+          <h3>{{ event.name }}</h3>
+          <p>{{ event.description | truncate : 160 }}</p>
+
+          <button
+            nz-button
+            nzType="default"
+            nzShape="round"
+            class="explore-btn"
+            (click)="onShowMore(event.placeId)">
+            Explore →
+          </button>
+        </div>
+
+      </nz-card>
+    }
+  </div>
+
+</section>

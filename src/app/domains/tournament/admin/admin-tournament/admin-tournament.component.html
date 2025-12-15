@@ -19,11 +19,11 @@
                 [nzText]="item.hasStopReg ? 'Active' : ''"> -->
             <nz-card nzSize="small">
                 <nz-list-item>
-                    
+
                     <nz-list-item-meta>
-                        
+
                         <nz-list-item-meta-title>
-                           
+
                             <nz-page-header [nzGhost]="false">
                                 <nz-page-header-title>{{ item.title | titlecase }}
                                 </nz-page-header-title>
@@ -31,12 +31,16 @@
                                 <nz-page-header-extra>
                                     <nz-space>
 
-                                        <button *nzSpaceItem nz-button (click)="onViewDetails(item.tournamentId)" >Tiesheet</button>
-                                        <button *nzSpaceItem nz-button nzType="primary" (click)="onAddTeam(item.tournamentId)">Add Team</button>
+                                        <button *nzSpaceItem nz-button
+                                            (click)="onViewDetails(item.tournamentId)">Tiesheet</button>
+                                        <button *nzSpaceItem nz-button nzType="primary"
+                                            (click)="onAddTeam(item.tournamentId)">Add Team</button>
+                                        <button *nzSpaceItem nz-button (click)="onViewPlayers(item.tournamentId)">View
+                                            Players</button>
                                     </nz-space>
                                 </nz-page-header-extra>
                             </nz-page-header>
-                           
+
                         </nz-list-item-meta-title>
                         <nz-list-item-meta-description>
                             <!-- <span nz-icon nzType="user-switch" nzTheme="outline"></span> -->

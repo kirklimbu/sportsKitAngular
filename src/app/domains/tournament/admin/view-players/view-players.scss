@@ -1,0 +1,103 @@
+.filter-bar {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+/* MOBILE */
+.mobile-cards {
+  display: grid;
+  gap: 1rem;
+}
+
+.team-card {
+  border-radius: 1rem;
+
+  h3 {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .player {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+
+  .meta {
+    display: flex;
+    gap: 8px;
+    margin: 0.75rem 0;
+  }
+}
+
+/* DESKTOP */
+.desktop-table {
+  display: none;
+}
+
+/* TABLET + DESKTOP */
+@media (min-width: 768px) {
+  .filter-bar {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .mobile-cards {
+    display: none;
+  }
+
+  .desktop-table {
+    display: block;
+  }
+}
+
+.search-box {
+  padding: 8px;
+}
+
+.search-box input {
+  width: 188px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.search-box button {
+  width: 90px;
+}
+
+.search-button {
+  margin-right: 8px;
+}
+
+
+
+nz-tag {
+  min-width: 69px;
+}
+
+.table-operations {
+  // display: flex;
+  // gap: 4px;
+  padding: 12px 0px;
+
+  nz-input-group {
+    width: 25%;
+    background-color: white;
+  }
+
+  .action-button {
+    float: right;
+    font-weight:bold;
+    width:8rem;
+  }
+}
+
+/* .table-container {
+  overflow-x: auto;
+}*/
+@media (width<=520px) {
+  .table-container {
+    padding-top: 2rem;
+  }
+
+}

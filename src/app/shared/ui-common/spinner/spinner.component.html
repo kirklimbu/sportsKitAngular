@@ -1,5 +1,7 @@
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#fff" type="cube-transition" [fullScreen]="true">
-  <p style="color: white"> Loading... </p>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-clip-rotate-multiple" [fullScreen]="true">
+  <img height="55px" width="55px" src="../assets/images/logo.png"alt="Loading..." />
+  <p style="color: white">Loading...</p>
 </ngx-spinner>
 
 <!-- 
@@ -10,3 +12,6 @@
       nzDescription="Further details about the context of this alert."></nz-alert>
 </nz-spin>
 } -->
+<!-- 
+<ng-template #indicatorTemplate><nz-icon nzType="loading" /></ng-template>
+    <nz-spin nzSimple [nzIndicator]="indicatorTemplate"></nz-spin> -->

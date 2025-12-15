@@ -6,20 +6,20 @@
         <span nz-icon nzType="home"></span>
         <span>
           Home
-          <a nz-tooltip nzTooltipTitle="Home" [routerLink]="['/home']"> </a>
+          <a  title="Home" [routerLink]="['/home']"> </a>
         </span>
       </li>
       <li nz-menu-item>
         <span nz-icon nzType="user"></span>
         <span>Profile
-          <a nz-tooltip nzTooltipTitle="Profile" [routerLink]="['/admin/user-profile']"></a>
+          <a  title="Profile" [routerLink]="['/admin/user-profile']"></a>
         </span>
       </li>
       @if (userRole==='Admin') {
       <li nz-menu-item>
         <span nz-icon nzType="bank"></span>
-        <span nz-tooltip>Organization
-          <a nz-tooltip nzTooltipTitle="Organization" [routerLink]="['/admin/profile']"></a>
+        <span >Organization
+          <a  title="Organization" [routerLink]="['/admin/profile']"></a>
         </span>
       </li>
 
@@ -27,12 +27,12 @@
         <span nz-icon nzType="user-add"></span>
         <span>
           Members
-          <a nz-tooltip nzTooltipTitle="Members" [routerLink]="['/admin/list-member']"></a>
+          <a  title="Members" [routerLink]="['/admin/list-member']"></a>
         </span>
       </li>
       <!-- <li nz-menu-item>
         <span nz-icon nzType="usergroup-add"></span>
-        <span nz-tooltip nzTooltipTitle="Trainee">Trainee
+        <span  title="Trainee">Trainee
           <a [routerLink]="['/admin/trainee']"></a>
         </span>
       </li> -->
@@ -40,32 +40,39 @@
         <span nz-icon nzTitle="Events" nzType="schedule"></span>
         <span>
           Events
-          <a nz-tooltip nzTooltipTitle="Events" [routerLink]="['/admin/events']"></a>
+          <a  title="Events" [routerLink]="['/admin/events']"></a>
+        </span>
+      </li>
+      <li nz-menu-item>
+        <span nz-icon nzTitle="Places" nzType="fund-projection-screen"></span>
+        <span>
+          Places
+          <a  title="Places" [routerLink]="['/admin/places']"></a>
         </span>
       </li>
       }
       <li nz-menu-item>
         <span nz-icon nzType="team"></span>
         <span>Training
-          <a nz-tooltip nzTooltipTitle="Training" [routerLink]="['/admin/training']"></a>
+          <a  title="Training" [routerLink]="['/admin/training']"></a>
         </span>
       </li>
 
-      <li nz-tooltip nzTooltipTitle="Trainee" nz-menu-item>
+      <li  title="Trainee" nz-menu-item>
         <span nz-icon nzType="usergroup-add"></span>
         <span>Trainee
-          <a nz-tooltip nzTooltipTitle="Trainee" [routerLink]="['/admin/trainee']"></a>
+          <a  title="Trainee" [routerLink]="['/admin/trainee']"></a>
         </span>
       </li>
-      <li nz-tooltip nzTooltipTitle="Tournament" nz-menu-item>
+      <li  title="Tournament" nz-menu-item>
         <span nz-icon nzType="crown"></span>
         <span>Tournament
-          <a  [routerLink]="['/admin/tournament']"></a>
+          <a [routerLink]="['/admin/tournament']"></a>
         </span>
       </li>
       <!-- <li nz-menu-item>
                 <span nz-icon nzTitle="Inquiry" nzType="question-circle"></span>
-                <span nz-tooltip nzTooltipTitle="Inquiry">
+                <span  title="Inquiry">
                     Inquiry
                     <a [routerLink]="['/auth/inquiry']"></a>
 
@@ -74,7 +81,7 @@
 
       <!-- <li nz-menu-item>
         <span nz-icon nzTitle="Set" nzType="user-add"></span>
-        <span nz-tooltip nzTooltipTitle="Users">
+        <span  title="Users">
           User
           <a [routerLink]="['/admin/add-user']"></a>
         </span>
@@ -82,7 +89,7 @@
 
       <!-- <li nz-menu-item>
                 <span nz-icon nzTitle="Set" nzType="schedule"></span>
-                <span nz-tooltip nzTooltipTitle="Set">
+                <span  title="Set">
                     Events
                     <a [routerLink]="['/auth/events']"></a>
 

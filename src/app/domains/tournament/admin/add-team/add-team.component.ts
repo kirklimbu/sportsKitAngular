@@ -1,5 +1,10 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, distinctUntilChanged, map, shareReplay } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -9,6 +14,11 @@ import { CommonModule } from '@angular/common';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { TournamentService } from '../../data/tournament.service';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-add-team',
@@ -18,19 +28,22 @@ import { TournamentService } from '../../data/tournament.service';
     ReactiveFormsModule,
     // third-party
     NzPageHeaderModule,
-    NzCheckboxModule
-
+    NzCheckboxModule,
+    NzFormModule,
+    NzSelectModule,
+    NzCardModule,
+    NzInputModule,
+    NzButtonModule
   ],
   templateUrl: './add-team.component.html',
-  styleUrl: './add-team.component.scss'
+  styleUrl: './add-team.component.scss',
 })
 export class AddTeamComponent {
-
   // props
   tournamentId!: number;
   id$!: Observable<number>;
   form!: FormGroup;
-  mode='add'
+  mode = 'add';
   private readonly fb = inject(FormBuilder);
   private readonly tournamentService = inject(TournamentService);
   private readonly route = inject(ActivatedRoute);
@@ -40,7 +53,6 @@ export class AddTeamComponent {
   ngOnInit(): void {
     this.buildForm();
     this.checkFormStatus();
-
   }
 
   private buildForm(): void {
@@ -50,12 +62,15 @@ export class AddTeamComponent {
       playerOneName: [''],
       playerTwoId: [0],
       playerTwoName: [],
+      playerOneGender: [],
+      playerOneMobile: [],
+      playerTwoGender: [],
+      playerTwoMobile: [],
       address: [],
+      name: [],
       hasPaid: [false],
-    })
+    });
   }
-
-
 
   private checkFormStatus() {
     this.id$ = this.route.queryParamMap.pipe(
@@ -72,14 +87,12 @@ export class AddTeamComponent {
         takeUntilDestroyed(this.unsubscribe$)
       )
       .subscribe((_res: any) => {
-        this.form.patchValue({ tournamentId: _res })
+        this.form.patchValue({ tournamentId: _res });
       });
   }
 
-
   // save data
   onSave() {
-
     this.tournamentService
       .saveTeam(this.form.value)
       .pipe(takeUntilDestroyed(this.unsubscribe$))
@@ -88,13 +101,9 @@ export class AddTeamComponent {
           this.messageService.createMessage('success', _res.message);
           this.form.reset();
           console.log('tournament id', this.tournamentId);
-          
-          this.form.patchValue({ tournamentId: this.tournamentId })
 
+          this.form.patchValue({ tournamentId: this.tournamentId });
         }
       });
   }
 }
-
-
-

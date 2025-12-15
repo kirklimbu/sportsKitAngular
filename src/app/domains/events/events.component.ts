@@ -1,14 +1,13 @@
-import { Router, RouterModule } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
-import { NzCardModule } from 'ng-zorro-antd/card';
+import { Router, RouterModule } from '@angular/router';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
-import { NzBackTopModule } from 'ng-zorro-antd/back-top';
-import { NepaliDateFormatterPipe } from "../../shared/util-common/pipes/nepali-date-formatter.pipe";
+import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
+import { NepaliDateFormatterPipe } from "../../shared/util-common/pipes/nepali-date-formatter.pipe";
 
 @Component({
   selector: 'app-events',
