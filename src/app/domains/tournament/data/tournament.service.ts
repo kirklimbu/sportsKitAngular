@@ -3,6 +3,7 @@ import {
   IGame2DTO,
   ITeam,
   ITeam3Dto,
+  ITeamRegistrationFormDtoWrapper,
   ITournament,
 } from './model/tournament.model';
 import { HttpClient } from '@angular/common/http';
@@ -62,6 +63,20 @@ export class TournamentService {
   getAllPlayers(id: number): Observable<ITeam3Dto[]> {
     return this.http.get<ITeam3Dto[]>(
       `${this.apiUrl}auth/admin/tournament/player/list?tournamentId=${id}`
+    );
+  }
+
+  getFormValues(
+    tournamentId: number,
+    teamId: number
+  ): Observable<ITeamRegistrationFormDtoWrapper> {
+    console.log('form', tournamentId, teamId);
+
+    return this.http.get<ITeamRegistrationFormDtoWrapper>(
+      `${this.apiUrl}tournament/registration/form`,
+      {
+        params: { tournamentId, teamId },
+      }
     );
   }
 }

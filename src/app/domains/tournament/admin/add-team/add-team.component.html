@@ -14,14 +14,15 @@
             </div>
         </div>
 
-        <form nz-form [formGroup]="form" class="team-form">
+        <form nz-form [formGroup]="form" class="team-form" (ngSubmit)="handleUpload()">
 
             <!-- TEAM INFO -->
             <nz-card class="section-card highlight" nzTitle="Team Information">
+
                 <nz-form-item>
                     <nz-form-control>
                         <nz-input-group nzPrefixIcon="team">
-                            <input nz-input placeholder="Team Name (e.g. Damak Smashers)" formControlName="name" />
+                            <input nz-input placeholder="Team Name (e.g. Damak Smashers)" formControlName="teamName" />
                         </nz-input-group>
                     </nz-form-control>
                 </nz-form-item>
@@ -49,9 +50,30 @@
 
                     <nz-form-item>
                         <nz-form-control>
-                            <nz-select formControlName="playerOneGender" nzPlaceHolder="Gender">
-                                <nz-option nzLabel="Male" nzValue="Male" />
-                                <nz-option nzLabel="Female" nzValue="Female" />
+                            <nz-select formControlName="playerOneGenderId" nzPlaceHolder="Gender">
+                                <!-- <nz-option nzLabel="None" nzValue="" /> -->
+                                @for ( gender of genderList; track gender.id) {
+                                <nz-option [nzLabel]="gender.name" [nzValue]="gender.id" />
+                                }
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-input-group nzPrefixIcon="calendar">
+                                <input nz-input type="text" placeholder="D.O.B(2050/01/01)"
+                                    formControlName="playerOneDobBs" appBsDateInput />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select formControlName="playerOnePlaceId" nzPlaceHolder="Hotel">
+                                <!-- <nz-option nzLabel="None" nzValue="" /> -->
+                                @for ( hotel of hotelList; track hotel.placeId) {
+                                <nz-option [nzLabel]="hotel.name" [nzValue]="hotel.placeId" />
+                                }
                             </nz-select>
                         </nz-form-control>
                     </nz-form-item>
@@ -80,9 +102,28 @@
 
                     <nz-form-item>
                         <nz-form-control>
-                            <nz-select formControlName="playerTwoGender" nzPlaceHolder="Gender">
-                                <nz-option nzLabel="Male" nzValue="Male" />
-                                <nz-option nzLabel="Female" nzValue="Female" />
+                            <nz-select formControlName="playerTwoGenderId" nzPlaceHolder="Gender">
+                                @for ( gender of genderList; track gender.id) {
+                                <nz-option [nzLabel]="gender.name" [nzValue]="gender.id" />
+                                }
+                            </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-input-group nzPrefixIcon="calendar">
+                                <input nz-input type="text" placeholder="D.O.B(2050/01/01) "
+                                    formControlName="playerTwoDobBs" appBsDateInput />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-select formControlName="playerTwoPlaceId" nzPlaceHolder="Hotel">
+                                <!-- <nz-option nzLabel="None" nzValue="" /> -->
+                                @for ( hotel of hotelList; track hotel.placeId) {
+                                <nz-option [nzLabel]="hotel.name" [nzValue]="hotel.placeId" />
+                                }
                             </nz-select>
                         </nz-form-control>
                     </nz-form-item>
@@ -104,11 +145,54 @@
                         Registration Fee Paid
                     </label>
                 </nz-form-item>
+                @if(form.get('hasPaid')?.value) {
+
+                <div nz-row >
+                    <div nz-col >
+                        <nz-form-item class="payment-row">
+                            <nz-form-label nzRequired>Payment Receipt</nz-form-label>
+                            <nz-form-control>
+
+                                <nz-upload [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload"
+                                    [nzMultiple]="false" [nzAccept]="'image/png, image/jpeg, image/jpg'"
+                                    (nzChange)="handleChange($event)">
+                                    <button nz-button type="button">
+                                        <nz-icon nzType="upload" />
+                                        Select File
+                                    </button>
+                                    @if(fileList.length === 0) {
+
+                                    <div>
+                                        <nz-icon nzType="plus"></nz-icon>
+                                        <div style="margin-top: 8px">Select File</div>
+                                    </div>
+                                    }
+
+                                </nz-upload>
+                                <!-- IMAGE PREVIEW -->
+                                @if(previewUrl) {
+
+                                <div class="preview">
+                                    <img nz-image [src]="previewUrl" alt="Payment receipt preview" />
+                                </div>
+                                }
+                                <br />
+                                <!-- <button nz-button nzType="primary" [nzLoading]="uploading" (click)="handleUpload()"
+                                                        [disabled]="fileList.length === 0">
+                                                        {{ uploading ? 'Uploading' : 'Start Upload' }}
+                                                    </button> -->
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                </div>
+                }
             </nz-card>
 
             <!-- ACTION -->
 
-            <button class="submit" (click)="onSave()">{{mode==='add'?"Save":"Update"}}</button>
+            <button type="submit" nzType="primary" nz-button [nzLoading]="uploading" [disabled]="uploading"
+                class="submit">{{mode==='add'?"Save":"Update"}}</button>
 
 
         </form>

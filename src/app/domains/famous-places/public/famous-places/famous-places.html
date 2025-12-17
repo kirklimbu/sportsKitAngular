@@ -12,37 +12,71 @@
     </a>
   </div>
 
-  <!-- Cards -->
-  <div class="places-cards">
-    @for (event of data$|async; track $index) {
-      <nz-card nzHoverable class="place-card">
+  <!-- SLIDER WRAPPER -->
+  <div class="places-slider">
 
-        <div class="image-wrapper">
-          <img nz-image 
-            [appLazyImg]="event.docPath"
-            [nzSrc]="event.docPath" 
-            [alt]="event.name"
-            [title]="event.name"
-            priority
-          />
-        </div>
+    <!-- LEFT ARROW -->
+    <button
+      nz-button
+      nzShape="circle"
+      nzType="default"
+      class="nav-arrow left"
+      (click)="scrollPlaces('left')">
+      <span nz-icon nzType="left"></span>
+    </button>
 
-        <div class="card-content">
-          <h3>{{ event.name }}</h3>
-          <p>{{ event.description | truncate : 160 }}</p>
+    <!-- CARDS -->
+    <div class="places-cards" #placesContainer>
+      @for (event of data$ | async; track $index) {
+        <nz-card nzHoverable class="place-card">
 
-          <button
-            nz-button
-            nzType="default"
-            nzShape="round"
-            class="explore-btn"
-            (click)="onShowMore(event.placeId)">
-            Explore →
-          </button>
-        </div>
+          <div class="image-wrapper">
+            <img
+              nz-image
+              [appLazyImg]="event.docPath"
+              [nzSrc]="event.docPath"
+              [alt]="event.name"
+              [title]="event.name"
+              priority
+            />
+          </div>
 
-      </nz-card>
-    }
+          <div class="card-content">
+            <h3>{{ event.name }}</h3>
+            <p [title]="event.description">
+              {{ event.description | truncate : 55 }}
+            </p>
+
+            <div class="place-meta">
+              <a class="meta-item" [href]="'tel:' + event.mobile">
+                <span nz-icon nzType="phone"></span>
+                {{ event.mobile }}
+              </a>
+
+              <a
+                class="meta-item"
+                [href]="event.mapLink"
+                target="_blank">
+                <span nz-icon nzType="environment"></span>
+                View Map
+              </a>
+            </div>
+          </div>
+
+        </nz-card>
+      }
+    </div>
+
+    <!-- RIGHT ARROW -->
+    <button
+      nz-button
+      nzShape="circle"
+      nzType="default"
+      class="nav-arrow right"
+      (click)="scrollPlaces('right')">
+      <span nz-icon nzType="right"></span>
+    </button>
+
   </div>
 
 </section>

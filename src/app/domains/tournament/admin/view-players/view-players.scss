@@ -22,7 +22,10 @@
     display: flex;
     gap: 6px;
     margin-bottom: 4px;
+    font-weight: bold;
   }
+
+
 
   .meta {
     display: flex;
@@ -72,7 +75,7 @@
 
 
 nz-tag {
-  min-width: 69px;
+  min-width: 39px;
 }
 
 .table-operations {
@@ -85,11 +88,11 @@ nz-tag {
     background-color: white;
   }
 
-  .action-button {
-    float: right;
-    font-weight:bold;
-    width:8rem;
-  }
+  // .action-button {
+  //   float: right;
+  //   font-weight: bold;
+  //   width: 8rem;
+  // }
 }
 
 /* .table-container {
@@ -100,4 +103,9 @@ nz-tag {
     padding-top: 2rem;
   }
 
+}
+
+.player-name {
+  font-weight: 600; // bold
+  margin-right: 4px
 }

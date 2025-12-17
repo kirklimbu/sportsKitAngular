@@ -20,10 +20,10 @@ body {
 }
 
 button {
-  border: 1px solid $gold;
+  border: 1px solid $black;
   font-weight: bold;
   color: $white;
-  background-color: $gold;
+  // background-color: $gold;
 
   &:hover {
     color: $white;

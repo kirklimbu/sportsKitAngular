@@ -9,11 +9,13 @@
             {{ team.playerOne }}
             <nz-tag nzColor="blue">{{ team.playerOneGender }}</nz-tag>
         </div>
+        @if(team.playerTwo){
 
-        <div class="player" *ngIf="team.playerTwo">
+        <div class="player">
             {{ team.playerTwo }}
             <nz-tag nzColor="pink">{{ team.playerTwoGender }}</nz-tag>
         </div>
+        }
 
         <div class="meta">
             <nz-tag nzColor="gold">{{ team.seed }}</nz-tag>
@@ -29,19 +31,19 @@
     </nz-card>
     }
 </div>
- <div class="table-operations">
-        <nz-input-group [nzSuffix]="suffixIconSearch">
-            <input [(ngModel)]="searchValue" type="text" nz-input placeholder="Search player... " />
-        </nz-input-group>
-        <ng-template #suffixIconSearch>
-            <span nz-icon nzType="search"></span>
-        </ng-template>
+<div class="table-operations">
+    <nz-input-group [nzSuffix]="suffixIconSearch">
+        <input [(ngModel)]="searchValue" type="text" nz-input placeholder="Search player... " />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+        <span nz-icon nzType="search"></span>
+    </ng-template>
 
-        <!-- <button class="action-button" nz-button nzType="primary" routerLinkActive routerLink="/admin/add-member">
+    <!-- <button class="action-button" nz-button nzType="primary" routerLinkActive routerLink="/admin/add-member">
             Add
         </button> -->
 
-    </div>
+</div>
 <nz-table class="desktop-table" #nzTable [nzData]="teams" nzBordered [nzFrontPagination]="false">
     <thead>
         <tr>
@@ -62,11 +64,11 @@
             <td>{{ team.name }}</td>
 
             <td>
-                {{ team.playerOne }}
-                <nz-tag>{{ team.playerOneGender }}</nz-tag>
-                <br />
-                {{ team.playerTwo }}
-                <nz-tag>{{ team.playerTwoGender }}</nz-tag>
+                <span class="player-name">{{ team.playerOne }}</span>
+
+                <nz-tag>{{ genderMap[team.playerOneGender] || '' }}</nz-tag> <br />
+                <span class="player-name">{{ team.playerTwo }}</span>
+                <nz-tag> {{ genderMap[team.playerTwoGender] || '' }}</nz-tag>
             </td>
             <td>{{ team.address |titlecase }}</td>
 
@@ -79,8 +81,12 @@
             </td>
 
             <td nzAlign="center">
-                <!-- <button nz-button nzType="link">View</button>
-                <button nz-button nzDanger nzType="link">Delete</button> -->
+                <button nzType="primary" nzGhost title="Edit" nz-button><span nz-icon nzType="edit"
+                        (click)="onEdit(team)">
+                    </span>
+                </button>
+
+                <!-- <button nz-button nzDanger nzType="link">Delete</button> -->
             </td>
         </tr>
         }

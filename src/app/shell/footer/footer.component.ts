@@ -1,8 +1,5 @@
-import { Component, Input, inject, OnInit, signal } from '@angular/core';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Observable } from 'rxjs';
-import { HomeService } from 'src/app/domains/home/home.service';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, NgOptimizedImage } from '@angular/common';
+import { Component, inject, Input, OnInit, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -15,7 +12,7 @@ import { RouterModule } from '@angular/router';
 })
 export class FooterComponent implements OnInit {
   currentDate!: string | null;
-  appVersion = signal('1.4.1');
+  appVersion = signal('1.5.1');
 
   @Input() footerData!: any;
 

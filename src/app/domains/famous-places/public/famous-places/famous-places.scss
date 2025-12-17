@@ -1,10 +1,10 @@
 @import 'src/assets/scss/_variables.scss';
 
 :host ::ng-deep .ant-card-body {
-    padding: 0;
+  padding: 0;
 }
 
-
+/* SECTION */
 .places-section {
   background: $tone-green-light;
   padding: 2rem 1rem;
@@ -18,7 +18,6 @@
   h2 {
     font-size: 1.8rem;
     font-weight: 800;
-    margin-bottom: 0.5rem;
   }
 
   p {
@@ -35,7 +34,7 @@
   }
 }
 
-/* CARD CONTAINER – MOBILE */
+/* CARD CONTAINER – MOBILE FIRST */
 .places-cards {
   display: flex;
   gap: 1rem;
@@ -52,21 +51,21 @@
   min-width: 280px;
   border-radius: 1.2rem;
   overflow: hidden;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
 
   &:hover {
     transform: translateY(-6px);
   }
 }
 
-.image-wrapper {
-  img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
+/* IMAGE */
+.image-wrapper img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
+/* CONTENT */
 .card-content {
   padding: 1rem;
 
@@ -78,12 +77,39 @@
   p {
     font-size: 0.9rem;
     color: $text-muted;
-    margin: 0.5rem 0 1rem;
+    margin: 0.5rem 0 0.75rem;
   }
+}
 
-  .explore-btn {
+/* CONTACT + MAP */
+.place-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    color: $green;
     font-weight: 600;
+
+    span[nz-icon] {
+      font-size: 0.9rem;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
+}
+
+/* BUTTON */
+.explore-btn {
+  width: 100%;
+  font-weight: 600;
 }
 
 /* TABLET */
@@ -108,5 +134,60 @@
 
   .places-intro p {
     max-width: 60ch;
+  }
+}
+
+/* SLIDER WRAPPER */
+.places-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* ARROWS */
+.nav-arrow {
+  position: absolute;
+  z-index: 5;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  border: 0;
+
+  &.left {
+    left: -0.5rem;
+    border-radius: 14px 0 0 14px;
+  }
+
+  &.right {
+    right: -0.5rem;
+    border-radius: 0 14px 14px 0;
+  }
+
+  span[nz-icon] {
+    font-size: 1rem;
+  }
+}
+
+/* MOBILE: show subtle arrows */
+@media (max-width: 767px) {
+  .nav-arrow {
+   width: 26px;
+    height: 144px;
+    color: $gold;
+  }
+}
+
+/* DESKTOP: stronger presence */
+@media (min-width: 1024px) {
+  .nav-arrow {
+    width: 26px;
+    height: 144px;
+    color: $gold;
+
+
+    &:hover {
+      // transform: scale(1.05);
+      color: $white;
+      background: $gold;
+    }
   }
 }

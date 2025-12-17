@@ -53,13 +53,13 @@ const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
 export class FamousPlacesForm implements OnInit {
   // props
   mode = 'add';
+  placeCategoryList: IPlaceCategory[] = [];
+  form!: FormGroup;
+  isLoading$!: Observable<boolean>;
   previewImage: string | undefined = '';
   avatarUrl: string | undefined;
   loading = false;
   previewVisible = false;
-  placeCategoryList: IPlaceCategory[] = [];
-  form!: FormGroup;
-  isLoading$!: Observable<boolean>;
   fileList: any[] = [];
 
   private destroyRef = inject(DestroyRef);

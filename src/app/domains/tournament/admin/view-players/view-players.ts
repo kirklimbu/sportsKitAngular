@@ -11,16 +11,18 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from 'src/app/shared/util-common/pipes/search.pipe';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-view-players',
   imports: [
     CommonModule,
+    FormsModule,
     NzTagModule,
+    NzIconModule,
     NzTableModule,
     NzCardModule,
     NzInputModule,
-    FormsModule,
     // project
     SearchPipe,
   ],
@@ -30,6 +32,13 @@ import { SearchPipe } from 'src/app/shared/util-common/pipes/search.pipe';
 export class ViewPlayers implements OnInit {
   // props
 
+  genderMap: Record<string, string> = {
+    Male: 'M',
+    Female: 'F',
+    'Non-binary': 'NB',
+    'Prefer not to say': 'N/A',
+    Other: 'O',
+  };
   teams: any[] = [];
   filteredTeams: any[] = [];
 
@@ -64,5 +73,11 @@ export class ViewPlayers implements OnInit {
         this.teams = players;
         this.filteredTeams = [...this.teams];
       });
+  }
+
+  onEdit(team: ITeam3Dto): void {
+    this.router.navigate(['/admin/tournament/add-team'], {
+      queryParams: { tournamentId: team.tournamentId, teamId: team.teamId },
+    });
   }
 }
