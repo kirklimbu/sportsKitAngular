@@ -1,82 +1,97 @@
-<section id="jhapa-places" class="places-section">
+<section class="places-section">
 
-  <!-- Intro -->
   <div class="places-intro">
-    <h2>Beautiful Places in Jhapa</h2>
+    <!-- @if (activeCategoryName === 'hotel') { -->
+    <h2>Find Your Hotel</h2>
     <p>
-      Discover the natural beauty, culture, and hidden gems of Jhapa —
-      where nature meets tradition.
+      Search your hotel by mobile number.
     </p>
-    <a routerLink="/home/events" class="view-all">
-      Explore all places →
-    </a>
-  </div>
+    <!-- search UI -->
+    <div class="search-box">
 
-  <!-- SLIDER WRAPPER -->
-  <div class="places-slider">
-
-    <!-- LEFT ARROW -->
-    <button
-      nz-button
-      nzShape="circle"
-      nzType="default"
-      class="nav-arrow left"
-      (click)="scrollPlaces('left')">
-      <span nz-icon nzType="left"></span>
-    </button>
-
-    <!-- CARDS -->
-    <div class="places-cards" #placesContainer>
-      @for (event of data$ | async; track $index) {
-        <nz-card nzHoverable class="place-card">
-
-          <div class="image-wrapper">
-            <img
-              nz-image
-              [appLazyImg]="event.docPath"
-              [nzSrc]="event.docPath"
-              [alt]="event.name"
-              [title]="event.name"
-              priority
-            />
-          </div>
-
-          <div class="card-content">
-            <h3>{{ event.name }}</h3>
-            <p [title]="event.description">
-              {{ event.description | truncate : 55 }}
-            </p>
-
-            <div class="place-meta">
-              <a class="meta-item" [href]="'tel:' + event.mobile">
-                <span nz-icon nzType="phone"></span>
-                {{ event.mobile }}
-              </a>
-
-              <a
-                class="meta-item"
-                [href]="event.mapLink"
-                target="_blank">
-                <span nz-icon nzType="environment"></span>
-                View Map
-              </a>
-            </div>
-          </div>
-
-        </nz-card>
-      }
+      <nz-form-item>
+        <nz-form-control [nzValidateStatus]="searchControl" nzErrorTip="Enter a valid 10-digit mobile number">
+          <nz-input-wrapper nzAllowClear>
+            <nz-icon nzInputPrefix nzType="search" />
+            <input nz-input type="tel" placeholder="eg. 9812345678" maxlength="10" [formControl]="searchControl"
+              nzSize="small" />
+          </nz-input-wrapper>
+        </nz-form-control>
+      </nz-form-item>
     </div>
 
-    <!-- RIGHT ARROW -->
-    <button
-      nz-button
-      nzShape="circle"
-      nzType="default"
-      class="nav-arrow right"
-      (click)="scrollPlaces('right')">
-      <span nz-icon nzType="right"></span>
-    </button>
+    <!-- } @else { -->
+    <!-- <h2>Explore Jhapa</h2> -->
+    <!-- <p>Hotels, nature & religious places</p> -->
+    <!-- } -->
 
   </div>
+
+  @if ((categories$ | async)?.length === 0) {
+  <div class="empty-state">
+    <nz-empty nzNotFoundImage="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+      [nzNotFoundContent]="contentTpl">
+      <ng-template #contentTpl>
+        <span>
+          No hotel found with this number. <br> Please try another mobile number.
+        </span>
+      </ng-template>
+
+    </nz-empty>
+  </div>
+  }
+  <nz-tabs nzType="card" nzSize="small" [nzAnimated]="true" (nzSelectedIndexChange)="onTabChange($event)">
+
+    @for (cat of categories$ | async; track cat.categoryId) {
+    <nz-tab [nzTitle]="cat.categoryName | titlecase">
+
+      <!-- TAB CONTENT -->
+      <div class="places-slider">
+
+        <!-- LEFT ARROW (mobile only via CSS) -->
+        <button nz-button nzShape="circle" class="nav-arrow left" (click)="scrollPlaces('left', cat.categoryId)">
+          <span nz-icon nzType="left"></span>
+        </button>
+
+        <!-- CARDS -->
+        <div class="places-cards" #placesContainer [attr.data-category]="cat.categoryId">
+
+          @for (place of cat.places; track place.placeId) {
+          <nz-card class="place-card">
+
+            <div class="image-wrapper">
+              <img nz-image [nzSrc]="place.docPath" [appLazyImg]="place.docPath" [alt]="place.name" loading="lazy" />
+            </div>
+
+            <div class="card-content">
+              <h3>{{ place.name }}</h3>
+              <p [title]="place.description">{{ place.description | truncate: 55 }}</p>
+
+              <div class="place-meta">
+                <a [href]="'tel:' + place.mobile">
+                  <span nz-icon nzType="phone"></span>
+                  {{ place.mobile }}
+                </a>
+
+                <a [href]="place.mapLink" target="_blank">
+                  <span nz-icon nzType="environment"></span>
+                  Map
+                </a>
+              </div>
+            </div>
+
+          </nz-card>
+          }
+        </div>
+
+        <!-- RIGHT ARROW -->
+        <button nz-button nzShape="circle" class="nav-arrow right" (click)="scrollPlaces('right', cat.categoryId)">
+          <span nz-icon nzType="right"></span>
+        </button>
+
+      </div>
+    </nz-tab>
+    }
+  </nz-tabs>
 
 </section>

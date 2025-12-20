@@ -31,18 +31,20 @@
 
   }
 
-  <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data"
-    [nzScroll]="{ x: '600px', y: '635px' }">
+  <nz-table [nzFrontPagination]="false" #nzTable [nzBordered]="true" [nzData]="data">
     <thead>
       <tr>
-        <th nzWidth="10%">Sn.</th>
-        <th>Image</th>
+        <th nzWidth="5%"></th>
+        <th nzWidth="15%">Image</th>
         <th>
           Name
         </th>
+        <th>Category</th>
+        <th>Availabe Rooms</th>
+        <th>Max Player</th>
         <th>Address</th>
         <th>Contact No.</th>
-        <th>Status</th>
+        <th nzWidth="10%">Status</th>
 
         <th>Action</th>
 
@@ -58,6 +60,9 @@
           <!-- <nz-avatar nzIcon="user" [nzSrc]="data.image"></nz-avatar> -->
         </td>
         <td>{{ data.name|titlecase }}</td>
+        <td>{{ data.categoryName }}</td>
+        <td>{{ data.maxRoom }}</td>
+        <td>{{ data.maxPerson }}</td>
         <td>
           <p>
             {{ data.address }}

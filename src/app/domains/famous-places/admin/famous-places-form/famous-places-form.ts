@@ -97,6 +97,8 @@ export class FamousPlacesForm implements OnInit {
       longitude: [],
       hasActive: [],
       docPath: [],
+      maxPerson: [],
+      maxRoom: [],
     });
   }
 

@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   IPlace1Dto,
-  IPlaceFormDto,
-  IPlaceFormDtoWrapper,
+  IPlaceFormDtoWrapper
 } from '../model/famous-places';
 
 @Injectable({
@@ -16,11 +15,16 @@ export class FamousPlacesService {
 
   private http = inject(HttpClient);
 
-  getPlaces(): Observable<IPlace1Dto[]> {
-    return this.http.get<IPlace1Dto[]>(`${this.apiUrl}place/list`, {});
+  getPlaces(mobilenumber: string ): Observable<IPlace1Dto[]> {
+    return this.http.get<IPlace1Dto[]>(`${this.apiUrl}place/list`, {
+      params: { mobile: mobilenumber },
+    });
   }
   getAdminPlaces(): Observable<IPlace1Dto[]> {
-    return this.http.get<IPlace1Dto[]>(`${this.apiUrl}auth/admin/place/list`, {});
+    return this.http.get<IPlace1Dto[]>(
+      `${this.apiUrl}auth/admin/place/list`,
+      {}
+    );
   }
 
   getFormValues(id: number): Observable<IPlaceFormDtoWrapper> {

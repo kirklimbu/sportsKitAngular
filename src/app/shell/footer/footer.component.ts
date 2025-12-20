@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 })
 export class FooterComponent implements OnInit {
   currentDate!: string | null;
-  appVersion = signal('1.5.1');
+  appVersion = signal('1.6.1');
 
   @Input() footerData!: any;
 

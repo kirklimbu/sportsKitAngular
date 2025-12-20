@@ -76,6 +76,25 @@
                             </nz-form-item>
                         </div>
                         <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+
+                            <nz-form-item>
+
+                                <nz-form-label>Available Room(Hotel)</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add available room!">
+                                    <input nz-input formControlName="maxRoom" placeholder="Available Room" />
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div><div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+
+                            <nz-form-item>
+
+                                <nz-form-label>Max Player(Hotel)</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add max no of guest!">
+                                    <input nz-input formControlName="maxPerson" placeholder="Max no of Guest" />
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
                             <nz-form-item>
                                 <nz-form-label nzRequired>Address</nz-form-label>
                                 <nz-form-control nzErrorTip="Please add  address!">
@@ -151,11 +170,11 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="18">
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
 
                             <nz-form-item>
 
-                                <nz-form-label>Google maps link</nz-form-label>
+                                <nz-form-label>Description</nz-form-label>
                                 <textarea nz-input formControlName="description" placeholder="Short description"
                                     [nzAutosize]="{ minRows: 3, maxRows: 5 }"></textarea>
 

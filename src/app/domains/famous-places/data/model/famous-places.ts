@@ -11,6 +11,8 @@ export interface IPlaceFormDto {
   email: string;
   address: string;
   mapLink: string;
+  maxPerson: string;
+  maxRoom: string;
   latitude: string;
   longitude: string;
   hasActive: boolean;
@@ -37,4 +39,11 @@ export interface IPlace1Dto {
   latitude: string;
   longitude: string;
   hasActive: boolean;
+  maxRoom: boolean;
+  maxPerson: boolean;
+}
+export interface IPlaceCategoryVM {
+  categoryName: string;
+  categoryId: number;
+  places: IPlace1Dto[];
 }

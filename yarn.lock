@@ -10138,10 +10138,10 @@ nepali-datetime@^1.4.0:
   resolved "https://registry.yarnpkg.com/nepali-datetime/-/nepali-datetime-1.5.0.tgz#6d31d789d20f13856dafa185b6b918b51bcbefad"
   integrity sha512-yn7+U4FrkmmQfJfyUYOnKg/7Xg1lIB3H2d/0y3atqWDeuTYzty9poyABIGAt0kQgjfe69wB+6zduo1z4HZsacQ==
 
-ng-zorro-antd@20.0.0:
-  version "20.0.0"
-  resolved "https://registry.yarnpkg.com/ng-zorro-antd/-/ng-zorro-antd-20.0.0.tgz#d0093f1499ca5dedb9f3893575afe723cf2f8f49"
-  integrity sha512-12cQq+JaoBdMtKO+JsDHXdfzFIiF0ocDJ4KSsypzupsUTVJa8/jpfPKnW8b8HZ5aY6scPtnPWKJ/uIrJ/Bwn6A==
+ng-zorro-antd@20.4.4:
+  version "20.4.4"
+  resolved "https://registry.yarnpkg.com/ng-zorro-antd/-/ng-zorro-antd-20.4.4.tgz#acf2c8f6de8f04087bfd9c95df495f7c5bb7d0ff"
+  integrity sha512-/O9yMBU0gdD9hw4ZzSOgq2MwlE4bCArY7jkeW4wFfwtDRvVCuzYOwdiO1bEUukaLCBx7NyU4bpNdd8SH9BxgxQ==
   dependencies:
     "@angular/cdk" "^20.0.0"
     "@ant-design/icons-angular" "^20.0.0"

@@ -6,39 +6,38 @@
 
 /* SECTION */
 .places-section {
-  background: $tone-green-light;
+  background: lighten($color: $tone-green-light, $amount: 30%);
   padding: 2rem 1rem;
 }
 
 /* INTRO */
 .places-intro {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 
   h2 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 800;
   }
 
   p {
-    max-width: 40ch;
+    max-width: 42ch;
     margin: auto;
     color: $text-muted;
   }
-
-  .view-all {
-    display: inline-block;
-    margin-top: 1rem;
-    color: $gold;
-    font-weight: 600;
-  }
 }
 
-/* CARD CONTAINER – MOBILE FIRST */
+/* SLIDER */
+.places-slider {
+  position: relative;
+}
+
+/* CARDS – MOBILE FIRST */
 .places-cards {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   overflow-x: auto;
+  scroll-snap-type: x mandatory;
   padding-bottom: 1rem;
 
   &::-webkit-scrollbar {
@@ -48,68 +47,66 @@
 
 /* CARD */
 .place-card {
-  min-width: 280px;
-  border-radius: 1.2rem;
+  min-width: 240px;
+  border-radius: 1rem;
   overflow: hidden;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-6px);
-  }
+  scroll-snap-align: start;
 }
 
 /* IMAGE */
 .image-wrapper img {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
 }
 
 /* CONTENT */
 .card-content {
-  padding: 1rem;
+  padding: 0.75rem;
 
   h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
   }
 
   p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: $text-muted;
-    margin: 0.5rem 0 0.75rem;
+    margin: 0.5rem 0;
   }
 }
 
-/* CONTACT + MAP */
+/* META */
 .place-meta {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0.75rem;
-  gap: 0.5rem;
+  font-size: 0.8rem;
 
-  .meta-item {
+  a {
     display: flex;
+    gap: 0.25rem;
     align-items: center;
-    gap: 0.35rem;
-    font-size: 0.85rem;
     color: $green;
     font-weight: 600;
-
-    span[nz-icon] {
-      font-size: 0.9rem;
-    }
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 }
 
-/* BUTTON */
-.explore-btn {
-  width: 100%;
-  font-weight: 600;
+/* ARROWS – MOBILE ONLY */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+
+  &.left {
+    left: -0.25rem;
+  }
+
+  &.right {
+    right: -0.25rem;
+  }
 }
 
 /* TABLET */
@@ -118,6 +115,10 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     overflow: visible;
+  }
+
+  .nav-arrow {
+    display: none;
   }
 }
 
@@ -132,62 +133,50 @@
     gap: 2rem;
   }
 
-  .places-intro p {
-    max-width: 60ch;
+  /* Hover only on desktop */
+  .place-card:hover {
+    transform: translateY(-6px);
+    transition: transform 0.25s ease;
   }
 }
 
-/* SLIDER WRAPPER */
-.places-slider {
+:host ::ng-deep .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: $gold ;
+  font-weight: bold;
+  height: 44px;
+  padding: 0;
+}
+
+:host ::ng-deep button {
+  &:hover {
+    color: $gold ;
+  }
+}
+
+.search-box {
+  margin-top: 1rem;
+  max-width: 360px;
+  margin-inline: auto;
   position: relative;
-  display: flex;
-  align-items: center;
+
+  input {
+    width: 100%;
+    padding: 0.6rem 0.75rem 0.6rem 2.2rem;
+    font-size: 0.9rem;
+    border: none;
+  }
+
+
 }
 
-/* ARROWS */
-.nav-arrow {
-  position: absolute;
-  z-index: 5;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  border: 0;
-
-  &.left {
-    left: -0.5rem;
-    border-radius: 14px 0 0 14px;
-  }
-
-  &.right {
-    right: -0.5rem;
-    border-radius: 0 14px 14px 0;
-  }
-
-  span[nz-icon] {
-    font-size: 1rem;
-  }
+.ant-input-affix-wrapper {
+  border-radius: 24px;
 }
 
-/* MOBILE: show subtle arrows */
-@media (max-width: 767px) {
-  .nav-arrow {
-   width: 26px;
-    height: 144px;
-    color: $gold;
-  }
-}
+:host ::ng-deep .ant-input-prefix .anticon-search {
+  padding-left: 1rem;
 
-/* DESKTOP: stronger presence */
-@media (min-width: 1024px) {
-  .nav-arrow {
-    width: 26px;
-    height: 144px;
-    color: $gold;
-
-
-    &:hover {
-      // transform: scale(1.05);
-      color: $white;
-      background: $gold;
-    }
+  &:hover {
+    scale: 1.25;
   }
 }
