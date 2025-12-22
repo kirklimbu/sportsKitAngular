@@ -1,0 +1,56 @@
+<section class="verify-section">
+
+  <div class="verify-intro">
+    <h2>Verify Registration</h2>
+    <p>Search your registration by mobile number.</p>
+
+    <div class="search-box">
+      <nz-form-item>
+        <nz-form-control [nzValidateStatus]="searchControl" nzErrorTip="Enter a valid 10-digit mobile number">
+          <nz-input-wrapper nzAllowClear>
+            <nz-icon nzInputPrefix nzType="search"></nz-icon>
+            <input nz-input type="tel" placeholder="eg. 9812345678" maxlength="10" [formControl]="searchControl" nzSize="small" />
+          </nz-input-wrapper>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+
+  <div class="verify-container" *ngIf="data$ | async as tournamentList; else noData">
+    <nz-card *ngFor="let item of tournamentList" class="tournament-card" nzBordered>
+      <nz-card-meta
+        [nzTitle]="item.tournamentName"
+        nzDescription="Tournament ID: {{ item.tournamentId }}">
+      </nz-card-meta>
+
+      <div class="players-section">
+        <!-- Player 1 -->
+        <div class="player">
+          <nz-avatar [nzText]="item.playerOneName.charAt(0)" [nzSize]="64" nzShape="circle" nzColor="#87d068"></nz-avatar>
+          <div class="player-info">
+            <h4>{{ item.playerOneName }}</h4>
+            <p *ngIf="item.playerOneGender">Gender: {{ item.playerOneGender }}</p>
+            <p *ngIf="item.teamName">Team: {{ item.teamName }}</p>
+          </div>
+        </div>
+
+        <nz-divider nzType="vertical" nzDashed></nz-divider>
+
+        <!-- Player 2 -->
+        <div class="player">
+          <nz-avatar [nzText]="item.playerTwoName.charAt(0)" [nzSize]="64" nzShape="circle" nzColor="#108ee9"></nz-avatar>
+          <div class="player-info">
+            <h4>{{ item.playerTwoName }}</h4>
+            <p *ngIf="item.playerTwoGender">Gender: {{ item.playerTwoGender }}</p>
+            <p *ngIf="item.teamName">Team: {{ item.teamName }}</p>
+          </div>
+        </div>
+      </div>
+    </nz-card>
+  </div>
+
+  <ng-template #noData>
+    <nz-empty nzNotFoundContent="No registration found"></nz-empty>
+  </ng-template>
+
+</section>

@@ -8,6 +8,9 @@ import { NzImageModule } from 'ng-zorro-antd/image';
 import { ContactUsFormComponent } from './contact-us-form/contact-us-form.component';
 import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
 import { IOrganization } from '../admin/organization/data/models/organization/organization.model';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 @Component({
   selector: 'app-our-location',
@@ -20,6 +23,9 @@ import { IOrganization } from '../admin/organization/data/models/organization/or
     NzButtonModule,
     NgOptimizedImage,
     NzImageModule,
+    NzDividerModule,
+    NzGridModule,
+    NzCardModule,
     // project
     MapComponent,
     ContactUsFormComponent,

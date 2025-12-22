@@ -3,6 +3,7 @@
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
+
 @media (min-width: 320px) {
   .map {
     // width: 350px;
@@ -10,9 +11,10 @@
     // margin-left: 2rem;
   }
 }
+
 @media (min-width: 992px) {
   .map {
-    max-width: 500px;
+    // max-width: 80rem;
     height: 396px;
     margin-left: 0;
   }

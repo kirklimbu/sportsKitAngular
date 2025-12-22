@@ -3,6 +3,7 @@ import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
   withFetch,
+  withInterceptors,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import en from '@angular/common/locales/en';
@@ -28,10 +29,12 @@ import {
 import { withNgxsStoragePlugin } from '@ngxs/storage-plugin';
 import { NgxsModule, provideStore } from '@ngxs/store';
 import { NzConfig, provideNzConfig } from 'ng-zorro-antd/core/config';
-import { en_US, ne_NP, provideNzI18n } from 'ng-zorro-antd/i18n';
+import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { appRoutes } from './app.routes';
 import { AuthState } from './domains/auth/login/state/login.state';
-import { ErrorInterceptor } from './shared/util-auth/guards/interceptors/error.interceptor';
+import {
+  errorInterceptor
+} from './shared/util-auth/guards/interceptors/error.interceptor';
 import { HttpTokenInterceptorService } from './shared/util-auth/guards/interceptors/http-token-interceptor.service';
 import { LoaderInterceptor } from './shared/util-auth/guards/interceptors/loader.interceptor';
 import { UrlState } from './shared/util-logger/url.service';
@@ -80,7 +83,12 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     importProvidersFrom([BrowserAnimationsModule]),
     provideAnimations(),
-    provideHttpClient(withInterceptorsFromDi(), withFetch()),
+    provideHttpClient(
+      withInterceptors([errorInterceptor]),
+
+      withInterceptorsFromDi(),
+      withFetch()
+    ),
     provideNzConfig(ngZorroConfig),
     provideStore(
       [AuthState],
@@ -110,11 +118,11 @@ export const appConfig: ApplicationConfig = {
       useClass: HttpTokenInterceptorService,
       multi: true,
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: ErrorInterceptor,
+    //   multi: true,
+    // },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptor,

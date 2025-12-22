@@ -1,0 +1,97 @@
+@import 'src/assets/scss/_variables.scss';
+
+
+.quick-action-card {
+  max-width: 420px;
+  margin: 1rem auto;
+  padding: 0.75rem;
+//   background: #ffffff;
+  border-radius: 16px;
+//   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* ===============================
+   ACTION ROW
+================================ */
+.quick-action {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+
+  span[nz-icon] {
+    font-size: 22px;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+
+    strong {
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    small {
+      font-size: 0.75rem;
+      opacity: 0.75;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+/* ===============================
+   VERIFY STYLE
+================================ */
+.verify {
+  background: linear-gradient(135deg, #fff7d6, #ffe58f);
+  color: #614700;
+
+  &:hover {
+    box-shadow: 0 6px 16px rgba(250, 173, 20, 0.35);
+  }
+}
+
+/* ===============================
+   HOTEL STYLE
+================================ */
+.hotel {
+  background: linear-gradient(135deg, #e6f7ff, #bae7ff);
+  color: #003a8c;
+
+  &:hover {
+    box-shadow: 0 6px 16px rgba(24, 144, 255, 0.35);
+  }
+}
+
+/* ===============================
+   DESKTOP REFINEMENT
+================================ */
+@media (min-width: 768px) {
+  .quick-action-card {
+    padding: 1rem;
+  }
+
+  .quick-action {
+    padding: 1rem 1.25rem;
+
+    span[nz-icon] {
+      font-size: 24px;
+    }
+
+    .text strong {
+      font-size: 1rem;
+    }
+  }
+}

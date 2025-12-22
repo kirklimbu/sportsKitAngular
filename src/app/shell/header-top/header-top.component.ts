@@ -1,22 +1,20 @@
-import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpBackend, HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
+import { Observable } from 'rxjs';
 // third-party
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 // project
-import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
-import { RouterModule } from '@angular/router';
-import { UserDetailsService } from 'src/app/shared/util-common/userDetails.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterModule } from '@angular/router';
+import { Store } from '@ngxs/store';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { Logout } from 'src/app/domains/auth/login/state/login.model';
 import { AuthService } from 'src/app/shared/util-auth/services/auth-http/auth.service';
+import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
+import { UserDetailsService } from 'src/app/shared/util-common/userDetails.service';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
-import { Store } from '@ngxs/store';
-import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
-
 @Component({
   selector: 'app-header-top',
   standalone: true,
@@ -27,6 +25,8 @@ import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
     NzIconModule,
     NzMenuModule,
     NzAvatarModule,
+    NzDropDownModule,
+    
   ],
   templateUrl: './header-top.component.html',
   styleUrls: ['./header-top.component.scss'],
@@ -47,7 +47,6 @@ export class HeaderTopComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   store = inject(Store);
   private userDetailsService = inject(UserDetailsService);
-
 
   ngOnInit(): void {
     this.getUserDetails();

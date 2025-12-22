@@ -1,6 +1,6 @@
 <div class="content-container container">
-  <div class="table-container container light animate__animated animate__fadeInUp animate__slow">
-    <div class="message-section animate__animated animate__fadeInUp">
+  <div class="table-container container light animate__animated animate__slideInUp">
+    <div class="message-section ">
       <div class="sub-title">
         <span> Training </span>
       </div>
@@ -34,7 +34,8 @@
                 </p>
 
                 <p nz-tooltip nzTooltipTitle="Date of training" [nzTooltipPlacement]="['topLeft', 'leftTop']">
-                  <i class="fas fa-calendar-alt mr-2"></i>{{ item.startDate| nepaliDateFormatter }} - {{ item.endDate| nepaliDateFormatter }}
+                  <i class="fas fa-calendar-alt mr-2"></i>{{ item.startDate| nepaliDateFormatter }} - {{ item.endDate|
+                  nepaliDateFormatter }}
                 </p>
                 <p nz-tooltip nzTooltipTitle="Time of training" [nzTooltipPlacement]="['topLeft', 'leftTop']">
                   <i class="fas fa-clock"></i>{{ item.fromTime }} - {{
@@ -58,12 +59,12 @@
                 </button> -->
 
                 <!-- <nz-button-group> -->
-                  <button nz-button nzType="primary" (click)="onJoin(item.trainingMasterId)">
-                    <!-- <span nz-icon nzType="left"></span> -->
-                    Join now </button>
-                  <button nz-button nzType="primary" (click)="onViewMore(item.trainingMasterId)">
-                    View details <span nz-icon nzType="right"></span>
-                  </button>
+                <button nz-button nzType="primary" (click)="onJoin(item.trainingMasterId)">
+                  <!-- <span nz-icon nzType="left"></span> -->
+                  Join now </button>
+                <button nz-button nzType="primary" (click)="onViewMore(item.trainingMasterId)">
+                  View details <span nz-icon nzType="right"></span>
+                </button>
                 <!-- </nz-button-group> -->
                 }
               </nz-list-item-meta-description>

@@ -1,127 +1,138 @@
 @import 'src/assets/scss/_variables.scss';
 
-::ng-deep .ant-menu-submenu-title .anticon {
-  font-size: 16px;
-}
-
-.top-bar {
-  overflow-x: clip;
-  margin-top: 0;
-  background: $tone-green-light;
+.top-header {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: $tone-green-light;
+  padding: 6px 12px;
+  gap: 10px;
 
-  marquee {
-    color: $green;
-    // width: 500px;
-  }
+  /* Announcement */
+  .announcement {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    overflow: hidden;
 
-  a {
-    color: $blue;
+    nz-icon {
+      color: $green;
+      font-size: 14px;
+    }
 
-    &:hover {
-      color: $secondary-color;
+    marquee {
+      color: $green;
+      font-size: 13px;
+      white-space: nowrap;
     }
   }
 
-  .info {
-    place-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 400;
-    // margin-left: 3rem;
-  }
-}
+  /* Actions */
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
 
-@media only screen and (min-width: 320px) {
-  .top-bar {
-    .info {
-      marquee {
-        width: 200px;
-        margin-left: 2rem;
+    .social-icon {
+      font-size: 18px;
+      color: $blue;
+
+      &:hover {
+        color: $secondary-color;
       }
-
-      flex: 2;
-      height: 50px;
-      padding-top: 1rem;
     }
 
-    .social-media {
-      // flex: 1;
+    .user-trigger {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: $white;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
 
-      a {
-        padding: 4px 8px;
-        font-size: large;
-        border-left: 1px solid white;
-        line-height: 50%;
+      nz-icon {
+        font-size: 16px;
+        color: $green;
       }
 
       &:hover {
-        color: $gray-lighter;
-      }
-
-      &:last-child {
-        padding-top: 0rem;
+        background: rgba(255, 255, 255, 0.7);
       }
     }
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .top-bar {
-    .info {
-      display: flex;
-      flex: 2;
-      height: 50px;
-      width: 900px;
-      padding: 0 1rem;
+/* Tablet */
+@media (min-width: 768px) {
+  .top-header {
+    padding: 8px 24px;
 
-      marquee {
-        margin-left: 11rem;
-        margin-right: 6rem;
-        width: 500px;
-      }
-
-      a {
-        color: white;
-        padding: 4px 8px;
-        font-size: medium;
-        line-height: 50%;
-
-        &:last-child {
-          padding-right: 4rem;
-        }
-      }
-    }
-
-    .social-media {
-      flex: 1;
-      padding-bottom: 0;
-
-      a {
-        // color: $white;
-        padding: 4px 8px;
-        font-size: large;
-        border-left: 1px solid white;
-        line-height: 50%;
-      }
-
-      &:last-child {
-        padding-right: 0;
-        padding-top: 0rem;
-      }
+    .announcement marquee {
+      font-size: 14px;
     }
   }
 }
 
-@media only screen and (min-width: 991px) {
-  .top-bar {
-    marquee {
-      margin-left: 11rem;
-      margin-right: 6rem;
-      width: 500px;
+/* Desktop */
+@media (min-width: 1024px) {
+  .top-header {
+    .announcement marquee {
+      max-width: 600px;
     }
   }
+}
+
+/* Dropdown polish */
+::ng-deep .ant-dropdown-menu {
+  border-radius: 2px;
+  padding: 6px 0;
+}
+
+::ng-deep .ant-dropdown-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.verify-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(34, 197, 94, 0.35);
+  transition: all 0.25s ease;
+
+  nz-icon {
+    font-size: 14px;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(34, 197, 94, 0.5);
+    color: #ffffff;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.verify-cta {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
+  70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
 }

@@ -175,6 +175,8 @@
 
 :host ::ng-deep .ant-input-prefix .anticon-search {
   padding-left: 1rem;
+  color: $green;
+
 
   &:hover {
     scale: 1.25;

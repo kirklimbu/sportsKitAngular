@@ -1,4 +1,11 @@
-import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  HostListener,
+  Input,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 
@@ -45,21 +52,38 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 })
 export class HeaderComponent {
   searchVisible = false;
-  quickViewVisible = false;
+  drawerVisible = false;
   isFolded!: boolean;
   isExpand!: boolean;
   size = '12px';
+  isMobile = false;
 
   @Input() data!: any;
 
   // private themeService = inject(ThemeConstantService)
+  ngOnInit() {
+    this.checkScreen();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreen();
+  }
+
+  private checkScreen() {
+    this.isMobile = window.innerWidth < 768; // mobile breakpoint
+  }
 
   searchToggle(): void {
     this.searchVisible = !this.searchVisible;
   }
 
-  quickViewToggle(): void {
-    this.quickViewVisible = !this.quickViewVisible;
+  openDrawer() {
+    this.drawerVisible = true;
+  }
+
+  closeDrawer() {
+    this.drawerVisible = false;
   }
 
   notificationList = [

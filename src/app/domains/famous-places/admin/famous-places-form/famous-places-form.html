@@ -1,7 +1,7 @@
 <div nz-row nzJustify="start">
     <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="24" [nzLg]="24" [nzXl]="24">
         <div class="form-container">
-            <nz-card nzTitle="Add Team">
+            <nz-card [nzTitle]=" mode === 'add' ? 'ADD' : 'UPDATE'  ">
                 <form nz-form [nzLayout]="'vertical'" [formGroup]="form" (ngSubmit)="onSave()">
                     <!-- START: Responsive Two-Column Layout -->
                     <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24 }">
@@ -84,7 +84,18 @@
                                     <input nz-input formControlName="maxRoom" placeholder="Available Room" />
                                 </nz-form-control>
                             </nz-form-item>
-                        </div><div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+                        </div>
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
+
+                            <nz-form-item>
+
+                                <nz-form-label> Room Nos. (Hotel)</nz-form-label>
+                                <nz-form-control nzErrorTip="Please add available room nos!">
+                                    <input nz-input formControlName="roomNos" placeholder="eg: 101, 102, 103" />
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8">
 
                             <nz-form-item>
 

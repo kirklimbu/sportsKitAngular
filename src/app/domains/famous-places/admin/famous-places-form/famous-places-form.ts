@@ -99,6 +99,7 @@ export class FamousPlacesForm implements OnInit {
       docPath: [],
       maxPerson: [],
       maxRoom: [],
+      roomNos: [],
     });
   }
 

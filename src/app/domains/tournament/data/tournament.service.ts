@@ -79,4 +79,13 @@ export class TournamentService {
       }
     );
   }
+
+  verifyRegistration(mobilenumber: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.apiUrl}tournament/player/registration/check`,
+      {
+        params: { mobile: mobilenumber },
+      }
+    );
+  }
 }

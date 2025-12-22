@@ -60,7 +60,7 @@
                     </nz-form-item>
                     <nz-form-item>
                         <nz-form-control>
-                            <nz-input-group nzPrefixIcon="calendar">
+                            <nz-input-group nzPrefixIcon="calendar" title="Date of Birth">
                                 <input nz-input type="text" placeholder="D.O.B(2050/01/01)"
                                     formControlName="playerOneDobBs" appBsDateInput />
                             </nz-input-group>
@@ -70,11 +70,18 @@
                     <nz-form-item>
                         <nz-form-control>
                             <nz-select formControlName="playerOnePlaceId" nzPlaceHolder="Hotel">
-                                <!-- <nz-option nzLabel="None" nzValue="" /> -->
+                                <nz-option nzLabel="None" nzValue="0" />
                                 @for ( hotel of hotelList; track hotel.placeId) {
                                 <nz-option [nzLabel]="hotel.name" [nzValue]="hotel.placeId" />
                                 }
                             </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-input-group nzPrefixIcon="windows" title="Room number">
+                                <input nz-input type="text" placeholder="103" formControlName="playerOneRoomNo" />
+                            </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
                 </div>
@@ -111,7 +118,7 @@
                     </nz-form-item>
                     <nz-form-item>
                         <nz-form-control>
-                            <nz-input-group nzPrefixIcon="calendar">
+                            <nz-input-group nzPrefixIcon="calendar" title="Date of Birth">
                                 <input nz-input type="text" placeholder="D.O.B(2050/01/01) "
                                     formControlName="playerTwoDobBs" appBsDateInput />
                             </nz-input-group>
@@ -121,10 +128,18 @@
                         <nz-form-control>
                             <nz-select formControlName="playerTwoPlaceId" nzPlaceHolder="Hotel">
                                 <!-- <nz-option nzLabel="None" nzValue="" /> -->
+                                <nz-option nzLabel="None" nzValue="0" />
                                 @for ( hotel of hotelList; track hotel.placeId) {
                                 <nz-option [nzLabel]="hotel.name" [nzValue]="hotel.placeId" />
                                 }
                             </nz-select>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-input-group nzPrefixIcon="windows" title="Room number">
+                                <input nz-input type="text" placeholder="203" formControlName="playerTwoRoomNo" />
+                            </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
                 </div>
@@ -147,8 +162,8 @@
                 </nz-form-item>
                 @if(form.get('hasPaid')?.value) {
 
-                <div nz-row >
-                    <div nz-col >
+                <div nz-row>
+                    <div nz-col>
                         <nz-form-item class="payment-row">
                             <nz-form-label nzRequired>Payment Receipt</nz-form-label>
                             <nz-form-control>

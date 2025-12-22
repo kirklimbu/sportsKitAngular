@@ -140,6 +140,8 @@ export class AddTeamComponent implements OnInit {
       playerTwoGenderId: [],
       playerOneMobile: [],
       playerTwoMobile: [],
+      playerOneRoomNo: [],
+      playerTwoRoomNo: [],
       playerOnePlaceId: [],
       playerTwoPlaceId: [],
       address: [],

@@ -77,11 +77,11 @@ small {
     .image-section {
       display: flex;
       flex-direction: row;
-      width: auto;
+      // width: auto;
       gap: 1rem;
 
       img {
-        width: 300px;
+        width: 900px;
         height: 300px;
       }
     }
@@ -105,7 +105,7 @@ small {
       flex-wrap: nowrap; // 🔥 forces all 3 cards to stay in one row
 
       nz-card {
-        width: 300px; // 🔥 ensures equal width
+        width: 900px; // 🔥 ensures equal width
       }
 
       img {
