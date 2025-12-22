@@ -1,52 +1,57 @@
-<section id="events" class="content-container ">
-  <div class="message-section animate__animated animate__fadeIn animate__slower">
-    <div class=" sub-title">
-      <span>Our Events </span>
-    </div>
-    <div class="title text-bolder">
-      <span> Events </span>
-    </div>
-    <div class="description text-muted">
-      <p>
+<section id="events" class="events-section">
+  <div class="events-container">
+
+    <!-- LEFT: TEXT CONTENT -->
+    <div class="message-section animate__animated animate__slideInDown animate__slow">
+
+      <div class="sub-title">
+        <span> Events</span>
+      </div>
+      <div class="title text-bolder">
+        <h3> Current Event</h3>
+      </div>
+
+      <p class="description">
         Damak Namuna Badminton Academy regularly organizes diverse events and
         training sessions aimed at fostering the sport of badminton. These
         activities cater to players of all levels, from local enthusiasts to
-        state and national-level athletes, as well as veteran players. The
-        academy provides a platform for skill development, competition, and
-        community engagement.Some of the glimpses of these events are ...
+        state and national-level athletes, as well as veteran players.
       </p>
-      <a routerLink="/home/events" title="View all events" class="all-events">
-        <small>View all events...</small>
+
+      <a routerLink="/home/events" class="all-events">
+        View all events →
       </a>
     </div>
-  </div>
 
-  <div class="image-section animate__animated animate__fadeIn ">
-    @for (event of data; track $index) {
+    <!-- RIGHT: EVENTS -->
+    <div class="events-grid animate__animated animate__fadeIn">
+      @for (event of data; track $index) {
+      <nz-card nzHoverable class="event-card" [nzCover]="coverTemplate"
+        [nzActions]="[actionDate, actionTime, actionMore]">
+        <nz-card-meta [title]="event.description" [nzTitle]="event.title"
+          [nzDescription]="event.description | truncate: 160"></nz-card-meta>
+      </nz-card>
 
-    <nz-card nzHoverable style="text-justify: justify" [nzCover]="coverTemplate"
-      [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
-      <nz-card-meta [nzTitle]="event.title" [nzDescription]="event.description | truncate : 35">
-      </nz-card-meta>
-    </nz-card>
+      <ng-template #coverTemplate>
+        <img nz-image [appLazyImg]=" event.image" [nzSrc]="event.image" [alt]="event.title" [title]="event.title" />
+      </ng-template>
 
-    <ng-template #coverTemplate>
-      <img [title]="event.title" [ngSrc]="event.image" [alt]="event.title" height="240" width="240" />
-    </ng-template>
+      <ng-template #actionDate>
+        <span>{{ event.eventDate | nepaliDateFormatter }}</span>
+      </ng-template>
 
-    <ng-template #actionSetting>
-      <span nz-icon nzType="">{{ event.eventDate |nepaliDateFormatter }}</span>
-    </ng-template>
-    <ng-template #actionEdit>
-      <span nz-icon nzType="">
-        {{ event.startTime }}
-      </span>
-    </ng-template>
-    <ng-template #actionEllipsis>
-      <button title="Show more" nz-button nzType="default" nzShape="circle" (click)="showMore(event.eventId)">
-        <span nz-icon nzType="right" nzTheme="outline"></span>
-      </button>
-    </ng-template>
-    }
+      <ng-template #actionTime>
+        <span>{{ event.startTime }}</span>
+      </ng-template>
+
+      <ng-template #actionMore>
+        <button title="Show Details" class="view-more" nz-button nzType="text" nzShape="circle"
+          (click)="showMore(event.eventId)">
+          <span nz-icon nzType="right"></span>
+        </button>
+      </ng-template>
+      }
+    </div>
+
   </div>
 </section>

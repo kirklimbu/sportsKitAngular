@@ -1,13 +1,11 @@
-import { Component, DestroyRef, Input, OnInit, inject, signal } from '@angular/core';
-import { HomeService } from '../home/home.service';
-import { Observable, shareReplay } from 'rxjs';
-import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { CommonModule } from '@angular/common';
+import { Component, Input, signal } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { SanitizeHtmlPipe } from "../../shared/util-common/pipes/sanitize-html.pipe";
+import { NzImageModule } from 'ng-zorro-antd/image';
+import { LazyImgDirective } from 'src/app/shared/util-common/directives/lazyImage/lazyImage.directive';
 import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
-
-
+import { SanitizeHtmlPipe } from '../../shared/util-common/pipes/sanitize-html.pipe';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-about-us',
@@ -15,34 +13,36 @@ import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
   imports: [
     CommonModule,
     NzButtonModule,
-    NgOptimizedImage,
+    NzImageModule,
+    NzIconModule,
     SanitizeHtmlPipe,
-    TruncatePipe
-
+    TruncatePipe,
+    LazyImgDirective,
   ],
   templateUrl: './about-us.component.html',
-  styleUrl: './about-us.component.scss'
+  styleUrl: './about-us.component.scss',
 })
-export class AboutUsComponent implements OnInit {
+export class AboutUsComponent {
   show = false;
   isLoading = signal(false);
 
   @Input() data!: any;
 
-
-  ngOnInit() {
-  }
-
-
-  scrollTo(elem: string) {
-    console.log(elem);
+  // scrollTo(elem: string) {
+  //   console.log(elem);
+  //   this.show = !this.show;
+  //   document
+  //     ?.querySelector(elem)
+  //     ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // }
+  toggleContent() {
     this.show = !this.show;
-    document?.querySelector(elem)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // wait for DOM to update
+    setTimeout(() => {
+      document
+        .querySelector('#about-us')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 0);
   }
-
-
 }
-
-
-
-

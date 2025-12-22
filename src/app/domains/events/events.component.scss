@@ -1,127 +1,123 @@
 @import 'src/assets/scss/_variables.scss';
 
-.content-container {
-  text-justify: justify;
-  background-color: $tone-green-light;
+:host {
+  display: block;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ================= SECTION ================= */
+.events-section {
+  background: $tone-green-light;
+  padding: 3rem 1rem;
+}
+
+/* ================= CONTAINER ================= */
+.events-container {
+  max-width: 1200px;
+  margin: 0 auto;
+
   display: flex;
-  place-content: center;
-  // font-family: $font-primary;
+  flex-direction: column;
+  gap: 3rem;
 }
 
-.image-section {
-  box-shadow: none;
-  background: none;
-
-  img {
-    aspect-ratio: 1/1;
-  }
-}
-
+/* ================= TEXT ================= */
 .message-section {
-  margin: 0;
-  //   padding-bottom: 2rem;
+  text-align: center;
 }
 
-.ant-card-meta-title {
-  font-family: $font-primary;
+.sub-title {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+
 }
 
-small {
-  font-family: $font-primary;
+.title {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 700;
+  margin: 0.5rem 0 1rem;
+}
+
+.description {
+  // max-width: 65ch;
+  margin: 0 auto 1.5rem;
+  line-height: 1.7;
+  color: $text-muted;
+}
+
+.all-events {
+  font-weight: 600;
   color: $gold;
+  text-decoration: none;
 
   &:hover {
-    cursor: pointer;
-    transform: scale(1.3);
+    color: $primary-color;
   }
 }
 
-@media (min-width: 320px) {
-  .content-container {
-    display: flex;
-    flex-direction: column;
-    place-content: center;
+/* ================= EVENTS GRID ================= */
+.events-grid {
+  display: grid;
+  grid-template-columns: 1fr; // 🔥 single column everywhere
+  gap: 1.5rem;
+}
 
-    .image-section {
-      display: flex;
-      flex-direction: column;
-      // margin-top: 2rem;
-      gap: 1rem;
-      width: 350px;
+/* ================= CARD ================= */
+.event-card {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
 
-      img {
-        margin: 0.25rem;
-        width: 350px;
-        height: 240px;
-      }
-    }
+  img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
 
-    .message-section {
-      //   margin: 0;
-      padding-bottom: 2rem;
-    }
+  &:hover img {
+    transform: scale(1.05);
   }
 }
 
+/* ================= TABLET ================= */
 @media (min-width: 768px) {
-
-  nz-card {
-    // width: 350px;
+  .events-section {
+    padding: 4rem 2rem;
   }
 
-  .content-container {
-    display: flex;
-    flex-direction: row;
-    padding: 2rem 7rem;
+  .events-container {
+    max-width: 900px;
+  }
 
-    .image-section {
-      display: flex;
-      flex-direction: row;
-      // width: auto;
-      gap: 1rem;
-
-      img {
-        width: 900px;
-        height: 300px;
-      }
-    }
+  .event-card img {
+    height: 320px; // 🔥 highlight image
   }
 }
 
-@media (min-width: 990px) {
-  .content-container {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 7rem;
-    gap: 0;
+/* ================= DESKTOP ================= */
+@media (min-width: 1024px) {
+  .events-section {
+    padding: 5rem 2rem;
+  }
 
-    .image-section {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: flex-start;
-      width: 100%;
-      gap: 1.5rem;
-      flex-wrap: nowrap; // 🔥 forces all 3 cards to stay in one row
+  .events-container {
+    max-width: 1100px;
+  }
 
-      nz-card {
-        width: 900px; // 🔥 ensures equal width
-      }
+  .event-card img {
+    height: 380px; // 🔥 strong visual emphasis
+  }
+}
 
-      img {
-        width: 280px;
-        height: 280px;
-      }
-    }
+.view-more {
+  color: primary;
 
-    .message-section {
-      text-align: center;
-      // padding-bottom: 6rem;
-
-      .description {
-        width: 60rem;
-        margin: auto;
-      }
-    }
+  &:hover {
+    color: $gold;
+    scale: 1.5;
   }
 }

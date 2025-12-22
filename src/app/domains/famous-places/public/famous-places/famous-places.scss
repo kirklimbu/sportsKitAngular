@@ -182,3 +182,53 @@
     scale: 1.25;
   }
 }
+
+
+/* ARROWS – MOBILE ONLY */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  span {
+    font-size: 1.2rem;
+    color: $green;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  &:hover {
+    background: $green;
+
+    span {
+      color: #fff;
+      transform: scale(1.2);
+    }
+  }
+
+  &.left {
+    left: 0.25rem;
+  }
+
+  &.right {
+    right: 0.25rem;
+  }
+}
+
+/* Tablet & Desktop: Hide arrows */
+@media (min-width: 768px) {
+  .nav-arrow {
+    display: none;
+  }
+}

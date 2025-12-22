@@ -7,7 +7,9 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
-import { NepaliDateFormatterPipe } from "../../shared/util-common/pipes/nepali-date-formatter.pipe";
+import { NepaliDateFormatterPipe } from '../../shared/util-common/pipes/nepali-date-formatter.pipe';
+import { LazyImgDirective } from 'src/app/shared/util-common/directives/lazyImage/lazyImage.directive';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 @Component({
   selector: 'app-events',
@@ -20,21 +22,21 @@ import { NepaliDateFormatterPipe } from "../../shared/util-common/pipes/nepali-d
     NzIconModule,
     NzButtonModule,
     NzGridModule,
+    NzImageModule,
     // project
     TruncatePipe,
-    NepaliDateFormatterPipe
-],
+    NepaliDateFormatterPipe,
+    LazyImgDirective,
+  ],
   templateUrl: './events.component.html',
-  styleUrl: './events.component.scss'
+  styleUrl: './events.component.scss',
 })
 export class EventsComponent {
+  @Input() data!: any;
 
-  @Input() data!: any
-
-  private router = inject(Router)
-
+  private router = inject(Router);
 
   showMore(id: number) {
-    this.router.navigate(['/home/events/detail',], { queryParams: { id: id } })
+    this.router.navigate(['/home/events/detail'], { queryParams: { id: id } });
   }
 }

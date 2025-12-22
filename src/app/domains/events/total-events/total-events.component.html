@@ -1,6 +1,6 @@
 <section class="light">
   <div class="container">
-    <div class="message-section animate__animated animate__fadeInUp">
+    <div class="message-section animate__animated animate__slideInDown animate__slow">
       <div class="sub-title">
         <span> Event </span>
       </div>
@@ -20,7 +20,7 @@
     </div>
     @if(!(events$|async)){
     <ng-container>
-      <section id="about-us" class="container content-container animate__animated animate__fadeInUp">
+      <section id="about-us" class="container content-container animate__animated animate__slideInDown animate__slow">
         <nz-skeleton-element nzType="image" [nzActive]="true"></nz-skeleton-element>
         <nz-skeleton [nzActive]="true">
         </nz-skeleton>
@@ -29,7 +29,7 @@
     }@else {
     <ng-container>
       @for ((item of events$|async); track $index) {
-      <nz-ribbon class="animate__animated animate__fadeInUp" [nzPlacement]="'start'"
+      <nz-ribbon class="animate__animated animate__slideInDown animate__slow" [nzPlacement]="'start'"
         [nzColor]="item.hasActive? 'red' : 'transparent'" [nzText]="item.hasActive ? 'Active' : ''">
         <article class="postcard light green " (click)="showMore(item.eventId)">
           <a class="postcard__img_link">

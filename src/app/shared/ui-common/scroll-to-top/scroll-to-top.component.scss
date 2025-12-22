@@ -1,0 +1,21 @@
+@import 'src/assets/scss/_variables.scss';
+
+:host ::ng-deep .ant-back-top {
+  bottom: 150px;
+}
+/* 
+nz-icon {
+  margin-right: 6px;
+  font-size: 24px;
+}
+.anticon svg {
+  font-size: 16px;
+} */
+
+button {
+  color: #fff;
+  background-color: $gold;
+  &:hover {
+    background-color: $primary-color;
+  }
+}

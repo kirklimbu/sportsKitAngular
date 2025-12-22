@@ -75,8 +75,8 @@
             <td><nz-tag nzColor="gold">{{ team.seed }}</nz-tag></td>
 
             <td>
-                <nz-tag [nzColor]="team.status === 'P' ? 'green' : 'red'">
-                    {{ team.status }}
+                <nz-tag [nzColor]="team.status === 'P' ? 'red' : 'green'">
+                    {{ team.status==='P' ? 'PENDING' : 'APPROVED' }}
                 </nz-tag>
             </td>
 

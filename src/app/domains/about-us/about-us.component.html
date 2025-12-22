@@ -1,49 +1,44 @@
-@if(data){
+@if(data) {
+<section id="about-us" class="about-us">
 
-<section id="about-us" class="content-container">
-  <!-- @for(content of data; track $index){ -->
-  <div
-    class="image-section animate__animated animate__fadeInUp animate__delay-2s animate__slower"
-  >
-    <img
-      [ngSrc]="data.image"
-      [alt]="data.title"
-      alt="About us"
-      loading="lazy"
-      height="400"
-      width="400"
-    />
-  </div>
-  <div
-    class="message-section animate__animated animate__fadeInUp animate__delay-2s animate__slower"
-  >
-    <div class="sub-title">
-      <span>{{ data.subTitle }} </span>
-    </div>
-    <div class="title text-bolder">
-      <span>
-        {{ data.title }}
-      </span>
+  <div class="about-container">
+
+    <!-- IMAGE COLUMN -->
+    <div class="about-image animate__animated animate__fadeInLeft">
+      <img nz-image [appLazyImg]="data.image" [src]="data.image" [alt]="data.title" loading="lazy" priority="false" />
     </div>
 
-    <div nz-typography nzType="secondary" class="description">
-      @if (!show) {
-      <p
-        [innerText]="data?.description | truncate : 800"
-        [ngClass]="show ? 'expand' : 'collapse'"
-      ></p>
-      <!-- </div> -->
+    <!-- TEXT COLUMN -->
+    <div class="about-content animate__animated animate__fadeInRight">
 
-      }@else {
-      <p [innerText]="data?.description"></p>
+      <div class="sub-title">
+        <span>
+          {{ data.subTitle }}
+        </span>
+      </div>
+      <div class="title text-bolder">
+        <h3>{{ data.title }}</h3>
+      </div>
 
-      }
-      <button nz-button nzShape="round" (click)="scrollTo('#about-us')">
+
+      <p class="description">
+        @if (!show) {
+        {{ data.description | truncate: 600 }}
+        } @else {
+        {{ data.description }}
+        }
+      </p>
+
+      <!-- <button nz-button nzType="primary" nzShape="round" (click)="toggleContent()">
+        {{ show ? 'Show less' : 'Read more' }}
+      </button> -->
+
+      <button nz-button nzType="primary" nzShape="round"  (click)="toggleContent()">
         {{ show ? 'Show less' : 'Show more' }}
+        <nz-icon [nzType]="show ? 'up' : 'down'"></nz-icon>
       </button>
     </div>
-  </div>
 
-  <!-- } -->
+  </div>
 </section>
 }

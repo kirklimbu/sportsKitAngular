@@ -1,32 +1,24 @@
-<section>
-  <app-slider [bannerData]="bannerData" />
+<section class="home">
 
-  <app-about-us [data]="aboutUsData" />
-  <!-- @defer (on viewport;) {
+  <app-slider [bannerData]="bannerData"></app-slider>
 
-  } -->
-  <!-- <app-coaches [data]="coachData" /> -->
-  
-  <img ngSrc="/assets/images/executive_members.jpg" priority="high" height="400" width="700" alt="Executive members image" />
+  <app-about-us [data]="aboutUsData"></app-about-us>
 
-  <app-members [data]="memberData" />
-  <app-events [data]="eventData" />
-  <!-- <app-gallaries /> -->
+  <!-- EXECUTIVE MEMBERS IMAGE SECTION -->
+  <section class="executive-image-section">
+    <img
+      nz-image
+      appLazyImg="/assets/images/executive_members.jpg"
+      nzSrc="/assets/images/executive_members.jpg"
+      alt="Executive members"
+      loading="lazy"
+    />
+  </section>
 
-  <!-- @defer (on viewport(trigger)) {
-    }
-    @defer (){
+  <app-members [data]="memberData"></app-members>
 
-    }
-    @defer () {
+  <app-events [data]="eventData"></app-events>
 
-    <app-why-us />
-    }
-    @defer () {
+  <app-our-location [data]="locationData"></app-our-location>
 
-    <app-study-destinations />
-    }
-    <app-videos /> -->
-  <!-- <app-gallary /> -->
-  <app-our-location [data]="locationData" />
 </section>

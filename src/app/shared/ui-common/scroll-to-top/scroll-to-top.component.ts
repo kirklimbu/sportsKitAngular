@@ -12,7 +12,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzButtonModule
   ],
   templateUrl: './scroll-to-top.component.html',
-  styleUrl: './scroll-to-top.component.css'
+  styleUrl: './scroll-to-top.component.scss'
 })
 export class ScrollToTopComponent {
 

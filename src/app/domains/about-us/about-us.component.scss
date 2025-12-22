@@ -1,87 +1,206 @@
 @import 'src/assets/scss/_variables.scss';
 
+:host {
+  display: block;
+  overflow-x: hidden;
+}
 
-button {
-  color: $gold;
-  border: 1px solid $gold;
-  background: transparent;
+/* ================= SECTION ================= */
+.about-us {
+  padding: 3rem 1rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+/* ================= CONTAINER ================= */
+.about-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-direction: column; // Mobile first
+  gap: 2.5rem;
+  align-items: center;
+}
+
+/* ================= IMAGE ================= */
+.about-image {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  width: 100%;
+
+  img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.06);
+  }
+}
+
+/* ================= CONTENT ================= */
+.about-content {
+  text-align: center;
+  width: 100%;
+}
+
+
+.sub-title {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  // letter-spacing: 0.08em;
+
+}
+
+.title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  margin: 0.6rem 0 1.2rem;
+}
+
+.description {
+  max-width: 65ch;
+  margin: auto 0 1.8rem;
+  line-height: 1.75;
+  color: #555;
+}
+
+/* ================= BUTTON ================= */
+
+button[nz-button] {
+  background-color: $gold;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0;
+  border: none;
+  transition: all 0.3s ease;
+  width: 200px;
+}
+
+button[nz-button]:hover {
+  background-color: $primary-color;
+}
+
+
+/* ================= TABLET (2 Columns) ================= */
+@media (min-width: 768px) {
+
+  .about-container {
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-image {
+    flex: 1;
+
+    img {
+      height: 320px;
+    }
+  }
+
+  .about-content {
+    flex: 1;
+    text-align: left;
+  }
+
+}
+
+/* ================= DESKTOP (2 Columns, Highlight Image) ================= */
+@media (min-width: 1024px) {
+  .about-container {
+    gap: 4rem;
+  }
+
+  .about-image img {
+    height: 420px; // Highlighted image
+  }
+
+  .about-content {
+    padding-right: 2rem;
+  }
+}
+
+
+.about-image {
+  border-radius: 4px; // softer corners
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2); // depth
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
 
   &:hover {
-    color: $primary-color;
-    border: 1px solid $primary-color;
-    background-position: 0;
-  }
-
-  background: {
-    image: linear-gradient(45deg, $gold 50%, transparent 50%);
-    position: 100%;
-    size: 300%;
-  }
-
-  transition: background 400ms ease-in-out;
-}
-
-// /* Small devices such as large phones (640px and up) */
-@media (min-width: 320px) {
-  // .content-container {
-  //   display: flex;
-  //   flex-direction: column-reverse;
-  // }
-
-  // .image-section {
-  //   // padding: 6%;
-  //   padding: 1rem;
-  //   width: 315px;
-
-  //   img {
-  //     height: 315px;
-  //     width: 320px;
-  //   }
-  // }
-
-  //   .message-section {
-  //     margin-bottom: 3rem;
-
-  //     .sub-title {
-  //       margin-top: 2rem;
-  //     }
-
-  //     .description {
-  //       margin-top: 2rem;
-  //     }
-
-  //     button {
-  //       height: 34px;
-  //     }
-  //   }
-
-  //   // about-us
-}
-
-// /* Medium devices such as tablets (768px and up) */
-@media only screen and (min-width: 768px) {
-  .content-container {
-
-    gap: 7rem;
-
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.3);
   }
 }
 
-@media (min-width: 992px) {
-  .content-container {
 
-    gap: 7rem;
+.about-image {
+  position: relative;
 
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
+    pointer-events: none;
   }
 }
 
-// /* Large devices such as laptops (1024px and up) */
-// // @media only screen and (min-width: 64em) {
-// //   .content-container {
-// //     padding: 0 6rem;
-// //     // background: rgb(233, 185, 98);
-// //   }
-// //   .image-section {
-// //     padding: 23%;
-// //   }
-// // }
+.about-image {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden; 
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    transition: transform 0.6s ease;
+  }
+
+  &:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 35px 70px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Subtle gradient overlay for depth */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    background: linear-gradient(to top left, rgba(255, 215, 0, 0.1), rgba(0,0,0,0.05));
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Gold border only at bottom-right corner */
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 120px;      // thickness of the accent
+    height: 120px;     // only at corner
+    border-bottom: 9px solid $gold;  // bottom edge
+    border-right: 9px solid $gold;   // right edge
+    border-radius: 0 0 4px 0;        // optional rounding
+    pointer-events: none;
+    z-index: 2;
+  }
+}

@@ -29,6 +29,8 @@ import { AuthState } from '../auth/login/state/login.state';
 import { GallariesComponent } from '../gallaries/gallaries.component';
 import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
 import { IOrganization } from '../admin/organization/data/models/organization/organization.model';
+import { LazyImgDirective } from 'src/app/shared/util-common/directives/lazyImage/lazyImage.directive';
+import { NzImageModule } from 'ng-zorro-antd/image';
 
 @Component({
   selector: 'app-home',
@@ -36,18 +38,19 @@ import { IOrganization } from '../admin/organization/data/models/organization/or
   styleUrls: ['./home.component.scss'],
   standalone: true,
   imports: [
-    SliderComponent,
+    NzImageModule,
     NzCarouselModule,
     NgOptimizedImage,
+    SliderComponent,
     AboutUsComponent,
     CoachesComponent,
     MembersComponent,
     OurLocationComponent,
     GallariesComponent,
     // VideosComponent,
-
     MembersComponent,
     EventsComponent,
+    LazyImgDirective,
   ],
 })
 export class HomeComponent implements OnInit {

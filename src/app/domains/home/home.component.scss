@@ -1,58 +1,62 @@
+/* ================= GLOBAL SAFETY ================= */
+:host {
+  display: block;
+  width: 100%;
+  overflow-x: hidden;
+}
 
-img {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ================= EXECUTIVE IMAGE ================= */
+.executive-image-section {
+  width: 100%;
+  margin: 3rem 0;
+  padding: 0 1rem; // ✅ X-axis padding for mobile
+
+  display: flex;
+  justify-content: center;
+
+  img {
     width: 100%;
-    // object-fit: contain;
-    aspect-ratio: 16/9 auto;
-    object-fit: contain;
+    height: 56vw;                 // MOBILE HERO
+    max-height: 420px;
+    object-fit: cover;            // ✅ IMPACT ON MOBILE
+    border-radius: 0.75rem;
+    display: block;
+  }
 }
 
-@media (min-width: 320px) {
-    img {
-        width: 100%;
-        height: 32vw;
-        aspect-ratio: 16/9 auto;
-
-    }
-}
-
+/* ================= TABLET ================= */
 @media (min-width: 768px) {
+  .executive-image-section {
+    margin: 4rem auto;
+    padding: 0 2rem;
+    max-width: 1200px;
+
     img {
-        height: 42rem;
-        aspect-ratio: 16/9 auto;
-            // object-fit: cover;
+      height: auto;               // ✅ SHOW FULL IMAGE
+      max-height: 520px;
+      object-fit: contain;        // ✅ NO CROPPING
+      background: #f7f7f7;        // fills empty space nicely
+      padding: 1rem;
+      border-radius: 1rem;
     }
+  }
 }
 
-@media (min-width: 992px) {
+/* ================= DESKTOP ================= */
+@media (min-width: 1024px) {
+  .executive-image-section {
+    margin: 5rem auto;
+    padding: 0 3rem;
+
     img {
-        height: 42rem;
-        aspect-ratio: 16/9 auto;
-                    // object-fit: cover;
+      max-height: 600px;          // balanced visibility
+      padding: 1.5rem;
     }
+  }
 }
-
-
-
-
-
-// Define the keyframes for slideInTop
-@keyframes slideInTop {
-    0% {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-// Apply the animation to the elements
-.carousel-section,
-.about-us-section,
-.other-sections {
-    animation: slideInTop 0.5s ease-in;
-}
-
-
