@@ -19,7 +19,8 @@
 
   <div class="verify-container" *ngIf="data$ | async as tournamentList; else noData">
     <nz-card *ngFor="let item of tournamentList" class="tournament-card" nzBordered>
-      <nz-card-meta [nzTitle]="item.tournamentName" nzDescription="Tournament ID: {{ item.tournamentId }}">
+      <nz-card-meta [nzTitle]="item.tournamentName" >
+        <!-- nzDescription="Tournament ID: {{ item.tournamentId }}" -->
       </nz-card-meta>
 
       <div class="players-section">

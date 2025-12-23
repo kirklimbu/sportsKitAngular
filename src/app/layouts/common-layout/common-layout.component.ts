@@ -20,7 +20,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HomeService } from 'src/app/domains/home/home.service';
 import { en_US, ne_NP, NzI18nService, provideNzI18n } from 'ng-zorro-antd/i18n';
 
-import { getDeviceId } from 'src/app/shared/util-common/generateDeviceId';
+import { getClientId } from 'src/app/shared/util-common/generateDeviceId';
 import { Store } from '@ngxs/store';
 import { AuthState } from 'src/app/domains/auth/login/state/login.state';
 
@@ -116,7 +116,7 @@ export class CommonLayoutComponent implements OnInit {
     private fetchHomeContents() {
         const userId = this.fetchUserId();
 
-        this.homeService.getHomeContents(getDeviceId(), userId)
+        this.homeService.getHomeContents(getClientId(), userId)
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((res: any) => {
                 this.headerTopData = res.organization

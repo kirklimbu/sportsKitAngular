@@ -1,4 +1,4 @@
-import { UrlState } from './../../../shared/util-logger/url.service';
+import { CommonModule } from '@angular/common';
 import {
   Component,
   DestroyRef,
@@ -7,38 +7,36 @@ import {
   TemplateRef,
   inject,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  ReactiveFormsModule,
   AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { Store, State } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { Observable, finalize, first } from 'rxjs';
 import { AuthService } from 'src/app/shared/util-auth/services/auth-http/auth.service';
 import { Login } from './state/login.model';
 // import { InlineSVGModule } from 'ng-inline-svg-2';
 // import { SecondaryLinksComponent } from 'src/app/shared/ui-common/secondary-links/secondary-links.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { AuthState } from './state/login.state';
 import { UserDetailsService } from '../../../shared/util-common/userDetails.service';
+import { AuthState } from './state/login.state';
 // import { SeoService } from 'src/app/shared/util-logger/seo.service';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 import { RouterState } from '@ngxs/router-plugin';
-import { Actions, ofActionSuccessful } from '@ngxs/store';
-import { RouterDataResolved } from '@ngxs/router-plugin';
+import { Actions } from '@ngxs/store';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
-import { SeoService } from 'src/app/shared/util-logger/seo.service';
+import { SecondaryLinksComponent } from 'src/app/shared/ui-common/secondary-links/secondary-links.component';
+import { getClientId } from 'src/app/shared/util-common/generateDeviceId';
 import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
-import { SecondaryLinksComponent } from 'src/app/shared/ui-common/secondary-links/secondary-links.component';
-import { getDeviceId } from 'src/app/shared/util-common/generateDeviceId';
+import { SeoService } from 'src/app/shared/util-logger/seo.service';
 
 @Component({
   selector: 'app-login',
@@ -84,7 +82,6 @@ export class LoginComponent implements OnInit {
     control: AbstractControl<any, any>;
   }> | null;
 
-
   // private readonly urlService = inject(UrlState);
 
   constructor(
@@ -107,9 +104,6 @@ export class LoginComponent implements OnInit {
     const title = 'Damak Namuna Badminton Academy';
     this.seoService.setMetaDescription(content);
     this.seoService.setMetaTitle(title);
-
-
-
   }
 
   ngOnInit(): void {
@@ -121,8 +115,6 @@ export class LoginComponent implements OnInit {
   // if user is from training page , clicked view more, send user to training detail page
   // #TODO PREVIOUS ROUTER
   checkUser() {
-
-
     // UrlState.previousUrl
 
     // .pipe(takeUntilDestroyed(this.destroyRef))
@@ -178,7 +170,7 @@ export class LoginComponent implements OnInit {
     const payload = {
       username: this.f['userName'].value,
       password: this.f['passWord'].value,
-      deviceId: getDeviceId(),
+      deviceId: getClientId(),
     };
 
     if (payload.username !== null && payload.password !== null) {

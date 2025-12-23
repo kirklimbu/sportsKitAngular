@@ -46,6 +46,10 @@
                                 [nzTooltipPlacement]="['topLeft', 'leftTop']">
 
                                 <i class="fas fa-code-branch mr-2"></i>{{ item.tournamentType }}
+                            </p><p nz-tooltip nzTooltipTitle="Tournament type"
+                                [nzTooltipPlacement]="['topLeft', 'leftTop']">
+
+                                <i class="fas fa-check mr-2"></i>{{ item.tournamentClass }}
                             </p>
                             <p nz-tooltip nzTooltipTitle="Tournament fee" [nzTooltipPlacement]="['topLeft', 'leftTop']">
                                 <i class="fas fa-money-bill-alt mr-2"></i>{{ item.entryFee | currency : 'NRP' : 'रु ' :

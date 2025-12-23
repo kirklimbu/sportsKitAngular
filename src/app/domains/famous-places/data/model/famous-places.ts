@@ -41,6 +41,7 @@ export interface IPlace1Dto {
   hasActive: boolean;
   maxRoom: boolean;
   maxPerson: boolean;
+  roomNo: boolean;
 }
 export interface IPlaceCategoryVM {
   categoryName: string;

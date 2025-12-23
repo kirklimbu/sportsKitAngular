@@ -6,6 +6,7 @@ import {
   effect,
   inject,
   OnInit,
+  signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -62,7 +63,7 @@ import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
 })
 export class AddTeamComponent implements OnInit {
   // props
-  tournamentId!: number;
+
   id$!: Observable<number>;
   form!: FormGroup;
   mode = 'add';
@@ -120,6 +121,11 @@ export class AddTeamComponent implements OnInit {
       tournamentId: Number(params?.get('tournamentId') ?? 0),
       teamId: Number(params?.get('teamId') ?? 0),
     };
+  });
+
+  tournamentNameSignal = computed(() => {
+    // This reads the name from navigation state once
+    return history.state?.tournamentName ?? '';
   });
 
   ngOnInit(): void {

@@ -25,17 +25,17 @@
                         <nz-list-item-meta-title>
 
                             <nz-page-header [nzGhost]="false">
-                                <nz-page-header-title>{{ item.title | titlecase }}
+                                <nz-page-header-title [title]="item.title">{{ item.title | titlecase }}
                                 </nz-page-header-title>
                                 <!-- <nz-page-header-subtitle>This is a subtitle</nz-page-header-subtitle> -->
                                 <nz-page-header-extra>
-                                    <nz-space>
+                                    <nz-space class="tournament-actions">
 
                                         <button *nzSpaceItem nz-button
                                             (click)="onViewDetails(item.tournamentId)">Tiesheet</button>
                                         <button *nzSpaceItem nz-button nzType="primary"
-                                            (click)="onAddTeam(item.tournamentId)">Add Team</button>
-                                        <button *nzSpaceItem nz-button (click)="onViewPlayers(item.tournamentId)">View
+                                            (click)="onAddTeam(item)">Add Team</button>
+                                        <button *nzSpaceItem nz-button (click)="onViewPlayers(item)">View
                                             Players</button>
                                     </nz-space>
                                 </nz-page-header-extra>
@@ -70,7 +70,7 @@
                                 [nzTooltipPlacement]="['topLeft', 'leftTop']">
                                 <i class="fas fa-users"></i>
                                 <!-- <nz-icon nzType="team" nzTheme="outline" /> -->
-                                {{item.gameCount|number}}
+                                {{item.tournamentClass}}
                             </p>
 
 

@@ -1,3 +1,5 @@
+@import 'src/assets/scss/_variables.scss';
+
 .filter-bar {
   display: grid;
   gap: 0.75rem;
@@ -14,8 +16,9 @@
   border-radius: 1rem;
 
   h3 {
-    font-weight: 700;
+    // font-weight: 700;
     margin-bottom: 0.5rem;
+    font-size: 16px;
   }
 
   .player {
@@ -108,4 +111,18 @@ nz-tag {
 .player-name {
   font-weight: 600; // bold
   margin-right: 4px
+}
+.tournament-header {
+  text-align: center;
+  margin: 1.5rem 0;
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    // color: $green; // or any highlight color
+  }
+}
+
+/* Optional: separate from search box */
+.table-operations {
+  margin-top: 1rem;
 }

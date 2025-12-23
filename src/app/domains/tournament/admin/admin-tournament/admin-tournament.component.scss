@@ -34,3 +34,20 @@ h5 {
 .ant-page-header{
     padding: 0;
 }
+.tournament-actions {
+  display: flex;
+  flex-wrap: wrap; // allow wrapping on small screens
+  gap: 0.5rem; // spacing between buttons
+
+  button {
+    flex: 1 1 auto; // grow/shrink to fill row if needed
+    min-width: 100px; // optional, prevent buttons from being too narrow
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column; // stack buttons on small screens
+    button {
+      width: 100%; // full width buttons
+    }
+  }
+}

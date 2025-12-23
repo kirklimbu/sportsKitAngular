@@ -232,3 +232,14 @@
     display: none;
   }
 }
+.room-badge {
+  display: inline-block;
+  margin-top: 0.35rem;
+  margin-bottom: 0.25rem;
+  padding: 0.15rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: $green;
+  background: lighten($green, 45%);
+  border-radius: 12px;
+}

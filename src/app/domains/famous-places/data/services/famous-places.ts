@@ -2,10 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import {
-  IPlace1Dto,
-  IPlaceFormDtoWrapper
-} from '../model/famous-places';
+import { IPlace1Dto, IPlaceFormDtoWrapper } from '../model/famous-places';
+import { getClientId } from 'src/app/shared/util-common/generateDeviceId';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +13,10 @@ export class FamousPlacesService {
 
   private http = inject(HttpClient);
 
-  getPlaces(mobilenumber: string ): Observable<IPlace1Dto[]> {
+  getPlaces(mobilenumber: string): Observable<IPlace1Dto[]> {
+    const deviceId = getClientId();
     return this.http.get<IPlace1Dto[]>(`${this.apiUrl}place/list`, {
-      params: { mobile: mobilenumber },
+      params: { mobile: mobilenumber, deviceId: deviceId },
     });
   }
   getAdminPlaces(): Observable<IPlace1Dto[]> {

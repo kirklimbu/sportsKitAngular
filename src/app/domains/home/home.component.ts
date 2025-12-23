@@ -23,7 +23,7 @@ import { CoachesComponent } from '../coaches/coaches.component';
 import { MembersComponent } from '../members/members.component';
 import { EventsComponent } from '../events/events.component';
 import { OurLocationComponent } from '../our-location/our-location.component';
-import { getDeviceId } from 'src/app/shared/util-common/generateDeviceId';
+import { getClientId } from 'src/app/shared/util-common/generateDeviceId';
 import { Store } from '@ngxs/store';
 import { AuthState } from '../auth/login/state/login.state';
 import { GallariesComponent } from '../gallaries/gallaries.component';
@@ -130,7 +130,7 @@ export class HomeComponent implements OnInit {
     const userId = this.fetchUserId();
 
     this.homeService
-      .getHomeContents(getDeviceId(), userId)
+      .getHomeContents(getClientId(), userId)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((res: any) => {
         // console.log(' res', res);

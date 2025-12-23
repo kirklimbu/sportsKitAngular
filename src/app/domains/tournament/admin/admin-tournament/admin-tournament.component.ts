@@ -54,14 +54,20 @@ export class AdminTournamentComponent implements OnInit {
       queryParams: { id: id },
     });
   }
-  onAddTeam(id: number): void {
+  onAddTeam(data: ITournament): void {
     this.router.navigate(['/admin/tournament/add-team'], {
-      queryParams: { tournamentId: id },
+      queryParams: {
+        tournamentId: data.tournamentId,
+      },
+      state: { tournamentName: data.title },
     });
   }
-  onViewPlayers(id: number): void {
+  onViewPlayers(data: ITournament): void {
+    console.log(data);
+    
     this.router.navigate(['/admin/tournament/view-players'], {
-      queryParams: { id: id },
+      queryParams: { id: data.tournamentId },
+      state: { tournamentName: data.title },
     });
   }
 }

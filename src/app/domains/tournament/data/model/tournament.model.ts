@@ -39,6 +39,7 @@ export interface ITournament {
   fromDate: string;
   toDate: string;
   location: string;
+  tournamentClass: string;
   gameCount: number;
 }
 
@@ -85,6 +86,7 @@ export interface ITeam3Dto {
   seed: string;
   name: string;
   status: string;
+  title: string;
 }
 
 

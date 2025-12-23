@@ -60,6 +60,10 @@ export class ViewPlayers implements OnInit {
   idsSignal = computed(() => ({
     id: Number(this.queryParamMapSignal()?.get('id') ?? 0),
   }));
+  tournamentNameSignal = computed(() => {
+    // This reads the name from navigation state once
+    return history.state?.tournamentName ?? '';
+  });
 
   ngOnInit() {
     this.fetchData();
@@ -78,6 +82,7 @@ export class ViewPlayers implements OnInit {
   onEdit(team: ITeam3Dto): void {
     this.router.navigate(['/admin/tournament/add-team'], {
       queryParams: { tournamentId: team.tournamentId, teamId: team.teamId },
+      state: { tournamentName: this.tournamentNameSignal() },
     });
   }
 }

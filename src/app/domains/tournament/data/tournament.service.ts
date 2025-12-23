@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ITraining } from '../../training/data/model/training.model';
 import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
+import { getClientId } from 'src/app/shared/util-common/generateDeviceId';
 
 @Injectable({
   providedIn: 'root',
@@ -81,10 +82,12 @@ export class TournamentService {
   }
 
   verifyRegistration(mobilenumber: string): Observable<any[]> {
+    const deviceId = getClientId();
+
     return this.http.get<any[]>(
       `${this.apiUrl}tournament/player/registration/check`,
       {
-        params: { mobile: mobilenumber },
+        params: { mobile: mobilenumber, deviceId: deviceId },
       }
     );
   }
