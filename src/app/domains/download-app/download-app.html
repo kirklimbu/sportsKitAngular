@@ -1,0 +1,41 @@
+<section class="download-app-section">
+  <nz-card nzBordered>
+    <div class="download-app-wrapper">
+
+      <!-- TEXT CONTENT -->
+      <div class="app-content">
+        <h3>Download Our Android App 📱</h3>
+        <p>
+          Register teams, view tiesheets, and receive live updates —
+          all in one place.
+        </p>
+
+        <!-- ACTIONS -->
+        <div class="app-actions">
+          <div class="qr-download">
+
+            <img
+              nz-image
+              nzSrc="/assets/images/playstore_qr.png"
+              appLazyImg="/assets/images/playstore_qr.png"
+              alt="Scan to download"
+              class="qr-image"
+            />
+
+            <span class="qr-text">Scan to download</span>
+
+            <a [href]="playstoreLink" target="_blank" rel="noopener">
+              <img
+                src="/assets/images/google-playstore-badge.png"
+                class="play-badge"
+                alt="Get it on Google Play"
+              />
+            </a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nz-card>
+</section>

@@ -24,46 +24,38 @@ import { TournamentService } from './data/tournament.service';
   standalone: true,
   imports: [
     CommonModule,
-  FormsModule,
-  NzTableModule,
-  NzDropDownModule,
-  NzAvatarModule,
-  NzButtonModule,
-  NzIconModule,
-  NzTagModule,
-  NzPageHeaderModule,
-  NzSpaceModule,
+    FormsModule,
+    NzTableModule,
+    NzDropDownModule,
+    NzAvatarModule,
+    NzButtonModule,
+    NzIconModule,
+    NzTagModule,
+    NzPageHeaderModule,
+    NzSpaceModule,
     NzToolTipModule,
     NzListModule,
     NzBadgeModule,
     NzCardModule,
-// project
-    NepaliDateFormatterPipe
-
+    // project
+    NepaliDateFormatterPipe,
   ],
 
   templateUrl: './tournament.component.html',
   styleUrl: './tournament.component.scss',
 })
 export class TournamentComponent {
-
   data$!: Observable<ITournament[]>;
 
   private readonly tournamentService = inject(TournamentService);
-
-
-
 
   ngOnInit(): void {
     this.fetchData();
   }
 
-
   private fetchData(): void {
     this.data$ = this.tournamentService.getAllPublicTournaments();
   }
-
-
 
   // onViewMore(id: number): void {
   //   this.store.dispatch(new Navigate(['/training']))
@@ -73,7 +65,6 @@ export class TournamentComponent {
   // onEdit(id: number): void {
   //   this.router.navigate(['/admin/training/add-training'], { queryParams: { id: id } })
   // }
-
 
   // onJoin(id: number) {
 
@@ -89,7 +80,5 @@ export class TournamentComponent {
   //       }
   //     });
 
-
   // }
-
 }

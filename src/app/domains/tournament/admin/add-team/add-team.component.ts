@@ -6,20 +6,14 @@ import {
   effect,
   inject,
   OnInit,
-  signal,
 } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import {
-  Observable,
-  distinctUntilChanged,
-  filter,
-  map,
-  shareReplay,
-} from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter, Observable, shareReplay } from 'rxjs';
 import { MessageService } from 'src/app/shared/util-logger/message.service';
 // third-party
+import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
@@ -27,18 +21,18 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { BsDateInputDirective } from 'src/app/shared/util-common/directives/bs-date-input.directive';
-import { TournamentService } from '../../data/tournament.service';
-import { IPlace1Dto } from 'src/app/domains/famous-places/data/model/famous-places';
-import { IReference1Dto } from '../../data/model/tournament.model';
 import {
   NzUploadChangeParam,
   NzUploadFile,
   NzUploadModule,
 } from 'ng-zorro-antd/upload';
-import { environment } from 'src/environments/environment';
-import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
+import { IPlace1Dto } from 'src/app/domains/famous-places/data/model/famous-places';
 import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
+import { BsDateInputDirective } from 'src/app/shared/util-common/directives/bs-date-input.directive';
+import { environment } from 'src/environments/environment';
+import { IReference1Dto } from '../../data/model/tournament.model';
+import { TournamentService } from '../../data/tournament.service';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-add-team',
@@ -55,6 +49,7 @@ import { CustomResponse } from 'src/app/shared/models/CustomResponse.model';
     NzInputModule,
     NzButtonModule,
     NzUploadModule,
+    NzIconModule,
     // project
     BsDateInputDirective,
   ],

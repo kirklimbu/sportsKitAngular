@@ -80,6 +80,7 @@ export class TournamentService {
       }
     );
   }
+  
 
   verifyRegistration(mobilenumber: string): Observable<any[]> {
     const deviceId = getClientId();
@@ -90,5 +91,11 @@ export class TournamentService {
         params: { mobile: mobilenumber, deviceId: deviceId },
       }
     );
+  }
+
+  getTiesheetPdf(): Observable<any> {
+        console.log('calling tesheet service');
+
+    return this.http.get<any>(`${this.apiUrl}tiesheet/manual`);
   }
 }

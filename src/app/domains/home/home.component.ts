@@ -31,6 +31,7 @@ import { GlobalConstants } from 'src/app/shared/util-common/global-constants';
 import { IOrganization } from '../admin/organization/data/models/organization/organization.model';
 import { LazyImgDirective } from 'src/app/shared/util-common/directives/lazyImage/lazyImage.directive';
 import { NzImageModule } from 'ng-zorro-antd/image';
+import { DownloadApp } from "../download-app/download-app";
 
 @Component({
   selector: 'app-home',
@@ -51,7 +52,8 @@ import { NzImageModule } from 'ng-zorro-antd/image';
     MembersComponent,
     EventsComponent,
     LazyImgDirective,
-  ],
+    DownloadApp
+],
 })
 export class HomeComponent implements OnInit {
   bannerData!: any;

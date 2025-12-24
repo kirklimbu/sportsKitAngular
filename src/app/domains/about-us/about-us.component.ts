@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, signal } from '@angular/core';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzImageModule } from 'ng-zorro-antd/image';
 import { LazyImgDirective } from 'src/app/shared/util-common/directives/lazyImage/lazyImage.directive';
 import { TruncatePipe } from 'src/app/shared/util-common/pipes/truncate.pipe';
-import { SanitizeHtmlPipe } from '../../shared/util-common/pipes/sanitize-html.pipe';
-import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({
   selector: 'app-about-us',
@@ -15,7 +14,6 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
     NzButtonModule,
     NzImageModule,
     NzIconModule,
-    SanitizeHtmlPipe,
     TruncatePipe,
     LazyImgDirective,
   ],

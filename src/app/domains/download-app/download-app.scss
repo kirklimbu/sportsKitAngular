@@ -1,0 +1,73 @@
+.download-app-section {
+    margin: 0;
+
+    nz-card {
+        border-radius: 14px;
+        padding: 2.5rem;
+    }
+}
+
+/* MAIN WRAPPER */
+.download-app-wrapper {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+/* TEXT */
+.app-content {
+    max-width: 600px;
+    margin: 0 auto;
+
+    h3 {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    p {
+        color: #555;
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* ACTIONS */
+.app-actions {
+    display: flex;
+    justify-content: center;
+}
+
+/* QR + PLAY STORE */
+.qr-download {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.qr-image {
+    width: 160px;
+}
+
+.qr-text {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.play-badge {
+    width: 160px;
+    margin-top: 0.5rem;
+    transition: transform 0.2s ease;
+}
+
+.play-badge:hover {
+    transform: scale(1.05);
+}
+
+/* 📱 Mobile */
+@media (max-width: 768px) {
+
+    .play-badge {
+        width: 180px;
+    }
+}

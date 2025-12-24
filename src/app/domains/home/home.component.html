@@ -6,13 +6,8 @@
 
   <!-- EXECUTIVE MEMBERS IMAGE SECTION -->
   <section class="executive-image-section">
-    <img
-      nz-image
-      appLazyImg="/assets/images/executive_members.jpg"
-      nzSrc="/assets/images/executive_members.jpg"
-      alt="Executive members"
-      loading="lazy"
-    />
+    <img nz-image appLazyImg="/assets/images/executive_members.jpg" nzSrc="/assets/images/executive_members.jpg"
+      alt="Executive members" loading="lazy" />
   </section>
 
   <app-members [data]="memberData"></app-members>
@@ -20,5 +15,5 @@
   <app-events [data]="eventData"></app-events>
 
   <app-our-location [data]="locationData"></app-our-location>
-
+  <app-download-app />
 </section>

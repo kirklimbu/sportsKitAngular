@@ -1,0 +1,20 @@
+<section class="tiesheet-viewer">
+
+  <!-- HEADER -->
+  <div class="viewer-header">
+    <h3>Tournament Tiesheet</h3>
+    <p>Open, view, or download the PDF for full schedule.</p>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="viewer-actions" *ngIf="tiesheetPath">
+    <button nz-button nzType="primary" nzBlock nzShape="round" (click)="previewTiesheet()">
+      <span nz-icon nzType="eye"></span> Preview Tiesheet
+    </button>
+
+    <button nz-button nzType="default" nzBlock nzShape="round" (click)="downloadTiesheet()">
+      <span nz-icon nzType="download"></span> Download Tiesheet
+    </button>
+  </div>
+
+</section>

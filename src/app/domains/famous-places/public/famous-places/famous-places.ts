@@ -46,7 +46,6 @@ import { FamousPlacesService } from '../../data/services/famous-places';
     NzTabsModule,
     NzFormModule,
     NzInputModule,
-    NzImageModule,
     NzEmptyModule,
     TruncatePipe,
     LazyImgDirective,
@@ -130,7 +129,7 @@ export class FamousPlaces implements OnInit {
       queryParams: { categoryId },
     });
   }
-  onTabChange(index: number) {
+  onTabChange(index: any) {
     this.activeCategoryName =
       this.categories[index]?.categoryName?.toLowerCase() ?? '';
   }

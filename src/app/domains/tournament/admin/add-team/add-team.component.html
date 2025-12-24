@@ -172,13 +172,13 @@
                                     [nzMultiple]="false" [nzAccept]="'image/png, image/jpeg, image/jpg'"
                                     (nzChange)="handleChange($event)">
                                     <button nz-button type="button">
-                                        <nz-icon nzType="upload" />
+                                        <icon nz-icon nzType="upload" />
                                         Select File
                                     </button>
                                     @if(fileList.length === 0) {
 
                                     <div>
-                                        <nz-icon nzType="plus"></nz-icon>
+                                        <icon nz-icon nzType="plus"></icon>
                                         <div style="margin-top: 8px">Select File</div>
                                     </div>
                                     }

@@ -143,24 +143,10 @@ button[nz-button]:hover {
     box-shadow: 0 35px 70px rgba(0, 0, 0, 0.3);
   }
 }
-
-
-.about-image {
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.05));
-    pointer-events: none;
-  }
-}
-
 .about-image {
   position: relative;
   border-radius: 8px;
-  overflow: hidden; 
+  overflow: hidden;
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
   transition: transform 0.6s ease, box-shadow 0.6s ease;
 
@@ -178,7 +164,7 @@ button[nz-button]:hover {
     box-shadow: 0 35px 70px rgba(0, 0, 0, 0.3);
   }
 
-  /* Subtle gradient overlay for depth */
+  /* Subtle gradient overlay */
   &::after {
     content: '';
     position: absolute;
@@ -189,18 +175,34 @@ button[nz-button]:hover {
     z-index: 1;
   }
 
-  /* Gold border only at bottom-right corner */
+  /* Bottom-right gold corner */
   &::before {
     content: '';
     position: absolute;
     bottom: 0;
     right: 0;
-    width: 120px;      // thickness of the accent
-    height: 120px;     // only at corner
-    border-bottom: 9px solid $gold;  // bottom edge
-    border-right: 9px solid $gold;   // right edge
-    border-radius: 0 0 4px 0;        // optional rounding
+    width: 120px;
+    height: 120px;
+    border-bottom: 9px solid $gold;
+    border-right: 9px solid $gold;
+    border-radius: 0 0 4px 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Top-left gold corner */
+  .top-left-corner {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    border-top: 9px solid $gold;
+    border-left: 9px solid $gold;
+    border-radius: 4px 0 0 0;
     pointer-events: none;
     z-index: 2;
   }
 }
+

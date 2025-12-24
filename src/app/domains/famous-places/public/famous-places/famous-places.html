@@ -12,7 +12,7 @@
       <nz-form-item>
         <nz-form-control [nzValidateStatus]="searchControl" nzErrorTip="Enter a valid 10-digit mobile number">
           <nz-input-wrapper nzAllowClear>
-            <nz-icon nzInputPrefix nzType="search" />
+            <nz-icon nzInputPrefix nzType="search"></nz-icon>
             <input nz-input type="tel" placeholder="eg. 9812345678" maxlength="10" [formControl]="searchControl"
               nzSize="small" />
           </nz-input-wrapper>
@@ -40,18 +40,18 @@
     </nz-empty>
   </div>
   }
-  <nz-tabs nzType="card" nzSize="small" [nzAnimated]="true" (nzSelectedIndexChange)="onTabChange($event)">
+  <nz-tabs nzType="card" nzSize="small" (nzSelectedIndexChange)="onTabChange($event)">
 
     @for (cat of categories$ | async; track cat.categoryId) {
-    <nz-tab [nzTitle]="cat.categoryName + ' ('+ cat.places?.length +')'"  >
-      
+    <nz-tab [nzTitle]="cat.categoryName + ' ('+ cat.places?.length +')'">
+
 
       <!-- TAB CONTENT -->
       <div class="places-slider">
 
         <!-- LEFT ARROW (mobile only via CSS) -->
         <button nz-button nzShape="circle" class="nav-arrow left" (click)="scrollPlaces('left', cat.categoryId)">
-          <span nz-icon nzType="left"></span>
+          <nz-icon nzType="left"></nz-icon>
         </button>
 
         <!-- CARDS -->

@@ -5,7 +5,10 @@
 
     <!-- IMAGE COLUMN -->
     <div class="about-image animate__animated animate__fadeInLeft">
+    
       <img nz-image [appLazyImg]="data.image" [src]="data.image" [alt]="data.title" loading="lazy" priority="false" />
+      <span class="top-left-corner"></span>
+
     </div>
 
     <!-- TEXT COLUMN -->
@@ -35,7 +38,7 @@
 
       <button nz-button nzType="primary" nzShape="round"  (click)="toggleContent()">
         {{ show ? 'Show less' : 'Show more' }}
-        <nz-icon [nzType]="show ? 'up' : 'down'"></nz-icon>
+        <icon nz-icon [nzType]="show ? 'up' : 'down'"></icon>
       </button>
     </div>
 

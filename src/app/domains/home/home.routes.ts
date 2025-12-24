@@ -8,6 +8,7 @@ import { TournamentComponent } from '../tournament/tournament.component';
 import { TrainingComponent } from '../training/training.component';
 import { HomeComponent } from './home.component';
 import { RegistrationVerification } from '../registration-verification/registration-verification';
+import { ViewTiesheet } from '../tournament/view-tiesheet/view-tiesheet';
 // import { StudyInJapanComponent } from "../study-destinations/study-in-japan/study-in-japan.component";
 
 export const FEATURE_HOME_ROUTES: Routes = [
@@ -47,6 +48,13 @@ export const FEATURE_HOME_ROUTES: Routes = [
       breadcrumb: 'tournament',
     },
     component: TournamentComponent,
+  },
+  {
+    path: 'view-tiesheet',
+    data: {
+      breadcrumb: 'Tiesheet',
+    },
+    component: ViewTiesheet,
   },
   {
     path: 'gallery',
