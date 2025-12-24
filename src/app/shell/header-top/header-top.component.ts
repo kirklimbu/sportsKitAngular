@@ -7,7 +7,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 // project
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { Logout } from 'src/app/domains/auth/login/state/login.model';
@@ -26,7 +26,6 @@ import { MessageService } from 'src/app/shared/util-logger/message.service';
     NzMenuModule,
     NzAvatarModule,
     NzDropDownModule,
-    
   ],
   templateUrl: './header-top.component.html',
   styleUrls: ['./header-top.component.scss'],
@@ -47,6 +46,7 @@ export class HeaderTopComponent implements OnInit {
   destroyRef = inject(DestroyRef);
   store = inject(Store);
   private userDetailsService = inject(UserDetailsService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.getUserDetails();
@@ -61,5 +61,18 @@ export class HeaderTopComponent implements OnInit {
 
   public onLogout() {
     this.store.dispatch(new Logout());
+  }
+  navigateToQrSection(): void {
+    if (this.router.url === '/home') {
+      const el = document.querySelector('.qr-code');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      this.router.navigate(['/home']).then(() => {
+        setTimeout(() => {
+          const el = document.querySelector('.qr-code');
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 200);
+      });
+    }
   }
 }

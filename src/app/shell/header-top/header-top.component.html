@@ -17,6 +17,11 @@
     <a nz-dropdown [nzDropdownMenu]="userMenu" nzTrigger="click" class="user-trigger">
       <span nz-icon nzType="user"></span>
     </a>
+    <!-- QR / Download App Button -->
+    <a class="qr-cta" (click)="navigateToQrSection()" nz-tooltip="Download our App">
+      <nz-icon nzType="qrcode" nzTheme="outline"></nz-icon>
+      <span class="text">Download App</span>
+    </a>
     <a routerLink="/home/verify-registration" class="verify-cta">
       <span nz-icon nzType="safety-certificate"></span>
       <span class="text">Verify Registration</span>

@@ -10,7 +10,7 @@
 
   /* Announcement */
   .announcement {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 8px;
     flex: 1;
@@ -69,6 +69,10 @@
 @media (min-width: 768px) {
   .top-header {
     padding: 8px 24px;
+
+    .announcement {
+      display: flex; // make it visible
+    }
 
     .announcement marquee {
       font-size: 14px;
@@ -135,4 +139,32 @@
   0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6); }
   70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
   100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+.qr-cta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f59e0b, #facc15);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(250, 204, 21, 0.35);
+
+  nz-icon {
+    font-size: 16px;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(250, 204, 21, 0.5);
+    color: #fff;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
 }
