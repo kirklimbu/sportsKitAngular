@@ -50,7 +50,7 @@
 
                     <nz-form-item>
                         <nz-form-control>
-                            <nz-select formControlName="playerOneGenderId" nzPlaceHolder="Gender">
+                            <nz-select nzShowSearch  formControlName="playerOneGenderId" nzPlaceHolder="Gender">
                                 <!-- <nz-option nzLabel="None" nzValue="" /> -->
                                 @for ( gender of genderList; track gender.id) {
                                 <nz-option [nzLabel]="gender.name" [nzValue]="gender.id" />
@@ -69,7 +69,7 @@
 
                     <nz-form-item>
                         <nz-form-control>
-                            <nz-select formControlName="playerOnePlaceId" nzPlaceHolder="Hotel">
+                            <nz-select nzShowSearch  formControlName="playerOnePlaceId" nzPlaceHolder="Hotel">
                                 <nz-option nzLabel="None" nzValue="0" />
                                 @for ( hotel of hotelList; track hotel.placeId) {
                                 <nz-option [nzLabel]="hotel.name" [nzValue]="hotel.placeId" />
@@ -109,7 +109,7 @@
 
                     <nz-form-item>
                         <nz-form-control>
-                            <nz-select formControlName="playerTwoGenderId" nzPlaceHolder="Gender">
+                            <nz-select nzShowSearch formControlName="playerTwoGenderId" nzPlaceHolder="Gender">
                                 @for ( gender of genderList; track gender.id) {
                                 <nz-option [nzLabel]="gender.name" [nzValue]="gender.id" />
                                 }
@@ -126,7 +126,7 @@
                     </nz-form-item>
                     <nz-form-item>
                         <nz-form-control>
-                            <nz-select formControlName="playerTwoPlaceId" nzPlaceHolder="Hotel">
+                            <nz-select nzShowSearch formControlName="playerTwoPlaceId" nzPlaceHolder="Hotel">
                                 <!-- <nz-option nzLabel="None" nzValue="" /> -->
                                 <nz-option nzLabel="None" nzValue="0" />
                                 @for ( hotel of hotelList; track hotel.placeId) {

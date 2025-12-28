@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
     setTimeout(() => {
       isLoading.set(false); // Hide spinner after data is loaded
     }, 2000); // Simulate 2 seconds delay
-    this.openMessage();
+    // this.openMessage();
   }
 
   private openMessage() {
